@@ -10,6 +10,7 @@ import es.chewiegames.bloggie.ui.BaseActivity
 import javax.inject.Inject
 import android.support.design.widget.Snackbar
 import android.view.View
+import es.chewiegames.bloggie.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : BaseActivity(), LoginView {
@@ -45,7 +46,6 @@ class LoginActivity : BaseActivity(), LoginView {
      */
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
-        initializePresenter()
     }
 
     /**
@@ -53,6 +53,11 @@ class LoginActivity : BaseActivity(), LoginView {
      */
     private fun initializePresenter() {
         mLoginPresenter.checkForUserLogin()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        initializePresenter()
     }
 
     /**
@@ -71,6 +76,9 @@ class LoginActivity : BaseActivity(), LoginView {
     }
 
     override fun navigateToMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     override fun showLoginButton() {

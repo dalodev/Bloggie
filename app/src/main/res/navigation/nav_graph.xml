@@ -4,6 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     app:startDestination="@id/homeFragment">
 
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="es.chewiegames.bloggie.ui.login.LoginActivity"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login" />
+
     <fragment
         android:id="@+id/homeFragment"
         android:name="es.chewiegames.bloggie.ui.mainactivity2.HomeFragment"

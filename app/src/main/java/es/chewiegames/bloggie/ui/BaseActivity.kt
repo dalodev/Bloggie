@@ -1,12 +1,10 @@
 package es.chewiegames.bloggie.ui
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.support.annotation.Nullable
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import es.chewiegames.bloggie.BloggieApplication
-import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.di.component.ApplicationComponent
 
 abstract class BaseActivity : AppCompatActivity() {

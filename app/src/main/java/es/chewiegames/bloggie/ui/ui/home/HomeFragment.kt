@@ -8,7 +8,6 @@ import es.chewiegames.bloggie.ui.BaseFragment
 class HomeFragment :BaseFragment() {
 
     override fun injectDependencies(component: ApplicationComponent, context: Context) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun getLayoutId(): Int {

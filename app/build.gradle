@@ -10,7 +10,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "es.chewiegames.bloggie"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -50,9 +50,10 @@ dependencies {
     // use -ktx for Kotlin
     implementation "android.arch.navigation:navigation-ui-ktx:$nav_version" // use -ktx for Kotlin
 
-    def lifecycle_version = "1.1.1"
 
     // ViewModel and LiveData
+    def lifecycle_version = "1.1.1"
+
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
 
     // Dagger 2
@@ -73,4 +74,19 @@ dependencies {
 
     //timber
     implementation 'com.jakewharton.timber:timber:4.5.0'
+
+    //Firebase core
+    implementation 'com.google.firebase:firebase-core:16.0.1'
+
+    //Firebase auth
+    implementation 'com.google.android.gms:play-services-auth:15.0.1'
+    implementation 'com.google.firebase:firebase-auth:16.0.2'
+    implementation 'com.firebaseui:firebase-ui-auth:4.0.0'
+
+    //Firebase database
+    implementation 'com.google.firebase:firebase-database:16.0.1'
+
+    //Firebase storage
+    implementation 'com.google.firebase:firebase-storage:16.0.1'
 }
+apply plugin: 'com.google.gms.google-services'

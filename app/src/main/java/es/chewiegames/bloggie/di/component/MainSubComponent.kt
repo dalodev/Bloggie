@@ -3,7 +3,7 @@ package es.chewiegames.bloggie.di.component
 import dagger.Subcomponent
 import es.chewiegames.bloggie.di.module.MainActivityModule
 import es.chewiegames.bloggie.di.scope.MainScope
-import es.chewiegames.bloggie.ui.MainActivity
+import es.chewiegames.bloggie.ui.main.MainActivity
 
 @MainScope
 @Subcomponent(modules = (arrayOf(MainActivityModule::class)))

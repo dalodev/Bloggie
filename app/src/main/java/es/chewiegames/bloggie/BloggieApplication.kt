@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Context
 import es.chewiegames.bloggie.di.component.ApplicationComponent
 import es.chewiegames.bloggie.di.component.DaggerApplicationComponent
-import es.chewiegames.bloggie.di.module.ApplicationModule
 
 open class BloggieApplication : Application() {
 
@@ -22,6 +21,7 @@ open class BloggieApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        instance = this
         initializeDependecyInjector()
     }
 

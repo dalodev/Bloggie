@@ -13,8 +13,8 @@ abstract class BaseActivity : AppCompatActivity() {
 
     private var mToolbar: Toolbar? = null
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(getLayoutId())
         injectDependencies(BloggieApplication.getComponent()!!)
         setupToolbar()

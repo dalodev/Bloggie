@@ -3,12 +3,19 @@ package es.chewiegames.bloggie
 import android.app.Application
 import android.content.Context
 import es.chewiegames.bloggie.di.component.ApplicationComponent
+import es.chewiegames.bloggie.di.component.DaggerApplicationComponent
 import es.chewiegames.bloggie.di.module.ApplicationModule
 
-class BloggieApplication : Application() {
+open class BloggieApplication : Application() {
 
-    protected lateinit var applicationComponent: ApplicationComponent
+    companion object {
+        var applicationComponent: ApplicationComponent? = null
+        lateinit var instance: BloggieApplication
 
+        fun getComponent(): ApplicationComponent? {
+            return applicationComponent
+        }
+    }
     operator fun get(context: Context): BloggieApplication {
         return context.applicationContext as BloggieApplication
     }
@@ -19,14 +26,9 @@ class BloggieApplication : Application() {
     }
 
     private fun initializeDependecyInjector() {
-       /* applicationComponent = DaggerApplicationComponent
+        applicationComponent = DaggerApplicationComponent
                 .builder()
-                .applicationModule(ApplicationModule(this))
-                .build()*/
+                //.applicationModule(ApplicationModule(this))
+                .build()
     }
-
-    open fun getComponent(): ApplicationComponent {
-        return applicationComponent
-    }
-
 }

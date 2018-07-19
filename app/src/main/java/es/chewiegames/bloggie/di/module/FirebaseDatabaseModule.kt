@@ -14,8 +14,8 @@ import javax.inject.Singleton
 @Module
 class FirebaseDatabaseModule {
 
-    private val posts: ArrayList<Post>? = ArrayList()
-    private val likedPostsByUser: ArrayList<Post>? = ArrayList()
+    var posts : ArrayList<Post> = ArrayList<Post>()
+    var likedPostsByUser : ArrayList<Post> = ArrayList<Post>()
 
     @Provides
     fun provideUsersReference(firebaseDatabase: FirebaseDatabase): DatabaseReference {
@@ -70,7 +70,7 @@ class FirebaseDatabaseModule {
     @Provides
     @Singleton
     @Named("liked posts")
-    fun provideLikedPostsByUser(): ArrayList<Post>? {
+    fun provideLikedPostsByUser(): ArrayList<Post> {
         return likedPostsByUser
     }
 

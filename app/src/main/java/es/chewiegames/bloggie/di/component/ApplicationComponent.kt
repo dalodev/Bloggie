@@ -15,4 +15,5 @@ import javax.inject.Singleton
 interface ApplicationComponent {
     fun plus(loginModule: LoginModule) : LoginSubComponent
     fun plus(mainActivityModule: MainActivityModule) : MainSubComponent
+    fun plus(homeModule: HomeModule) : HomeSubComponent
 }

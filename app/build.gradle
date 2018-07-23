@@ -50,7 +50,6 @@ dependencies {
     // use -ktx for Kotlin
     implementation "android.arch.navigation:navigation-ui-ktx:$nav_version" // use -ktx for Kotlin
 
-
     // ViewModel and LiveData
     def lifecycle_version = "1.1.1"
 

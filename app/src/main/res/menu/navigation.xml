@@ -12,9 +12,9 @@
         android:title="@string/title_search" />
 
     <item
-        android:id="@+id/createPostFragment"
-        android:icon="@drawable/ic_home"
-        android:title="@string/title_create_post" />
+        android:id="@+id/newPostActivity"
+        android:icon="@drawable/ic_create"
+        android:title="@string/title_new_post" />
 
     <item
         android:id="@+id/notificationFragment"

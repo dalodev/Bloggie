@@ -8,7 +8,7 @@ import es.chewiegames.bloggie.interactor.main.IMainInteractor
 import es.chewiegames.bloggie.interactor.main.MainInteractor
 import es.chewiegames.bloggie.presenter.main.IMainPresenter
 import es.chewiegames.bloggie.presenter.main.MainPresenter
-import es.chewiegames.bloggie.ui.ui.main.MainView
+import es.chewiegames.bloggie.ui.main.MainView
 
 @Module
 class MainActivityModule constructor(var view: MainView?, var activity: Activity?){

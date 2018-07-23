@@ -10,10 +10,14 @@ import es.chewiegames.bloggie.ui.BaseActivity
 import javax.inject.Inject
 import android.support.design.widget.Snackbar
 import android.view.View
+import com.google.android.gms.common.api.GoogleApiClient
 import es.chewiegames.bloggie.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_login.*
+import com.google.android.gms.common.ConnectionResult
+import android.support.annotation.Nullable
 
-class LoginActivity : BaseActivity(), LoginView {
+
+class LoginActivity : BaseActivity(), LoginView,  GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private val TAG = this.javaClass.simpleName
 
@@ -89,6 +93,10 @@ class LoginActivity : BaseActivity(), LoginView {
         Snackbar.make(getStartedButton, message, Snackbar.LENGTH_SHORT).show()
     }
 
+    /**
+     * this method show/hide a progress bar
+     * @param show boolean parameter to show/hide view
+     */
     override fun showLoading(show: Boolean) {
         showProgressBar()
     }
@@ -100,6 +108,18 @@ class LoginActivity : BaseActivity(), LoginView {
     fun showProgressBar(){
         getStartedButton.visibility = View.GONE
         progressBar.visibility = View.VISIBLE
+    }
+
+    override fun onConnected(@Nullable bundle: Bundle?) {
+
+    }
+
+    override fun onConnectionSuspended(i: Int) {
+
+    }
+
+    override fun onConnectionFailed(connectionResult: ConnectionResult) {
+
     }
 
 }

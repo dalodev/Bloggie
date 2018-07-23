@@ -5,6 +5,7 @@ import android.support.annotation.Nullable
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import es.chewiegames.bloggie.BloggieApplication
+import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.di.component.ApplicationComponent
 
 abstract class BaseActivity : AppCompatActivity() {
@@ -35,7 +36,7 @@ abstract class BaseActivity : AppCompatActivity() {
      * layout this will be configured
      */
     fun setupToolbar() {
-        //mToolbar = findViewById(R.id.toolbar)
+        mToolbar = findViewById(R.id.toolbar)
         if (mToolbar != null) {
             setSupportActionBar(mToolbar)
         }

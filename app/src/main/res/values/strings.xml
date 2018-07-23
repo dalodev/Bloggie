@@ -29,7 +29,7 @@
     <!--Menu navigation srings-->
     <string name="title_home">Home</string>
     <string name="title_search">Search</string>
-    <string name="title_create_post">Create post</string>
+    <string name="title_new_post">New post</string>
     <string name="title_notification">Notifications</string>
     <string name="title_profile">Profile</string>
 
@@ -63,4 +63,7 @@
     <string name="removed_from_content">Removed from content!</string>
     <string name="views">Views</string>
     <string name="type_a_comment">Type a comment...</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

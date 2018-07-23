@@ -1,6 +1,6 @@
 package es.chewiegames.bloggie.presenter.main
 
-import es.chewiegames.bloggie.ui.ui.main.MainView
+import es.chewiegames.bloggie.ui.main.MainView
 import javax.inject.Inject
 
 class MainPresenter @Inject constructor() : IMainPresenter{

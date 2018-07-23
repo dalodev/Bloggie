@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/homeFragment">
+
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="es.chewiegames.bloggie.ui.login.LoginActivity"
+        android:label="Login"
+        tools:layout="@layout/activity_login" />
+
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="es.chewiegames.bloggie.ui.main.MainActivity"
+        android:label="Main"
+        tools:layout="@layout/activity_main" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="es.chewiegames.bloggie.ui.ui.home.HomeFragment"
+        android:label="@string/title_home" />
+    <activity
+        android:id="@+id/newPostActivity"
+        android:name="es.chewiegames.bloggie.ui.newPost.NewPostActivity"
+        android:label="@string/"
+        tools:layout="@layout/activity_new_post" />
+
+
+</navigation>

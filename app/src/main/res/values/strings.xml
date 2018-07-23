@@ -63,7 +63,4 @@
     <string name="removed_from_content">Removed from content!</string>
     <string name="views">Views</string>
     <string name="type_a_comment">Type a comment...</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -27,10 +27,20 @@ class MainActivity : BaseActivity(), MainView {
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
 
+        val host = my_nav_host_fragment as NavHostFragment? ?: return
+        val navController = host.navController
+
+        //NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
+        navigation.setupWithNavController(navController)
+
     }
 
     override fun injectDependencies(component: ApplicationComponent) {
         component.plus(MainActivityModule(this, this)).inject(this)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return NavigationUI.navigateUp(drawerLayout, Navigation.findNavController(this, R.id.my_nav_host_fragment))
     }
 
     override fun showMessage(message: String) {

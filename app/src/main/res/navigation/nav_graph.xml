@@ -15,10 +15,10 @@
         android:name="es.chewiegames.bloggie.ui.main.MainActivity"
         android:label="Main"
         tools:layout="@layout/activity_main" />
-
     <fragment
         android:id="@+id/homeFragment"
-        android:name="es.chewiegames.bloggie.ui.mainactivity2.HomeFragment"
-        android:label="Home"
-        tools:layout="@layout/fragment_home" />
+        android:name="es.chewiegames.bloggie.ui.ui.home.HomeFragment"
+        android:label="@string/title_home" />
+
+
 </navigation>

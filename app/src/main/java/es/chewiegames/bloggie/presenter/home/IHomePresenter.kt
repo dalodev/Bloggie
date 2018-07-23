@@ -5,6 +5,6 @@ import es.chewiegames.bloggie.presenter.BasePresenter
 import es.chewiegames.bloggie.ui.ui.home.HomeView
 
 interface IHomePresenter : BasePresenter<HomeView> {
-    abstract fun loadFeedPosts()
-    abstract fun onPostLiked(post: Post, checked: Boolean)
+    fun loadFeedPosts()
+    fun onPostLiked(post: Post, checked: Boolean)
 }

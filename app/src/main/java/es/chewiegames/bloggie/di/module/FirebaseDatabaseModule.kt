@@ -9,13 +9,12 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import es.chewiegames.bloggie.model.Post
 import es.chewiegames.bloggie.model.User
+import org.jetbrains.annotations.NotNull
+import org.jetbrains.annotations.Nullable
 import javax.inject.Singleton
 
 @Module
-class FirebaseDatabaseModule {
-
-    var posts : ArrayList<Post> = ArrayList<Post>()
-    var likedPostsByUser : ArrayList<Post> = ArrayList<Post>()
+class FirebaseDatabaseModule constructor(var posts : ArrayList<Post> = ArrayList(), var likedPostsByUser : ArrayList<Post> = ArrayList()){
 
     @Provides
     fun provideUsersReference(firebaseDatabase: FirebaseDatabase): DatabaseReference {
@@ -63,7 +62,7 @@ class FirebaseDatabaseModule {
 
     @Provides
     @Singleton
-    fun providefeedPosts(): ArrayList<Post>? {
+    fun providefeedPosts(): ArrayList<Post> {
         return posts
     }
 

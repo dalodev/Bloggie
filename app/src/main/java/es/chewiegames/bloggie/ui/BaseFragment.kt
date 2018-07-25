@@ -4,12 +4,10 @@ import android.support.v4.app.Fragment
 import android.content.Context
 import android.os.Bundle
 import android.support.annotation.Nullable
-import android.support.v7.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import es.chewiegames.bloggie.BloggieApplication
-import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.di.component.ApplicationComponent
 
 abstract class BaseFragment : Fragment() {
@@ -17,6 +15,8 @@ abstract class BaseFragment : Fragment() {
     @Nullable
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view: View = layoutInflater.inflate(getLayoutId(), container, false)
+        bindViews(view)
+        initView()
         return view
     }
 
@@ -29,6 +29,13 @@ abstract class BaseFragment : Fragment() {
         super.onAttach(context)
         injectDependencies(BloggieApplication.getComponent()!!, context)
         // can be used for general purpose in all Fragments of Application
+    }
+
+    /**
+     * Every object annotated with [butterknife.BindViews] its gonna injected trough butterknife
+     */
+    private fun bindViews(v: View) {
+        //ButterKnife.bind(this, v)
     }
 
     /**

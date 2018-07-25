@@ -17,6 +17,7 @@ abstract class BaseActivity : AppCompatActivity() {
         setContentView(getLayoutId())
         injectDependencies(BloggieApplication.getComponent()!!)
         setupToolbar()
+        bindViews()
         initView(savedInstanceState)
     }
 
@@ -40,6 +41,13 @@ abstract class BaseActivity : AppCompatActivity() {
         if (mToolbar != null) {
             setSupportActionBar(mToolbar)
         }
+    }
+
+    /**
+     * Every object annotated with [butterknife.BindViews] its gonna injected trough butterknife
+     */
+    private fun bindViews() {
+        //ButterKnife.bind(this)
     }
 
     /**

@@ -44,7 +44,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.2'
 
     //Navigation
-    def nav_version = "1.0.0-alpha03"
+    def nav_version = "1.0.0-alpha04"
 
     implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
     // use -ktx for Kotlin

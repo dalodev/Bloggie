@@ -70,7 +70,7 @@ class HomeAdapter @Inject constructor(): RecyclerView.Adapter<HomeAdapter.HomeVi
         return false
     }
 
-    class HomeViewHolder(internal var rootView: View) : RecyclerView.ViewHolder(rootView) {
+    class HomeViewHolder constructor(rootView: View) : RecyclerView.ViewHolder(rootView) {
 
         val postImage: ImageView? = rootView.postImage
         val postTitle: TextView? = rootView.postTitle

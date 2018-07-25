@@ -17,4 +17,8 @@
     <dimen name="detail_backdrop_height_background">254dp</dimen>
     <dimen name="card_margin_post_content_background">17dp</dimen>
     <dimen name="heart_size">24sp</dimen>
+
+    <dimen name="textinput_margin">12dp</dimen>
+    <dimen name="buttonDialogMargin">36dp</dimen>
+    <dimen name="textview_margin">12dp</dimen>
 </resources>

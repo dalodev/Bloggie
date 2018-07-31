@@ -9,8 +9,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import es.chewiegames.bloggie.model.Post
 import es.chewiegames.bloggie.model.User
-import org.jetbrains.annotations.NotNull
-import org.jetbrains.annotations.Nullable
 import javax.inject.Singleton
 
 @Module
@@ -18,7 +16,7 @@ class FirebaseDatabaseModule constructor(var posts : ArrayList<Post> = ArrayList
 
     @Provides
     fun provideUsersReference(firebaseDatabase: FirebaseDatabase): DatabaseReference {
-        val databaseReference = firebaseDatabase.getReference("users")
+        var databaseReference = firebaseDatabase.getReference("users")
         databaseReference.keepSynced(true)//keep data synced
         return databaseReference
     }
@@ -26,7 +24,7 @@ class FirebaseDatabaseModule constructor(var posts : ArrayList<Post> = ArrayList
     @Provides
     @Named("post by user")
     fun providePostByUserReference(firebaseDatabase: FirebaseDatabase, user: User): DatabaseReference {
-        val databaseReference = firebaseDatabase.getReference("postsByUser").child(user.id)
+        var databaseReference = firebaseDatabase.getReference("postsByUser").child(user.id)
         databaseReference.keepSynced(true)//keep data synced
         return databaseReference
     }
@@ -34,7 +32,7 @@ class FirebaseDatabaseModule constructor(var posts : ArrayList<Post> = ArrayList
     @Provides
     @Named("all posts")
     fun provideAllPosts(firebaseDatabase: FirebaseDatabase): DatabaseReference {
-        val databaseReference = firebaseDatabase.getReference("posts")
+        var databaseReference = firebaseDatabase.getReference("posts")
         databaseReference.keepSynced(true)//keep data synced
         return databaseReference
     }
@@ -42,7 +40,7 @@ class FirebaseDatabaseModule constructor(var posts : ArrayList<Post> = ArrayList
     @Provides
     @Named("liked posts by user")
     fun provideLikedPostByUser(firebaseDatabase: FirebaseDatabase, user: User): DatabaseReference {
-        val databaseReference = firebaseDatabase.getReference("likedPostsByUser").child(user.id)
+        var databaseReference = firebaseDatabase.getReference("likedPostsByUser").child(user.id)
         databaseReference.keepSynced(true)
         return databaseReference
     }

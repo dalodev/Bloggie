@@ -67,7 +67,7 @@ class ImagePicker {
 
             var fileDescriptor: AssetFileDescriptor? = null
             try {
-                fileDescriptor = context.getContentResolver().openAssetFileDescriptor(theUri, "r")
+                fileDescriptor = context.contentResolver.openAssetFileDescriptor(theUri, "r")
             } catch (e: FileNotFoundException) {
                 e.printStackTrace()
             }
@@ -75,8 +75,7 @@ class ImagePicker {
             val actuallyUsableBitmap = BitmapFactory.decodeFileDescriptor(
                     fileDescriptor!!.fileDescriptor, null, options)
 
-            Log.d(TAG, options.inSampleSize.toString() + " sample method bitmap ... " +
-                    actuallyUsableBitmap.width + " " + actuallyUsableBitmap.height)
+            Log.d(TAG, options.inSampleSize.toString() + " sample method bitmap ... " + actuallyUsableBitmap.width + " " + actuallyUsableBitmap.height)
 
             return actuallyUsableBitmap
         }

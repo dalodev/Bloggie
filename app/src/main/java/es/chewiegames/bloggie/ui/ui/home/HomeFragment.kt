@@ -60,7 +60,7 @@ class HomeFragment : BaseFragment(), HomeView, HomeAdapter.HomeAdapterListener {
     /**
      * set the adapter for recyclerview
      */
-    fun updateAdapter(){
+    private fun updateAdapter(){
         feedRecyclerview.layoutManager = layoutManager
         feedRecyclerview.itemAnimator = HomeItemAnimator()
         feedRecyclerview.adapter = adapter

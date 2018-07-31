@@ -105,6 +105,7 @@ class NewPostPresenter @Inject constructor() : INewPostPresenter, INewPostIntera
                         BLOG_CONTENT_IMAGE -> onAddImageContent(tempContent, photoUri, bitmap!!)
                     }
                 } catch (e: Exception) {
+                    //TODO: show error cannot found file or cannot read file
                     e.printStackTrace()
                 }
             }

@@ -12,4 +12,4 @@ data class Post(
         var littlePoints: Int = -1,
         var views : Int = -1,
         var createdDate : Date = Date(),
-        var user : User = User()) : Serializable
+        var user : User? =null) : Serializable

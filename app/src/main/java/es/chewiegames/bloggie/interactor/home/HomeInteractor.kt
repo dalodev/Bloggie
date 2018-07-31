@@ -11,16 +11,13 @@ import javax.inject.Named
 
 class HomeInteractor @Inject constructor(): IHomeInteractor {
 
-    @Inject
-    @Named("post by user")
+    @field:[Inject Named("post by user")]
     lateinit var mDatabasePostByUser: DatabaseReference
 
-    @Inject
-    @Named("all posts")
+    @field:[Inject Named("all posts")]
     lateinit var mDatabaseAllPost: DatabaseReference
 
-    @Inject
-    @Named("liked posts by user")
+    @field:[Inject Named("liked posts by user")]
     lateinit var mDatabaseLikedPostByUser: DatabaseReference
 
     @Inject
@@ -29,8 +26,7 @@ class HomeInteractor @Inject constructor(): IHomeInteractor {
     @Inject
     lateinit var posts : ArrayList<Post>
 
-    @Inject
-    @Named("liked posts")
+    @field:[Inject Named("liked posts")]
     lateinit var likedPosts : ArrayList<Post>
 
 
@@ -38,10 +34,10 @@ class HomeInteractor @Inject constructor(): IHomeInteractor {
         getLikedPostByUser(mUser.id, listener)
         mDatabaseAllPost.addChildEventListener(object: ChildEventListener {
             override fun onChildAdded(dataSnapshot: DataSnapshot, p1: String?) {
-                var post: Post? = dataSnapshot.getValue(Post::class.java)
+                val post: Post? = dataSnapshot.getValue(Post::class.java)
                 if(post != null){
                     if(posts.isEmpty()){
-                        var feedPostUser : User? = post.user
+                        val feedPostUser : User? = post.user
                         if(feedPostUser!=null){
                             if(feedPostUser.id.equals(mUser.id)){
                                 posts.add(post)
@@ -51,7 +47,7 @@ class HomeInteractor @Inject constructor(): IHomeInteractor {
                             }
                         }
                     }else if (!postsContainPost(posts, post)){
-                        var feedPostUser: User? = post.user
+                        val feedPostUser: User? = post.user
                         if(feedPostUser != null){
                             if(feedPostUser.id == mUser.id){
                                 posts.add(0, post)
@@ -65,7 +61,7 @@ class HomeInteractor @Inject constructor(): IHomeInteractor {
             }
 
             override fun onChildChanged(dataSnapshot: DataSnapshot, p1: String?) {
-                var post : Post? = dataSnapshot.getValue(Post::class.java)
+                val post : Post? = dataSnapshot.getValue(Post::class.java)
                 for(i in posts.indices){
                     if(post!!.id == posts[i].id){
                         posts[i] = post
@@ -75,7 +71,7 @@ class HomeInteractor @Inject constructor(): IHomeInteractor {
             }
 
             override fun onChildRemoved(dataSnapshot: DataSnapshot) {
-                var key : String = dataSnapshot.key!!
+                val key : String = dataSnapshot.key!!
                 var position = 0
                 for (post in posts){
                     if(key == post.id){
@@ -104,7 +100,7 @@ class HomeInteractor @Inject constructor(): IHomeInteractor {
         if (checked){ //add
             mDatabaseLikedPostByUser.child(post.id).setValue(post)
         }else{ // remove
-            mDatabaseLikedPostByUser.child(post.id).setValue(post)
+            mDatabaseLikedPostByUser.child(post.id).removeValue()
         }
     }
 
@@ -112,10 +108,10 @@ class HomeInteractor @Inject constructor(): IHomeInteractor {
         mDatabaseLikedPostByUser.addChildEventListener(object: ChildEventListener{
 
             override fun onChildAdded(dataSnapshot: DataSnapshot, p1: String?) {
-                var post: Post? = dataSnapshot.getValue(Post::class.java)
+                val post: Post? = dataSnapshot.getValue(Post::class.java)
                 if(post!=null){
                     if(likedPosts.isEmpty()){
-                        var feedPostUser : User? = post.user
+                        val feedPostUser : User? = post.user
                         if(feedPostUser!=null){
                             if(feedPostUser.id == mUser.id){
                                 post.littlePoints = post.littlePoints+1
@@ -124,7 +120,7 @@ class HomeInteractor @Inject constructor(): IHomeInteractor {
                             }
                         }
                     }else if(!postsContainPost(likedPosts, post)){
-                        var feedPostUSer : User? = post.user
+                        val feedPostUSer : User? = post.user
                         if(feedPostUSer!=null){
                             if(feedPostUSer.id == mUser.id){
                                 post.littlePoints = post.littlePoints+1
@@ -140,6 +136,15 @@ class HomeInteractor @Inject constructor(): IHomeInteractor {
             }
 
             override fun onChildRemoved(dataSnapshot: DataSnapshot) {
+                val key : String = dataSnapshot.key!!
+                for (post in likedPosts){
+                    if(key == post.id){
+                        post.littlePoints = post.littlePoints-1
+                        likedPosts.remove(post) //?????????
+                        storePostInDatabase(post, listener)
+                        break
+                    }
+                }
             }
 
             override fun onChildMoved(dataSnapshot: DataSnapshot, p1: String?) {

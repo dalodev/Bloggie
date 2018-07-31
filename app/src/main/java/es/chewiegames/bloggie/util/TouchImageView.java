@@ -31,6 +31,7 @@ import android.support.v7.widget.AppCompatImageView;
 import android.widget.OverScroller;
 import android.widget.Scroller;
 
+//TODO change to kotlin file
 public class TouchImageView extends AppCompatImageView {
 
     private static final String DEBUG = "DEBUG";

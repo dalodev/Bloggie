@@ -41,12 +41,10 @@ class NewPostInteractor @Inject constructor(): INewPostInteractor {
     @Inject
     lateinit var mStorageReference: StorageReference
 
-    @Inject
-    @Named("post by user")
+    @field:[Inject Named("post by user")]
     lateinit var mDatabasePostByUser : DatabaseReference
 
-    @Inject
-    @Named("all posts")
+    @field:[Inject Named("all posts")]
     lateinit var mDatabasePosts : DatabaseReference
 
     override fun handleAddContent(listener: INewPostInteractor.PostContentListener) {

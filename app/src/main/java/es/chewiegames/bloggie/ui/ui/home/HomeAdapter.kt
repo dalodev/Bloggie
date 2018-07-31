@@ -1,6 +1,7 @@
 package es.chewiegames.bloggie.ui.ui.home
 
 import android.content.Context
+import android.support.v4.view.ViewCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -12,13 +13,15 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.CheckBox
 import android.widget.ImageView
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
 import es.chewiegames.bloggie.model.User
+import es.chewiegames.bloggie.util.RoundedTransformation
 import kotlinx.android.synthetic.main.list_item_home.view.*
 import javax.inject.Inject
 import javax.inject.Named
 
-
-class HomeAdapter @Inject constructor(): RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
+class HomeAdapter @Inject constructor() : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
     interface HomeAdapterListener {
         fun onPostClicked(post: Post, vararg viewsToShare: View)
@@ -35,17 +38,18 @@ class HomeAdapter @Inject constructor(): RecyclerView.Adapter<HomeAdapter.HomeVi
     lateinit var mListener: HomeAdapterListener
 
     @Inject
-    lateinit var posts : ArrayList<Post>
+    lateinit var posts: ArrayList<Post>
 
-    @Inject
-    @Named("liked posts")
-    lateinit var likedPosts : ArrayList<Post>
+    @field:[Inject Named("liked posts")]
+    lateinit var likedPosts: ArrayList<Post>
 
     @Inject
     lateinit var context: Context
 
+    private var onBind: Boolean = false
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
-        return HomeViewHolder(LayoutInflater.from(context).inflate(R.layout.list_item_home, parent, false))
+        return HomeViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.list_item_home, parent, false))
     }
 
     override fun getItemCount(): Int {
@@ -53,36 +57,88 @@ class HomeAdapter @Inject constructor(): RecyclerView.Adapter<HomeAdapter.HomeVi
     }
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
-        val feedPost : Post = posts[position]
+        onBind = true
+        val feedPost: Post = posts[position]
 
-        var feedPostUser : User = feedPost.user
+        val feedPostUser: User? = feedPost.user
 
-        holder.postTitle!!.text = feedPost.title
+        holder.postTitle.text = feedPost.title
+        if (feedPost.titleImage.isNotEmpty()) {
+            Picasso.with(context)
+                    .load(feedPost.titleImage)
+                    .into(holder.postImage, object : Callback {
+                        override fun onSuccess() {
+                            holder.mProgressBarImage.visibility = View.GONE
+                            holder.postImage.visibility = View.VISIBLE
+                            holder.logoNoImage.visibility = View.GONE
+                        }
 
+                        override fun onError() {
+                            holder.mProgressBarImage.visibility = View.GONE
+                            holder.postImage.visibility = View.GONE
+                            holder.logoNoImage.visibility = View.GONE
+                        }
+                    })
+        }else{
+            holder.mProgressBarImage.visibility = View.GONE
+            holder.logoNoImage.visibility = View.VISIBLE
+            holder.postImage.setImageResource(R.drawable.background_splash)
+        }
+
+        if(feedPostUser != null){
+            Picasso.with(context)
+                    .load(feedPostUser.avatar)
+                    .transform(RoundedTransformation(50, 0))
+                    .into(holder.postProfileImage)
+        }
+
+        holder.postLittlePoints.text = feedPost.littlePoints.toString()
+        holder.postComments.text = feedPost.comments.size.toString()
+        holder.postViews.text = feedPost.views.toString()
+        holder.littlePointButton.isChecked = isLikedPost(feedPost)
+
+        onBind = false
+
+        ViewCompat.setTransitionName(holder.postImage, feedPost.id)
+        ViewCompat.setTransitionName(holder.postTitle, feedPost.title)
+
+        holder.cardView.setOnClickListener {
+            //view.findNavController().navigate(R.id.action_home_to_detail)
+        }
+
+        holder.littlePointButton.setOnCheckedChangeListener { _, b ->
+            if(!onBind){
+                mListener.onLikePost(posts[holder.adapterPosition], b)
+            }
+        }
+
+        holder.addComment.setOnClickListener {
+            mListener.onAddCommentClicked(posts[holder.adapterPosition])
+        }
     }
 
-    fun isLikedPost(feedPost : Post) : Boolean{
-        for (likedPost in likedPosts){
-            if(likedPost.id == feedPost.id){
+    fun isLikedPost(feedPost: Post): Boolean {
+        for (likedPost in likedPosts) {
+            if (likedPost.id == feedPost.id) {
                 return true
             }
         }
         return false
     }
 
-    class HomeViewHolder constructor(rootView: View) : RecyclerView.ViewHolder(rootView) {
+    class HomeViewHolder constructor(rootView: View?) : RecyclerView.ViewHolder(rootView) {
 
-        val postImage: ImageView? = rootView.postImage
-        val postTitle: TextView? = rootView.postTitle
-        val postComments: TextView? = rootView.commentsCount
-        val postProfileImage: ImageView? = rootView.profilePostImageView
-        val logoNoImage: ImageView? = rootView.logoNoImage
-        val littlePointButton: CheckBox? = rootView.littlePoint
-        val addComment: ImageView? = rootView.comments
-        val postLittlePoints: TextView? = rootView.littlePointCount
-        val postViews: TextView? = rootView.viewsCount
-        val mProgressBarImage: ProgressBar? = rootView.imageViewProgressBar
-        val cardView: CardView? = rootView.cardView
+        var postImage: ImageView = rootView!!.postImage
+        var postTitle: TextView = rootView!!.postTitle
+        var postComments: TextView = rootView!!.commentsCount
+        var postProfileImage: ImageView = rootView!!.profilePostImageView
+        var logoNoImage: ImageView = rootView!!.logoNoImage
+        var littlePointButton: CheckBox = rootView!!.littlePoint
+        var addComment: ImageView = rootView!!.comments
+        var postLittlePoints: TextView = rootView!!.littlePointCount
+        var postViews: TextView = rootView!!.viewsCount
+        var mProgressBarImage: ProgressBar = rootView!!.imageViewProgressBar
+        var cardView: CardView = rootView!!.cardView
 
     }
 }

@@ -13,4 +13,6 @@
 
     <color name="delete_red">#D93B58</color>
 
+    <color name="alpha_black">#CC000000</color>
+
 </resources>

@@ -6,11 +6,13 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+apply plugin: 'androidx.navigation.safeargs'
+
 android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "es.chewiegames.bloggie"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -43,15 +45,19 @@ dependencies {
     //GSON
     implementation 'com.google.code.gson:gson:2.8.2'
 
+    //KTX
+    //implementation 'androidx.core:core-ktx:1.0.0-beta01'
+
     //Navigation
     def nav_version = "1.0.0-alpha04"
 
-    implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
-    // use -ktx for Kotlin
+    implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"// use -ktx for Kotlin
     implementation "android.arch.navigation:navigation-ui-ktx:$nav_version" // use -ktx for Kotlin
+    implementation "android.arch.navigation:navigation-runtime-ktx:$nav_version" // use -ktx for Kotlin
 
-    // ViewModel and LiveData
+    // Lifecycle
     def lifecycle_version = "1.1.1"
+    def lifecycle_versionX= "2.0.0-beta01"
 
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
 

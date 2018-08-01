@@ -3,10 +3,8 @@ package es.chewiegames.bloggie.ui.main
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.view.MenuItem
-import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import es.chewiegames.bloggie.R
@@ -31,15 +29,11 @@ class MainActivity : BaseActivity(), MainView, BottomNavigationView.OnNavigation
      */
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
-
         val host = my_nav_host_fragment as NavHostFragment? ?: return
         val navController = host.navController
-
         setupActionBarWithNavController(navController)
-        //NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
         navigation.setupWithNavController(navController)
         navigation.setOnNavigationItemSelectedListener(this)
-
     }
 
     /**
@@ -50,9 +44,6 @@ class MainActivity : BaseActivity(), MainView, BottomNavigationView.OnNavigation
         component.plus(MainActivityModule(this, this)).inject(this)
     }
 
-   /* override fun onSupportNavigateUp(): Boolean {
-        return NavigationUI.navigateUp(drawerLayout, Navigation.findNavController(this, R.id.my_nav_host_fragment))
-    }*/
     override fun onSupportNavigateUp() = findNavController(R.id.my_nav_host_fragment).navigateUp()
 
     /**
@@ -60,15 +51,9 @@ class MainActivity : BaseActivity(), MainView, BottomNavigationView.OnNavigation
      * @param item single component of menu
      */
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when(item!!.itemId){
+        when(item.itemId){
             R.id.newPostActivity -> {
-                val options = NavOptions.Builder()
-                        .setEnterAnim(R.anim.fui_slide_in_right)
-                        .setExitAnim(R.anim.fui_slide_out_left)
-                        .setPopEnterAnim(R.anim.fui_slide_in_right)
-                        .setPopExitAnim(R.anim.fui_slide_out_left)
-                        .build()
-                findNavController(R.id.my_nav_host_fragment).navigate(R.id.newPostActivity, null, options)
+                findNavController(R.id.my_nav_host_fragment).navigate(R.id.action_to_new_post)
             }
         }
         return true

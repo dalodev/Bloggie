@@ -24,7 +24,7 @@ import javax.inject.Named
 class HomeAdapter @Inject constructor() : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
     interface HomeAdapterListener {
-        fun onPostClicked(post: Post, vararg viewsToShare: View)
+        fun onPostClicked(post: Post, vararg viewsToShare: View?)
 
         fun onLikePost(post: Post, checked: Boolean)
 
@@ -63,7 +63,7 @@ class HomeAdapter @Inject constructor() : RecyclerView.Adapter<HomeAdapter.HomeV
         val feedPostUser: User? = feedPost.user
 
         holder.postTitle.text = feedPost.title
-        if (feedPost.titleImage.isNotEmpty()) {
+        if (feedPost.titleImage!!.isNotEmpty()) {
             Picasso.with(context)
                     .load(feedPost.titleImage)
                     .into(holder.postImage, object : Callback {
@@ -104,6 +104,7 @@ class HomeAdapter @Inject constructor() : RecyclerView.Adapter<HomeAdapter.HomeV
 
         holder.cardView.setOnClickListener {
             //view.findNavController().navigate(R.id.action_home_to_detail)
+            mListener.onPostClicked(feedPost, if(feedPost.titleImage!!.isNotEmpty()) holder.postImage else null, holder.postTitle )
         }
 
         holder.littlePointButton.setOnCheckedChangeListener { _, b ->

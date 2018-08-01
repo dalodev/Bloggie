@@ -24,14 +24,18 @@
         <activity android:name=".ui.main.MainActivity" />
         <activity
             android:name=".ui.newPost.NewPostActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan"
             android:configChanges="orientation|screenSize"
-            >
+            android:label="@string/title_activity_create_post"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.main.MainActivity" />
         </activity>
+        <activity android:name=".ui.detailPost.DetailPostActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_detail_post" />
     </application>
 
 </manifest>

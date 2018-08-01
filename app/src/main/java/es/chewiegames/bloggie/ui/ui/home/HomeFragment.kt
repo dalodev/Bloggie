@@ -2,18 +2,24 @@ package es.chewiegames.bloggie.ui.ui.home
 
 import android.content.Context
 import android.os.Bundle
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.di.component.ApplicationComponent
 import es.chewiegames.bloggie.di.module.HomeModule
 import es.chewiegames.bloggie.model.Post
 import es.chewiegames.bloggie.presenter.home.IHomePresenter
 import es.chewiegames.bloggie.ui.BaseFragment
+import es.chewiegames.bloggie.util.EXTRA_POST
 import es.chewiegames.bloggie.util.HomeItemAnimator
 import kotlinx.android.synthetic.main.fragment_home.*
 import javax.inject.Inject
+import android.support.v4.view.ViewCompat
+import android.support.v4.util.Pair
+import androidx.navigation.NavOptions
+import androidx.navigation.NavOptionsBuilder
 
 class HomeFragment : BaseFragment(), HomeView, HomeAdapter.HomeAdapterListener {
 
@@ -70,7 +76,18 @@ class HomeFragment : BaseFragment(), HomeView, HomeAdapter.HomeAdapterListener {
     /**
      * trigger when user touch on item of the list
      */
-    override fun onPostClicked(post: Post, vararg viewsToShare: View) {
+    override fun onPostClicked(post: Post, vararg viewsToShare: View?) {
+        val bundle = Bundle()
+        bundle.putSerializable(EXTRA_POST, post)
+        val p2 = Pair.create(viewsToShare[1], ViewCompat.getTransitionName(viewsToShare[1]))
+        var options= if(viewsToShare[0] != null){
+            val p1 = Pair.create(viewsToShare[0], ViewCompat.getTransitionName(viewsToShare[0]))
+            ActivityOptionsCompat.makeSceneTransitionAnimation(activity!!, p1, p2)
+        }else{
+            ActivityOptionsCompat.makeSceneTransitionAnimation(activity!!, p2)
+
+        }
+        findNavController().navigate(R.id.action_home_to_detail_post, bundle)
     }
 
     /**

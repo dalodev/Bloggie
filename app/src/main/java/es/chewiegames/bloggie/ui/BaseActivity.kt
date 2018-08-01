@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.support.annotation.Nullable
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupActionBarWithNavController
 import es.chewiegames.bloggie.BloggieApplication
 import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.di.component.ApplicationComponent
+import kotlinx.android.synthetic.main.activity_main.*
 
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -20,6 +23,11 @@ abstract class BaseActivity : AppCompatActivity() {
         bindViews()
         initView(savedInstanceState)
     }
+
+    /**
+     * @return The layout id that's gonna be the activity view.
+     */
+    protected abstract fun getLayoutId(): Int
 
     /**
      * This method implements in every activity to inject the dependences
@@ -57,9 +65,4 @@ abstract class BaseActivity : AppCompatActivity() {
     fun getToolbar(): Toolbar? {
         return mToolbar
     }
-
-    /**
-     * @return The layout id that's gonna be the activity view.
-     */
-    protected abstract fun getLayoutId(): Int
 }

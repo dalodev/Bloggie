@@ -16,4 +16,5 @@ interface ApplicationComponent {
     fun plus(mainActivityModule: MainActivityModule) : MainSubComponent
     fun plus(homeModule: HomeModule) : HomeSubComponent
     fun plus(newPostModule: NewPostModule) : NewPostSubComponent
+    fun plus(detailPostModule: DetailPostModule) : DetailPostSubComponent
 }

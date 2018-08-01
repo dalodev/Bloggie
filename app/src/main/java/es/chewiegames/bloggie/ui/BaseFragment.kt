@@ -45,7 +45,7 @@ abstract class BaseFragment : Fragment() {
     protected abstract fun injectDependencies(component: ApplicationComponent, context: Context)
 
     /**
-     * @return The layout id that's gonna be the activity view.
+     * @return The layout id that's gonna be the fragment view.
      */
     protected abstract fun getLayoutId(): Int
 }

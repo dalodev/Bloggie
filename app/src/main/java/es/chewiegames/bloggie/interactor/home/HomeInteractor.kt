@@ -31,13 +31,13 @@ class HomeInteractor @Inject constructor(): IHomeInteractor {
 
 
     override fun loadFeedPostsFromDatabase(listener: IHomeInteractor.OnLoadFinishedListener) {
-        getLikedPostByUser(mUser.id, listener)
+        getLikedPostByUser(mUser.id!!, listener)
         mDatabaseAllPost.addChildEventListener(object: ChildEventListener {
             override fun onChildAdded(dataSnapshot: DataSnapshot, p1: String?) {
                 val post: Post? = dataSnapshot.getValue(Post::class.java)
                 if(post != null){
                     if(posts.isEmpty()){
-                        val feedPostUser : User? = post.user
+                        val feedPostUser = post.user
                         if(feedPostUser!=null){
                             if(feedPostUser.id.equals(mUser.id)){
                                 posts.add(post)
@@ -47,7 +47,7 @@ class HomeInteractor @Inject constructor(): IHomeInteractor {
                             }
                         }
                     }else if (!postsContainPost(posts, post)){
-                        val feedPostUser: User? = post.user
+                        val feedPostUser= post.user
                         if(feedPostUser != null){
                             if(feedPostUser.id == mUser.id){
                                 posts.add(0, post)
@@ -71,10 +71,11 @@ class HomeInteractor @Inject constructor(): IHomeInteractor {
             }
 
             override fun onChildRemoved(dataSnapshot: DataSnapshot) {
-                val key : String = dataSnapshot.key!!
+                val key  = dataSnapshot.key
                 var position = 0
                 for (post in posts){
                     if(key == post.id){
+                        posts.remove(post)
                         listener.onItemRemoved(position)
                         break
                     }
@@ -92,15 +93,15 @@ class HomeInteractor @Inject constructor(): IHomeInteractor {
     }
 
     override fun storePostInDatabase(post: Post, listener: IHomeInteractor.OnLoadFinishedListener) {
-        mDatabaseAllPost.child(post.id).setValue(post)
-        mDatabasePostByUser.child(post.id).setValue(post)
+        mDatabaseAllPost.child(post.id!!).setValue(post)
+        mDatabasePostByUser.child(post.id!!).setValue(post)
     }
 
     override fun handleFromLikedPostByUser(post: Post, checked: Boolean, listener: IHomeInteractor.OnLoadFinishedListener) {
         if (checked){ //add
-            mDatabaseLikedPostByUser.child(post.id).setValue(post)
+            mDatabaseLikedPostByUser.child(post.id!!).setValue(post)
         }else{ // remove
-            mDatabaseLikedPostByUser.child(post.id).removeValue()
+            mDatabaseLikedPostByUser.child(post.id!!).removeValue()
         }
     }
 

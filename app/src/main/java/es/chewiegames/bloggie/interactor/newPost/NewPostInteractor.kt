@@ -68,14 +68,14 @@ class NewPostInteractor @Inject constructor(): INewPostInteractor {
     }
 
     override fun onEditTextContent(content: PostContent, listener: INewPostInteractor.PostContentListener) {
-        content.viewType = EDITTEXT_VIEW;
+        content.viewType = EDITTEXT_VIEW
         listener.onChangeViewType(EDITTEXT_VIEW, content.position)
     }
 
     override fun onAddImageContent(content: PostContent?, bitmap: Bitmap, uri: Uri, listener: INewPostInteractor.PostContentListener) {
         typeContentToAdd = IMAGE_VIEW
         if (content == null) {
-            var content = PostContent()
+            val content = PostContent()
             content.viewType = IMAGE_VIEW
             content.position = postContent.size
             content.uriImage = uri.toString()
@@ -107,7 +107,7 @@ class NewPostInteractor @Inject constructor(): INewPostInteractor {
     }
 
     override fun storePostInDatabase(blogImageView: ImageView, listener: INewPostInteractor.OnStoreFinished) {
-        if (mPost.title != null && !mPost.title.isEmpty()) {
+        if (mPost.title != null && !mPost.title!!.isEmpty()) {
             val idP = mDatabasePosts.push().key
             mPost.id = idP!!
             getDataFromTitleImage(blogImageView, idP)
@@ -146,11 +146,13 @@ class NewPostInteractor @Inject constructor(): INewPostInteractor {
             val errorCode = (it as StorageException).errorCode
             val errorMessage = it.message
         }.addOnSuccessListener {
-            val downloadUrl = it.uploadSessionUri
-            if (downloadUrl?.toString() != null && !downloadUrl.toString().isEmpty()) {
-                content.content = downloadUrl.toString()
-                mPost.content[content.position] = content
-                mDatabasePostByUser.child(idPost).setValue(mPost) //Store post by user
+            it.storage.downloadUrl.addOnSuccessListener {
+                val downloadUrl = it.toString()
+                if (!downloadUrl.toString().isEmpty()) {
+                    content.content = downloadUrl
+                    mPost.content[content.position] = content
+                    mDatabasePostByUser.child(idPost).setValue(mPost) //Store post by user
+                }
             }
         }
 
@@ -161,12 +163,16 @@ class NewPostInteractor @Inject constructor(): INewPostInteractor {
             val errorCode = (it as StorageException).errorCode
             val errorMessage = it.message
         }.addOnSuccessListener {
-            val downloadUrl = it.uploadSessionUri
-            if (downloadUrl != null && !downloadUrl.toString().isEmpty()) {
-                content.content = downloadUrl.toString()
-                mPost.content[content.position] = content
-                mDatabasePosts.child(idPost).setValue(mPost)//store in general posts
+
+            it.storage.downloadUrl.addOnSuccessListener {
+                val downloadUrl = it.toString()
+                if (!downloadUrl.isEmpty()) {
+                    content.content = downloadUrl
+                    mPost.content[content.position] = content
+                    mDatabasePosts.child(idPost).setValue(mPost)//store in general posts
+                }
             }
+
         }
         content.bitmapImage = null
     }
@@ -185,20 +191,26 @@ class NewPostInteractor @Inject constructor(): INewPostInteractor {
             val postImagesRefByUser = mStorageReference.child("images").child(idPost).child(UUID.randomUUID().toString())
             val uploadTaskByUser = postImagesRefByUser.putBytes(data)
             uploadTaskByUser.addOnFailureListener { }.addOnSuccessListener { taskSnapshot ->
-                val downloadUrl = taskSnapshot.uploadSessionUri
-                if (downloadUrl?.toString() != null && !downloadUrl.toString().isEmpty()) {
-                    mPost.titleImage = downloadUrl.toString()
-                    mDatabasePostByUser.child(idPost).setValue(mPost) //Store post by user
+                taskSnapshot.storage.downloadUrl.addOnSuccessListener {
+                    val downloadUrl = it.toString()
+                    if (!downloadUrl.isEmpty()) {
+                        mPost.titleImage = downloadUrl.toString()
+                        mDatabasePostByUser.child(idPost).setValue(mPost) //Store post by user
+                    }
                 }
             }
             val postImagesRefPost = mStorageReference.child("images/" + idPost + "/" + UUID.randomUUID() + ".jpg")
             val uploadTaskPost = postImagesRefPost.putBytes(data)
             uploadTaskPost.addOnFailureListener { }.addOnSuccessListener { taskSnapshot ->
-                val downloadUrl = taskSnapshot.uploadSessionUri
-                if (downloadUrl?.toString() != null && !downloadUrl.toString().isEmpty()) {
-                    mPost.titleImage = downloadUrl.toString()
-                    mDatabasePosts.child(idPost).setValue(mPost)//store in general posts
+                taskSnapshot.storage.downloadUrl.addOnSuccessListener {
+                    val downloadUrl = it.toString()
+                    if (!downloadUrl.isEmpty()) {
+                        mPost.titleImage = downloadUrl.toString()
+                        mDatabasePosts.child(idPost).setValue(mPost)//store in general posts
+                    }
                 }
+
+
             }
         }
     }

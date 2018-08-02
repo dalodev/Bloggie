@@ -157,7 +157,7 @@ class DetailPostInteractor @Inject constructor() : IDetailPostInteractor {
 
     override fun addViewToPost(post: Post) {
         post.views = post.views + 1
-        mDatabaseAllPosts.child(post.id).setValue(post)
-        mDatabasePostByUser.child(post.id).setValue(post)
+        mDatabaseAllPosts.child(post.id!!).setValue(post)
+        mDatabasePostByUser.child(post.id!!).setValue(post)
     }
 }

@@ -56,12 +56,13 @@ class DetailPostActivity : BaseActivity(), DetailPostView, DetailPostAdapter.Det
     }
 
     override fun fillValues(post: Post) {
-        if(post.titleImage!!.isNotEmpty()){
+        if(post.titleImage!=null){
             imgToolbar.transitionName = post.id
-            Picasso.with(this).load(post.titleImage!!).into(imgToolbar)
         }
         collapsingToolBar.transitionName = post.title
         collapsingToolBar.title = post.title
+        Picasso.with(this).load(post.titleImage).into(imgToolbar)
+
     }
 
     override fun displayExpandedImage(content: String) {

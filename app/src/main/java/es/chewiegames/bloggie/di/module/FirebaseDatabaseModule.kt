@@ -24,7 +24,7 @@ class FirebaseDatabaseModule constructor(var posts : ArrayList<Post> = ArrayList
     @Provides
     @Named("post by user")
     fun providePostByUserReference(firebaseDatabase: FirebaseDatabase, user: User): DatabaseReference {
-        var databaseReference = firebaseDatabase.getReference("postsByUser").child(user.id)
+        var databaseReference = firebaseDatabase.getReference("postsByUser").child(user.id!!)
         databaseReference.keepSynced(true)//keep data synced
         return databaseReference
     }
@@ -40,7 +40,7 @@ class FirebaseDatabaseModule constructor(var posts : ArrayList<Post> = ArrayList
     @Provides
     @Named("liked posts by user")
     fun provideLikedPostByUser(firebaseDatabase: FirebaseDatabase, user: User): DatabaseReference {
-        var databaseReference = firebaseDatabase.getReference("likedPostsByUser").child(user.id)
+        var databaseReference = firebaseDatabase.getReference("likedPostsByUser").child(user.id!!)
         databaseReference.keepSynced(true)
         return databaseReference
     }

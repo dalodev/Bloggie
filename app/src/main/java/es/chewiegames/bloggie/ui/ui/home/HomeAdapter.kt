@@ -58,12 +58,12 @@ class HomeAdapter @Inject constructor() : RecyclerView.Adapter<HomeAdapter.HomeV
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
         onBind = true
-        val feedPost: Post = posts[position]
+        val feedPost: Post? = posts[position]
 
-        val feedPostUser: User? = feedPost.user
+        val feedPostUser: User? = feedPost!!.user
 
         holder.postTitle.text = feedPost.title
-        if (feedPost.titleImage!!.isNotEmpty()) {
+        if (feedPost.titleImage != null) {
             Picasso.with(context)
                     .load(feedPost.titleImage)
                     .into(holder.postImage, object : Callback {
@@ -104,7 +104,7 @@ class HomeAdapter @Inject constructor() : RecyclerView.Adapter<HomeAdapter.HomeV
 
         holder.cardView.setOnClickListener {
             //view.findNavController().navigate(R.id.action_home_to_detail)
-            mListener.onPostClicked(feedPost, if(feedPost.titleImage!!.isNotEmpty()) holder.postImage else null, holder.postTitle )
+            mListener.onPostClicked(feedPost, if(feedPost.titleImage!=null) holder.postImage else null, holder.postTitle )
         }
 
         holder.littlePointButton.setOnCheckedChangeListener { _, b ->

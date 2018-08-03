@@ -35,12 +35,19 @@
         <action
             android:id="@+id/action_home_to_detail_post"
             app:destination="@id/detailPostActivity" />
+        <action
+            android:id="@+id/action_home_to_comments"
+            app:destination="@id/commentsActivity" />
     </fragment>
     <activity
         android:id="@+id/detailPostActivity"
         android:name="es.chewiegames.bloggie.ui.detailPost.DetailPostActivity"
-        android:label="activity_detail_post"
-        tools:layout="@layout/activity_detail_post" >
-    </activity>
+        android:label="@string/title_activity_create_post"
+        tools:layout="@layout/activity_detail_post"></activity>
+    <activity
+        android:id="@+id/commentsActivity"
+        android:name="es.chewiegames.bloggie.ui.comments.CommentsActivity"
+        android:label="@string/comments"
+        tools:layout="@layout/activity_comments" />
 
 </navigation>

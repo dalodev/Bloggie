@@ -1,6 +1,7 @@
 package es.chewiegames.bloggie.ui.ui.home
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.widget.LinearLayoutManager
@@ -20,6 +21,7 @@ import android.support.v4.view.ViewCompat
 import android.support.v4.util.Pair
 import androidx.navigation.NavOptions
 import androidx.navigation.NavOptionsBuilder
+import es.chewiegames.bloggie.ui.detailPost.DetailPostActivity
 
 class HomeFragment : BaseFragment(), HomeView, HomeAdapter.HomeAdapterListener {
 
@@ -67,10 +69,12 @@ class HomeFragment : BaseFragment(), HomeView, HomeAdapter.HomeAdapterListener {
      * set the adapter for recyclerview
      */
     private fun updateAdapter(){
-        feedRecyclerview.layoutManager = layoutManager
-        feedRecyclerview.itemAnimator = HomeItemAnimator()
-        feedRecyclerview.adapter = adapter
-        showEmptyView()
+        if(feedRecyclerview.layoutManager==null){
+            feedRecyclerview.layoutManager = layoutManager
+            feedRecyclerview.itemAnimator = HomeItemAnimator()
+            feedRecyclerview.adapter = adapter
+            showEmptyView()
+        }
     }
 
     /**
@@ -87,7 +91,10 @@ class HomeFragment : BaseFragment(), HomeView, HomeAdapter.HomeAdapterListener {
             ActivityOptionsCompat.makeSceneTransitionAnimation(activity!!, p2)
 
         }
-        findNavController().navigate(R.id.action_home_to_detail_post, bundle)
+        val intent = Intent(context, DetailPostActivity::class.java)
+        intent.putExtra(EXTRA_POST, post)
+        //findNavController().navigate(R.id.action_home_to_detail_post, bundle)
+        startActivity(intent, options.toBundle())
     }
 
     /**
@@ -101,6 +108,9 @@ class HomeFragment : BaseFragment(), HomeView, HomeAdapter.HomeAdapterListener {
      * trigger when user touch on comment buttom
      */
     override fun onAddCommentClicked(post: Post) {
+        val bundle = Bundle()
+        bundle.putSerializable(EXTRA_POST, post)
+        findNavController().navigate(R.id.action_home_to_comments, bundle)
     }
 
     /**

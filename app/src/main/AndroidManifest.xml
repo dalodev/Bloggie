@@ -32,10 +32,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.main.MainActivity" />
         </activity>
-        <activity android:name=".ui.detailPost.DetailPostActivity"
-            android:theme="@style/AppTheme.NoActionBar"
+        <activity
+            android:name=".ui.detailPost.DetailPostActivity"
             android:configChanges="orientation|screenSize"
-            android:label="@string/title_activity_detail_post" />
+            android:label="@string/title_activity_detail_post"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.comments.CommentsActivity"
+            android:label="@string/comments"
+            android:configChanges="orientation|screenSize"
+            />
     </application>
 
 </manifest>

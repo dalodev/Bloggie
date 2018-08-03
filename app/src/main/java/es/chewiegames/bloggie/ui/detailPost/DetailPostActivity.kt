@@ -3,7 +3,11 @@ package es.chewiegames.bloggie.ui.detailPost
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
+import androidx.navigation.ui.setupActionBarWithNavController
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.di.component.ApplicationComponent
@@ -46,8 +50,6 @@ class DetailPostActivity : BaseActivity(), DetailPostView, DetailPostAdapter.Det
         component.plus(DetailPostModule(this, this)).inject(this)
     }
 
-
-
     override fun setAdapter(content: ArrayList<PostContent>) {
         adapter.setPostContent(content)
         contentPostList.layoutManager = layoutManager
@@ -60,21 +62,51 @@ class DetailPostActivity : BaseActivity(), DetailPostView, DetailPostAdapter.Det
             imgToolbar.transitionName = post.id
         }
         collapsingToolBar.transitionName = post.title
-        collapsingToolBar.title = post.title
         Picasso.with(this).load(post.titleImage).into(imgToolbar)
+        collapsingToolBar.title = post.title
+    }
 
+    override fun onBackPressed() {
+        mDetailPostPresenter.handleBack()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item!!.itemId) {
+            android.R.id.home ->{
+                supportFinishAfterTransition()
+                super.onBackPressed()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    fun expandTitleImage(v: View){
+        if(mDetailPostPresenter.getPost()!!.titleImage!= null){
+            mDetailPostPresenter.zoomDetailPostImage(imgToolbar, expandedImage, mDetailPostPresenter.getPost()!!)
+        }
     }
 
     override fun displayExpandedImage(content: String) {
+        Picasso.with(this).load(content).into(expandedImage, object: Callback {
+            override fun onSuccess() { expandedImageProgressbar.visibility = View.GONE }
+            override fun onError() {} })
     }
 
     override fun goBack() {
+        super.onBackPressed()
     }
 
     override fun closeExpandedImage() {
+        closeExpandedImage(expandedImage)
+    }
+
+    fun closeExpandedImage(v: View){
+        mDetailPostPresenter.closeExpandedImage(expandedImage)
     }
 
     override fun onClickImage(thumbView: View, postContent: PostContent) {
+        expandedImageProgressbar.visibility = View.VISIBLE
+        mDetailPostPresenter.zoomDetailPostImage(thumbView, expandedImage, postContent)
     }
 
     override fun showMessage(message: String) {

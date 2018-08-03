@@ -22,7 +22,8 @@
             android:fitsSystemWindows="true"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:expandedTitleMarginStart="48dp"
-            app:expandedTitleMarginEnd="64dp">
+            app:expandedTitleMarginEnd="64dp"
+            >
 
             <ImageView
                 android:id="@+id/imgToolbar"
@@ -30,7 +31,8 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 android:fitsSystemWindows="true"
-                app:layout_collapseMode="parallax" />
+                app:layout_collapseMode="parallax"
+                android:onClick="expandTitleImage"/>
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -61,8 +63,8 @@
         android:visibility="gone"
         app:layout_anchorGravity="bottom|right|end" />
 
-    <com.alonso.david.appme.util.TouchImageView
-        android:id="@+id/expanded_image"
+    <es.chewiegames.bloggie.util.TouchImageView
+        android:id="@+id/expandedImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="invisible"
@@ -71,6 +73,7 @@
         android:background="@color/alpha_black"
         android:fitsSystemWindows="true"
         android:contentDescription="@string/description_zoom_touch_close"
+        android:onClick="closeExpandedImage"
         />
 
     <RelativeLayout

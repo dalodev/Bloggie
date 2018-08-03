@@ -51,13 +51,15 @@ dependencies {
     //Navigation
     def nav_version = "1.0.0-alpha04"
 
-    implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"// use -ktx for Kotlin
+    implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
+// use -ktx for Kotlin
     implementation "android.arch.navigation:navigation-ui-ktx:$nav_version" // use -ktx for Kotlin
-    implementation "android.arch.navigation:navigation-runtime-ktx:$nav_version" // use -ktx for Kotlin
+    implementation "android.arch.navigation:navigation-runtime-ktx:$nav_version"
+    // use -ktx for Kotlin
 
     // Lifecycle
     def lifecycle_version = "1.1.1"
-    def lifecycle_versionX= "2.0.0-beta01"
+    def lifecycle_versionX = "2.0.0-beta01"
 
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
 

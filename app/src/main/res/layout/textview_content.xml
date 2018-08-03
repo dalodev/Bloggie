@@ -1,31 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
         android:id="@+id/foregroundView"
-        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/card_margin_post_content"
-        android:layout_marginRight="@dimen/card_margin_post_content"
-        android:layout_marginLeft="@dimen/card_margin_post_content"
-        android:layout_marginEnd="@dimen/card_margin_post_content"
-        android:layout_marginStart="@dimen/card_margin_post_content"
-        android:layout_marginBottom="@dimen/card_margin"
-        >
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/okButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:visibility="visible"
             android:id="@+id/textview"
+            style="@style/Widget.CardContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            style="@style/Widget.CardContent"
-            />
+            android:visibility="visible" />
 
         <include layout="@layout/edittext_add_content" />
     </android.support.v7.widget.CardView>
@@ -34,16 +35,17 @@
         android:id="@+id/okButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_done"
-        android:textColor="@color/primaryText"
         android:layout_below="@+id/foregroundView"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/card_margin_post_content"
-        android:layout_marginLeft="@dimen/card_margin_post_content"
-        android:layout_marginEnd="@dimen/card_margin_post_content"
-        android:layout_marginStart="@dimen/card_margin_post_content"
-        android:layout_marginBottom="@dimen/card_margin_post_content"
-        app:fabSize="mini"/>
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:textColor="@color/primaryText"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/foregroundView"
+        app:srcCompat="@drawable/ic_done" />
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

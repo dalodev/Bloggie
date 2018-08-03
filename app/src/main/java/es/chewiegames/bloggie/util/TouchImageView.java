@@ -1,4 +1,4 @@
-package com.alonso.david.appme.util;
+package es.chewiegames.bloggie.util;
 
 /**
  * Created by dalonso on 27/03/2018.

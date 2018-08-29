@@ -25,10 +25,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildToolsVersion '27.0.3'
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:design:27.1.1'
@@ -38,7 +39,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
     implementation 'com.android.support:support-annotations:27.1.1'
     compileOnly 'org.glassfish:javax.annotation:10.0-b28'
 
@@ -46,24 +46,28 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.2'
 
     //KTX
+
     //implementation 'androidx.core:core-ktx:1.0.0-beta01'
 
     //Navigation
-    def nav_version = "1.0.0-alpha04"
-
+    def nav_version = "1.0.0-alpha05"
     implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
-// use -ktx for Kotlin
-    implementation "android.arch.navigation:navigation-ui-ktx:$nav_version" // use -ktx for Kotlin
+
+    // use -ktx for Kotlin
+    implementation "android.arch.navigation:navigation-ui-ktx:$nav_version"
+
+    // use -ktx for Kotlin
     implementation "android.arch.navigation:navigation-runtime-ktx:$nav_version"
+
     // use -ktx for Kotlin
 
     // Lifecycle
     def lifecycle_version = "1.1.1"
     def lifecycle_versionX = "2.0.0-beta01"
-
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
 
     // Dagger 2
+
     //implementation 'com.google.dagger:dagger-android:2.15'
     implementation 'com.google.dagger:dagger:2.15'
     kapt "com.google.dagger:dagger-compiler:2.14.1"
@@ -71,23 +75,15 @@ dependencies {
     implementation 'com.google.dagger:dagger-android-support:2.14.1'
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.14.1'
 
-    //Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
-
-    //okHttp
-    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.2.0'
-
     //timber
     implementation 'com.jakewharton.timber:timber:4.5.0'
 
     //Firebase core
-    implementation 'com.google.firebase:firebase-core:16.0.1'
+    implementation 'com.google.firebase:firebase-core:16.0.3'
 
     //Firebase auth
-    implementation 'com.google.android.gms:play-services-auth:15.0.1'
-    implementation 'com.google.firebase:firebase-auth:16.0.2'
+    implementation 'com.google.android.gms:play-services-auth:16.0.0'
+    implementation 'com.google.firebase:firebase-auth:16.0.3'
     implementation 'com.firebaseui:firebase-ui-auth:4.0.0'
 
     //Firebase database
@@ -98,5 +94,16 @@ dependencies {
 
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.5.2'
+
+    /**
+     * Not in use
+     */
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+
+    //okHttp
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.2.0'
 }
 apply plugin: 'com.google.gms.google-services'

@@ -33,6 +33,7 @@ class DetailPostPresenter @Inject constructor(): IDetailPostPresenter, IDetailPo
         if (post != null){
             mPost = post
             view.fillValues(post)
+            mDetailPostInteractor.addViewToPost(post)
             if(post.content.isNotEmpty()){
                 view.setAdapter(post.content)
             }

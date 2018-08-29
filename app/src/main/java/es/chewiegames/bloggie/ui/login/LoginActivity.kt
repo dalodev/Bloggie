@@ -72,7 +72,9 @@ class LoginActivity : BaseActivity(), LoginView,  GoogleApiClient.ConnectionCall
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        mLoginPresenter.onActivityResult(requestCode, resultCode, data!!)
+        if(data != null){
+            mLoginPresenter.onActivityResult(requestCode, resultCode, data)
+        }
     }
 
     override fun onStartActivityForResult(intent: Intent, request: Int) {

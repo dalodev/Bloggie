@@ -49,7 +49,7 @@ class LoginPresenter @Inject constructor(): ILoginPresenter, ILoginInteractor.On
         mLoginInteractor.handleLaunch(this)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(requestCode == RC_SIGN_IN){
             var response: IdpResponse? = IdpResponse.fromResultIntent(data)
             if(resultCode == RESULT_OK){

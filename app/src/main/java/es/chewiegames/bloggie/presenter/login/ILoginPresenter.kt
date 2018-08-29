@@ -7,5 +7,5 @@ import android.content.Intent
 interface ILoginPresenter : BasePresenter<LoginView> {
     fun checkFirebaseAuth()
     fun checkForUserLogin()
-    fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent)
+    fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
 }

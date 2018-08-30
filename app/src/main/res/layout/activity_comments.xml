@@ -34,7 +34,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
-            android:id="@+id/et_user_comment"
+            android:id="@+id/userCommentTextInput"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -44,10 +44,12 @@
             app:layout_constraintStart_toEndOf="@+id/userImage" />
 
         <ImageButton
+            android:id="@+id/sendCommentBtn"
             android:layout_width="48dp"
             android:layout_height="48dp"
             app:srcCompat="@drawable/ic_done"
             android:layout_gravity="bottom"
+            android:onClick="onSendCommentClicked"
             />
     </LinearLayout>
 

@@ -37,7 +37,10 @@
             app:destination="@id/detailPostActivity" />
         <action
             android:id="@+id/action_home_to_comments"
-            app:destination="@id/commentsActivity" />
+            app:destination="@id/commentsActivity"
+            app:enterAnim="@animator/slide_up"
+            app:exitAnim="@animator/slide_down"
+            />
     </fragment>
     <activity
         android:id="@+id/detailPostActivity"

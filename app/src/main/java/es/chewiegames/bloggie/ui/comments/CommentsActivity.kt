@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
+import android.view.View
 import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.di.component.ApplicationComponent
 import es.chewiegames.bloggie.di.module.CommentsModule
@@ -15,7 +16,6 @@ import javax.inject.Inject
 import es.chewiegames.bloggie.util.RoundedTransformation
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_comments.*
-
 
 class CommentsActivity : BaseActivity(), CommentsView {
 
@@ -65,6 +65,17 @@ class CommentsActivity : BaseActivity(), CommentsView {
         commentsRecyclerView.layoutManager = layoutManager
         commentsRecyclerView.itemAnimator = DefaultItemAnimator()
         commentsRecyclerView.adapter = adapter
+    }
+
+    fun onSendCommentClicked(view: View){
+        if(userCommentTextInput.text.toString().isNotEmpty()){
+            mCommentsPresenter.sendComment(userCommentTextInput.text.toString())
+            userCommentTextInput.setText("")
+        }
+    }
+
+    override fun commentAdded(comment: Comment) {
+        mCommentsPresenter.loadComments()
     }
 
     override fun showMessage(message: String) {

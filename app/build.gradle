@@ -57,7 +57,7 @@ dependencies {
     implementation "android.arch.navigation:navigation-ui-ktx:$nav_version"
 
     // use -ktx for Kotlin
-    implementation "android.arch.navigation:navigation-runtime-ktx:$nav_version"
+    //implementation "android.arch.navigation:navigation-runtime-ktx:$nav_version"
 
     // use -ktx for Kotlin
 

@@ -1,6 +1,5 @@
 package es.chewiegames.bloggie.di.module
 
-import android.content.Context
 import dagger.Module
 import dagger.Provides
 import es.chewiegames.bloggie.di.scope.DetailPostScope

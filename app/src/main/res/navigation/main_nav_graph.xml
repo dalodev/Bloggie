@@ -43,7 +43,7 @@
         android:id="@+id/detailPostActivity"
         android:name="es.chewiegames.bloggie.ui.detailPost.DetailPostActivity"
         android:label="@string/title_activity_create_post"
-        tools:layout="@layout/activity_detail_post"></activity>
+        tools:layout="@layout/activity_detail_post" />
     <activity
         android:id="@+id/commentsActivity"
         android:name="es.chewiegames.bloggie.ui.comments.CommentsActivity"

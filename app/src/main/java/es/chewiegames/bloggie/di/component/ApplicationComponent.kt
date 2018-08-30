@@ -17,4 +17,5 @@ interface ApplicationComponent {
     fun plus(homeModule: HomeModule) : HomeSubComponent
     fun plus(newPostModule: NewPostModule) : NewPostSubComponent
     fun plus(detailPostModule: DetailPostModule) : DetailPostSubComponent
+    fun plus(commentsModule: CommentsModule) : CommentsSubComponent
 }

@@ -6,8 +6,10 @@ import es.chewiegames.bloggie.model.Post
 interface ICommentsInteractor  {
 
     interface CommentsListener {
-        fun onAdded(comment:Comment)
+        fun onCommentAdded(comment:Comment)
+        fun onReplyCommentAdded(replyComment:Comment)
     }
 
     fun storeCommentInDatabase(text: String?, post: Post, listener: CommentsListener)
+    fun storeReplyCommentInDatabase(text: String?, post: Post, parentComment: Comment, listener: CommentsListener)
 }

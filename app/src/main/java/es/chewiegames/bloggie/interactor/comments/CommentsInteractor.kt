@@ -24,15 +24,29 @@ class CommentsInteractor @Inject constructor(): ICommentsInteractor{
     lateinit var mUser: User
 
     override fun storeCommentInDatabase(text: String?, post: Post, listener: ICommentsInteractor.CommentsListener) {
+
         var comment = Comment()
         comment.comment = text
         comment.likes = 0
-        comment.responses = ArrayList()
+        comment.replies = ArrayList()
         comment.user = mUser
         comment.viewType = COMMENT_VIEW
         post.comments.add(comment)
         mDatabaseAllPosts.child(post.id!!).setValue(post)
         mDatabasePostByUser.child(post.id!!).setValue(post)
-        listener.onAdded(comment)
+        listener.onCommentAdded(comment)
+    }
+
+    override fun storeReplyCommentInDatabase(text: String?, post: Post, parentComment: Comment, listener: ICommentsInteractor.CommentsListener) {
+        var comment = Comment()
+        comment.comment = text
+        comment.likes = 0
+        comment.user = mUser
+        comment.viewType = COMMENT_VIEW
+        parentComment.replies.add(comment)
+        post.comments.add(parentComment)
+        mDatabaseAllPosts.child(post.id!!).setValue(post)
+        mDatabasePostByUser.child(post.id!!).setValue(post)
+        listener.onReplyCommentAdded(parentComment)
     }
 }

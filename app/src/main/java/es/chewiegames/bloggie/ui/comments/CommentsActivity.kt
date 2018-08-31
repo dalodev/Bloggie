@@ -1,5 +1,6 @@
 package es.chewiegames.bloggie.ui.comments
 
+import android.animation.LayoutTransition
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
@@ -17,13 +18,13 @@ import es.chewiegames.bloggie.util.RoundedTransformation
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_comments.*
 
-class CommentsActivity : BaseActivity(), CommentsView {
+class CommentsActivity : BaseActivity(), CommentsView, CommentsAdapter.CommentsAdapterListener {
 
     @Inject
     lateinit var mCommentsPresenter: ICommentsPresenter
 
     @Inject
-    lateinit var adapter : CommentsAdapter
+    lateinit var commentsAdapter : CommentsAdapter
 
     @Inject
     lateinit var layoutManager : LinearLayoutManager
@@ -50,10 +51,18 @@ class CommentsActivity : BaseActivity(), CommentsView {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item!!.itemId){
             android.R.id.home ->{
-                super.onBackPressed()
+                mCommentsPresenter.handleBack()
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onBackPressed() {
+        mCommentsPresenter.handleBack()
+    }
+
+    override fun goBack() {
+        super.onBackPressed()
     }
 
     override fun fillValues(post: Post) {
@@ -61,10 +70,14 @@ class CommentsActivity : BaseActivity(), CommentsView {
     }
 
     override fun setAdapter(comments: ArrayList<Comment>) {
-        adapter.comments = comments
+        commentsAdapter.comments = comments
         commentsRecyclerView.layoutManager = layoutManager
         commentsRecyclerView.itemAnimator = DefaultItemAnimator()
-        commentsRecyclerView.adapter = adapter
+        commentsRecyclerView.adapter = commentsAdapter
+    }
+
+    override fun setReplyCommentsAdapter(parentComment: Comment) {
+        commentsAdapter.repliesAdded(parentComment)
     }
 
     fun onSendCommentClicked(view: View){
@@ -76,6 +89,29 @@ class CommentsActivity : BaseActivity(), CommentsView {
 
     override fun commentAdded(comment: Comment) {
         mCommentsPresenter.loadComments()
+    }
+
+    override fun replyCommentAdded(replyComment: Comment) {
+        mCommentsPresenter.loadReplyComments(replyComment)
+    }
+
+    override fun replyComment(parentComment: Comment) {
+        mCommentsPresenter.replyTo(parentComment)
+    }
+
+    override fun showReplies(parentComment: Comment) {
+
+    }
+
+    override fun showReplyTo(show: Boolean, replyToText: String) {
+        if(show){
+            commentsRoot.layoutTransition.enableTransitionType(LayoutTransition.APPEARING)
+            replyInfo.text = replyToText
+            replyInfo.visibility = View.VISIBLE
+        }else{
+            commentsRoot.layoutTransition.enableTransitionType(LayoutTransition.DISAPPEARING)
+            replyInfo.visibility = View.GONE
+        }
     }
 
     override fun showMessage(message: String) {

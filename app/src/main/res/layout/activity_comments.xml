@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.comments.CommentsActivity">
+    tools:context=".ui.comments.CommentsActivity"
+    android:animateLayoutChanges="true"
+    android:id="@+id/commentsRoot"
+    >
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/commentsRecyclerView"
@@ -12,6 +15,15 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/inputContainer"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/replyInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/replyTo"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/inputContainer" />
 
     <LinearLayout
         android:id="@+id/inputContainer"

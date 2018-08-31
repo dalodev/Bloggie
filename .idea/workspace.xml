@@ -24,24 +24,22 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.9/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.9/taskHistory/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.9/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.9/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_navigation_navigation_fragment_1_0_0_alpha05.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_navigation_navigation_fragment_ktx_1_0_0_alpha05.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Bloggie.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Bloggie.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/di/module/CommentsModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/di/module/CommentsModule.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/interactor/comments/CommentsInteractor.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/interactor/comments/CommentsInteractor.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/interactor/comments/ICommentsInteractor.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/interactor/comments/ICommentsInteractor.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/model/Comment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/model/Comment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/presenter/comments/CommentsPresenter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/presenter/comments/CommentsPresenter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/presenter/comments/ICommentsPresenter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/presenter/comments/ICommentsPresenter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/comments/CommentViewHolder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/comments/CommentViewHolder.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/comments/CommentsActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/comments/CommentsActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/comments/CommentsAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/comments/CommentsAdapter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/comments/CommentsView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/comments/CommentsView.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_comments.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_comments.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/comment_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/comment_item.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/navigation/main_nav_graph.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/navigation/main_nav_graph.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/reply_comment_item.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -98,20 +96,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CommentsActivity.kt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CommentsActivity.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/comments/CommentsActivity.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="734">
-              <caret line="77" column="41" lean-forward="true" selection-start-line="77" selection-start-column="41" selection-end-line="77" selection-end-column="41" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CommentsAdapter.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/comments/CommentsAdapter.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" selection-start-line="2" selection-end-line="2" />
+            <state relative-caret-position="298">
+              <caret line="94" selection-start-line="94" selection-end-line="94" />
+              <folding>
+                <element signature="e#44#851#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -119,29 +111,17 @@
       <file leaf-file-name="CommentsPresenter.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/presenter/comments/CommentsPresenter.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="39" column="39" selection-start-line="39" selection-start-column="39" selection-end-line="39" selection-end-column="39" />
+            <state relative-caret-position="153">
+              <caret line="43" column="39" selection-start-line="43" selection-start-column="39" selection-end-line="43" selection-end-column="39" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CommentsInteractor.kt" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CommentsInteractor.kt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/interactor/comments/CommentsInteractor.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="263">
-              <caret line="35" column="24" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ICommentsInteractor.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/interactor/comments/ICommentsInteractor.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="84" selection-start-line="11" selection-start-column="84" selection-end-line="11" selection-end-column="84" />
-              <folding>
-                <element signature="e#52#136#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="291">
+              <caret line="49" selection-start-line="49" selection-end-line="49" />
             </state>
           </provider>
         </entry>
@@ -2468,8 +2448,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/app_bar_main.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/main/MainActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/content_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/interactor/newPost/NewPostInteractor.kt" />
@@ -2499,8 +2477,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/di/component/ApplicationComponent.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/di/component/CommentsSubComponent.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/di/module/DetailPostModule.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/reply_comment_item.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/di/module/CommentsModule.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/interactor/login/LoginInteractor.kt" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
@@ -2508,16 +2484,20 @@
         <option value="$PROJECT_DIR$/app/src/main/res/navigation/main_nav_graph.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/animator/slide_down.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/comments/CommentsViewHolder.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/comments/CommentsView.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/interactor/comments/ICommentsInteractor.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/comment_item.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/comments/CommentViewHolder.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_comments.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/di/module/CommentsModule.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/comments/ReplyCommentsAdapter.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/reply_comment_item.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/model/Comment.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/interactor/comments/CommentsInteractor.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/comments/CommentsAdapter.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/comments/CommentsActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_comments.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/interactor/comments/ICommentsInteractor.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/presenter/comments/ICommentsPresenter.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/comments/CommentsView.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/comment_item.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/comments/CommentsActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/interactor/comments/CommentsInteractor.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/comments/RepliesCommentsAdapter.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/comments/CommentViewHolder.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/comments/CommentsAdapter.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/presenter/comments/CommentsPresenter.kt" />
       </list>
     </option>
@@ -2532,6 +2512,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
+      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -2555,6 +2538,36 @@
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="bloggie" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="interactor" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Bloggie" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="bloggie" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="interactor" type="462c0819:PsiDirectoryNode" />
+              <item name="comments" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Bloggie" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="bloggie" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="presenter" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Bloggie" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="bloggie" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="presenter" type="462c0819:PsiDirectoryNode" />
+              <item name="comments" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Bloggie" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="bloggie" type="cbb59c9e:AndroidPsiDirectoryNode" />
               <item name="ui" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -2563,7 +2576,18 @@
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="bloggie" type="cbb59c9e:AndroidPsiDirectoryNode" />
               <item name="ui" type="462c0819:PsiDirectoryNode" />
-              <item name="newPost" type="462c0819:PsiDirectoryNode" />
+              <item name="comments" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Bloggie" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="Bloggie" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
             </path>
             <path>
               <item name="Bloggie" type="1abcf292:AndroidViewProjectNode" />
@@ -2573,9 +2597,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="ProjectPane" />
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2810,17 +2831,17 @@
       <window_info anchor="bottom" id="Run" order="2" weight="0.32960895" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Logcat" order="7" weight="0.4385475" />
+      <window_info active="true" anchor="bottom" id="Logcat" order="7" visible="true" weight="0.4385475" />
       <window_info id="Captures" order="2" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21316166" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21316166" />
       <window_info anchor="bottom" id="Build" order="7" sideWeight="0.49928468" weight="0.32960895" />
       <window_info anchor="right" id="Gradle" order="3" weight="0.32904148" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Device File Explorer" order="3" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.39944133" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3603352" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -2850,25 +2871,55 @@
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/comments/CommentsActivity.kt</url>
-          <line>70</line>
+          <url>file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/interactor/home/HomeInteractor.kt</url>
+          <line>36</line>
           <properties />
-          <option name="timeStamp" value="18" />
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/interactor/home/HomeInteractor.kt</url>
+          <line>63</line>
+          <properties />
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/comments/CommentsAdapter.kt</url>
+          <line>46</line>
+          <properties />
+          <option name="timeStamp" value="43" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/comments/CommentsActivity.kt</url>
-          <line>77</line>
+          <line>83</line>
           <properties />
-          <option name="timeStamp" value="19" />
+          <option name="timeStamp" value="44" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/presenter/comments/CommentsPresenter.kt</url>
+          <line>40</line>
+          <properties />
+          <option name="timeStamp" value="45" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/interactor/comments/CommentsInteractor.kt</url>
-          <line>35</line>
+          <line>49</line>
           <properties />
-          <option name="timeStamp" value="21" />
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/presenter/comments/CommentsPresenter.kt</url>
+          <line>55</line>
+          <properties />
+          <option name="timeStamp" value="47" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/comments/CommentsActivity.kt</url>
+          <line>94</line>
+          <properties />
+          <option name="timeStamp" value="48" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="22" />
+      <option name="time" value="51" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="app">
@@ -2876,96 +2927,77 @@
         <watch expression="feedPost.titleImage!!.isNotEmpty()" />
       </configuration>
       <configuration name="Remote">
-        <watch expression="userCommentText" />
-        <watch expression="userCommentText.text" language="kotlin" custom="import kotlinx.android.synthetic.main.activity_comments.userCommentText" />
-        <watch expression="vie" language="kotlin" />
+        <watch expression="comment" language="kotlin" />
+        <watch expression="dataSnapshot.value" language="kotlin" />
+        <watch expression="comments.contains(comment)" />
+        <watch expression="dataSnapshot.value" language="kotlin" />
+        <watch expression="comment.user!!.avatar.equals(&quot;null&quot;)" />
+        <watch expression="comment.user.avatar" language="kotlin" />
+        <watch expression="comment.user" language="kotlin" />
       </configuration>
     </watches-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
       <expression>
-        <expression-string>vie</expression-string>
+        <expression-string>comment.user</expression-string>
         <language-id>kotlin</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>userCommentText.text</expression-string>
-        <language-id>kotlin</language-id>
-        <custom-info>import kotlinx.android.synthetic.main.activity_comments.userCommentText</custom-info>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>post.user!!.avatar</expression-string>
+        <expression-string>comment.user.avatar</expression-string>
         <language-id>kotlin</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>taskSnapshot.storage.d</expression-string>
+        <expression-string>dataSnapshot.value</expression-string>
         <language-id>kotlin</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>taskSnapshot.metadata.path.toString()</expression-string>
+        <expression-string>comment</expression-string>
         <language-id>kotlin</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>taskSnapshot.metadata.reference</expression-string>
+        <expression-string>(dataSnapshot.value as HashMap&lt;String, any&gt;).get(&quot;Comments&quot;)</expression-string>
         <language-id>kotlin</language-id>
+        <custom-info>import java.util.HashMap</custom-info>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>taskSnapshot.metadata.bucket</expression-string>
+        <expression-string>(dataSnapshot.value as HashMap&lt;&gt;).get(&quot;Comments&quot;)</expression-string>
         <language-id>kotlin</language-id>
+        <custom-info>import java.util.HashMap</custom-info>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>taskSnapshot.metadata.name</expression-string>
+        <expression-string>dataSnapshot.value[&quot;comments&quot;]</expression-string>
         <language-id>kotlin</language-id>
+        <custom-info>import java.util.HashMap</custom-info>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>taskSnapshot.metadata.toString()</expression-string>
+        <expression-string>(dataSnapshot.value as HashMap).keys</expression-string>
         <language-id>kotlin</language-id>
+        <custom-info>import java.util.HashMap</custom-info>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>taskSnapshot.metadata.path</expression-string>
+        <expression-string>dataSnapshot.value</expression-string>
         <language-id>kotlin</language-id>
+        <custom-info>import java.util.HashMap</custom-info>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>(dataSnapshot.value as HashMap).get(&quot;comments&quot;)</expression-string>
+        <language-id>kotlin</language-id>
+        <custom-info>import java.util.HashMap</custom-info>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/util/Utils.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="43" column="32" selection-start-line="43" selection-start-column="32" selection-end-line="43" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-27/android/app/Activity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="705" column="28" selection-start-line="705" selection-start-column="28" selection-end-line="705" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/util/Constants.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/presenter/login/ILoginPresenter.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="9" column="8" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/login/LoginActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="311">
@@ -3032,26 +3064,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/di/module/DetailPostModule.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/presenter/detailPost/DetailPostPresenter.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-8">
           <caret line="31" column="39" lean-forward="true" selection-start-line="31" selection-end-line="32" />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/reply_comment_item.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state />
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/model/User.kt">
@@ -3065,13 +3082,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="570">
           <caret line="52" selection-start-line="52" selection-end-line="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/interactor/login/LoginInteractor.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="68" column="23" lean-forward="true" selection-start-line="68" selection-start-column="23" selection-end-line="68" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -3149,13 +3159,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/interactor/detailPost/DetailPostInteractor.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="160" column="59" lean-forward="true" selection-start-line="158" selection-start-column="7" selection-end-line="160" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/model/Post.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -3167,74 +3170,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/di/module/CommentsModule.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="32" column="5" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/interactor/newPost/NewPostInteractor.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1173">
-          <caret line="20" column="6" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/comments/CommentsView.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="37" selection-start-line="9" selection-start-column="37" selection-end-line="9" selection-end-column="37" />
-          <folding>
-            <element signature="e#44#173#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/interactor/home/HomeInteractor.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="63" column="43" selection-start-line="63" selection-end-line="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/comment_item.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="26" column="44" lean-forward="true" selection-start-line="26" selection-start-column="44" selection-end-line="26" selection-end-column="44" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_comments.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="36" column="49" selection-start-line="36" selection-start-column="49" selection-end-line="36" selection-end-column="49" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/ui/home/HomeFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="147" selection-start-line="147" selection-end-line="147" />
-          <folding>
-            <element signature="e#43#1009#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/detailPost/DetailPostAdapter.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-762">
-          <caret line="40" column="27" lean-forward="true" selection-start-line="40" selection-start-column="27" selection-end-line="40" selection-end-column="27" />
         </state>
       </provider>
     </entry>
@@ -3252,68 +3187,189 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/comments/CommentViewHolder.kt">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/interactor/newPost/NewPostInteractor.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="44" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
+        <state relative-caret-position="-180">
+          <caret line="20" column="6" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/ui/home/HomeFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="147" selection-start-line="147" selection-end-line="147" />
           <folding>
-            <element signature="e#44#203#0" expanded="true" />
+            <element signature="e#43#1009#0" expanded="true" />
           </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/interactor/home/HomeInteractor.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="61" lean-forward="true" selection-start-line="61" selection-end-line="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/interactor/login/LoginInteractor.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="610">
+          <caret line="68" column="23" lean-forward="true" selection-start-line="68" selection-start-column="23" selection-end-line="68" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/interactor/main/MainInteractor.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/interactor/detailPost/DetailPostInteractor.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="117" column="49" lean-forward="true" selection-start-line="117" selection-start-column="49" selection-end-line="117" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/di/module/DetailPostModule.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="32" column="25" lean-forward="true" selection-start-line="32" selection-start-column="25" selection-end-line="32" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/detailPost/DetailPostAdapter.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1379">
+          <caret line="110" column="24" selection-start-line="110" selection-start-column="12" selection-end-line="110" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/processDebugResources/r/es/chewiegames/bloggie/R.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="4642" column="28" selection-start-line="4642" selection-start-column="28" selection-end-line="4642" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/reply_comment_item.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="29" column="21" lean-forward="true" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/model/Comment.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="31" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
+        <state relative-caret-position="90">
+          <caret line="6" column="19" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="19" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/presenter/comments/ICommentsPresenter.kt">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/di/module/AppContextModule.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
-          <folding>
-            <element signature="e#51#184#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="75">
+          <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_comments.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="103">
+          <caret line="39" column="39" selection-start-line="39" selection-start-column="39" selection-end-line="39" selection-end-column="39" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/interactor/comments/ICommentsInteractor.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="84" selection-start-line="11" selection-start-column="84" selection-end-line="11" selection-end-column="84" />
+        <state relative-caret-position="135">
+          <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
           <folding>
             <element signature="e#52#136#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/interactor/comments/CommentsInteractor.kt">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/comments/CommentsView.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="35" column="24" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="24" />
+        <state relative-caret-position="165">
+          <caret line="13" column="4" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/presenter/comments/CommentsPresenter.kt">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/presenter/comments/ICommentsPresenter.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="39" column="39" selection-start-line="39" selection-start-column="39" selection-end-line="39" selection-end-column="39" />
+        <state relative-caret-position="120">
+          <caret line="11" column="11" lean-forward="true" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/di/module/CommentsModule.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="38" column="44" lean-forward="true" selection-start-line="38" selection-start-column="15" selection-end-line="38" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/comment_item.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="36" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="36" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/comments/CommentViewHolder.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="18" column="31" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/comments/RepliesCommentsAdapter.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="20" column="28" lean-forward="true" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/comments/CommentsAdapter.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        <state relative-caret-position="120">
+          <caret line="44" column="21" selection-start-line="44" selection-start-column="21" selection-end-line="44" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/comments/CommentsActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="734">
-          <caret line="77" column="41" lean-forward="true" selection-start-line="77" selection-start-column="41" selection-end-line="77" selection-end-column="41" />
+        <state relative-caret-position="298">
+          <caret line="94" selection-start-line="94" selection-end-line="94" />
+          <folding>
+            <element signature="e#44#851#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/presenter/comments/CommentsPresenter.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="43" column="39" selection-start-line="43" selection-start-column="39" selection-end-line="43" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/interactor/comments/CommentsInteractor.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="49" selection-start-line="49" selection-end-line="49" />
         </state>
       </provider>
     </entry>

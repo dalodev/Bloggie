@@ -9,6 +9,7 @@ import es.chewiegames.bloggie.interactor.comments.ICommentsInteractor
 import es.chewiegames.bloggie.presenter.comments.CommentsPresenter
 import es.chewiegames.bloggie.presenter.comments.ICommentsPresenter
 import es.chewiegames.bloggie.ui.comments.CommentsActivity
+import es.chewiegames.bloggie.ui.comments.CommentsAdapter
 import es.chewiegames.bloggie.ui.comments.CommentsView
 
 @Module
@@ -36,5 +37,11 @@ class CommentsModule constructor(private val activity: CommentsActivity){
     @CommentsScope
     fun provideLinearLayoutManager() : LinearLayoutManager{
         return LinearLayoutManager(activity)
+    }
+
+    @Provides
+    @CommentsScope
+    fun provideCommentsAdapterListener(): CommentsAdapter.CommentsAdapterListener {
+        return activity
     }
 }

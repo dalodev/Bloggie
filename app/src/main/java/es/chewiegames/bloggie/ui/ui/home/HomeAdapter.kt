@@ -15,7 +15,7 @@ import android.widget.CheckBox
 import android.widget.ImageView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
-import es.chewiegames.bloggie.model.User
+import es.chewiegames.data.model.User
 import es.chewiegames.bloggie.util.RoundedTransformation
 import kotlinx.android.synthetic.main.list_item_home.view.*
 import javax.inject.Inject

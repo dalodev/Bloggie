@@ -4,6 +4,10 @@ import android.app.Application
 import android.content.Context
 import es.chewiegames.bloggie.di.component.ApplicationComponent
 import es.chewiegames.bloggie.di.component.DaggerApplicationComponent
+import es.chewiegames.bloggie.koin.appModule
+import es.chewiegames.data.koin.dataModule
+import es.chewiegames.domain.koin.domainModule
+import org.koin.android.ext.android.startKoin
 
 open class BloggieApplication : Application() {
 
@@ -23,6 +27,7 @@ open class BloggieApplication : Application() {
         super.onCreate()
         instance = this
         initializeDependecyInjector()
+        startKoin(this, listOf(appModule, domainModule, dataModule))
     }
 
     private fun initializeDependecyInjector() {

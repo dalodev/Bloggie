@@ -2,127 +2,67 @@ package es.chewiegames.bloggie.ui.login
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.databinding.DataBindingUtil
 import es.chewiegames.bloggie.R
-import es.chewiegames.bloggie.di.component.ApplicationComponent
-import es.chewiegames.bloggie.di.module.LoginModule
-import es.chewiegames.bloggie.presenter.login.ILoginPresenter
-import es.chewiegames.bloggie.ui.BaseActivity
-import javax.inject.Inject
 import com.google.android.material.snackbar.Snackbar
-import android.view.View
-import com.google.android.gms.common.api.GoogleApiClient
 import es.chewiegames.bloggie.ui.main.MainActivity
-import kotlinx.android.synthetic.main.activity_login.*
-import com.google.android.gms.common.ConnectionResult
-import androidx.annotation.Nullable
+import androidx.lifecycle.Observer
+import es.chewiegames.bloggie.databinding.ActivityLoginBinding
+import es.chewiegames.bloggie.di.component.ApplicationComponent
+import es.chewiegames.bloggie.ui.base.BaseActivity
+import es.chewiegames.bloggie.ui.base.BaseBindingActivity
+import es.chewiegames.bloggie.util.RC_SIGN_IN
+import es.chewiegames.bloggie.viewmodel.LoginViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
+
+class LoginActivity : BaseActivity() {
 
 
-class LoginActivity : BaseActivity(), LoginView,  GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+    override fun injectDependencies(component: ApplicationComponent) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     private val TAG = this.javaClass.simpleName
 
-    /**
-     * Dependences reference
-     */
-    @Inject
-    lateinit var mLoginPresenter: ILoginPresenter
+    private val viewModel: LoginViewModel by viewModel()
+    lateinit var binding: ActivityLoginBinding
 
     /**
      * Get the layout view of the activity
      *
      * @return The layout id of the activity
      */
-    override fun getLayoutId(): Int {
-        return R.layout.activity_login
-    }
+    override fun getLayoutId(): Int = R.layout.activity_login
 
-    /**
-     * Initialize the inject dependences for this activity. This method is triggered in onCreate event
-     *
-     * @param component
-     */
-    override fun injectDependencies(component: ApplicationComponent) {
-        component.plus(LoginModule(this, this)).inject(this)
-    }
-
-    /**
-     * This method is triggered in onCreate event
-     */
     override fun initView(savedInstanceState: Bundle?) {
-        super.initView(savedInstanceState)
+        binding = DataBindingUtil.setContentView(this, getLayoutId())
+        binding.lifecycleOwner = this
+        binding.loginViewModel = viewModel
     }
 
-    /**
-     * call presenter to check if user logged in
-     */
-    private fun initializePresenter() {
-        mLoginPresenter.checkForUserLogin()
+    override fun initObservers() {
+        viewModel.startActivityForResult.observe(this, Observer {
+            startActivityForResult(it, RC_SIGN_IN)
+        })
+        viewModel.goToMainActivity.observe(this, Observer {
+            goToActivity(MainActivity(), this)
+        })
+        viewModel.showMessage.observe(this, Observer {
+            Snackbar.make(binding.root, resources.getString(it), Snackbar.LENGTH_SHORT).show()
+        })
     }
-
     override fun onResume() {
         super.onResume()
-        initializePresenter()
-    }
-
-    /**
-     * This method is triggered when user click on get started button
-     */
-    fun onGetStartedClick(view: View){
-        mLoginPresenter.checkFirebaseAuth()
+        viewModel.checkForUserLogin()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(data != null){
-            mLoginPresenter.onActivityResult(requestCode, resultCode, data)
+            viewModel.onActivityResult(requestCode, resultCode, data)
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    override fun onStartActivityForResult(intent: Intent, request: Int) {
-        startActivityForResult(intent, request)
-    }
-
-    override fun navigateToMainActivity() {
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-    override fun showLoginButton() {
-        getStartedButton.visibility = View.VISIBLE
-    }
-
-    override fun showMessage(message: String) {
-        Snackbar.make(getStartedButton, message, Snackbar.LENGTH_SHORT).show()
-    }
-
-    /**
-     * this method show/hide a progress bar
-     * @param show boolean parameter to show/hide view
-     */
-    override fun showLoading(show: Boolean) {
-        showProgressBar()
-    }
-
-    /**
-     * this method show/hide a progress dialog
-     * @param show boolean parameter to show/hide view
-     */
-    fun showProgressBar(){
-        getStartedButton.visibility = View.GONE
-        progressBar.visibility = View.VISIBLE
-    }
-
-    override fun onConnected(@Nullable bundle: Bundle?) {
-
-    }
-
-    override fun onConnectionSuspended(i: Int) {
-
-    }
-
-    override fun onConnectionFailed(connectionResult: ConnectionResult) {
-
-    }
-
+    /*override fun destroyView() {
+    }*/
 }

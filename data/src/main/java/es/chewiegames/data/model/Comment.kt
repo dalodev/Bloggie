@@ -1,5 +1,6 @@
 package es.chewiegames.bloggie.model
 
+import es.chewiegames.data.model.User
 import java.io.Serializable
 
 data class Comment(

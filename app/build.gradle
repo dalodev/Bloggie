@@ -25,17 +25,35 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    dataBinding {
+        enabled = true
+    }
+
     buildToolsVersion '29.0.2'
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    /**
+     * Module dependences
+     */
+    implementation project(path: ':domain')
+    implementation project(path: ':data')
+
     /**
      * Kotlin
      */
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     compileOnly 'org.glassfish:javax.annotation:10.0-b28'
+
+    /**
+     * Koin
+     */
+    implementation "org.koin:koin-android:$kotlin_koin_version"
+    implementation "org.koin:koin-androidx-viewmodel:$kotlin_koin_version"
 
     /**
      * Android X

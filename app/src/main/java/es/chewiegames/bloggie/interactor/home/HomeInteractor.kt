@@ -5,7 +5,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import es.chewiegames.bloggie.model.Post
-import es.chewiegames.bloggie.model.User
+import es.chewiegames.data.model.User
 import javax.inject.Inject
 import javax.inject.Named
 

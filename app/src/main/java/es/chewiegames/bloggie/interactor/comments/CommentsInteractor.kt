@@ -1,13 +1,9 @@
 package es.chewiegames.bloggie.interactor.comments
 
-import androidx.lifecycle.LiveData
-import com.google.firebase.database.ChildEventListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import es.chewiegames.bloggie.model.Comment
 import es.chewiegames.bloggie.model.Post
-import es.chewiegames.bloggie.model.User
+import es.chewiegames.data.model.User
 import es.chewiegames.bloggie.util.COMMENT_VIEW
 import javax.inject.Inject
 import javax.inject.Named

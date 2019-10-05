@@ -1,6 +1,5 @@
 package es.chewiegames.bloggie.interactor.login
 
-import android.app.Activity
 import android.content.Context
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
@@ -9,7 +8,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
-import es.chewiegames.bloggie.model.User
+import es.chewiegames.data.model.User
 import es.chewiegames.bloggie.util.LOGIN_IN
 import es.chewiegames.bloggie.util.LOGIN_OUT
 import javax.inject.Inject

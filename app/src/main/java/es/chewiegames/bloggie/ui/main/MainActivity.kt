@@ -10,9 +10,8 @@ import androidx.navigation.ui.setupWithNavController
 import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.di.component.ApplicationComponent
 import es.chewiegames.bloggie.di.module.MainActivityModule
-import es.chewiegames.bloggie.ui.BaseActivity
+import es.chewiegames.bloggie.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : BaseActivity(), MainView, BottomNavigationView.OnNavigationItemSelectedListener {
 

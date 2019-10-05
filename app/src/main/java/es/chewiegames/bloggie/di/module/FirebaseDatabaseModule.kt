@@ -8,7 +8,7 @@ import javax.inject.Named
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import es.chewiegames.bloggie.model.Post
-import es.chewiegames.bloggie.model.User
+import es.chewiegames.data.model.User
 import javax.inject.Singleton
 
 @Module

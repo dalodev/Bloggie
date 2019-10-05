@@ -12,15 +12,13 @@ import es.chewiegames.bloggie.di.component.ApplicationComponent
 import es.chewiegames.bloggie.di.module.HomeModule
 import es.chewiegames.bloggie.model.Post
 import es.chewiegames.bloggie.presenter.home.IHomePresenter
-import es.chewiegames.bloggie.ui.BaseFragment
+import es.chewiegames.bloggie.ui.base.BaseFragment
 import es.chewiegames.bloggie.util.EXTRA_POST
 import es.chewiegames.bloggie.util.HomeItemAnimator
 import kotlinx.android.synthetic.main.fragment_home.*
 import javax.inject.Inject
 import androidx.core.view.ViewCompat
 import androidx.core.util.Pair
-import androidx.navigation.NavOptions
-import androidx.navigation.NavOptionsBuilder
 import es.chewiegames.bloggie.ui.detailPost.DetailPostActivity
 
 class HomeFragment : BaseFragment(), HomeView, HomeAdapter.HomeAdapterListener {

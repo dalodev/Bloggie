@@ -5,8 +5,6 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import es.chewiegames.bloggie.R
@@ -15,7 +13,7 @@ import es.chewiegames.bloggie.di.module.DetailPostModule
 import es.chewiegames.bloggie.model.Post
 import es.chewiegames.bloggie.model.PostContent
 import es.chewiegames.bloggie.presenter.detailPost.IDetailPostPresenter
-import es.chewiegames.bloggie.ui.BaseActivity
+import es.chewiegames.bloggie.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_detail_post.*
 import javax.inject.Inject
 

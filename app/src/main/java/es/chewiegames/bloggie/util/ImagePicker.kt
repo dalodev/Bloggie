@@ -129,7 +129,7 @@ class ImagePicker {
             if (rotation != 0) {
                 val matrix = Matrix()
                 matrix.postRotate(rotation.toFloat())
-                return Bitmap.createBitmap(bm, 0, 0, bm!!.width, bm.height, matrix, true)
+                return Bitmap.createBitmap(bm!!, 0, 0, bm!!.width, bm.height, matrix, true)
             }
             return bm
         }

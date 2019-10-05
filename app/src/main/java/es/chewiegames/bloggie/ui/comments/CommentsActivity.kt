@@ -2,8 +2,8 @@ package es.chewiegames.bloggie.ui.comments
 
 import android.animation.LayoutTransition
 import android.os.Bundle
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.MenuItem
 import android.view.View
 import es.chewiegames.bloggie.R
@@ -45,7 +45,7 @@ class CommentsActivity : BaseActivity(), CommentsView, CommentsAdapter.CommentsA
 
     override fun onStart() {
         super.onStart()
-        mCommentsPresenter.loadData(intent.extras)
+        mCommentsPresenter.loadData(intent.extras!!)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

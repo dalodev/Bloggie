@@ -1,14 +1,14 @@
 package es.chewiegames.bloggie.ui.ui.home
 
 import android.content.Context
-import android.support.v4.view.ViewCompat
-import android.support.v7.widget.RecyclerView
+import androidx.core.view.ViewCompat
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.model.Post
-import android.support.v7.widget.CardView
+import androidx.cardview.widget.CardView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.CheckBox
@@ -127,7 +127,7 @@ class HomeAdapter @Inject constructor() : RecyclerView.Adapter<HomeAdapter.HomeV
         return false
     }
 
-    class HomeViewHolder constructor(rootView: View?) : RecyclerView.ViewHolder(rootView) {
+    class HomeViewHolder constructor(rootView: View?) : RecyclerView.ViewHolder(rootView!!) {
 
         var postImage: ImageView = rootView!!.postImage
         var postTitle: TextView = rootView!!.postTitle

@@ -4,8 +4,8 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
-import android.support.v7.widget.LinearLayoutManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import es.chewiegames.bloggie.R
@@ -16,16 +16,16 @@ import es.chewiegames.bloggie.presenter.newPost.INewPostPresenter
 import es.chewiegames.bloggie.ui.BaseActivity
 import kotlinx.android.synthetic.main.activity_new_post.*
 import javax.inject.Inject
-import android.support.v7.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.DefaultItemAnimator
 import kotlinx.android.synthetic.main.content_new_post.*
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.helper.ItemTouchHelper
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.ItemTouchHelper
 import android.view.View
 import android.widget.ImageView
 import com.squareup.picasso.Picasso
 import es.chewiegames.bloggie.util.*
-import android.support.design.widget.CoordinatorLayout
-import android.support.design.widget.Snackbar
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import com.google.android.material.snackbar.Snackbar
 
 class NewPostActivity : BaseActivity(), NewPostView, BottomNavigationView.OnNavigationItemSelectedListener, PostAdapter.PostAdapterListener {
 

@@ -1,7 +1,7 @@
 package es.chewiegames.bloggie.di.module
 
 import android.content.Context
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.Module
 import es.chewiegames.bloggie.ui.newPost.NewPostView
 import es.chewiegames.bloggie.interactor.newPost.NewPostInteractor

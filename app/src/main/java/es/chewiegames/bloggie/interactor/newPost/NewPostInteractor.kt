@@ -139,7 +139,7 @@ class NewPostInteractor @Inject constructor(): INewPostInteractor {
         val baos = ByteArrayOutputStream()
         content.bitmapImage!!.compress(Bitmap.CompressFormat.JPEG, 100, baos)
         val data = baos.toByteArray()
-        val postImagesRefByUser = mStorageReference.child("images").child(idPost).child(Uri.parse(content.uriImage).lastPathSegment)
+        val postImagesRefByUser = mStorageReference.child("images").child(idPost).child(Uri.parse(content.uriImage).lastPathSegment!!)
         val  uploadTaskByUser = postImagesRefByUser.putBytes(data)
 
         uploadTaskByUser.addOnFailureListener {
@@ -156,7 +156,7 @@ class NewPostInteractor @Inject constructor(): INewPostInteractor {
             }
         }
 
-        val postImagesRefPost = mStorageReference.child("images").child(idPost).child(Uri.parse(content.uriImage).lastPathSegment)
+        val postImagesRefPost = mStorageReference.child("images").child(idPost).child(Uri.parse(content.uriImage).lastPathSegment!!)
         val uploadTaskPost = postImagesRefPost.putBytes(data)
 
         uploadTaskPost.addOnFailureListener {

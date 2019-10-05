@@ -1,7 +1,7 @@
 package es.chewiegames.bloggie.di.module
 
 import android.content.Context
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.Module
 import dagger.Provides
 import es.chewiegames.bloggie.di.scope.HomeScope
@@ -35,7 +35,7 @@ class HomeModule constructor(var view: HomeView?, var context : Context, var lis
 
     @Provides
     @HomeScope
-    fun provideLayoutManager() : LinearLayoutManager{
+    fun provideLayoutManager() : LinearLayoutManager {
         return LinearLayoutManager(context)
     }
 

@@ -8,7 +8,7 @@ import es.chewiegames.bloggie.interactor.detailPost.IDetailPostInteractor
 import es.chewiegames.bloggie.presenter.detailPost.DetailPostPresenter
 import es.chewiegames.bloggie.presenter.detailPost.IDetailPostPresenter
 import es.chewiegames.bloggie.ui.detailPost.DetailPostView
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import es.chewiegames.bloggie.ui.detailPost.DetailPostActivity
 import es.chewiegames.bloggie.ui.detailPost.DetailPostAdapter
 

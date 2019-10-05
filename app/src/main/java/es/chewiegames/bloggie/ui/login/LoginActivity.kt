@@ -8,13 +8,13 @@ import es.chewiegames.bloggie.di.module.LoginModule
 import es.chewiegames.bloggie.presenter.login.ILoginPresenter
 import es.chewiegames.bloggie.ui.BaseActivity
 import javax.inject.Inject
-import android.support.design.widget.Snackbar
+import com.google.android.material.snackbar.Snackbar
 import android.view.View
 import com.google.android.gms.common.api.GoogleApiClient
 import es.chewiegames.bloggie.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import com.google.android.gms.common.ConnectionResult
-import android.support.annotation.Nullable
+import androidx.annotation.Nullable
 
 
 class LoginActivity : BaseActivity(), LoginView,  GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
@@ -75,6 +75,7 @@ class LoginActivity : BaseActivity(), LoginView,  GoogleApiClient.ConnectionCall
         if(data != null){
             mLoginPresenter.onActivityResult(requestCode, resultCode, data)
         }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun onStartActivityForResult(intent: Intent, request: Int) {

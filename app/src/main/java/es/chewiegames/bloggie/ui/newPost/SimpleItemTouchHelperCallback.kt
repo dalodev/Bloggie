@@ -1,13 +1,13 @@
 package es.chewiegames.bloggie.ui.newPost
 
 import android.graphics.Canvas
+import android.graphics.Paint
 import android.graphics.RectF
 import android.graphics.drawable.Drawable
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.helper.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.ItemTouchHelper
 import es.chewiegames.bloggie.R
-import android.graphics.Paint
-import android.support.v7.widget.CardView
+import androidx.cardview.widget.CardView
 import es.chewiegames.bloggie.util.Utils
 
 
@@ -43,16 +43,16 @@ class SimpleItemTouchHelperCallback constructor(dragDirs: Int, swipeDirs: Int) :
         return true
     }
 
-    override fun onMove(recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder?, target: RecyclerView.ViewHolder?): Boolean {
+    override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
         adapter!!.onItemMove(viewHolder!!.adapterPosition, target!!.adapterPosition)
         return true
     }
 
-    override fun onSwiped(viewHolder: RecyclerView.ViewHolder?, direction: Int) {
+    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
         adapter!!.onSwiped(viewHolder!!, direction, viewHolder.adapterPosition)
     }
 
-    override fun onChildDraw(c: Canvas?, recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder?, dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
+    override fun onChildDraw(c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
 
         if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
 
@@ -72,12 +72,12 @@ class SimpleItemTouchHelperCallback constructor(dragDirs: Int, swipeDirs: Int) :
             if (dX > 0) {
                 val background = RectF(left, top, right + dX, bottom)
                 val iconDest = RectF(left + cardViewWidth, top + cardViewWidth, left + 2 * cardViewWidth, bottom - cardViewWidth)
-                c!!.drawRect(background, paintLeft)
+                c!!.drawRect(background, paintLeft!!)
                 c.drawBitmap(Utils.getBitmap(drawableLeft!!), null, iconDest, paintLeft)
             } else if (dX < 0) {
                 val background = RectF(right + dX, top, right, bottom)
                 val iconDest = RectF(right - 2 * cardViewWidth, top + cardViewWidth, right - cardViewWidth, bottom - cardViewWidth)
-                c!!.drawRect(background, paintRight)
+                c!!.drawRect(background, paintRight!!)
                 c.drawBitmap(Utils.getBitmap(drawableRight!!), null, iconDest, paintRight)
             }
         }

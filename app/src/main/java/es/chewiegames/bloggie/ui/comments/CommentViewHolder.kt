@@ -1,11 +1,11 @@
 package es.chewiegames.bloggie.ui.comments
 
-import android.support.constraint.ConstraintLayout
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import kotlinx.android.synthetic.main.comment_item.view.*
 
 class CommentViewHolder constructor(rootView: View) : RecyclerView.ViewHolder(rootView) {
@@ -16,5 +16,5 @@ class CommentViewHolder constructor(rootView: View) : RecyclerView.ViewHolder(ro
     var reply: TextView? = rootView.replyButton
     var replysView : LinearLayout? = rootView.replysContainer
     var replysRecyclerView : RecyclerView? = rootView.replysRecyclerView
-    var root: ConstraintLayout? = rootView.commentItemRoot
+    var root : ConstraintLayout = rootView.commentItemRoot as ConstraintLayout
 }

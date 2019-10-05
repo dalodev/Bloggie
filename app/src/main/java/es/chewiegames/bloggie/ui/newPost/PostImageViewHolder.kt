@@ -1,9 +1,9 @@
 package es.chewiegames.bloggie.ui.newPost
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.widget.ProgressBar
-import android.support.v7.widget.CardView
+import androidx.cardview.widget.CardView
 import android.widget.ImageView
 import kotlinx.android.synthetic.main.imageview_content.view.*
 

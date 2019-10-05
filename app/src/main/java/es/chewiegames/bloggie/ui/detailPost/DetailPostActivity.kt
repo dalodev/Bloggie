@@ -1,8 +1,8 @@
 package es.chewiegames.bloggie.ui.detailPost
 
 import android.os.Bundle
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
@@ -43,7 +43,7 @@ class DetailPostActivity : BaseActivity(), DetailPostView, DetailPostAdapter.Det
 
     override fun onStart() {
         super.onStart()
-        mDetailPostPresenter.loadData(intent.extras)
+        mDetailPostPresenter.loadData(intent.extras!!)
     }
 
     override fun injectDependencies(component: ApplicationComponent) {

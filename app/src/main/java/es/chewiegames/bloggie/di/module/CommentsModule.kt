@@ -1,6 +1,6 @@
 package es.chewiegames.bloggie.di.module
 
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.Module
 import dagger.Provides
 import es.chewiegames.bloggie.di.scope.CommentsScope
@@ -35,7 +35,7 @@ class CommentsModule constructor(private val activity: CommentsActivity){
 
     @Provides
     @CommentsScope
-    fun provideLinearLayoutManager() : LinearLayoutManager{
+    fun provideLinearLayoutManager() : LinearLayoutManager {
         return LinearLayoutManager(activity)
     }
 

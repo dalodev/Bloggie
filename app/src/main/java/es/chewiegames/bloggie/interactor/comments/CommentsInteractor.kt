@@ -1,6 +1,6 @@
 package es.chewiegames.bloggie.interactor.comments
 
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError

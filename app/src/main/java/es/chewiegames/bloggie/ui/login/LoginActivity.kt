@@ -10,7 +10,6 @@ import androidx.lifecycle.Observer
 import es.chewiegames.bloggie.databinding.ActivityLoginBinding
 import es.chewiegames.bloggie.di.component.ApplicationComponent
 import es.chewiegames.bloggie.ui.base.BaseActivity
-import es.chewiegames.bloggie.ui.base.BaseBindingActivity
 import es.chewiegames.bloggie.util.RC_SIGN_IN
 import es.chewiegames.bloggie.viewmodel.LoginViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel

@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import es.chewiegames.bloggie.BloggieApplication
 import es.chewiegames.bloggie.di.component.ApplicationComponent
 
 abstract class BaseFragment : Fragment() {
@@ -35,6 +36,7 @@ abstract class BaseFragment : Fragment() {
      */
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        injectDependencies(BloggieApplication.getComponent()!!, context)
         if (context is OnLoaderCallback) {
             loaderCallback = context
         }

@@ -9,19 +9,16 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.di.component.ApplicationComponent
-import es.chewiegames.bloggie.di.module.MainActivityModule
 import es.chewiegames.bloggie.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseActivity(), MainView, BottomNavigationView.OnNavigationItemSelectedListener {
+class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     /**
      * Get the layout view of the activity
      * @return The layout id of the activity
      */
-    override fun getLayoutId(): Int {
-        return R.layout.activity_main
-    }
+    override fun getLayoutId(): Int = R.layout.activity_main
 
     /**
      * This method is triggered in onCreate event
@@ -39,9 +36,7 @@ class MainActivity : BaseActivity(), MainView, BottomNavigationView.OnNavigation
      * Initialize the inject dependences for this activity. This method is triggered in onCreate event
      * @param component
      */
-    override fun injectDependencies(component: ApplicationComponent) {
-        component.plus(MainActivityModule(this, this)).inject(this)
-    }
+    override fun injectDependencies(component: ApplicationComponent) {}
 
     override fun onSupportNavigateUp() = findNavController(R.id.my_nav_host_fragment).navigateUp()
 
@@ -56,11 +51,5 @@ class MainActivity : BaseActivity(), MainView, BottomNavigationView.OnNavigation
             }
         }
         return true
-    }
-
-    override fun showMessage(message: String) {
-    }
-
-    override fun showLoading(show: Boolean) {
     }
 }

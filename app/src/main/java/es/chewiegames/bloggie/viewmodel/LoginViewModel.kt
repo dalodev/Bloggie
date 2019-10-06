@@ -18,7 +18,6 @@ import es.chewiegames.domain.usecases.LoginUseCase
 class LoginViewModel(private val loginUseCase : LoginUseCase) : ViewModel(), OnLaunchResult, OnLoginFinishedListener {
 
     val goToMainActivity: BaseSingleLiveEvent<Any?> by lazy { BaseSingleLiveEvent<Any?>() }
-    val onSuccess: BaseSingleLiveEvent<Any?> by lazy { BaseSingleLiveEvent<Any?>() }
     val showLoginButton: BaseSingleLiveEvent<Boolean> by lazy { BaseSingleLiveEvent<Boolean>() }
     val showMessage: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
     val startActivityForResult: BaseSingleLiveEvent<Intent> by lazy { BaseSingleLiveEvent<Intent>() }
@@ -71,7 +70,7 @@ class LoginViewModel(private val loginUseCase : LoginUseCase) : ViewModel(), OnL
     }
 
     override fun userLogged() {
-        onSuccess.call()
+        goToMainActivity.call()
     }
 
     override fun userNotLogged() {

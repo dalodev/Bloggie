@@ -1,6 +1,8 @@
 package es.chewiegames.bloggie.ui.base
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +18,7 @@ abstract class BaseBindingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initView()
+        initObservers()
     }
 
     open fun bindViews(inflater: LayoutInflater, container: ViewGroup?, layoutId: Int) {}
@@ -74,6 +77,12 @@ abstract class BaseBindingFragment : Fragment() {
         }
     }
 
+    /**
+     * Activity navigation.
+     */
+    fun goToActivity(intent: Intent, bundle : Bundle) {
+        startActivity(intent, bundle)
+    }
     /**
      * Start callbacks
      */

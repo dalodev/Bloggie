@@ -34,7 +34,7 @@ class HomeFragment : BaseBindingFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
         binding.lifecycleOwner = this
-
+        binding.homeViewModel = viewModel
         return binding.root
     }
 
@@ -53,9 +53,6 @@ class HomeFragment : BaseBindingFragment() {
         })
         viewModel.showEmptyView.observe(this, Observer {
             showEmptyView()
-        })
-        viewModel.showLoading.observe(this, Observer {
-            progressBar.visibility = if (it) View.VISIBLE else View.GONE
         })
         viewModel.goToComments.observe(this, Observer {
             findNavController().navigate(R.id.action_home_to_comments, it)
@@ -96,8 +93,8 @@ class HomeFragment : BaseBindingFragment() {
      * display the view if no items in list
      */
     fun showEmptyView() {
-        emptyView.visibility = if (adapter.itemCount == 0) View.VISIBLE else View.GONE
-        progressBar.visibility = View.GONE
+        viewModel.showEmptyView.value = adapter.itemCount == 0
+        viewModel.showLoading.value = false
     }
 
     override fun destroyView() {

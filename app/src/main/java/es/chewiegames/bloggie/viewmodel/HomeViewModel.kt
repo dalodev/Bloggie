@@ -8,9 +8,7 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import androidx.core.view.ViewCompat
 import androidx.lifecycle.ViewModel
-import androidx.navigation.fragment.findNavController
 import com.david.pokeapp.livedata.BaseSingleLiveEvent
-import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.model.Post
 import es.chewiegames.bloggie.ui.detailPost.DetailPostActivity
 import es.chewiegames.bloggie.util.EXTRA_POST
@@ -21,7 +19,7 @@ import java.util.ArrayList
 class HomeViewModel(val activity: Activity, private val homeUseCase : HomeUseCase)  : ViewModel(), OnLoadFinishedListener {
 
     val posts: BaseSingleLiveEvent<ArrayList<Post>> by lazy { BaseSingleLiveEvent<ArrayList<Post>>() }
-    val showEmptyView: BaseSingleLiveEvent<Any> by lazy { BaseSingleLiveEvent<Any>() }
+    val showEmptyView: BaseSingleLiveEvent<Boolean> by lazy { BaseSingleLiveEvent<Boolean>() }
     val showLoading: BaseSingleLiveEvent<Boolean> by lazy { BaseSingleLiveEvent<Boolean>() }
     val addItem: BaseSingleLiveEvent<Any> by lazy { BaseSingleLiveEvent<Any>() }
     val removeItemPosition: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
@@ -35,7 +33,6 @@ class HomeViewModel(val activity: Activity, private val homeUseCase : HomeUseCas
 
     fun onPostLiked(post: Post, checked: Boolean) {
         homeUseCase.handleFromLikedPostByUser(post, checked,  this)
-
     }
 
     /**
@@ -45,7 +42,7 @@ class HomeViewModel(val activity: Activity, private val homeUseCase : HomeUseCas
         val bundle = Bundle()
         bundle.putSerializable(EXTRA_POST, post)
         val p2 = Pair.create(viewsToShare[1], ViewCompat.getTransitionName(viewsToShare[1]!!))
-        var options= if(viewsToShare[0] != null){
+        val options= if(viewsToShare[0] != null){
             val p1 = Pair.create(viewsToShare[0], ViewCompat.getTransitionName(viewsToShare[0]!!))
             ActivityOptionsCompat.makeSceneTransitionAnimation(activity, p1, p2)
         }else{

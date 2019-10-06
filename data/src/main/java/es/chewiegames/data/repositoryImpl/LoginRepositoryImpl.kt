@@ -12,7 +12,7 @@ import es.chewiegames.data.repository.LoginRespository
 import es.chewiegames.data.utils.LOGIN_IN
 import es.chewiegames.data.utils.LOGIN_OUT
 
-class LoginRepositoryImpl(var mUser: User, var mDatabaseUsers: DatabaseReference) : LoginRespository {
+class LoginRepositoryImpl(var mUser : User, var mDatabaseUsers: DatabaseReference) : LoginRespository {
 
     private val TAG = this.javaClass.name
 

@@ -25,9 +25,9 @@ open class BloggieApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        startKoin(this, listOf(appModule, domainModule, dataModule))
         instance = this
         initializeDependecyInjector()
-        startKoin(this, listOf(appModule, domainModule, dataModule))
     }
 
     private fun initializeDependecyInjector() {

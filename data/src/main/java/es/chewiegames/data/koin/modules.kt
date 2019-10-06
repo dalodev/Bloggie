@@ -8,9 +8,8 @@ import org.koin.dsl.module.module
 
 val dataModule = module {
 
-    single{LoginRepositoryImpl(
-            mUser = get(),
-            mDatabaseUsers = getUserDatabaseReference())}
+    single<LoginRespository>{LoginRepositoryImpl(mUser = get(), mDatabaseUsers = getUserDatabaseReference())}
+
 }
 
 fun getUserDatabaseReference() : DatabaseReference{

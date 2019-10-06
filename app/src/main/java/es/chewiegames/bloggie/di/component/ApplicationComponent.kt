@@ -12,7 +12,6 @@ import javax.inject.Singleton
         FirebaseDatabaseModule::class
         )))
 interface ApplicationComponent {
-    fun plus(loginModule: LoginModule) : LoginSubComponent
     fun plus(mainActivityModule: MainActivityModule) : MainSubComponent
     fun plus(homeModule: HomeModule) : HomeSubComponent
     fun plus(newPostModule: NewPostModule) : NewPostSubComponent

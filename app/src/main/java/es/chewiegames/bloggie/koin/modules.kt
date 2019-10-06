@@ -11,5 +11,5 @@ val appModule = module {
     viewModel { LoginViewModel(loginUseCase = get()) }
 
     // Coroutines
-    factory<CoroutineContext> { Dispatchers.Main }
+    //factory<CoroutineContext> { Dispatchers.Main }
 }

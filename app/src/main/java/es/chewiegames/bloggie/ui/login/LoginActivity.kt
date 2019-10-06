@@ -19,7 +19,6 @@ class LoginActivity : BaseActivity() {
 
 
     override fun injectDependencies(component: ApplicationComponent) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     private val TAG = this.javaClass.simpleName
@@ -27,11 +26,6 @@ class LoginActivity : BaseActivity() {
     private val viewModel: LoginViewModel by viewModel()
     lateinit var binding: ActivityLoginBinding
 
-    /**
-     * Get the layout view of the activity
-     *
-     * @return The layout id of the activity
-     */
     override fun getLayoutId(): Int = R.layout.activity_login
 
     override fun initView(savedInstanceState: Bundle?) {

@@ -2,8 +2,8 @@ package es.chewiegames.bloggie.presenter.detailPost
 
 import es.chewiegames.bloggie.presenter.BasePresenter
 import es.chewiegames.bloggie.ui.detailPost.DetailPostView
-import es.chewiegames.bloggie.model.Post
-import es.chewiegames.bloggie.model.PostContent
+import es.chewiegames.domain.model.Post
+import es.chewiegames.data.model.PostContent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView

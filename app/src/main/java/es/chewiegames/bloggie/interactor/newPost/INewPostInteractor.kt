@@ -1,6 +1,6 @@
 package es.chewiegames.bloggie.interactor.newPost
 
-import es.chewiegames.bloggie.model.PostContent
+import es.chewiegames.data.model.PostContent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.widget.ImageView

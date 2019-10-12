@@ -6,8 +6,8 @@ import android.net.Uri
 import android.widget.ImageView
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.storage.StorageReference
-import es.chewiegames.bloggie.model.Post
-import es.chewiegames.bloggie.model.PostContent
+import es.chewiegames.domain.model.Post
+import es.chewiegames.data.model.PostContent
 import es.chewiegames.data.model.User
 import es.chewiegames.bloggie.util.EDITTEXT_VIEW
 import es.chewiegames.bloggie.util.IMAGE_VIEW

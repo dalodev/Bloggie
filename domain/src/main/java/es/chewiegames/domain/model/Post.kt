@@ -1,5 +1,7 @@
-package es.chewiegames.bloggie.model
+package es.chewiegames.domain.model
 
+import es.chewiegames.data.model.Comment
+import es.chewiegames.data.model.PostContent
 import es.chewiegames.data.model.User
 import java.io.Serializable
 import java.util.*

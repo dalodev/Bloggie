@@ -5,8 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import es.chewiegames.bloggie.R
-import es.chewiegames.bloggie.model.Comment
-import javax.inject.Inject
+import es.chewiegames.data.model.Comment
 
 class RepliesCommentsAdapter constructor(var context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

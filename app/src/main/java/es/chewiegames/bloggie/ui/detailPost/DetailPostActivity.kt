@@ -10,8 +10,8 @@ import com.squareup.picasso.Picasso
 import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.di.component.ApplicationComponent
 import es.chewiegames.bloggie.di.module.DetailPostModule
-import es.chewiegames.bloggie.model.Post
-import es.chewiegames.bloggie.model.PostContent
+import es.chewiegames.domain.model.Post
+import es.chewiegames.data.model.PostContent
 import es.chewiegames.bloggie.presenter.detailPost.IDetailPostPresenter
 import es.chewiegames.bloggie.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_detail_post.*

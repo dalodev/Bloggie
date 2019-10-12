@@ -1,6 +1,6 @@
 package es.chewiegames.data.callbacks
 
-import es.chewiegames.bloggie.model.Post
+import es.chewiegames.data.model.Post
 import java.util.ArrayList
 
 interface OnLoadFinishedListener {
@@ -8,11 +8,11 @@ interface OnLoadFinishedListener {
 
     fun onSuccess(posts: ArrayList<Post>)
 
-    fun onItemAdded()
+    fun onItemAdded(post: Post)
 
     fun onItemRemoved(position: Int)
 
-    fun onItemChange(position: Int)
+    fun onItemChange(position: Int, post: Post)
 
     fun showProgressDialog()
 

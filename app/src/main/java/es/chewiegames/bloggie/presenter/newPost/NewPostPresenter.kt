@@ -14,7 +14,7 @@ import android.widget.ImageView
 import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.interactor.newPost.INewPostInteractor
 import es.chewiegames.bloggie.interactor.newPost.NewPostInteractor
-import es.chewiegames.bloggie.model.PostContent
+import es.chewiegames.data.model.PostContent
 import es.chewiegames.bloggie.ui.newPost.NewPostView
 import es.chewiegames.bloggie.util.*
 import javax.inject.Inject

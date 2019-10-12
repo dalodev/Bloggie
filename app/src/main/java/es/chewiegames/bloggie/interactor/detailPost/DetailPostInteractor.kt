@@ -2,7 +2,7 @@ package es.chewiegames.bloggie.interactor.detailPost
 
 import android.view.View
 import android.widget.ImageView
-import es.chewiegames.bloggie.model.Post
+import es.chewiegames.domain.model.Post
 import javax.inject.Inject
 import android.animation.Animator
 import android.graphics.Rect

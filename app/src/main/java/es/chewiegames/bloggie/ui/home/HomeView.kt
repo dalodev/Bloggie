@@ -1,7 +1,7 @@
 package es.chewiegames.bloggie.ui.home
 
 import es.chewiegames.bloggie.ui.ui.BaseView
-import es.chewiegames.bloggie.model.Post
+import es.chewiegames.domain.model.Post
 
 
 

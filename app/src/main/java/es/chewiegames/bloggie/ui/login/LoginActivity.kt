@@ -16,11 +16,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : BaseActivity() {
 
-
     override fun injectDependencies(component: ApplicationComponent) {
     }
-
-    private val TAG = this.javaClass.simpleName
 
     private val viewModel: LoginViewModel by viewModel()
     lateinit var binding: ActivityLoginBinding

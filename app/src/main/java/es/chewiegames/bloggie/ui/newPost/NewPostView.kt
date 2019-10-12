@@ -1,7 +1,7 @@
 package es.chewiegames.bloggie.ui.newPost
 
 import es.chewiegames.bloggie.ui.ui.BaseView
-import es.chewiegames.bloggie.model.PostContent
+import es.chewiegames.data.model.PostContent
 import android.content.Intent
 import android.net.Uri
 

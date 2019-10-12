@@ -11,7 +11,7 @@ import android.view.MenuItem
 import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.di.component.ApplicationComponent
 import es.chewiegames.bloggie.di.module.NewPostModule
-import es.chewiegames.bloggie.model.PostContent
+import es.chewiegames.data.model.PostContent
 import es.chewiegames.bloggie.presenter.newPost.INewPostPresenter
 import es.chewiegames.bloggie.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_new_post.*
@@ -42,9 +42,7 @@ class NewPostActivity : BaseActivity(), NewPostView, BottomNavigationView.OnNavi
      * Get the layout view of the activity
      * @return The layout id of the activity
      */
-    override fun getLayoutId(): Int {
-        return R.layout.activity_new_post
-    }
+    override fun getLayoutId() = R.layout.activity_new_post
 
     /**
      * This method is triggered in onCreate event

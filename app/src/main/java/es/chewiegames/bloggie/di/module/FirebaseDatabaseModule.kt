@@ -7,7 +7,7 @@ import dagger.Provides
 import javax.inject.Named
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import es.chewiegames.bloggie.model.Post
+import es.chewiegames.domain.model.Post
 import es.chewiegames.data.model.User
 import javax.inject.Singleton
 

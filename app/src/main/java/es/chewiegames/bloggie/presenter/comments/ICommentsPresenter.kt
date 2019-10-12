@@ -1,7 +1,7 @@
 package es.chewiegames.bloggie.presenter.comments
 
 import android.os.Bundle
-import es.chewiegames.bloggie.model.Comment
+import es.chewiegames.data.model.Comment
 import es.chewiegames.bloggie.presenter.BasePresenter
 import es.chewiegames.bloggie.ui.comments.CommentsView
 

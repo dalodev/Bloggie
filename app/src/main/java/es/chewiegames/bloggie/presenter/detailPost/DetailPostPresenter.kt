@@ -6,11 +6,11 @@ import android.view.View
 import android.widget.ImageView
 import es.chewiegames.bloggie.interactor.detailPost.DetailPostInteractor
 import es.chewiegames.bloggie.interactor.detailPost.IDetailPostInteractor
-import es.chewiegames.bloggie.model.PostContent
+import es.chewiegames.data.model.PostContent
 import es.chewiegames.bloggie.ui.detailPost.DetailPostView
 import es.chewiegames.bloggie.util.EXTRA_POST
 import javax.inject.Inject
-import es.chewiegames.bloggie.model.Post
+import es.chewiegames.domain.model.Post
 
 class DetailPostPresenter @Inject constructor(): IDetailPostPresenter, IDetailPostInteractor.InteractorListener {
 

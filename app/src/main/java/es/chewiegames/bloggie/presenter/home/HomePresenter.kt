@@ -2,7 +2,7 @@ package es.chewiegames.bloggie.presenter.home
 
 import es.chewiegames.bloggie.interactor.home.HomeInteractor
 import es.chewiegames.bloggie.interactor.home.IHomeInteractor
-import es.chewiegames.bloggie.model.Post
+import es.chewiegames.domain.model.Post
 import es.chewiegames.bloggie.ui.home.HomeView
 import java.util.ArrayList
 import javax.inject.Inject

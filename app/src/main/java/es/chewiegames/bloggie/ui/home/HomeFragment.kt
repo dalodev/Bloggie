@@ -18,7 +18,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseBindingFragment() {
 
-
     private val viewModel: HomeViewModel by viewModel()
 
     lateinit var binding : FragmentHomeBinding
@@ -40,18 +39,20 @@ class HomeFragment : BaseBindingFragment() {
 
     override fun initObservers() {
         viewModel.posts.observe(this, Observer {
+            adapter.posts = it
             adapter.notifyDataSetChanged()
+            showEmptyView()
         })
         viewModel.updateItemPosition.observe(this, Observer {
             adapter.notifyItemChanged(it)
+            showEmptyView()
         })
         viewModel.addItem.observe(this, Observer {
             adapter.notifyItemRangeChanged(0, adapter.itemCount)
+            showEmptyView()
         })
         viewModel.removeItemPosition.observe(this, Observer {
             adapter.notifyItemRemoved(it)
-        })
-        viewModel.showEmptyView.observe(this, Observer {
             showEmptyView()
         })
         viewModel.goToComments.observe(this, Observer {

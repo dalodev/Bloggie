@@ -9,16 +9,17 @@ import androidx.core.util.Pair
 import androidx.core.view.ViewCompat
 import androidx.lifecycle.ViewModel
 import com.david.pokeapp.livedata.BaseSingleLiveEvent
-import es.chewiegames.bloggie.model.Post
+import es.chewiegames.domain.model.Post
 import es.chewiegames.bloggie.ui.detailPost.DetailPostActivity
 import es.chewiegames.bloggie.util.EXTRA_POST
-import es.chewiegames.data.callbacks.OnLoadFinishedListener
+import es.chewiegames.domain.callbacks.OnLoadHomeFinishedListener
 import es.chewiegames.domain.usecases.HomeUseCase
 import java.util.ArrayList
 
-class HomeViewModel(val activity: Activity, private val homeUseCase : HomeUseCase)  : ViewModel(), OnLoadFinishedListener {
+class HomeViewModel(val activity: Activity, private val homeUseCase : HomeUseCase)  : ViewModel(), OnLoadHomeFinishedListener {
 
     val posts: BaseSingleLiveEvent<ArrayList<Post>> by lazy { BaseSingleLiveEvent<ArrayList<Post>>() }
+    val likedPosts: BaseSingleLiveEvent<ArrayList<Post>> by lazy { BaseSingleLiveEvent<ArrayList<Post>>() }
     val showEmptyView: BaseSingleLiveEvent<Boolean> by lazy { BaseSingleLiveEvent<Boolean>() }
     val showLoading: BaseSingleLiveEvent<Boolean> by lazy { BaseSingleLiveEvent<Boolean>() }
     val addItem: BaseSingleLiveEvent<Any> by lazy { BaseSingleLiveEvent<Any>() }
@@ -26,6 +27,8 @@ class HomeViewModel(val activity: Activity, private val homeUseCase : HomeUseCas
     val updateItemPosition: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
     val goToDetailPostActivity: BaseSingleLiveEvent<HashMap<Intent, Bundle>> by lazy { BaseSingleLiveEvent<HashMap<Intent, Bundle>>() }
     val goToComments: BaseSingleLiveEvent<Bundle> by lazy { BaseSingleLiveEvent<Bundle>() }
+
+    var onBind = false
 
     fun loadFeedPosts() {
         homeUseCase.loadFeedPostsFromDatabase(this)
@@ -81,19 +84,22 @@ class HomeViewModel(val activity: Activity, private val homeUseCase : HomeUseCas
         hideProgressDialog()
     }
 
-    override fun onItemAdded() {
+    override fun onItemAdded(post: Post) {
+        this.posts.value?.add(post)
         addItem.call()
         showEmptyView.call()
         hideProgressDialog()
     }
 
     override fun onItemRemoved(position: Int) {
+        posts.value?.removeAt(position)
         removeItemPosition.value = position
         showEmptyView.call()
         hideProgressDialog()
     }
 
-    override fun onItemChange(position: Int) {
+    override fun onItemChange(position: Int, post: Post) {
+        this.posts.value!![position] = post
         updateItemPosition.value = position
         showEmptyView.call()
         hideProgressDialog()
@@ -105,5 +111,14 @@ class HomeViewModel(val activity: Activity, private val homeUseCase : HomeUseCas
 
     override fun hideProgressDialog() {
         showLoading.value = false
+    }
+
+    fun isLikedPost(feedPost: Post): Boolean {
+        for (likedPost in likedPosts.value!!) {
+            if (likedPost.id == feedPost.id) {
+                return true
+            }
+        }
+        return false
     }
 }

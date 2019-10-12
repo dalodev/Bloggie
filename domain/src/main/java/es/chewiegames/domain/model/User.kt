@@ -1,4 +1,4 @@
-package es.chewiegames.bloggie.model
+package es.chewiegames.domain.model
 
 import java.io.Serializable
 

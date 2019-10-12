@@ -9,7 +9,7 @@ import android.widget.ProgressBar
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import es.chewiegames.bloggie.R
-import es.chewiegames.bloggie.model.PostContent
+import es.chewiegames.data.model.PostContent
 import es.chewiegames.bloggie.ui.newPost.PostImageViewHolder
 import es.chewiegames.bloggie.ui.newPost.PostTextViewHolder
 import javax.inject.Inject

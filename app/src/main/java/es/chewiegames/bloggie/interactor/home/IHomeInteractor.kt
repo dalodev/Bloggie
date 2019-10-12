@@ -1,7 +1,7 @@
 package es.chewiegames.bloggie.interactor.home
 
 import es.chewiegames.bloggie.interactor.BaseInteractor
-import es.chewiegames.bloggie.model.Post
+import es.chewiegames.domain.model.Post
 import java.util.ArrayList
 
 interface IHomeInteractor : BaseInteractor {

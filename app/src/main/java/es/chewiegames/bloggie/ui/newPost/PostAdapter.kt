@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import es.chewiegames.bloggie.R
-import es.chewiegames.bloggie.model.PostContent
+import es.chewiegames.data.model.PostContent
 import javax.inject.Inject
 import com.squareup.picasso.Picasso
 import android.widget.ProgressBar

@@ -1,8 +1,8 @@
 package es.chewiegames.bloggie.interactor.comments
 
 import com.google.firebase.database.DatabaseReference
-import es.chewiegames.bloggie.model.Comment
-import es.chewiegames.bloggie.model.Post
+import es.chewiegames.data.model.Comment
+import es.chewiegames.domain.model.Post
 import es.chewiegames.data.model.User
 import es.chewiegames.bloggie.util.COMMENT_VIEW
 import javax.inject.Inject

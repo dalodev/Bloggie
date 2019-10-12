@@ -10,7 +10,7 @@ import dagger.Provides
 import es.chewiegames.bloggie.di.scope.NewPostScope
 import es.chewiegames.bloggie.presenter.newPost.NewPostPresenter
 import es.chewiegames.bloggie.presenter.newPost.INewPostPresenter
-import es.chewiegames.bloggie.model.PostContent
+import es.chewiegames.data.model.PostContent
 import es.chewiegames.bloggie.ui.newPost.PostAdapter
 
 @Module

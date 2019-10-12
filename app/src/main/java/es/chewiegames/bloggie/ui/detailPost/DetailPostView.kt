@@ -1,8 +1,8 @@
 package es.chewiegames.bloggie.ui.detailPost
 
 import es.chewiegames.bloggie.ui.ui.BaseView
-import es.chewiegames.bloggie.model.Post
-import es.chewiegames.bloggie.model.PostContent
+import es.chewiegames.domain.model.Post
+import es.chewiegames.data.model.PostContent
 
 interface DetailPostView : BaseView {
     fun setAdapter(content: ArrayList<PostContent>)

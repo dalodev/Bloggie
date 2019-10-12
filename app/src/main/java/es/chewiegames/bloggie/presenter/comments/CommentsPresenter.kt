@@ -5,8 +5,8 @@ import android.os.Bundle
 import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.interactor.comments.CommentsInteractor
 import es.chewiegames.bloggie.interactor.comments.ICommentsInteractor
-import es.chewiegames.bloggie.model.Comment
-import es.chewiegames.bloggie.model.Post
+import es.chewiegames.data.model.Comment
+import es.chewiegames.domain.model.Post
 import es.chewiegames.bloggie.ui.comments.CommentsView
 import es.chewiegames.bloggie.util.EXTRA_POST
 import javax.inject.Inject

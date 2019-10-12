@@ -1,6 +1,6 @@
 package es.chewiegames.bloggie.presenter.newPost
 
-import es.chewiegames.bloggie.model.PostContent
+import es.chewiegames.data.model.PostContent
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap

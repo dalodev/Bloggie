@@ -1,32 +1,19 @@
 package es.chewiegames.bloggie.ui.home
 
 import android.content.Context
-import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import es.chewiegames.bloggie.R
-import es.chewiegames.bloggie.model.Post
-import androidx.cardview.widget.CardView
-import android.widget.ProgressBar
-import android.widget.TextView
-import android.widget.CheckBox
-import android.widget.ImageView
+import es.chewiegames.domain.model.Post
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import com.squareup.picasso.Callback
-import com.squareup.picasso.Picasso
 import es.chewiegames.data.model.User
-import es.chewiegames.bloggie.util.RoundedTransformation
 import es.chewiegames.bloggie.viewmodel.HomeViewModel
-import kotlinx.android.synthetic.main.list_item_home.view.*
-import javax.inject.Inject
-import javax.inject.Named
 
 class HomeAdapter(val context: Context, private val viewModel : HomeViewModel) : RecyclerView.Adapter<HomeViewHolder>() {
 
-    private var posts: ArrayList<Post> = arrayListOf()
+    var posts: ArrayList<Post> = viewModel.posts.value ?: arrayListOf()
 
     private var likedPosts: ArrayList<Post> = arrayListOf()
 

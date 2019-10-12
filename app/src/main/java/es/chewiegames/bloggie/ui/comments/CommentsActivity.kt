@@ -9,8 +9,8 @@ import android.view.View
 import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.di.component.ApplicationComponent
 import es.chewiegames.bloggie.di.module.CommentsModule
-import es.chewiegames.bloggie.model.Comment
-import es.chewiegames.bloggie.model.Post
+import es.chewiegames.data.model.Comment
+import es.chewiegames.domain.model.Post
 import es.chewiegames.bloggie.presenter.comments.ICommentsPresenter
 import es.chewiegames.bloggie.ui.base.BaseActivity
 import javax.inject.Inject

@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.squareup.picasso.Picasso
 import es.chewiegames.bloggie.R
-import es.chewiegames.bloggie.model.Comment
+import es.chewiegames.data.model.Comment
 import es.chewiegames.bloggie.util.RoundedTransformation
 import javax.inject.Inject
 

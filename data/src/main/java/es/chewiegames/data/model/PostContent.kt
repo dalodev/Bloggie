@@ -1,4 +1,4 @@
-package es.chewiegames.bloggie.model
+package es.chewiegames.data.model
 
 import android.graphics.Bitmap
 import java.io.Serializable

@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.ImageView
 import es.chewiegames.bloggie.interactor.detailPost.DetailPostInteractor
 import es.chewiegames.bloggie.interactor.detailPost.IDetailPostInteractor
-import es.chewiegames.data.model.PostContent
+import es.chewiegames.data.model.PostContentData
 import es.chewiegames.bloggie.ui.detailPost.DetailPostView
 import es.chewiegames.bloggie.util.EXTRA_POST
 import javax.inject.Inject
@@ -49,7 +49,7 @@ class DetailPostPresenter @Inject constructor(): IDetailPostPresenter, IDetailPo
         mDetailPostInteractor.zoomImageFromThumb(thumbView, expandedImage, post.titleImage!!, this)
     }
 
-    override fun zoomDetailPostImage(thumbView: View, expandedImage: ImageView, post: PostContent?) {
+    override fun zoomDetailPostImage(thumbView: View, expandedImage: ImageView, post: PostContentData?) {
         mDetailPostInteractor.zoomImageFromThumb(thumbView, expandedImage, post!!.content!!, this)
     }
 

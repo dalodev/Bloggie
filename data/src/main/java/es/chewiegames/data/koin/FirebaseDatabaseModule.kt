@@ -2,22 +2,22 @@ package es.chewiegames.data.koin
 
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import es.chewiegames.data.model.Post
-import es.chewiegames.data.model.User
+import es.chewiegames.data.model.PostData
+import es.chewiegames.data.model.UserData
 
-fun provideUser(): User {
-    return User()
+fun provideUser(): UserData {
+    return UserData()
 }
 
-fun providePost(): Post {
-    return Post()
+fun providePost(): PostData {
+    return PostData()
 }
 
-fun providefeedPosts(): ArrayList<Post> {
+fun providefeedPosts(): ArrayList<PostData> {
     return arrayListOf()
 }
 
-fun provideLikedPostsByUser(): ArrayList<Post> {
+fun provideLikedPostsByUser(): ArrayList<PostData> {
     return arrayListOf()
 }
 
@@ -32,20 +32,20 @@ fun getUserDatabaseReference(): DatabaseReference {
     return databaseReference
 }
 
-fun providePostByUserReference(firebaseDatabase: FirebaseDatabase, user: User): DatabaseReference {
-    var databaseReference = firebaseDatabase.getReference("postsByUser").child(user.id!!)
+fun providePostByUserReference(firebaseDatabase: FirebaseDatabase, userData: UserData): DatabaseReference {
+    val databaseReference = firebaseDatabase.getReference("postsByUser").child(userData.id!!)
     databaseReference.keepSynced(true)//keep data synced
     return databaseReference
 }
 
 fun provideAllPosts(firebaseDatabase: FirebaseDatabase): DatabaseReference {
-    var databaseReference = firebaseDatabase.getReference("posts")
+    val databaseReference = firebaseDatabase.getReference("posts")
     databaseReference.keepSynced(true)//keep data synced
     return databaseReference
 }
 
-fun provideLikedPostByUser(firebaseDatabase: FirebaseDatabase, user: User): DatabaseReference {
-    var databaseReference = firebaseDatabase.getReference("likedPostsByUser").child(user.id!!)
+fun provideLikedPostByUser(firebaseDatabase: FirebaseDatabase, userData: UserData): DatabaseReference {
+    val databaseReference = firebaseDatabase.getReference("likedPostsByUser").child(userData.id!!)
     databaseReference.keepSynced(true)
     return databaseReference
 }

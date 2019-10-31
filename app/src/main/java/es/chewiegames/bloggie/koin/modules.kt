@@ -10,9 +10,9 @@ import kotlin.coroutines.CoroutineContext
 
 val appModule = module {
 
-    viewModel { LoginViewModel(loginUseCase = get()) }
-    viewModel { HomeViewModel(activity = get(), homeUseCase = get()) }
-    viewModel { NewPostViewModel() }
+    viewModel { LoginViewModel(checkUserLoginUseCase = get(), registerUserUseCase = get()) }
+    viewModel { HomeViewModel(activity = get(), feedPostUseCase = get(), updateLikedPostUseCase = get()) }
+    viewModel { NewPostViewModel(context = get(), storeNewPostUseCase = get()) }
 
     // Coroutines
     factory<CoroutineContext> { Dispatchers.Main }

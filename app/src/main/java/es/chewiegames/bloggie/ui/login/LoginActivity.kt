@@ -40,6 +40,9 @@ class LoginActivity : BaseActivity() {
         viewModel.showMessage.observe(this, Observer {
             Snackbar.make(binding.root, resources.getString(it), Snackbar.LENGTH_SHORT).show()
         })
+        viewModel.showError.observe(this, Observer {
+            Snackbar.make(binding.root, it, Snackbar.LENGTH_SHORT).show()
+        })
     }
     override fun onResume() {
         super.onResume()

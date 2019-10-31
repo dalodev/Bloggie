@@ -7,34 +7,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import es.chewiegames.bloggie.R
-import es.chewiegames.data.model.PostContent
-import javax.inject.Inject
+import es.chewiegames.data.model.PostContentData
 import com.squareup.picasso.Picasso
 import android.widget.ProgressBar
 import com.squareup.picasso.Callback
 import es.chewiegames.bloggie.util.*
+import es.chewiegames.bloggie.viewmodel.NewPostViewModel
 import java.util.*
+import kotlin.collections.ArrayList
 
-class PostAdapter @Inject constructor() : RecyclerView.Adapter<RecyclerView.ViewHolder>(), ItemTouchHelperAdapter {
+class PostAdapter(private val context: Context, private val viewModel: NewPostViewModel, private val mListener : PostAdapterListener, private var postContent : ArrayList<PostContentData> = viewModel.postContent.value ?: arrayListOf()) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), ItemTouchHelperAdapter {
 
     interface PostAdapterListener {
-        fun onAddTextContent(content: PostContent, textContent: String)
+        fun onAddTextContent(content: PostContentData, textContent: String)
 
-        fun onEditTextContent(content: PostContent)
+        fun onEditTextContent(content: PostContentData)
 
-        fun onItemSwiped(deletedItem: PostContent, deletedIndex: Int)
+        fun onItemSwiped(deletedItem: PostContentData, deletedIndex: Int)
 
-        fun onImageClicked(content: PostContent)
+        fun onImageClicked(content: PostContentData)
     }
-
-    @Inject
-    lateinit var context: Context
-
-    @Inject
-    lateinit var mListener: PostAdapterListener
-
-    @Inject
-    lateinit var postContent: ArrayList<PostContent>
 
     override fun getItemViewType(position: Int): Int {
         return postContent[position].viewType
@@ -137,7 +129,7 @@ class PostAdapter @Inject constructor() : RecyclerView.Adapter<RecyclerView.View
         }
     }
 
-    fun restoreItem(item: PostContent, position: Int) {
+    fun restoreItem(item: PostContentData, position: Int) {
         postContent.add(position, item)
         // notify item added by position
         notifyItemInserted(position)
@@ -170,7 +162,7 @@ class PostAdapter @Inject constructor() : RecyclerView.Adapter<RecyclerView.View
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int, position: Int) {
-        val deletedItem: PostContent = postContent[viewHolder.adapterPosition]
+        val deletedItem: PostContentData = postContent[viewHolder.adapterPosition]
         val deletedIndex: Int = viewHolder.adapterPosition
         mListener.onItemSwiped(deletedItem, deletedIndex)
     }

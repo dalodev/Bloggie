@@ -8,7 +8,7 @@ import javax.inject.Named
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import es.chewiegames.domain.model.Post
-import es.chewiegames.data.model.User
+import es.chewiegames.data.model.UserData
 import javax.inject.Singleton
 
 @Module
@@ -23,8 +23,8 @@ class FirebaseDatabaseModule constructor(var posts : ArrayList<Post> = ArrayList
 
     @Provides
     @Named("post by user")
-    fun providePostByUserReference(firebaseDatabase: FirebaseDatabase, user: User): DatabaseReference {
-        var databaseReference = firebaseDatabase.getReference("postsByUser").child(user.id!!)
+    fun providePostByUserReference(firebaseDatabase: FirebaseDatabase, userData: UserData): DatabaseReference {
+        var databaseReference = firebaseDatabase.getReference("postsByUser").child(userData.id!!)
         databaseReference.keepSynced(true)//keep data synced
         return databaseReference
     }
@@ -39,8 +39,8 @@ class FirebaseDatabaseModule constructor(var posts : ArrayList<Post> = ArrayList
 
     @Provides
     @Named("liked posts by user")
-    fun provideLikedPostByUser(firebaseDatabase: FirebaseDatabase, user: User): DatabaseReference {
-        var databaseReference = firebaseDatabase.getReference("likedPostsByUser").child(user.id!!)
+    fun provideLikedPostByUser(firebaseDatabase: FirebaseDatabase, userData: UserData): DatabaseReference {
+        var databaseReference = firebaseDatabase.getReference("likedPostsByUser").child(userData.id!!)
         databaseReference.keepSynced(true)
         return databaseReference
     }
@@ -54,8 +54,8 @@ class FirebaseDatabaseModule constructor(var posts : ArrayList<Post> = ArrayList
 
     @Provides
     @Singleton
-    fun provideUser(): User {
-        return User()
+    fun provideUser(): UserData {
+        return UserData()
     }
 
     @Provides

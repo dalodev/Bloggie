@@ -67,7 +67,7 @@ class CommentsPresenter @Inject constructor() : ICommentsPresenter, ICommentsInt
     override fun replyTo(parentComment: Comment) {
         this.parentComment = parentComment
         isReplyTo = true
-        val replyToText = ""+resources.getText(R.string.replyTo) + " @" + parentComment.user!!.userName
+        val replyToText = ""+resources.getText(R.string.replyTo) + " @" + parentComment.userData!!.userName
         view.showReplyTo(true, replyToText)
     }
 

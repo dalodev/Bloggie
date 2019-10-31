@@ -44,7 +44,7 @@ class CommentsAdapter @Inject constructor(): RecyclerView.Adapter<RecyclerView.V
         (holder as CommentViewHolder).comment.text = comment.comment
         holder.root!!.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
 
-        if(comment.user!!.avatar != null) Picasso.with(context).load(comment.user!!.avatar).transform(RoundedTransformation(50, 0)).into(holder.userImage)
+        if(comment.userData!!.avatar != null) Picasso.with(context).load(comment.userData!!.avatar).transform(RoundedTransformation(50, 0)).into(holder.userImage)
 
         if(comment.replies.isEmpty()){
             holder.replysRecyclerView!!.visibility = View.GONE

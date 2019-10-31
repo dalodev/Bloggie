@@ -5,17 +5,13 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.di.component.ApplicationComponent
-import es.chewiegames.bloggie.di.module.NewPostModule
-import es.chewiegames.data.model.PostContent
-import es.chewiegames.bloggie.presenter.newPost.INewPostPresenter
+import es.chewiegames.data.model.PostContentData
 import es.chewiegames.bloggie.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_new_post.*
-import javax.inject.Inject
 import androidx.recyclerview.widget.DefaultItemAnimator
 import kotlinx.android.synthetic.main.content_new_post.*
 import androidx.core.content.ContextCompat
@@ -25,18 +21,29 @@ import android.widget.ImageView
 import com.squareup.picasso.Picasso
 import es.chewiegames.bloggie.util.*
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import es.chewiegames.bloggie.databinding.ActivityNewPostBinding
+import es.chewiegames.bloggie.viewmodel.NewPostViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class NewPostActivity : BaseActivity(), NewPostView, BottomNavigationView.OnNavigationItemSelectedListener, PostAdapter.PostAdapterListener {
+class NewPostActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener, PostAdapter.PostAdapterListener {
 
-    @Inject
-    lateinit var mNewPostPresenter: INewPostPresenter
+    private val viewModel : NewPostViewModel by viewModel()
+    private val adapter: PostAdapter by lazy { PostAdapter(this, viewModel, this) }
+    lateinit var binding : ActivityNewPostBinding
 
-    @Inject
-    lateinit var layoutManager: LinearLayoutManager
-
-    @Inject
-    lateinit var adapter: PostAdapter
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = DataBindingUtil.setContentView(this, getLayoutId())
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
+        setupToolbar()
+        initView(savedInstanceState)
+        initObservers()
+    }
 
     /**
      * Get the layout view of the activity
@@ -55,13 +62,13 @@ class NewPostActivity : BaseActivity(), NewPostView, BottomNavigationView.OnNavi
         setAdapter()
     }
 
+    override fun onSupportNavigateUp() = findNavController(R.id.my_nav_host_fragment).navigateUp()
+
     /**
      * Initialize the inject dependences for this activity. This method is triggered in onCreate event
      * @param component
      */
-    override fun injectDependencies(component: ApplicationComponent) {
-        component.plus(NewPostModule(this, this, this)).inject(this)
-    }
+    override fun injectDependencies(component: ApplicationComponent) {}
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.new_post, menu)
@@ -75,27 +82,26 @@ class NewPostActivity : BaseActivity(), NewPostView, BottomNavigationView.OnNavi
                 super.onBackPressed()
             }
             R.id.edit_text_menu -> {
-                mNewPostPresenter.onChangePostTitle(this)
+                viewModel.onChangePostTitle(this)
             }
         }
         return true
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-
         when (item.itemId) {
             R.id.textNavigation -> {
-                mNewPostPresenter.onAddTextContent(this)
+                viewModel.onAddTextContent(this)
                 return true
             }
 
             R.id.imageNavigation -> {
-                mNewPostPresenter.onChoosePhotoPicker(BLOG_CONTENT_IMAGE, null)
+                viewModel.onChoosePhotoPicker(BLOG_CONTENT_IMAGE, null)
                 return true
             }
 
             R.id.publishNavigation -> {
-                mNewPostPresenter.publishPost(blogImageView)
+                viewModel.publishPost(blogImageView)
                 return true
             }
         }
@@ -103,19 +109,20 @@ class NewPostActivity : BaseActivity(), NewPostView, BottomNavigationView.OnNavi
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (data != null) mNewPostPresenter.onActivityResult(requestCode, resultCode, data, this)
+        if (data != null) viewModel.onActivityResult(requestCode, resultCode, data, this)
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     fun contentClicked(v: View) {
-        mNewPostPresenter.onAddContent()
+        viewModel.onAddContent()
     }
 
     fun onToolbarImageClicked(v: View) {
-        mNewPostPresenter.onChoosePhotoPicker(BLOG_TITLE_IMAGE, null)
+        viewModel.onChoosePhotoPicker(BLOG_TITLE_IMAGE, null)
     }
 
-    override fun setAdapter() {
-        contentList.layoutManager = layoutManager
+    private fun setAdapter() {
+        contentList.layoutManager = LinearLayoutManager(this)
         contentList.itemAnimator = DefaultItemAnimator()
         contentList.adapter = adapter
         val callback = SimpleItemTouchHelperCallback.Builder(ItemTouchHelper.UP or ItemTouchHelper.DOWN, ItemTouchHelper.START or ItemTouchHelper.END)
@@ -174,7 +181,7 @@ class NewPostActivity : BaseActivity(), NewPostView, BottomNavigationView.OnNavi
     }
 
     override fun showTitleNameDialog() {
-        mNewPostPresenter.onChangePostTitle(this)
+        viewModel.onChangePostTitle(this)
     }
 
     override fun updateAdapterView(position: Int) {
@@ -193,7 +200,7 @@ class NewPostActivity : BaseActivity(), NewPostView, BottomNavigationView.OnNavi
         adapter.notifyItemInserted(adapter.itemCount - 1)
     }
 
-    override fun showUndoSnackbar(deletedItem: PostContent, deletedIndex: Int) {
+    override fun showUndoSnackbar(deletedItem: PostContentData, deletedIndex: Int) {
         // showing snack bar with Undo option
         val snackbar = Snackbar.make(coordinatorLayout, resources.getString(R.string.removed_from_content), Snackbar.LENGTH_LONG)
         val snackBarView = snackbar.view
@@ -209,23 +216,23 @@ class NewPostActivity : BaseActivity(), NewPostView, BottomNavigationView.OnNavi
         snackbar.show()
     }
 
-    override fun onAddTextContent(content: PostContent, textContent: String) {
+    override fun onAddTextContent(content: PostContentData, textContent: String) {
         Utils.hideKeyBoard(this, contentList)
-        mNewPostPresenter.setTextContent(content, textContent)
+        viewModel.setTextContent(content, textContent)
     }
 
-    override fun onEditTextContent(content: PostContent) {
-        mNewPostPresenter.editTextContent(content)
+    override fun onEditTextContent(content: PostContentData) {
+        viewModel.editTextContent(content)
     }
 
-    override fun onItemSwiped(deletedItem: PostContent, deletedIndex: Int) {
+    override fun onItemSwiped(deletedItem: PostContentData, deletedIndex: Int) {
         // remove the item from recycler view
         adapter.removeItem(deletedIndex)
-        mNewPostPresenter.itemSwiped(deletedItem, deletedIndex)
+        viewModel.itemSwiped(deletedItem, deletedIndex)
     }
 
-    override fun onImageClicked(content: PostContent) {
-        mNewPostPresenter.onChoosePhotoPicker(BLOG_CONTENT_IMAGE, content)
+    override fun onImageClicked(content: PostContentData) {
+        viewModel.onChoosePhotoPicker(BLOG_CONTENT_IMAGE, content)
     }
 
     override fun showMessage(message: String) {

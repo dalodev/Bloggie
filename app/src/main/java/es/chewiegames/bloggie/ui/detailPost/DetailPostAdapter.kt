@@ -9,7 +9,7 @@ import android.widget.ProgressBar
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import es.chewiegames.bloggie.R
-import es.chewiegames.data.model.PostContent
+import es.chewiegames.data.model.PostContentData
 import es.chewiegames.bloggie.ui.newPost.PostImageViewHolder
 import es.chewiegames.bloggie.ui.newPost.PostTextViewHolder
 import javax.inject.Inject
@@ -18,7 +18,7 @@ import es.chewiegames.bloggie.util.*
 
 class DetailPostAdapter @Inject constructor() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private lateinit var postContent: ArrayList<PostContent>
+    private lateinit var postContent: ArrayList<PostContentData>
 
     @Inject
     lateinit var context: Context
@@ -103,11 +103,11 @@ class DetailPostAdapter @Inject constructor() : RecyclerView.Adapter<RecyclerVie
 
     }
 
-    fun setPostContent(content: ArrayList<PostContent>) {
+    fun setPostContent(content: ArrayList<PostContentData>) {
         this.postContent = content
     }
 
     interface DetailPostAdapterListener {
-        fun onClickImage(thumbView: View, postContent: PostContent)
+        fun onClickImage(thumbView: View, postContent: PostContentData)
     }
 }

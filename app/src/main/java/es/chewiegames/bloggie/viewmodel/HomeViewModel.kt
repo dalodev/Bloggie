@@ -12,11 +12,14 @@ import com.david.pokeapp.livedata.BaseSingleLiveEvent
 import es.chewiegames.domain.model.Post
 import es.chewiegames.bloggie.ui.detailPost.DetailPostActivity
 import es.chewiegames.bloggie.util.EXTRA_POST
-import es.chewiegames.domain.callbacks.OnLoadHomeFinishedListener
-import es.chewiegames.domain.usecases.HomeUseCase
+import es.chewiegames.domain.callbacks.OnLoadFeedPostListener
+import es.chewiegames.domain.usecases.feedpost.FeedPostUseCase
+import es.chewiegames.domain.usecases.feedpost.UpdateLikedPostUseCase
 import java.util.ArrayList
 
-class HomeViewModel(val activity: Activity, private val homeUseCase : HomeUseCase)  : ViewModel(), OnLoadHomeFinishedListener {
+class HomeViewModel(val activity: Activity,
+                    private val feedPostUseCase : FeedPostUseCase,
+                    private val updateLikedPostUseCase : UpdateLikedPostUseCase)  : ViewModel(), OnLoadFeedPostListener {
 
     val posts: BaseSingleLiveEvent<ArrayList<Post>> by lazy { BaseSingleLiveEvent<ArrayList<Post>>() }
     val likedPosts: BaseSingleLiveEvent<ArrayList<Post>> by lazy { BaseSingleLiveEvent<ArrayList<Post>>() }
@@ -27,15 +30,18 @@ class HomeViewModel(val activity: Activity, private val homeUseCase : HomeUseCas
     val updateItemPosition: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
     val goToDetailPostActivity: BaseSingleLiveEvent<HashMap<Intent, Bundle>> by lazy { BaseSingleLiveEvent<HashMap<Intent, Bundle>>() }
     val goToComments: BaseSingleLiveEvent<Bundle> by lazy { BaseSingleLiveEvent<Bundle>() }
+    val handleError: BaseSingleLiveEvent<String> by lazy { BaseSingleLiveEvent<String>() }
 
     var onBind = false
 
     fun loadFeedPosts() {
-        homeUseCase.loadFeedPostsFromDatabase(this)
+        showProgressDialog()
+        feedPostUseCase.executeAsync(this, onSuccess = {hideProgressDialog()}, onError = ::onError)
     }
 
-    fun onPostLiked(post: Post, checked: Boolean) {
-        homeUseCase.handleFromLikedPostByUser(post, checked,  this)
+    fun onLikedPost(post: Post, checked: Boolean) {
+        updateLikedPostUseCase.checked = checked
+        updateLikedPostUseCase.executeAsync(post, onSuccess = {}, onError = {})
     }
 
     /**
@@ -63,7 +69,7 @@ class HomeViewModel(val activity: Activity, private val homeUseCase : HomeUseCas
      * trigger when user touch on like button in post
      */
     fun onLikePost(post: Post, checked: Boolean) {
-        onPostLiked(post, checked)
+        onLikedPost(post, checked)
     }
 
     /**
@@ -75,10 +81,31 @@ class HomeViewModel(val activity: Activity, private val homeUseCase : HomeUseCas
         goToComments.value = bundle
     }
 
-    override fun onError(message: String) {
+    private fun onError(t: Throwable) {
+        handleError.value = t.message
     }
 
-    override fun onSuccess(posts: ArrayList<Post>) {
+    fun showProgressDialog() {
+        showLoading.value = true
+    }
+
+    fun hideProgressDialog() {
+        showLoading.value = false
+    }
+
+    fun isLikedPost(feedPost: Post): Boolean {
+        for (likedPost in likedPosts.value!!) {
+            if (likedPost.id == feedPost.id) {
+                return true
+            }
+        }
+        return false
+    }
+
+    /**
+     * OnLoadFeedPostListener methods
+     */
+    override fun onLoadFeedPostSuccess(posts: ArrayList<Post>) {
         this.posts.value = posts
         showEmptyView.call()
         hideProgressDialog()
@@ -103,22 +130,5 @@ class HomeViewModel(val activity: Activity, private val homeUseCase : HomeUseCas
         updateItemPosition.value = position
         showEmptyView.call()
         hideProgressDialog()
-    }
-
-    override fun showProgressDialog() {
-        showLoading.value = true
-    }
-
-    override fun hideProgressDialog() {
-        showLoading.value = false
-    }
-
-    fun isLikedPost(feedPost: Post): Boolean {
-        for (likedPost in likedPosts.value!!) {
-            if (likedPost.id == feedPost.id) {
-                return true
-            }
-        }
-        return false
     }
 }

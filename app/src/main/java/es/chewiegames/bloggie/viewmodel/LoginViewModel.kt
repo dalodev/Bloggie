@@ -11,15 +11,16 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.util.RC_SIGN_IN
-import es.chewiegames.domain.callbacks.OnLaunchResult
-import es.chewiegames.domain.callbacks.OnLoginFinishedListener
-import es.chewiegames.domain.usecases.LoginUseCase
+import es.chewiegames.domain.usecases.UseCase.None
+import es.chewiegames.domain.usecases.user.CheckUserLoginUseCase
+import es.chewiegames.domain.usecases.user.RegisterUserUseCase
 
-class LoginViewModel(private val loginUseCase : LoginUseCase) : ViewModel(), OnLaunchResult, OnLoginFinishedListener {
+class LoginViewModel(private val checkUserLoginUseCase: CheckUserLoginUseCase, private val registerUserUseCase : RegisterUserUseCase) : ViewModel() {
 
     val goToMainActivity: BaseSingleLiveEvent<Any?> by lazy { BaseSingleLiveEvent<Any?>() }
     val showLoginButton: BaseSingleLiveEvent<Boolean> by lazy { BaseSingleLiveEvent<Boolean>() }
     val showMessage: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
+    val showError: BaseSingleLiveEvent<String> by lazy { BaseSingleLiveEvent<String>() }
     val startActivityForResult: BaseSingleLiveEvent<Intent> by lazy { BaseSingleLiveEvent<Intent>() }
     val showLoading: BaseSingleLiveEvent<Boolean> by lazy { BaseSingleLiveEvent<Boolean>() }
 
@@ -39,7 +40,8 @@ class LoginViewModel(private val loginUseCase : LoginUseCase) : ViewModel(), OnL
     }
 
     fun checkForUserLogin() {
-        loginUseCase.handleLaunch(this)
+        showProgressDialog()
+        checkUserLoginUseCase.executeAsync(None(), onSuccess= {userLogged()}, onError = {userNotLogged()})
     }
 
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -47,7 +49,7 @@ class LoginViewModel(private val loginUseCase : LoginUseCase) : ViewModel(), OnL
             val response: IdpResponse? = IdpResponse.fromResultIntent(data)
             if(resultCode == Activity.RESULT_OK){
                 val user : FirebaseUser = FirebaseAuth.getInstance().currentUser!!
-                loginUseCase.storeUserInDatabase(user, this)
+                registerUserUseCase.executeAsync(user, onSuccess = {onRegisterUserSucces()}, onError = ::onError)
             }else{
                 if(response == null){
                     showMessage.value = R.string.sign_in_canceled
@@ -69,26 +71,30 @@ class LoginViewModel(private val loginUseCase : LoginUseCase) : ViewModel(), OnL
         }
     }
 
-    override fun userLogged() {
+    private fun userLogged() {
         goToMainActivity.call()
+        hideProgressDialog()
     }
 
-    override fun userNotLogged() {
+    private fun userNotLogged() {
         showLoginButton.value = true
+        hideProgressDialog()
     }
 
-    override fun onError(message: String) {
+    private fun onError(t: Throwable) {
+        hideProgressDialog()
+        showError.value = t.message
     }
 
-    override fun onSuccess() {
+    private fun onRegisterUserSucces() {
         goToMainActivity.call()
     }
 
-    override fun showProgressDialog() {
+    private fun showProgressDialog() {
         showLoading.value = true
     }
 
-    override fun hideProgressDialog() {
+    private fun hideProgressDialog() {
         showLoading.value = false
     }
 }

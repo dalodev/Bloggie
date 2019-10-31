@@ -10,7 +10,7 @@ import dagger.Provides
 import es.chewiegames.bloggie.di.scope.NewPostScope
 import es.chewiegames.bloggie.presenter.newPost.NewPostPresenter
 import es.chewiegames.bloggie.presenter.newPost.INewPostPresenter
-import es.chewiegames.data.model.PostContent
+import es.chewiegames.data.model.PostContentData
 import es.chewiegames.bloggie.ui.newPost.PostAdapter
 
 @Module
@@ -42,7 +42,7 @@ class NewPostModule constructor(var view: NewPostView?, var context : Context, v
 
     @Provides
     @NewPostScope
-    fun providePostContent(): ArrayList<PostContent> {
+    fun providePostContent(): ArrayList<PostContentData> {
         return ArrayList()
     }
 

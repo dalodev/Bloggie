@@ -1,7 +1,7 @@
 package es.chewiegames.domain.model
 
 import es.chewiegames.data.model.Comment
-import es.chewiegames.data.model.User
+import es.chewiegames.data.model.UserData
 import java.io.Serializable
 
 data class Comment(

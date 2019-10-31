@@ -19,9 +19,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class HomeFragment : BaseBindingFragment() {
 
     private val viewModel: HomeViewModel by viewModel()
-
     lateinit var binding : FragmentHomeBinding
-
     private val adapter: HomeAdapter by lazy {  HomeAdapter(context!!, viewModel) }
 
     /**
@@ -68,13 +66,11 @@ class HomeFragment : BaseBindingFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        //when activity created, initialize the adapter
         updateAdapter()
     }
 
     override fun onStart() {
         super.onStart()
-        //call viewmodel to load data
         viewModel.loadFeedPosts()
     }
 

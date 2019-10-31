@@ -11,7 +11,7 @@ import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.di.component.ApplicationComponent
 import es.chewiegames.bloggie.di.module.DetailPostModule
 import es.chewiegames.domain.model.Post
-import es.chewiegames.data.model.PostContent
+import es.chewiegames.data.model.PostContentData
 import es.chewiegames.bloggie.presenter.detailPost.IDetailPostPresenter
 import es.chewiegames.bloggie.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_detail_post.*
@@ -48,7 +48,7 @@ class DetailPostActivity : BaseActivity(), DetailPostView, DetailPostAdapter.Det
         component.plus(DetailPostModule(this, this)).inject(this)
     }
 
-    override fun setAdapter(content: ArrayList<PostContent>) {
+    override fun setAdapter(content: ArrayList<PostContentData>) {
         adapter.setPostContent(content)
         contentPostList.layoutManager = layoutManager
         contentPostList.itemAnimator = DefaultItemAnimator()
@@ -102,7 +102,7 @@ class DetailPostActivity : BaseActivity(), DetailPostView, DetailPostAdapter.Det
         mDetailPostPresenter.closeExpandedImage(expandedImage)
     }
 
-    override fun onClickImage(thumbView: View, postContent: PostContent) {
+    override fun onClickImage(thumbView: View, postContent: PostContentData) {
         expandedImageProgressbar.visibility = View.VISIBLE
         mDetailPostPresenter.zoomDetailPostImage(thumbView, expandedImage, postContent)
     }

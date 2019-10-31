@@ -7,8 +7,8 @@ import android.widget.ImageView
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.storage.StorageReference
 import es.chewiegames.domain.model.Post
-import es.chewiegames.data.model.PostContent
-import es.chewiegames.data.model.User
+import es.chewiegames.data.model.PostContentData
+import es.chewiegames.data.model.UserData
 import es.chewiegames.bloggie.util.EDITTEXT_VIEW
 import es.chewiegames.bloggie.util.IMAGE_VIEW
 import javax.inject.Inject
@@ -17,6 +17,7 @@ import es.chewiegames.bloggie.util.TEXT_VIEW
 import java.util.*
 import java.io.ByteArrayOutputStream
 import com.google.firebase.storage.StorageException
+import es.chewiegames.data.model.PostData
 
 class NewPostInteractor @Inject constructor(): INewPostInteractor {
 
@@ -30,13 +31,13 @@ class NewPostInteractor @Inject constructor(): INewPostInteractor {
     lateinit var context: Context
 
     @Inject
-    lateinit var mPost : Post
+    lateinit var mPost : PostData
 
     @Inject
-    lateinit var mUser : User
+    lateinit var mUserData : UserData
 
     @Inject
-    lateinit var postContent : ArrayList<PostContent>
+    lateinit var postContent : ArrayList<PostContentData>
 
     @Inject
     lateinit var mStorageReference: StorageReference
@@ -60,22 +61,22 @@ class NewPostInteractor @Inject constructor(): INewPostInteractor {
 
     override fun onAddTextContent(listener: INewPostInteractor.PostContentListener) {
         typeContentToAdd = EDITTEXT_VIEW
-        val content = PostContent()
+        val content = PostContentData()
         content.viewType = EDITTEXT_VIEW
         content.position = postContent.size
         postContent.add(content)
         listener.onChangeViewType(EDITTEXT_VIEW, content.position)
     }
 
-    override fun onEditTextContent(content: PostContent, listener: INewPostInteractor.PostContentListener) {
+    override fun onEditTextContent(content: PostContentData, listener: INewPostInteractor.PostContentListener) {
         content.viewType = EDITTEXT_VIEW
         listener.onChangeViewType(EDITTEXT_VIEW, content.position)
     }
 
-    override fun onAddImageContent(content: PostContent?, bitmap: Bitmap, uri: Uri, listener: INewPostInteractor.PostContentListener) {
+    override fun onAddImageContent(content: PostContentData?, bitmap: Bitmap, uri: Uri, listener: INewPostInteractor.PostContentListener) {
         typeContentToAdd = IMAGE_VIEW
         if (content == null) {
-            val content = PostContent()
+            val content = PostContentData()
             content.viewType = IMAGE_VIEW
             content.position = postContent.size
             content.uriImage = uri.toString()
@@ -89,7 +90,7 @@ class NewPostInteractor @Inject constructor(): INewPostInteractor {
         }
     }
 
-    override fun setTextContent(content: PostContent, textContent: String, listener: INewPostInteractor.PostContentListener) {
+    override fun setTextContent(content: PostContentData, textContent: String, listener: INewPostInteractor.PostContentListener) {
         if(!textContent.trim().isEmpty()){
             content.viewType = TEXT_VIEW
             content.content = textContent
@@ -112,7 +113,7 @@ class NewPostInteractor @Inject constructor(): INewPostInteractor {
             mPost.id = idP!!
             getDataFromTitleImage(blogImageView, idP)
             mPost.createdDate = Calendar.getInstance().time
-            mPost.user = mUser
+            mPost.userData = mUserData
             mPost.littlePoints = 0
             mPost.views = 0
             mPost.content = getContentData(idP)
@@ -125,7 +126,7 @@ class NewPostInteractor @Inject constructor(): INewPostInteractor {
         }
     }
 
-    private fun getContentData(idPost: String): ArrayList<PostContent> {
+    private fun getContentData(idPost: String): ArrayList<PostContentData> {
         for (i in 0 until postContent.size) {
             val content = postContent[i]
             if (content.viewType == IMAGE_VIEW) {
@@ -135,7 +136,7 @@ class NewPostInteractor @Inject constructor(): INewPostInteractor {
         return postContent
     }
 
-    private fun uploadImage(content: PostContent, idPost : String){
+    private fun uploadImage(content: PostContentData, idPost : String){
         val baos = ByteArrayOutputStream()
         content.bitmapImage!!.compress(Bitmap.CompressFormat.JPEG, 100, baos)
         val data = baos.toByteArray()

@@ -8,8 +8,9 @@ import es.chewiegames.bloggie.R
 import es.chewiegames.domain.model.Post
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import es.chewiegames.data.model.User
+import es.chewiegames.data.model.UserData
 import es.chewiegames.bloggie.viewmodel.HomeViewModel
+import es.chewiegames.domain.model.User
 
 class HomeAdapter(val context: Context, private val viewModel : HomeViewModel) : RecyclerView.Adapter<HomeViewHolder>() {
 
@@ -35,9 +36,9 @@ class HomeAdapter(val context: Context, private val viewModel : HomeViewModel) :
         onBind = true
         val feedPost: Post = posts[position]
 
-        val feedPostUser: User = feedPost.user!!
+        val feedPostUserData: User = feedPost.user!!
 
-        holder.bind(feedPost, feedPostUser, viewModel)
+        holder.bind(feedPost, feedPostUserData, viewModel)
 
         /*
 

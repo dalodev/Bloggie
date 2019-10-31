@@ -14,7 +14,7 @@ import android.widget.ImageView
 import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.interactor.newPost.INewPostInteractor
 import es.chewiegames.bloggie.interactor.newPost.NewPostInteractor
-import es.chewiegames.data.model.PostContent
+import es.chewiegames.data.model.PostContentData
 import es.chewiegames.bloggie.ui.newPost.NewPostView
 import es.chewiegames.bloggie.util.*
 import javax.inject.Inject
@@ -33,7 +33,7 @@ class NewPostPresenter @Inject constructor() : INewPostPresenter, INewPostIntera
     @Inject
     lateinit var interactor: NewPostInteractor
 
-    private var tempContent: PostContent? = null
+    private var tempContent: PostContentData? = null
 
     override fun setView(view: NewPostView) {
         this.view = view
@@ -81,7 +81,7 @@ class NewPostPresenter @Inject constructor() : INewPostPresenter, INewPostIntera
         }
     }
 
-    override fun onChoosePhotoPicker(imageViewRequest: Int, content: PostContent?) {
+    override fun onChoosePhotoPicker(imageViewRequest: Int, content: PostContentData?) {
         isTextContent = false
         tempContent = content
         val photoPickerIntent = Intent(Intent.ACTION_PICK)
@@ -112,7 +112,7 @@ class NewPostPresenter @Inject constructor() : INewPostPresenter, INewPostIntera
         }
     }
 
-    override fun onAddImageContent(content: PostContent?, imageUri: Uri, bitmap: Bitmap) {
+    override fun onAddImageContent(content: PostContentData?, imageUri: Uri, bitmap: Bitmap) {
         interactor.onAddImageContent(content, bitmap, imageUri, this)
     }
 
@@ -121,12 +121,12 @@ class NewPostPresenter @Inject constructor() : INewPostPresenter, INewPostIntera
         interactor.storePostInDatabase(blogImageView, this)
     }
 
-    override fun setTextContent(content: PostContent?, textContent: String) {
+    override fun setTextContent(content: PostContentData?, textContent: String) {
         isTypeContent = false
         interactor.setTextContent(content!!, textContent, this)
     }
 
-    override fun editTextContent(content: PostContent?) {
+    override fun editTextContent(content: PostContentData?) {
         interactor.onEditTextContent(content!!, this)
     }
 
@@ -138,7 +138,7 @@ class NewPostPresenter @Inject constructor() : INewPostPresenter, INewPostIntera
         isTypeContent = typing
     }
 
-    override fun itemSwiped(deletedItem: PostContent?, deletedItemIndex: Int) {
+    override fun itemSwiped(deletedItem: PostContentData?, deletedItemIndex: Int) {
         if(deletedItem!!.viewType != EDITTEXT_VIEW){
             view!!.showUndoSnackbar(deletedItem, deletedItemIndex)
         }else if(deletedItem.viewType != IMAGE_VIEW){

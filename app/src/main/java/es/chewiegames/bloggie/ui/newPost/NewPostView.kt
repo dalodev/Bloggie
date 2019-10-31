@@ -1,7 +1,7 @@
 package es.chewiegames.bloggie.ui.newPost
 
 import es.chewiegames.bloggie.ui.ui.BaseView
-import es.chewiegames.data.model.PostContent
+import es.chewiegames.data.model.PostContentData
 import android.content.Intent
 import android.net.Uri
 
@@ -16,5 +16,5 @@ interface NewPostView : BaseView {
     fun showInstructions()
     fun removeContent(position: Int)
     fun addItem()
-    fun showUndoSnackbar(deletedItem: PostContent, deletedIndex: Int)
+    fun showUndoSnackbar(deletedItem: PostContentData, deletedIndex: Int)
 }

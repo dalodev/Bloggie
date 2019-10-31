@@ -3,7 +3,7 @@ package es.chewiegames.bloggie.interactor.comments
 import com.google.firebase.database.DatabaseReference
 import es.chewiegames.data.model.Comment
 import es.chewiegames.domain.model.Post
-import es.chewiegames.data.model.User
+import es.chewiegames.data.model.UserData
 import es.chewiegames.bloggie.util.COMMENT_VIEW
 import javax.inject.Inject
 import javax.inject.Named
@@ -17,7 +17,7 @@ class CommentsInteractor @Inject constructor(): ICommentsInteractor{
     lateinit var mDatabasePostByUser: DatabaseReference
 
     @Inject
-    lateinit var mUser: User
+    lateinit var mUserData: UserData
 
     override fun storeCommentInDatabase(text: String?, post: Post, listener: ICommentsInteractor.CommentsListener) {
 
@@ -25,7 +25,7 @@ class CommentsInteractor @Inject constructor(): ICommentsInteractor{
         comment.comment = text
         comment.likes = 0
         comment.replies = ArrayList()
-        comment.user = mUser
+        comment.userData = mUserData
         comment.viewType = COMMENT_VIEW
         post.comments.add(comment)
         mDatabaseAllPosts.child(post.id!!).setValue(post)
@@ -37,7 +37,7 @@ class CommentsInteractor @Inject constructor(): ICommentsInteractor{
         var comment = Comment()
         comment.comment = text
         comment.likes = 0
-        comment.user = mUser
+        comment.userData = mUserData
         comment.viewType = COMMENT_VIEW
         parentComment.replies.add(comment)
         post.comments.add(parentComment)

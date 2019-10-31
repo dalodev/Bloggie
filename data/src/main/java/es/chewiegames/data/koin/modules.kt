@@ -2,23 +2,36 @@ package es.chewiegames.data.koin
 
 import android.content.Context
 import android.content.res.Resources
-import es.chewiegames.data.repository.HomeRepository
-import es.chewiegames.data.repository.LoginRespository
-import es.chewiegames.data.repositoryImpl.HomeRepositoryImpl
-import es.chewiegames.data.repositoryImpl.LoginRepositoryImpl
+import es.chewiegames.data.repository.NewPostRepository
+import es.chewiegames.data.repository.PostRepository
+import es.chewiegames.data.repository.UserRepository
+import es.chewiegames.data.repositoryImpl.NewPostDataRepository
+import es.chewiegames.data.repositoryImpl.PostDataRepository
+import es.chewiegames.data.repositoryImpl.UserDataRepository
 import org.koin.dsl.module.module
 
 val dataModule = module {
 
-    single<LoginRespository>{LoginRepositoryImpl(get(),get())}
-    single<HomeRepository>{HomeRepositoryImpl(
-            providePostByUserReference(get(), get()),
-            provideAllPosts(get()),
-            provideLikedPostByUser(get(), get()),
-            provideLikedPostsByUser(),
-            providefeedPosts(),
-            provideUser()
-    )}
+    single<UserRepository> { UserDataRepository(get(), getUserDatabaseReference()) }
+    single<PostRepository> {
+        PostDataRepository(
+                providePostByUserReference(get(), get()),
+                provideAllPosts(get()),
+                provideLikedPostByUser(get(), get()),
+                provideLikedPostsByUser(),
+                providefeedPosts(),
+                provideUser()
+        )
+    }
+    single<NewPostRepository> {
+        NewPostDataRepository(
+                providePost(),
+                provideAllPosts(get()),
+                providePostByUserReference(get(), get()),
+                provideStorageReference(get()),
+                provideUser()
+        )
+    }
 
     single { provideUser() }
     single { providePost() }

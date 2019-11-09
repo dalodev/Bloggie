@@ -1,15 +1,17 @@
 package es.chewiegames.bloggie.ui.newPost
 
 import androidx.recyclerview.widget.RecyclerView
-import android.view.View
-import android.widget.ProgressBar
-import androidx.cardview.widget.CardView
-import android.widget.ImageView
-import kotlinx.android.synthetic.main.imageview_content.view.*
+import androidx.databinding.ViewDataBinding
+import es.chewiegames.bloggie.BR
+import es.chewiegames.bloggie.viewmodel.NewPostViewModel
+import es.chewiegames.domain.model.PostContent
 
-class PostImageViewHolder constructor(rootView: View, isDetailPost: Boolean) : RecyclerView.ViewHolder(rootView) {
-    var image: ImageView? = rootView.imageView
-    var foregroundView: CardView = rootView.foregroundView
-    var mProgressBar: ProgressBar = rootView.progressBar
-    var container: View? = rootView.rootView
+class PostImageViewHolder constructor(private val binding: ViewDataBinding, isDetailPost: Boolean) : RecyclerView.ViewHolder(binding.root) {
+
+    fun bind(content: PostContent, viewModel: NewPostViewModel, adapterPosition: Int) {
+        binding.setVariable(BR.content, content)
+        binding.setVariable(BR.viewModel, viewModel)
+        binding.setVariable(BR.adapterPosition, adapterPosition)
+        binding.executePendingBindings()
+    }
 }

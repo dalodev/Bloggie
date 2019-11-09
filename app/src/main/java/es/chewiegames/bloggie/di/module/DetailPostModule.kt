@@ -39,9 +39,9 @@ class DetailPostModule constructor(private val view: DetailPostView, var activit
         return LinearLayoutManager(activity)
     }
 
-    @Provides
+/*    @Provides
     @DetailPostScope
     fun provideDetailPostAdapterListener(): DetailPostAdapter.DetailPostAdapterListener {
         return activity
-    }
+    }*/
 }

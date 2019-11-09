@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import es.chewiegames.bloggie.R
@@ -27,22 +29,21 @@ class DetailPostAdapter @Inject constructor() : RecyclerView.Adapter<RecyclerVie
     lateinit var mListener: DetailPostAdapterListener
 
     override fun getItemViewType(position: Int): Int {
-        return postContent!![position].viewType
+        return when (postContent[position].viewType) {
+            TEXT_VIEW -> R.layout.textview_content
+            EDITTEXT_VIEW -> R.layout.edittext_content
+            IMAGE_VIEW -> R.layout.imageview_content
+            else -> postContent[position].viewType
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = DataBindingUtil.inflate<ViewDataBinding>(layoutInflater, viewType, parent, false)
         return when (viewType) {
-            TEXT_VIEW, EDITTEXT_VIEW -> {
-                val view = LayoutInflater.from(parent.context).inflate(R.layout.textview_content, parent, false)
-                PostTextViewHolder(view, true)
-            }
-            IMAGE_VIEW -> {
-                val view = LayoutInflater.from(parent.context).inflate(R.layout.imageview_content, parent, false)
-                PostImageViewHolder(view, true)
-            }
-            else -> {
-                PostTextViewHolder(null, true)
-            }
+            TEXT_VIEW, EDITTEXT_VIEW -> PostTextViewHolder(binding, false)
+            IMAGE_VIEW -> PostImageViewHolder(binding, false)
+            else -> PostTextViewHolder(binding, false)
         }
     }
 
@@ -53,7 +54,7 @@ class DetailPostAdapter @Inject constructor() : RecyclerView.Adapter<RecyclerVie
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val content = postContent[position]
 
-        when (content.viewType) {
+       /* when (content.viewType) {
             TEXT_VIEW -> {
                 (holder as PostTextViewHolder).foregroundView!!.visibility = View.VISIBLE
                 holder.textContent!!.visibility = View.VISIBLE
@@ -67,7 +68,7 @@ class DetailPostAdapter @Inject constructor() : RecyclerView.Adapter<RecyclerVie
                     holder.foregroundView.setOnClickListener { mListener.onClickImage(holder.image!!, postContent[holder.getAdapterPosition()]) }
                 }
             }
-        }
+        }*/
 
     }
 
@@ -76,7 +77,7 @@ class DetailPostAdapter @Inject constructor() : RecyclerView.Adapter<RecyclerVie
      *
      * @param holder item views to show
      */
-    private fun displayImage(holder: PostImageViewHolder, pb: ProgressBar, urlImage: String?) {
+    /*private fun displayImage(holder: PostImageViewHolder, pb: ProgressBar, urlImage: String?) {
         val size = Math.ceil(Math.sqrt((MAX_WIDTH * MAX_HEIGHT).toDouble())).toInt()
         holder.image!!.post {
             if (urlImage != null) {
@@ -101,7 +102,7 @@ class DetailPostAdapter @Inject constructor() : RecyclerView.Adapter<RecyclerVie
             }
         }
 
-    }
+    }*/
 
     fun setPostContent(content: ArrayList<PostContentData>) {
         this.postContent = content

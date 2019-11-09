@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
+        <import type="android.view.View"/>
         <variable
             name="viewModel"
             type="es.chewiegames.bloggie.viewmodel.NewPostViewModel" />
@@ -30,6 +31,7 @@
                 android:fitsSystemWindows="true"
                 app:expandedTitleMarginStart="48dp"
                 app:expandedTitleMarginEnd="64dp"
+                app:title="@{viewModel.post.title}"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                 <ImageView
@@ -38,11 +40,14 @@
                     android:layout_height="match_parent"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
-                    android:visibility="gone"
+                    android:visibility="@{viewModel.photoUriContent != null ? View.VISIBLE : View.GONE}"
                     android:fitsSystemWindows="true"
                     app:layout_collapseMode="parallax"
                     app:layout_collapseParallaxMultiplier="0.7"
-                    android:onClick="onToolbarImageClicked"/>
+                    android:onClick="@{() -> viewModel.onToolbarImageClicked()}"
+                    app:size="@{viewModel.photoSize}"
+                    app:newPostImageUri="@{viewModel.photoUriContent}"
+                    />
 
                 <ImageView
                     android:id="@+id/addPhotoButton"
@@ -50,11 +55,12 @@
                     android:layout_height="match_parent"
                     android:scaleType="centerInside"
                     app:srcCompat="@drawable/ic_add_photo"
-                    android:visibility="visible"
+                    android:visibility="@{viewModel.photoUriContent != null ? View.GONE : View.VISIBLE}"
                     app:layout_collapseMode="parallax"
                     android:fitsSystemWindows="true"
                     app:layout_collapseParallaxMultiplier="0.7"
-                    android:onClick="onToolbarImageClicked"/>
+                    android:onClick="@{() -> viewModel.onToolbarImageClicked()}"
+                    />
 
 
                 <androidx.appcompat.widget.Toolbar

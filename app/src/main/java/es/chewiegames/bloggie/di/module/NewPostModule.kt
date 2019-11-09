@@ -14,7 +14,7 @@ import es.chewiegames.data.model.PostContentData
 import es.chewiegames.bloggie.ui.newPost.PostAdapter
 
 @Module
-class NewPostModule constructor(var view: NewPostView?, var context : Context, var listener : PostAdapter.PostAdapterListener) {
+class NewPostModule constructor(var view: NewPostView?, var context : Context) {
 
     @Provides
     fun provideView(): NewPostView? {
@@ -46,9 +46,9 @@ class NewPostModule constructor(var view: NewPostView?, var context : Context, v
         return ArrayList()
     }
 
-    @Provides
+/*    @Provides
     @NewPostScope
     fun providePostAdapterListener(): PostAdapter.PostAdapterListener {
         return listener
-    }
+    }*/
 }

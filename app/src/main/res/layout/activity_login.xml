@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="android.view.View"/>
         <variable
             name="loginViewModel"
             type="es.chewiegames.bloggie.viewmodel.LoginViewModel" />
@@ -42,7 +41,7 @@
             android:onClick="@{(v) -> loginViewModel.checkFirebaseAuth()}"
             android:text="@string/get_started"
             android:theme="@style/PrimaryButton"
-            android:visibility="@{loginViewModel.showLoginButton ? View.VISIBLE : View.GONE}"
+            android:visibility="@{loginViewModel.loginButtonVisibility}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -53,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:indeterminate="true"
-            android:visibility="@{loginViewModel.showLoading ? View.VISIBLE : View.GONE}"
+            android:visibility="@{loginViewModel.loadingVisibility}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

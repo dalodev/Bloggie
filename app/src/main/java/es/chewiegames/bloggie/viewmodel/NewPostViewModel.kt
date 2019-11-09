@@ -10,44 +10,53 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.david.pokeapp.livedata.BaseSingleLiveEvent
+import androidx.lifecycle.viewModelScope
+import es.chewiegames.bloggie.livedata.BaseSingleLiveEvent
 import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.util.*
-import es.chewiegames.data.model.PostContentData
-import es.chewiegames.domain.callbacks.OnPostContentListener
+import es.chewiegames.domain.model.Post
 import es.chewiegames.domain.model.PostContent
-import es.chewiegames.domain.usecases.newpost.AddNewPostContentImageUseCase
-import es.chewiegames.domain.usecases.newpost.AddNewPostContentTextUseCase
-import es.chewiegames.domain.usecases.newpost.ChangeNewPostTitleUseCase
 import es.chewiegames.domain.usecases.newpost.StoreNewPostUseCase
 import kotlin.math.ceil
 import kotlin.math.sqrt
 
-class NewPostViewModel(private val context: Context,
-                       private val storeNewPostUseCase: StoreNewPostUseCase,
-                       private val changePostTitleUseCase: ChangeNewPostTitleUseCase,
-                       private val addNewPostContentImageUseCase: AddNewPostContentImageUseCase,
-                       private val addNewPostContentTextUseCase : AddNewPostContentTextUseCase) : ViewModel(), OnPostContentListener {
+class NewPostViewModel(private val context: Context, private val storeNewPostUseCase: StoreNewPostUseCase) : ViewModel() {
 
-    val postContent: BaseSingleLiveEvent<ArrayList<PostContentData>> by lazy { BaseSingleLiveEvent<ArrayList<PostContentData>>() }
+    val postContent: BaseSingleLiveEvent<ArrayList<PostContent>> by lazy { BaseSingleLiveEvent<ArrayList<PostContent>>() }
+    val post: BaseSingleLiveEvent<Post> by lazy { BaseSingleLiveEvent<Post>() }
+    val photoUriContent: BaseSingleLiveEvent<Uri> by lazy { BaseSingleLiveEvent<Uri>() }
+    val photoSize: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
+    val navigateToHome: BaseSingleLiveEvent<Any> by lazy { BaseSingleLiveEvent<Any>() }
+    val showTitleDialog: BaseSingleLiveEvent<Boolean> by lazy { BaseSingleLiveEvent<Boolean>() }
+    val showInstructions: BaseSingleLiveEvent<Boolean> by lazy { BaseSingleLiveEvent<Boolean>() }
+    val showUndoPostContent: BaseSingleLiveEvent<PostContent> by lazy { BaseSingleLiveEvent<PostContent>() }
+    val postContentImageType: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
+    val addAdapterItem: BaseSingleLiveEvent<Any> by lazy { BaseSingleLiveEvent<Any>() }
+    val updateAdapterPosition: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
+    val removeAdapterItem: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
 
-    lateinit var tempContent: PostContent
+    private var tempContent: PostContent? = null
     var isTextContent: Boolean = true
     private var isTypeContent: Boolean = false
+    private var typeContentToAdd: Int? = null
 
-    fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent, activity: Activity) {
-        //isTypeContent= false;
+    init {
+        typeContentToAdd = EDITTEXT_VIEW
+    }
+
+    fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         if (resultCode == Activity.RESULT_OK) {
             val photoUri = data.data
             if (photoUri != null) {
                 try {
-//                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), photoUri);
                     val bitmap = ImagePicker.getImageFromResult(context, data)
                     when (requestCode) {
                         BLOG_TITLE_IMAGE -> {
                             val size = ceil(sqrt((MAX_WIDTH * MAX_HEIGHT).toDouble())).toInt()
-                            view!!.onTitleImageSelected(photoUri, size)
+                            photoSize.value = size
+                            photoUriContent.value = photoUri
                         }
                         BLOG_CONTENT_IMAGE -> onAddImageContent(tempContent, photoUri, bitmap!!)
                     }
@@ -59,110 +68,121 @@ class NewPostViewModel(private val context: Context,
         }
     }
 
-    fun onChangePostTitle(activity: Activity) {
-        val dialogBuilder = AlertDialog.Builder(activity)
-        val viewContent: View = activity.layoutInflater.inflate(R.layout.title_edit_text_dialog, null)
-        dialogBuilder.setView(viewContent)
-        val editText: EditText = viewContent.findViewById(R.id.post_title_edittext)
-        dialogBuilder.setPositiveButton(activity.getString(R.string.ok)) { dialog, _ ->
-            changePostTitleUseCase.executeAsync(editText.text.toString(), onSuccess = {}, onError = {})
-            view!!.onChangeTitle(editText.text.toString())
-            dialog.dismiss()
-        }
-
-        val dialog: AlertDialog = dialogBuilder.create()
-        dialog.show()
-        editText.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                changePostTitleUseCase.executeAsync(editText.text.toString(), onSuccess = {}, onError = {})
-                view!!.onChangeTitle(editText.text.toString())
-                dialog.dismiss()
-            }
-            false
+    private fun onAddImageContent(content: PostContent?, imageUri: Uri, bitmap: Bitmap) {
+        if (content == null) {
+            val tmpContent = PostContent()
+            tmpContent.viewType = es.chewiegames.data.utils.IMAGE_VIEW
+            tmpContent.position = postContent.value!!.size
+            tmpContent.uriImage = imageUri.toString()
+            tmpContent.bitmapImage = bitmap
+            postContent.value?.add(tmpContent)
+            onChangeViewType(IMAGE_VIEW, tmpContent.position)
+        } else {
+            content.uriImage = imageUri.toString()
+            content.bitmapImage = bitmap
+            onChangeImageContent(content.position)
         }
     }
 
-    private fun onAddImageContent(content: PostContent, imageUri: Uri, bitmap: Bitmap) {
-        addNewPostContentImageUseCase.bitmap = bitmap
-        addNewPostContentImageUseCase.imageUri = imageUri
-        addNewPostContentImageUseCase.listener = this
-        addNewPostContentImageUseCase.executeAsync(content, onSuccess = {}, onError = {})
-    }
-
-    fun onAddTextContent(activity: Activity) {
+    fun addTextContent() {
         isTextContent = true
         if (!isTypeContent) {
-            isTypeContent = true,
-            addNewPostContentTextUseCase.executeAsync(this, onSuccess = {}, onError = {})
-            interactor.onAddTextContent(this)
+            isTypeContent = true
+            val content = PostContent()
+            content.viewType = EDITTEXT_VIEW
+            content.position = postContent.value!!.size
+            postContent.value?.add(content)
+            onChangeViewType(EDITTEXT_VIEW, content.position)
         }
-    }
-
-    fun onChoosePhotoPicker(imageViewRequest: Int, content: PostContent) {
-        isTextContent = false
-        tempContent = content
-        val photoPickerIntent = Intent(Intent.ACTION_PICK)
-        photoPickerIntent.type = "image/*"
-        view!!.onStartActivityForResult(photoPickerIntent, PHOTO_PICKER, imageViewRequest)
     }
 
     fun publishPost(blogImageView: ImageView) {
-        storeNewPostUseCase.executeAsync(blogImageView, onSuccess =  {onStoreNewPostSuccess()}, onError = {onTitleEmpty()})
+        storeNewPostUseCase.blogImageView = blogImageView
+        storeNewPostUseCase.postContent = postContent.value ?: arrayListOf()
+//        storeNewPostUseCase.executeAsync(viewModelScope, post.value!!, onResult= {::onStoreNewPostSuccess}, onError = ::onTitleEmpty)
     }
 
     fun onAddContent() {
         if (isTextContent) {
             if (!isTypeContent) {
                 isTextContent = true
-                interactor.handleAddContent(this)
+                handleAddContent()
             }
         } else {
-            interactor.handleAddContent(this)
+            handleAddContent()
         }
     }
 
-    fun setTextContent(content: PostContentData?, textContent: String) {
+    private fun handleAddContent() {
+        when (typeContentToAdd) {
+            EDITTEXT_VIEW -> addTextContent()
+            IMAGE_VIEW -> postContentImageType.value = BLOG_CONTENT_IMAGE
+        }
+    }
+
+    fun doSetTextContent(view: View, content: PostContent, textContent: String) {
         isTypeContent = false
-        interactor.setTextContent(content!!, textContent, this)
-    }
-
-    fun editTextContent(content: PostContentData?) {
-        interactor.onEditTextContent(content!!, this)
-    }
-
-    fun itemSwiped(deletedItem: PostContentData?, deletedItemIndex: Int) {
-        if(deletedItem!!.viewType != EDITTEXT_VIEW){
-            view!!.showUndoSnackbar(deletedItem, deletedItemIndex)
-        }else if(deletedItem.viewType != IMAGE_VIEW){
-            setTyping(false)
+        typeContentToAdd = TEXT_VIEW
+        Utils.hideKeyBoard(context, view)
+        if (textContent.trim().isNotEmpty()) {
+            content.viewType = TEXT_VIEW
+            content.content = textContent
+            postContent.value!![postContent.value!!.indexOf(content)] = content
+            onChangeViewType(TEXT_VIEW, content.position)
+        } else {
+            postContent.value?.remove(postContent.value!![postContent.value!!.indexOf(content)])
+            removeAdapterItem.value = postContent.value!!.indexOf(content)
         }
-        view!!.showInstructions()
     }
 
-    fun setTyping(typing: Boolean) {
-        isTypeContent = typing
+    fun editTextContent(content: PostContent) {
+        content.viewType = EDITTEXT_VIEW
+        onChangeViewType(EDITTEXT_VIEW, content.position)
     }
 
-    private fun onStoreNewPostSuccess() {
-        view!!.navigateToHomeActivity()
+    fun itemSwiped(deletedItem: PostContent?, deletedItemIndex: Int) {
+        if (deletedItem!!.viewType != EDITTEXT_VIEW) {
+            showUndoPostContent.value = deletedItem
+        } else if (deletedItem.viewType != IMAGE_VIEW) {
+            isTypeContent = false
+        }
+        showInstructions.call()
     }
 
-    fun onTitleEmpty() {
-        view!!.showTitleNameDialog()
+    private fun onChangeViewType(viewType: Int, position: Int) {
+        typeContentToAdd = viewType
+        if (viewType == IMAGE_VIEW) {
+            //isTypeContent = false;
+            addAdapterItem.call()
+        } else {
+            updateAdapterPosition.value = position
+        }
+        showInstructions.call()
+    }
+
+    private fun onChangeImageContent(position: Int) {
+        updateAdapterPosition.value = position
     }
 
     /**
-     * OnPostContent methods implementation
+     * storeUseCase methods
      */
-    override fun onChangeViewType(viewType: Int, position: Int) {
+    private fun onStoreNewPostSuccess(any: LiveData<Unit>) = navigateToHome.call()
+
+    private fun onTitleEmpty(t: Throwable) = showTitleDialog.call()
+
+    /**
+     * Trigger when click on add image to post
+     */
+    fun onPostContentImageClicked(content: PostContent?) {
+        isTextContent = false
+        tempContent = content
+        postContentImageType.value = BLOG_CONTENT_IMAGE
     }
 
-    override fun removeContent(position: Int) {
-    }
-
-    override fun onAddImageContent() {
-    }
-
-    override fun onChangeImageContent(position: Int) {
+    fun onToolbarImageClicked() {
+        isTypeContent = false
+        tempContent = null
+        postContentImageType.value = BLOG_TITLE_IMAGE
     }
 }

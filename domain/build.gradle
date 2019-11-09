@@ -37,6 +37,11 @@ dependencies {
      * Kotlin
      */
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    /**
+     * coroutines
+     */
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
 
     /**
@@ -44,6 +49,7 @@ dependencies {
      */
     implementation "org.koin:koin-android:$kotlin_koin_version"
     implementation "org.koin:koin-androidx-viewmodel:$kotlin_koin_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0-rc02"
 
     /**
      * Firebase Auth

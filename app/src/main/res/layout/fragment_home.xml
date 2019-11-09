@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <import type="android.view.View"/>
         <variable
             name="homeViewModel"
             type="es.chewiegames.bloggie.viewmodel.HomeViewModel" />
@@ -25,7 +24,7 @@
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="@{homeViewModel.showLoading ? View.VISIBLE : View.GONE}"
+            android:visibility="@{homeViewModel.loadingVisibility}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -38,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="No feeds post information avalible"
-            android:visibility="@{homeViewModel.showEmptyView ? View.VISIBLE : View.GONE}"
+            android:visibility="@{homeViewModel.emptyViewVisibility}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

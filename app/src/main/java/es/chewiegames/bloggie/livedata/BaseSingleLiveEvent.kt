@@ -1,4 +1,4 @@
-package com.david.pokeapp.livedata
+package es.chewiegames.bloggie.livedata
 
 import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleOwner

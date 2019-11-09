@@ -1,90 +1,39 @@
 package es.chewiegames.data.repositoryImpl
 
 import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.widget.ImageView
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.storage.StorageException
 import com.google.firebase.storage.StorageReference
-import es.chewiegames.data.callbacks.OnPostContentCallback
 import es.chewiegames.data.exceptions.NewPostException
 import es.chewiegames.data.model.PostContentData
 import es.chewiegames.data.model.PostData
 import es.chewiegames.data.model.UserData
 import es.chewiegames.data.repository.NewPostRepository
-import es.chewiegames.data.utils.EDITTEXT_VIEW
 import es.chewiegames.data.utils.IMAGE_VIEW
-import es.chewiegames.data.utils.TEXT_VIEW
+import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.util.*
 
-class NewPostDataRepository(private val mPost: PostData,
-                            private val mDatabasePosts: DatabaseReference,
-                            private val mDatabasePostByUser: DatabaseReference,
-                            private val mStorageReference: StorageReference,
-                            private val mUserData: UserData,
-                            private val postContent: ArrayList<PostContentData> = arrayListOf()) : NewPostRepository {
 
-    var typeContentToAdd : Int? = null
+class NewPostDataRepository(val mDatabasePosts: DatabaseReference,
+                            val mDatabasePostByUser: DatabaseReference,
+                            val mStorageReference: StorageReference,
+                            val mUserData: UserData) : NewPostRepository {
 
-    init {
-        typeContentToAdd = EDITTEXT_VIEW
-    }
+    private lateinit var mPost: PostData
+    private var postContent = arrayListOf<PostContentData>()
 
-    override fun onAddImageContent(content: PostContentData?, bitmap: Bitmap, uri: Uri, callback: OnPostContentCallback) {
-        typeContentToAdd = IMAGE_VIEW
-        if (content == null) {
-            val content = PostContentData()
-            content.viewType = IMAGE_VIEW
-            content.position = postContent.size
-            content.uriImage = uri.toString()
-            content.bitmapImage = bitmap
-            postContent.add(content)
-            listener.onChangeViewType(IMAGE_VIEW, content.position)
-        } else {
-            content.uriImage = uri.toString()
-            content.bitmapImage = bitmap
-            listener.onChangeImageContent(content.position)
-        }
-    }
-
-    override fun onAddTextContent(callback: OnPostContentCallback) {
-        typeContentToAdd = EDITTEXT_VIEW
-        val content = PostContentData()
-        content.viewType = EDITTEXT_VIEW
-        content.position = postContent.size
-        postContent.add(content)
-        listener.onChangeViewType(EDITTEXT_VIEW, content.position)
-    }
-
-    override fun onEditTextContent(content: PostContentData, callback: OnPostContentCallback) {
-        content.viewType = EDITTEXT_VIEW
-        listener.onChangeViewType(EDITTEXT_VIEW, content.position)
-    }
-
-    override fun setTextContent(content: PostContentData, textContent: String, callback: OnPostContentCallback) {
-        if(!textContent.trim().isEmpty()){
-            content.viewType = TEXT_VIEW
-            content.content = textContent
-//            postContent.set(content.getPosition(), content)
-            postContent[postContent.indexOf(content)] = content
-            listener.onChangeViewType(TEXT_VIEW, content.position)
-        }else{
-            listener.removeContent(postContent.indexOf(content))
-            postContent.remove(postContent[postContent.indexOf(content)])
-        }
-    }
-
-    override fun storePostTitle(title: String) {
-        mPost.title = title
-    }
-
-    override fun storeNewPost(blogImageView: ImageView) {
+    override fun storeNewPost(mPost: PostData, postContent: ArrayList<PostContentData>, blogImageView: ImageView) {
         try {
+            this.mPost = mPost
+            this.postContent = postContent
             if (mPost.title != null && mPost.title!!.isNotEmpty()) {
                 val idP = mDatabasePosts.push().key
                 mPost.id = idP!!
-                getDataFromTitleImage(blogImageView, idP)
+//                getDataFromTitleImage(blogImageView, idP)
                 mPost.createdDate = Calendar.getInstance().time
                 mPost.userData = mUserData
                 mPost.littlePoints = 0
@@ -93,15 +42,56 @@ class NewPostDataRepository(private val mPost: PostData,
                 mDatabasePostByUser.child(idP).setValue(mPost) //Store post by user
                 mPost.id = idP
                 mDatabasePosts.child(idP).setValue(mPost)//store in general posts
+                storeImage(getBitmapFromView(blogImageView), idP)  //launch in coroutine???????
             } else {
                 throw NewPostException("Tittle Empty")
             }
         } catch (e: Exception) {
-            throw Exception()
+            throw NewPostException(e.message ?: "Default Exception")
         }
     }
 
-    override fun handleAddContent(callback: OnPostContentCallback) {
+    private fun getBitmapFromView(imageView: ImageView): ByteArray? {
+        val drawable = imageView.drawable
+        val bitmapDrawable = drawable as BitmapDrawable
+        val bitmap = bitmapDrawable.bitmap
+        var imageInByte : ByteArray? = null
+        if (bitmap != null) {
+            val stream = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+            imageInByte = stream.toByteArray()
+            val bis = ByteArrayInputStream(imageInByte)
+        }
+        return imageInByte
+    }
+
+    private fun storeImage(imageInByte: ByteArray?, idPost: String) {
+        if(imageInByte!=null){
+            val postImagesRefByUser = mStorageReference.child("images").child(idPost).child(UUID.randomUUID().toString())
+            val uploadTaskByUser = postImagesRefByUser.putBytes(imageInByte)
+            uploadTaskByUser.addOnFailureListener { }.addOnSuccessListener { taskSnapshot ->
+                taskSnapshot.storage.downloadUrl.addOnSuccessListener {
+                    val downloadUrl = it.toString()
+                    if (downloadUrl.isNotEmpty()) {
+                        mPost.titleImage = downloadUrl
+                        mDatabasePostByUser.child(idPost).setValue(mPost) //Store post by user
+                    }
+                }
+            }
+            val postImagesRefPost = mStorageReference.child("images/" + idPost + "/" + UUID.randomUUID() + ".jpg")
+            val uploadTaskPost = postImagesRefPost.putBytes(imageInByte)
+            uploadTaskPost.addOnFailureListener { }.addOnSuccessListener { taskSnapshot ->
+                taskSnapshot.storage.downloadUrl.addOnSuccessListener {
+                    val downloadUrl = it.toString()
+                    if (downloadUrl.isNotEmpty()) {
+                        mPost.titleImage = downloadUrl
+                        mDatabasePosts.child(idPost).setValue(mPost)//store in general posts
+                    }
+                }
+            }
+        }else{
+            throw Exception()
+        }
     }
 
     private fun getDataFromTitleImage(imageView: ImageView, idPost: String) {
@@ -120,7 +110,7 @@ class NewPostDataRepository(private val mPost: PostData,
             uploadTaskByUser.addOnFailureListener { }.addOnSuccessListener { taskSnapshot ->
                 taskSnapshot.storage.downloadUrl.addOnSuccessListener {
                     val downloadUrl = it.toString()
-                    if (!downloadUrl.isEmpty()) {
+                    if (downloadUrl.isNotEmpty()) {
                         mPost.titleImage = downloadUrl.toString()
                         mDatabasePostByUser.child(idPost).setValue(mPost) //Store post by user
                     }
@@ -131,7 +121,7 @@ class NewPostDataRepository(private val mPost: PostData,
             uploadTaskPost.addOnFailureListener { }.addOnSuccessListener { taskSnapshot ->
                 taskSnapshot.storage.downloadUrl.addOnSuccessListener {
                     val downloadUrl = it.toString()
-                    if (!downloadUrl.isEmpty()) {
+                    if (downloadUrl.isNotEmpty()) {
                         mPost.titleImage = downloadUrl.toString()
                         mDatabasePosts.child(idPost).setValue(mPost)//store in general posts
                     }
@@ -163,7 +153,7 @@ class NewPostDataRepository(private val mPost: PostData,
         }.addOnSuccessListener {
             it.storage.downloadUrl.addOnSuccessListener {
                 val downloadUrl = it.toString()
-                if (!downloadUrl.toString().isEmpty()) {
+                if (downloadUrl.isNotEmpty()) {
                     content.content = downloadUrl
                     mPost.content[content.position] = content
                     mDatabasePostByUser.child(idPost).setValue(mPost) //Store post by user

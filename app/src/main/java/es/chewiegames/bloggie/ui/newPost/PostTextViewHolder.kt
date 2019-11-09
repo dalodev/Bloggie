@@ -1,21 +1,17 @@
 package es.chewiegames.bloggie.ui.newPost
 
 import androidx.recyclerview.widget.RecyclerView
-import android.view.View
-import android.widget.RelativeLayout
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import android.widget.EditText
-import android.widget.TextView
-import androidx.cardview.widget.CardView
-import kotlinx.android.synthetic.main.edittext_add_content.view.*
-import kotlinx.android.synthetic.main.textview_content.view.*
+import androidx.databinding.ViewDataBinding
+import es.chewiegames.bloggie.viewmodel.NewPostViewModel
+import es.chewiegames.domain.model.PostContent
+import es.chewiegames.bloggie.BR
 
-class PostTextViewHolder constructor(rootView: View?, isDetailPost: Boolean) : RecyclerView.ViewHolder(rootView!!) {
+class PostTextViewHolder constructor(private val binding: ViewDataBinding, isDetailPost: Boolean) : RecyclerView.ViewHolder(binding.root) {
 
-    var textContent: TextView? = rootView!!.textview
-    var editTextLayout: RelativeLayout? = rootView!!.sendMsgLayout
-    var foregroundView: CardView? = rootView!!.foregroundView
-    var editTextContent: EditText? = rootView!!.editTextContent
-    var okButton: FloatingActionButton? = rootView!!.okButton
-    var container: View? = rootView!!.rootView
+    fun bind(content: PostContent, viewModel: NewPostViewModel, adapterPosition: Int) {
+        binding.setVariable(BR.viewModel, viewModel)
+        binding.setVariable(BR.content, content)
+        binding.setVariable(BR.adapterPosition, adapterPosition)
+        binding.executePendingBindings()
+    }
 }

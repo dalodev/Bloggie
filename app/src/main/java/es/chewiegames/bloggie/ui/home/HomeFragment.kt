@@ -1,10 +1,14 @@
 package es.chewiegames.bloggie.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
+import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import es.chewiegames.bloggie.R
@@ -13,19 +17,17 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import androidx.lifecycle.Observer
 import es.chewiegames.bloggie.databinding.FragmentHomeBinding
 import es.chewiegames.bloggie.ui.base.BaseBindingFragment
+import es.chewiegames.bloggie.ui.detailPost.DetailPostActivity
+import es.chewiegames.bloggie.util.EXTRA_POST
 import es.chewiegames.bloggie.viewmodel.HomeViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseBindingFragment() {
 
     private val viewModel: HomeViewModel by viewModel()
-    lateinit var binding : FragmentHomeBinding
-    private val adapter: HomeAdapter by lazy {  HomeAdapter(context!!, viewModel) }
+    lateinit var binding: FragmentHomeBinding
+    private val adapter: HomeAdapter by lazy { HomeAdapter(context!!, viewModel) }
 
-    /**
-     * Get the layout view of the activity
-     * @return The layout id of the activity
-     */
     override fun getLayoutId(): Int = R.layout.fragment_home
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -41,26 +43,33 @@ class HomeFragment : BaseBindingFragment() {
             adapter.notifyDataSetChanged()
             showEmptyView()
         })
-        viewModel.updateItemPosition.observe(this, Observer {
+        viewModel.updateItemAdapterPosition.observe(this, Observer {
             adapter.notifyItemChanged(it)
             showEmptyView()
         })
-        viewModel.addItem.observe(this, Observer {
+        viewModel.addItemAdapter.observe(this, Observer {
             adapter.notifyItemRangeChanged(0, adapter.itemCount)
             showEmptyView()
         })
-        viewModel.removeItemPosition.observe(this, Observer {
+        viewModel.removeItemAdapterPosition.observe(this, Observer {
             adapter.notifyItemRemoved(it)
             showEmptyView()
         })
-        viewModel.goToComments.observe(this, Observer {
-            findNavController().navigate(R.id.action_home_to_comments, it)
+        viewModel.goToComments.observe(this, Observer { findNavController().navigate(R.id.action_home_to_comments, it) })
+        viewModel.viewsToShare.observe(this, Observer {
+            val p2 = Pair.create(it[1], ViewCompat.getTransitionName(it[1]))
+            val options = if(it.size > 1){
+                val p1 = Pair.create(it[0], ViewCompat.getTransitionName(it[0]))
+                ActivityOptionsCompat.makeSceneTransitionAnimation(activity!!, p1, p2)
+            }else{
+                ActivityOptionsCompat.makeSceneTransitionAnimation(activity!!, p2)
+            }
+            viewModel.options = options.toBundle()!!
         })
-        viewModel.goToDetailPostActivity.observe(this, Observer {
-            val entry = it.entries.iterator().next()
-            val bundle = entry.value
-            val intent = entry.key
-            goToActivity(intent, bundle)
+        viewModel.postToDetail.observe(this, Observer {
+            val intent = Intent(activity, DetailPostActivity::class.java)
+            intent.putExtra(EXTRA_POST, it)
+            goToActivity(intent, viewModel.options)
         })
     }
 
@@ -74,24 +83,16 @@ class HomeFragment : BaseBindingFragment() {
         viewModel.loadFeedPosts()
     }
 
-    /**
-     * set the adapter for recyclerview
-     */
     private fun updateAdapter() {
-        if (feedRecyclerview.layoutManager == null) {
-            feedRecyclerview.layoutManager = LinearLayoutManager(context)
-            feedRecyclerview.itemAnimator = HomeItemAnimator()
-            feedRecyclerview.adapter = adapter
-            showEmptyView()
-        }
+        feedRecyclerview.layoutManager = LinearLayoutManager(context)
+        feedRecyclerview.itemAnimator = HomeItemAnimator()
+        feedRecyclerview.adapter = adapter
+        showEmptyView()
     }
 
-    /**
-     * display the view if no items in list
-     */
-    fun showEmptyView() {
-        viewModel.showEmptyView.value = adapter.itemCount == 0
-        viewModel.showLoading.value = false
+    private fun showEmptyView() {
+        viewModel.emptyViewVisibility.value = if(adapter.itemCount == 0) View.VISIBLE else View.GONE
+        viewModel.loadingVisibility.value = View.GONE
     }
 
     override fun destroyView() {

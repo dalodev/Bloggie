@@ -31,18 +31,10 @@ class LoginActivity : BaseActivity() {
     }
 
     override fun initObservers() {
-        viewModel.startActivityForResult.observe(this, Observer {
-            startActivityForResult(it, RC_SIGN_IN)
-        })
-        viewModel.goToMainActivity.observe(this, Observer {
-            goToActivity(MainActivity(), this)
-        })
-        viewModel.showMessage.observe(this, Observer {
-            Snackbar.make(binding.root, resources.getString(it), Snackbar.LENGTH_SHORT).show()
-        })
-        viewModel.showError.observe(this, Observer {
-            Snackbar.make(binding.root, it, Snackbar.LENGTH_SHORT).show()
-        })
+        viewModel.startActivityForResult.observe(this, Observer { startActivityForResult(it, RC_SIGN_IN) })
+        viewModel.goToMainActivity.observe(this, Observer { goToActivity(MainActivity(), this) })
+        viewModel.message.observe(this, Observer { Snackbar.make(binding.root, resources.getString(it), Snackbar.LENGTH_SHORT).show() })
+        viewModel.error.observe(this, Observer { Snackbar.make(binding.root, it, Snackbar.LENGTH_SHORT).show() })
     }
     override fun onResume() {
         super.onResume()

@@ -1,68 +1,52 @@
 package es.chewiegames.bloggie.viewmodel
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.core.app.ActivityOptionsCompat
-import androidx.core.util.Pair
-import androidx.core.view.ViewCompat
 import androidx.lifecycle.ViewModel
-import com.david.pokeapp.livedata.BaseSingleLiveEvent
+import androidx.lifecycle.viewModelScope
+import es.chewiegames.bloggie.livedata.BaseSingleLiveEvent
 import es.chewiegames.domain.model.Post
-import es.chewiegames.bloggie.ui.detailPost.DetailPostActivity
 import es.chewiegames.bloggie.util.EXTRA_POST
 import es.chewiegames.domain.callbacks.OnLoadFeedPostListener
 import es.chewiegames.domain.usecases.feedpost.FeedPostUseCase
 import es.chewiegames.domain.usecases.feedpost.UpdateLikedPostUseCase
 import java.util.ArrayList
 
-class HomeViewModel(val activity: Activity,
-                    private val feedPostUseCase : FeedPostUseCase,
+class HomeViewModel(private val feedPostUseCase : FeedPostUseCase,
                     private val updateLikedPostUseCase : UpdateLikedPostUseCase)  : ViewModel(), OnLoadFeedPostListener {
 
     val posts: BaseSingleLiveEvent<ArrayList<Post>> by lazy { BaseSingleLiveEvent<ArrayList<Post>>() }
-    val likedPosts: BaseSingleLiveEvent<ArrayList<Post>> by lazy { BaseSingleLiveEvent<ArrayList<Post>>() }
-    val showEmptyView: BaseSingleLiveEvent<Boolean> by lazy { BaseSingleLiveEvent<Boolean>() }
-    val showLoading: BaseSingleLiveEvent<Boolean> by lazy { BaseSingleLiveEvent<Boolean>() }
-    val addItem: BaseSingleLiveEvent<Any> by lazy { BaseSingleLiveEvent<Any>() }
-    val removeItemPosition: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
-    val updateItemPosition: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
-    val goToDetailPostActivity: BaseSingleLiveEvent<HashMap<Intent, Bundle>> by lazy { BaseSingleLiveEvent<HashMap<Intent, Bundle>>() }
+    val emptyViewVisibility: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
+    val loadingVisibility: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
+    val addItemAdapter: BaseSingleLiveEvent<Any> by lazy { BaseSingleLiveEvent<Any>() }
+    val removeItemAdapterPosition: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
+    val updateItemAdapterPosition: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
+    private val handleError: BaseSingleLiveEvent<String> by lazy { BaseSingleLiveEvent<String>() }
+    val viewsToShare: BaseSingleLiveEvent<ArrayList<View>> by lazy { BaseSingleLiveEvent<ArrayList<View>>() }
+    val postToDetail: BaseSingleLiveEvent<Post> by lazy { BaseSingleLiveEvent<Post>() }
     val goToComments: BaseSingleLiveEvent<Bundle> by lazy { BaseSingleLiveEvent<Bundle>() }
-    val handleError: BaseSingleLiveEvent<String> by lazy { BaseSingleLiveEvent<String>() }
+    private val likedPosts: BaseSingleLiveEvent<ArrayList<Post>> by lazy { BaseSingleLiveEvent<ArrayList<Post>>() }
 
     var onBind = false
+    var options = Bundle()
 
     fun loadFeedPosts() {
         showProgressDialog()
-        feedPostUseCase.executeAsync(this, onSuccess = {hideProgressDialog()}, onError = ::onError)
+//        feedPostUseCase.executeAsync(viewModelScope,this, onResult = {hideProgressDialog()}, onError = ::onError)
     }
 
-    fun onLikedPost(post: Post, checked: Boolean) {
+    private fun onLikedPost(post: Post, checked: Boolean) {
         updateLikedPostUseCase.checked = checked
-        updateLikedPostUseCase.executeAsync(post, onSuccess = {}, onError = {})
+//        updateLikedPostUseCase.executeAsync(viewModelScope, post, onResult = {}, onError = {})
     }
 
     /**
      * trigger when user touch on item of the list
      */
     fun onPostClicked(post: Post, vararg viewsToShare: View?) {
-        val bundle = Bundle()
-        bundle.putSerializable(EXTRA_POST, post)
-        val p2 = Pair.create(viewsToShare[1], ViewCompat.getTransitionName(viewsToShare[1]!!))
-        val options= if(viewsToShare[0] != null){
-            val p1 = Pair.create(viewsToShare[0], ViewCompat.getTransitionName(viewsToShare[0]!!))
-            ActivityOptionsCompat.makeSceneTransitionAnimation(activity, p1, p2)
-        }else{
-            ActivityOptionsCompat.makeSceneTransitionAnimation(activity, p2)
+        this.viewsToShare.value = varargAsList(viewsToShare) as ArrayList<View>
+        postToDetail.value = post
 
-        }
-        val intent = Intent(activity, DetailPostActivity::class.java)
-        intent.putExtra(EXTRA_POST, post)
-        val directionData  = HashMap<Intent, Bundle>()
-        directionData[intent] = options.toBundle()!!
-        goToDetailPostActivity.value = directionData
     }
 
     /**
@@ -85,12 +69,12 @@ class HomeViewModel(val activity: Activity,
         handleError.value = t.message
     }
 
-    fun showProgressDialog() {
-        showLoading.value = true
+    private fun showProgressDialog() {
+        loadingVisibility.value = View.VISIBLE
     }
 
-    fun hideProgressDialog() {
-        showLoading.value = false
+    private fun hideProgressDialog() {
+        loadingVisibility.value = View.GONE
     }
 
     fun isLikedPost(feedPost: Post): Boolean {
@@ -107,28 +91,35 @@ class HomeViewModel(val activity: Activity,
      */
     override fun onLoadFeedPostSuccess(posts: ArrayList<Post>) {
         this.posts.value = posts
-        showEmptyView.call()
+        emptyViewVisibility.call()
         hideProgressDialog()
     }
 
     override fun onItemAdded(post: Post) {
         this.posts.value?.add(post)
-        addItem.call()
-        showEmptyView.call()
+        addItemAdapter.call()
+        emptyViewVisibility.call()
         hideProgressDialog()
     }
 
     override fun onItemRemoved(position: Int) {
         posts.value?.removeAt(position)
-        removeItemPosition.value = position
-        showEmptyView.call()
+        removeItemAdapterPosition.value = position
+        emptyViewVisibility.call()
         hideProgressDialog()
     }
 
     override fun onItemChange(position: Int, post: Post) {
         this.posts.value!![position] = post
-        updateItemPosition.value = position
-        showEmptyView.call()
+        updateItemAdapterPosition.value = position
+        emptyViewVisibility.call()
         hideProgressDialog()
     }
+}
+
+fun <T> varargAsList(vararg ts: T): ArrayList<T>? {
+    val result = ArrayList<T>()
+    for (t in ts) // ts is an Array
+        result.add(t)
+    return result
 }

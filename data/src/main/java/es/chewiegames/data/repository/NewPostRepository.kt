@@ -6,13 +6,8 @@ import android.widget.ImageView
 import es.chewiegames.data.callbacks.OnPostContentCallback
 import es.chewiegames.data.callbacks.OnStoreFinishedCallback
 import es.chewiegames.data.model.PostContentData
+import es.chewiegames.data.model.PostData
 
 interface NewPostRepository {
-    fun onAddImageContent(content: PostContentData?, bitmap: Bitmap, uri: Uri, callback: OnPostContentCallback)
-    fun onAddTextContent(callback: OnPostContentCallback)
-    fun onEditTextContent(content: PostContentData, callback: OnPostContentCallback)
-    fun setTextContent(content: PostContentData, textContent: String, callback: OnPostContentCallback)
-    fun storePostTitle(title: String)
-    fun storeNewPost(blogImageView: ImageView)
-    fun handleAddContent(callback: OnPostContentCallback)
+    fun storeNewPost(mPost: PostData, postContent : ArrayList<PostContentData>, blogImageView: ImageView)
 }

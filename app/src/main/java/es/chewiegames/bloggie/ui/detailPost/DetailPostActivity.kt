@@ -22,8 +22,6 @@ class DetailPostActivity : BaseActivity(), DetailPostView, DetailPostAdapter.Det
     @Inject
     lateinit var mDetailPostPresenter : IDetailPostPresenter
 
-    @Inject
-    lateinit var adapter : DetailPostAdapter
 
     @Inject
     lateinit var layoutManager: LinearLayoutManager
@@ -49,10 +47,10 @@ class DetailPostActivity : BaseActivity(), DetailPostView, DetailPostAdapter.Det
     }
 
     override fun setAdapter(content: ArrayList<PostContentData>) {
-        adapter.setPostContent(content)
+        /*adapter.setPostContent(content)
         contentPostList.layoutManager = layoutManager
         contentPostList.itemAnimator = DefaultItemAnimator()
-        contentPostList.adapter = adapter
+        contentPostList.adapter = adapter*/
     }
 
     override fun fillValues(post: Post) {

@@ -15,9 +15,7 @@ import es.chewiegames.domain.model.User
 class HomeAdapter(val context: Context, private val viewModel : HomeViewModel) : RecyclerView.Adapter<HomeViewHolder>() {
 
     var posts: ArrayList<Post> = viewModel.posts.value ?: arrayListOf()
-
     private var likedPosts: ArrayList<Post> = arrayListOf()
-
     private var onBind: Boolean = false
 
     override fun getItemViewType(position: Int): Int = R.layout.list_item_home
@@ -28,16 +26,12 @@ class HomeAdapter(val context: Context, private val viewModel : HomeViewModel) :
         return HomeViewHolder(binding)
     }
 
-    override fun getItemCount(): Int {
-        return posts.size
-    }
+    override fun getItemCount() = posts.size
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
         onBind = true
         val feedPost: Post = posts[position]
-
         val feedPostUserData: User = feedPost.user!!
-
         holder.bind(feedPost, feedPostUserData, viewModel)
 
         /*

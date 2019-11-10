@@ -80,12 +80,12 @@ class NewPostInteractor @Inject constructor(): INewPostInteractor {
             content.viewType = IMAGE_VIEW
             content.position = postContent.size
             content.uriImage = uri.toString()
-            content.bitmapImage = bitmap
+//            content.bitmapImage = bitmap
             postContent.add(content)
             listener.onChangeViewType(IMAGE_VIEW, content.position)
         } else {
             content.uriImage = uri.toString()
-            content.bitmapImage = bitmap
+//            content.bitmapImage = bitmap
             listener.onChangeImageContent(content.position)
         }
     }
@@ -138,7 +138,7 @@ class NewPostInteractor @Inject constructor(): INewPostInteractor {
 
     private fun uploadImage(content: PostContentData, idPost : String){
         val baos = ByteArrayOutputStream()
-        content.bitmapImage!!.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+//        content.bitmapImage!!.compress(Bitmap.CompressFormat.JPEG, 100, baos)
         val data = baos.toByteArray()
         val postImagesRefByUser = mStorageReference.child("images").child(idPost).child(Uri.parse(content.uriImage).lastPathSegment!!)
         val  uploadTaskByUser = postImagesRefByUser.putBytes(data)
@@ -175,7 +175,7 @@ class NewPostInteractor @Inject constructor(): INewPostInteractor {
             }
 
         }
-        content.bitmapImage = null
+//        content.bitmapImage = null
     }
 
     private fun getDataFromTitleImage(imageView: ImageView, idPost: String){

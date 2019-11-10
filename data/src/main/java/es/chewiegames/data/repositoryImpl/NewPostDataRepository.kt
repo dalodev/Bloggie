@@ -3,6 +3,7 @@ package es.chewiegames.data.repositoryImpl
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
+import android.util.Log
 import android.widget.ImageView
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.storage.StorageException
@@ -21,13 +22,15 @@ import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.math.log
+
+private const val TAG = "NewPostDataRepository"
 
 @ExperimentalCoroutinesApi
 class NewPostDataRepository(val mDatabasePosts: DatabaseReference,
                             val mDatabasePostByUser: DatabaseReference,
                             val mStorageReference: StorageReference,
                             val mUserData: UserData) : NewPostRepository {
-
     private lateinit var mPost: PostData
     private var postContent = arrayListOf<PostContentData>()
 
@@ -53,6 +56,7 @@ class NewPostDataRepository(val mDatabasePosts: DatabaseReference,
                 close(NewPostException("Title Empty"))
             }
         } catch (e: Exception) {
+            Log.i(TAG, e.message!!)
             if (e is NewPostException) close(NewPostException("Title Empty"))
             else close(e)
         }
@@ -84,7 +88,7 @@ class NewPostDataRepository(val mDatabasePosts: DatabaseReference,
                 taskSnapshot.storage.downloadUrl.addOnSuccessListener {
                     val downloadUrl = it.toString()
                     if (downloadUrl.isNotEmpty()) {
-                        mPost.titleImage = downloadUrl
+                        mPost.titleImage = downloadUrl.toString()
                         mDatabasePostByUser.child(idPost).setValue(mPost) //Store post by user
                     }
                 }
@@ -95,7 +99,7 @@ class NewPostDataRepository(val mDatabasePosts: DatabaseReference,
                 taskSnapshot.storage.downloadUrl.addOnSuccessListener {
                     val downloadUrl = it.toString()
                     if (downloadUrl.isNotEmpty()) {
-                        mPost.titleImage = downloadUrl
+                        mPost.titleImage = downloadUrl.toString()
                         mDatabasePosts.child(idPost).setValue(mPost)//store in general posts
                     }
                 }
@@ -122,18 +126,16 @@ class NewPostDataRepository(val mDatabasePosts: DatabaseReference,
         val postImagesRefByUser = mStorageReference.child("images").child(idPost).child(Uri.parse(content.uriImage).lastPathSegment!!)
         val uploadTaskByUser = postImagesRefByUser.putBytes(data)
 
-        uploadTaskByUser.addOnFailureListener {
-            val errorCode = (it as StorageException).errorCode
-            val errorMessage = it.message
-        }.addOnSuccessListener {
+        uploadTaskByUser.addOnFailureListener { }.addOnSuccessListener {
             it.storage.downloadUrl.addOnSuccessListener {
                 val downloadUrl = it.toString()
                 if (downloadUrl.isNotEmpty()) {
-                    content.content = downloadUrl
+                    content.content = downloadUrl.toString()
                     mPost.content[content.position] = content
                     mDatabasePostByUser.child(idPost).setValue(mPost) //Store post by user
                 }
             }
         }
+        content.bitmapImage = null
     }
 }

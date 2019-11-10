@@ -4,9 +4,9 @@ import android.widget.ImageView
 import es.chewiegames.data.model.Comment
 import es.chewiegames.data.model.PostContentData
 import es.chewiegames.data.model.PostData
-import es.chewiegames.data.model.UserData
 import java.io.Serializable
 import java.util.*
+import kotlin.collections.ArrayList
 
 data class Post(
         var id: String? = null,

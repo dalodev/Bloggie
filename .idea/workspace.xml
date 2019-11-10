@@ -16,7 +16,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6773d06c-abb8-4ea7-ab5a-42f7fdfd2a93" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/domain/src/main/java/es/chewiegames/domain/usecases/feedpost/GetFeedPostUseCase.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.6.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.6.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.6.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -31,63 +30,12 @@
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/binding/HomeBindingAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/binding/HomeBindingAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/binding/NewPostBindingAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/binding/NewPostBindingAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/di/component/ApplicationComponent.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/di/component/ApplicationComponent.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/di/component/CommentsSubComponent.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/di/component/DetailPostSubComponent.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/di/module/CommentsModule.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/di/module/DetailPostModule.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/di/scope/CommentsScope.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/di/scope/DetailPostScope.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/koin/modules.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/koin/modules.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/base/BaseActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/base/BaseActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/comments/CommentsActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/comments/CommentsActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/detailPost/DetailPostActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/detailPost/DetailPostActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/home/HomeAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/home/HomeAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/home/HomeFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/home/HomeFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/login/LoginActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/login/LoginActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/main/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/main/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/newPost/NewPostActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/newPost/NewPostActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/newPost/PostAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/ui/newPost/PostAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/viewmodel/HomeViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/viewmodel/HomeViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/viewmodel/LoginViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/viewmodel/LoginViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/viewmodel/NewPostViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/viewmodel/NewPostViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_comments.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_comments.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_detail_post.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_detail_post.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_new_post.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_new_post.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/content_new_post.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/content_new_post.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/edittext_content.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/edittext_content.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/imageview_content.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/imageview_content.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/list_item_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/list_item_home.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/interactor/newPost/NewPostInteractor.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/interactor/newPost/NewPostInteractor.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/data.iml" beforeDir="false" afterPath="$PROJECT_DIR$/data/data.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/src/main/java/es/chewiegames/data/callbacks/OnLoadFeedPostCallback.kt" beforeDir="false" afterPath="$PROJECT_DIR$/data/src/main/java/es/chewiegames/data/callbacks/OnLoadFeedPostCallback.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/src/main/java/es/chewiegames/data/koin/FirebaseModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/data/src/main/java/es/chewiegames/data/koin/FirebaseModule.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/src/main/java/es/chewiegames/data/koin/modules.kt" beforeDir="false" afterPath="$PROJECT_DIR$/data/src/main/java/es/chewiegames/data/koin/modules.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/src/main/java/es/chewiegames/data/model/PostData.kt" beforeDir="false" afterPath="$PROJECT_DIR$/data/src/main/java/es/chewiegames/data/model/PostData.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/src/main/java/es/chewiegames/data/repository/NewPostRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/data/src/main/java/es/chewiegames/data/repository/NewPostRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/src/main/java/es/chewiegames/data/repository/PostRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/data/src/main/java/es/chewiegames/data/repository/PostRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/src/main/java/es/chewiegames/data/repository/UserRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/data/src/main/java/es/chewiegames/data/repository/UserRepository.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/src/main/java/es/chewiegames/data/repositoryImpl/NewPostDataRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/data/src/main/java/es/chewiegames/data/repositoryImpl/NewPostDataRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/src/main/java/es/chewiegames/data/repositoryImpl/PostDataRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/data/src/main/java/es/chewiegames/data/repositoryImpl/PostDataRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/src/main/java/es/chewiegames/data/repositoryImpl/UserDataRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/data/src/main/java/es/chewiegames/data/repositoryImpl/UserDataRepository.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/domain/domain.iml" beforeDir="false" afterPath="$PROJECT_DIR$/domain/domain.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/src/main/java/es/chewiegames/domain/callbacks/OnLoadFeedPostListener.kt" beforeDir="false" afterPath="$PROJECT_DIR$/domain/src/main/java/es/chewiegames/domain/callbacks/OnLoadFeedPostListener.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/src/main/java/es/chewiegames/domain/koin/modules.kt" beforeDir="false" afterPath="$PROJECT_DIR$/domain/src/main/java/es/chewiegames/domain/koin/modules.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/domain/src/main/java/es/chewiegames/domain/model/Post.kt" beforeDir="false" afterPath="$PROJECT_DIR$/domain/src/main/java/es/chewiegames/domain/model/Post.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/src/main/java/es/chewiegames/domain/model/User.kt" beforeDir="false" afterPath="$PROJECT_DIR$/domain/src/main/java/es/chewiegames/domain/model/User.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/src/main/java/es/chewiegames/domain/usecases/UseCase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/domain/src/main/java/es/chewiegames/domain/usecases/UseCase.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/src/main/java/es/chewiegames/domain/usecases/feedpost/FeedPostUseCase.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/src/main/java/es/chewiegames/domain/usecases/feedpost/UpdateLikedPostUseCase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/domain/src/main/java/es/chewiegames/domain/usecases/feedpost/UpdateLikedPostUseCase.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/src/main/java/es/chewiegames/domain/usecases/newpost/StoreNewPostUseCase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/domain/src/main/java/es/chewiegames/domain/usecases/newpost/StoreNewPostUseCase.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/src/main/java/es/chewiegames/domain/usecases/user/CheckUserLoginUseCase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/domain/src/main/java/es/chewiegames/domain/usecases/user/CheckUserLoginUseCase.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/src/main/java/es/chewiegames/domain/usecases/user/RegisterUserUseCase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/domain/src/main/java/es/chewiegames/domain/usecases/user/RegisterUserUseCase.kt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -492,33 +440,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/data/src/main/java/es/chewiegames/data/repositoryImpl/NewPostDataRepository.kt</url>
-          <line>56</line>
+          <line>60</line>
           <option name="timeStamp" value="163" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/data/src/main/java/es/chewiegames/data/repositoryImpl/NewPostDataRepository.kt</url>
-          <line>35</line>
-          <option name="timeStamp" value="195" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/data/src/main/java/es/chewiegames/data/repositoryImpl/NewPostDataRepository.kt</url>
-          <line>62</line>
-          <option name="timeStamp" value="196" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/data/src/main/java/es/chewiegames/data/repositoryImpl/NewPostDataRepository.kt</url>
-          <line>79</line>
-          <option name="timeStamp" value="197" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/data/src/main/java/es/chewiegames/data/repositoryImpl/NewPostDataRepository.kt</url>
-          <line>41</line>
-          <option name="timeStamp" value="198" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/viewmodel/HomeViewModel.kt</url>
-          <line>113</line>
-          <option name="timeStamp" value="205" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/viewmodel/HomeViewModel.kt</url>
@@ -540,6 +463,16 @@
           <line>52</line>
           <option name="timeStamp" value="226" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/interactor/newPost/NewPostInteractor.kt</url>
+          <line>110</line>
+          <option name="timeStamp" value="227" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/data/src/main/java/es/chewiegames/data/repositoryImpl/NewPostDataRepository.kt</url>
+          <line>130</line>
+          <option name="timeStamp" value="231" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
@@ -549,7 +482,7 @@
         <watch expression="dataSnapshot.children" />
       </configuration>
       <configuration name="Remote">
-        <watch expression="post.id" language="kotlin" />
+        <watch expression="mPost" language="kotlin" />
       </configuration>
     </watches-manager>
   </component>

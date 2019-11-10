@@ -1,7 +1,5 @@
 package es.chewiegames.data.repositoryImpl
 
-import android.system.Os
-import android.system.Os.close
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -17,20 +15,21 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.flow.channelFlow
 
+@ExperimentalCoroutinesApi
 class UserDataRepository(var mUserData: UserData, var mDatabaseUsers: DatabaseReference) : UserRepository {
 
-    override suspend fun storeUserInDatabase(user: FirebaseUser) {
+    override fun storeUserInDatabase(user: FirebaseUser) : Flow<UserData> = callbackFlow {
         mUserData.id = user.uid
         mUserData.userEmail = user.email.toString()
         mUserData.userName = user.displayName.toString()
         mUserData.loginStatus = LOGIN_IN
         mUserData.avatar = user.photoUrl.toString()
         mDatabaseUsers.child(user.uid).setValue(mUserData)
+        offer(mUserData)
+        awaitClose()
     }
 
-    @ExperimentalCoroutinesApi
     override fun checkUserLogin(): Flow<Boolean> = callbackFlow {
         val callback = object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {

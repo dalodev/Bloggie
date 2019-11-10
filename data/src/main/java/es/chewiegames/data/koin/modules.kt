@@ -12,15 +12,13 @@ import org.koin.dsl.module.module
 
 val dataModule = module {
 
-    single<UserRepository> { UserDataRepository(mUserData= get(), mDatabaseUsers = get(allPostsDatabaseReference) ) }
+    single<UserRepository> { UserDataRepository(mUserData= get(), mDatabaseUsers = get(userDatabaseReference) ) }
     single<PostRepository> {
         PostDataRepository(
                 mDatabasePostByUser = get(postsByUserDatabaseReference),
                 mDatabaseAllPost =get(allPostsDatabaseReference),
                 mDatabaseLikedPostByUser = get(likedPostsByUserDatabaseReference),
-                likedPosts = get(likedPostsByUser),
-                posts = get(feedPosts),
-                mUserData = get(user)
+                mUserData = get()
         )
     }
     single<NewPostRepository> {
@@ -28,7 +26,7 @@ val dataModule = module {
                 mDatabasePosts = get(allPostsDatabaseReference),
                 mDatabasePostByUser = get(postsByUserDatabaseReference),
                 mStorageReference = get(),
-                mUserData = get(user)
+                mUserData = get()
         )
     }
 
@@ -40,10 +38,11 @@ val dataModule = module {
     factory(userDatabaseReference) { getUserDatabaseReference(firebaseDatabase = get()) }
     factory(postsByUserDatabaseReference) { providePostByUserReference(firebaseDatabase = get(), userData =  get()) }
     factory(allPostsDatabaseReference) { provideAllPostsReference(firebaseDatabase = get()) }
-    factory(likedPostsByUserDatabaseReference) { provideLikedPostByUserReference(firebaseDatabase = get(),userData =  get(user)) }
+    factory(likedPostsByUserDatabaseReference) { provideLikedPostByUserReference(firebaseDatabase = get(),userData =  get()) }
 
     //Firebase storage
     factory { provideFirebaseStorage() }
+    factory { provideStorageReference(firebaseStorage = get()) }
 
     //firebase auth
     factory { provideFirebaseAuth() }
@@ -53,7 +52,6 @@ fun provideResources(context: Context): Resources = context.resources
 
 const val likedPostsByUser = "likedPostsByUser"
 const val feedPosts = "feedPost"
-const val user = "user"
 
 const val userDatabaseReference = "userDatabaseReference"
 const val postsByUserDatabaseReference = "postsByUserDatabaseReference"

@@ -1,23 +1,21 @@
 package es.chewiegames.bloggie.ui.detailPost
 
 import android.os.Bundle
-import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.MenuItem
 import android.view.View
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import es.chewiegames.bloggie.R
+import es.chewiegames.bloggie.databinding.ActivityDetailPostBinding
 import es.chewiegames.bloggie.di.component.ApplicationComponent
-import es.chewiegames.bloggie.di.module.DetailPostModule
 import es.chewiegames.domain.model.Post
 import es.chewiegames.data.model.PostContentData
 import es.chewiegames.bloggie.presenter.detailPost.IDetailPostPresenter
 import es.chewiegames.bloggie.ui.base.BaseActivity
-import kotlinx.android.synthetic.main.activity_detail_post.*
 import javax.inject.Inject
 
-class DetailPostActivity : BaseActivity(), DetailPostView, DetailPostAdapter.DetailPostAdapterListener{
+class DetailPostActivity : BaseActivity<ActivityDetailPostBinding>(), DetailPostView, DetailPostAdapter.DetailPostAdapterListener{
 
     @Inject
     lateinit var mDetailPostPresenter : IDetailPostPresenter
@@ -42,9 +40,7 @@ class DetailPostActivity : BaseActivity(), DetailPostView, DetailPostAdapter.Det
         mDetailPostPresenter.loadData(intent.extras!!)
     }
 
-    override fun injectDependencies(component: ApplicationComponent) {
-        component.plus(DetailPostModule(this, this)).inject(this)
-    }
+    override fun injectDependencies(component: ApplicationComponent) {}
 
     override fun setAdapter(content: ArrayList<PostContentData>) {
         /*adapter.setPostContent(content)
@@ -55,11 +51,11 @@ class DetailPostActivity : BaseActivity(), DetailPostView, DetailPostAdapter.Det
 
     override fun fillValues(post: Post) {
         if(post.titleImage!=null){
-            imgToolbar.transitionName = post.id
+            binding.imgToolbar.transitionName = post.id
         }
-        collapsingToolBar.transitionName = post.title
-        Picasso.with(this).load(post.titleImage).into(imgToolbar)
-        collapsingToolBar.title = post.title
+        binding.collapsingToolBar.transitionName = post.title
+        Picasso.with(this).load(post.titleImage).into(binding.imgToolbar)
+        binding.collapsingToolBar.title = post.title
     }
 
     override fun onBackPressed() {
@@ -78,13 +74,13 @@ class DetailPostActivity : BaseActivity(), DetailPostView, DetailPostAdapter.Det
 
     fun expandTitleImage(v: View){
         if(mDetailPostPresenter.getPost()!!.titleImage!= null){
-            mDetailPostPresenter.zoomDetailPostImage(imgToolbar, expandedImage, mDetailPostPresenter.getPost()!!)
+            mDetailPostPresenter.zoomDetailPostImage(binding.imgToolbar, binding.expandedImage, mDetailPostPresenter.getPost()!!)
         }
     }
 
     override fun displayExpandedImage(content: String) {
-        Picasso.with(this).load(content).into(expandedImage, object: Callback {
-            override fun onSuccess() { expandedImageProgressbar.visibility = View.GONE }
+        Picasso.with(this).load(content).into(binding.expandedImage, object: Callback {
+            override fun onSuccess() { binding.expandedImageProgressbar.visibility = View.GONE }
             override fun onError() {} })
     }
 
@@ -93,16 +89,16 @@ class DetailPostActivity : BaseActivity(), DetailPostView, DetailPostAdapter.Det
     }
 
     override fun closeExpandedImage() {
-        closeExpandedImage(expandedImage)
+        closeExpandedImage(binding.expandedImage)
     }
 
     fun closeExpandedImage(v: View){
-        mDetailPostPresenter.closeExpandedImage(expandedImage)
+        mDetailPostPresenter.closeExpandedImage(binding.expandedImage)
     }
 
     override fun onClickImage(thumbView: View, postContent: PostContentData) {
-        expandedImageProgressbar.visibility = View.VISIBLE
-        mDetailPostPresenter.zoomDetailPostImage(thumbView, expandedImage, postContent)
+        binding.expandedImageProgressbar.visibility = View.VISIBLE
+        mDetailPostPresenter.zoomDetailPostImage(thumbView, binding.expandedImage, postContent)
     }
 
     override fun showMessage(message: String) {

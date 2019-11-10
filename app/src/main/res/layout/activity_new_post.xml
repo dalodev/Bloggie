@@ -31,7 +31,6 @@
                 android:fitsSystemWindows="true"
                 app:expandedTitleMarginStart="48dp"
                 app:expandedTitleMarginEnd="64dp"
-                app:title="@{viewModel.post.title}"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                 <ImageView
@@ -62,7 +61,6 @@
                     android:onClick="@{() -> viewModel.onToolbarImageClicked()}"
                     />
 
-
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
@@ -73,7 +71,10 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <include layout="@layout/content_new_post" />
+        <include
+            app:viewModel="@{viewModel}"
+            android:id="@+id/content_new_post_layout"
+            layout="@layout/content_new_post" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navigation"

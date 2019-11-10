@@ -1,11 +1,14 @@
 package es.chewiegames.data.repository
 
-import android.widget.ImageView
 import es.chewiegames.data.callbacks.OnLoadFeedPostCallback
 import es.chewiegames.data.model.PostData
+import kotlinx.coroutines.flow.Flow
 
 interface PostRepository {
-    fun loadFeedPost(callback: OnLoadFeedPostCallback)
-    fun updateLikedPost(post: PostData, checked: Boolean)
-    fun getLikedPostByUser(id: String): Boolean
+    //CRUD
+    fun getFeedPosts() : Flow<ArrayList<PostData>>
+    fun getLikedPostsByUser() : Flow<ArrayList<PostData>>
+    fun updateLikedPosts(postData: PostData, checked: Boolean) : Flow<PostData>
+    //Subscribe
+    fun subscribeFeedPosts(callback : OnLoadFeedPostCallback)
 }

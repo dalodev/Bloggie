@@ -1,26 +1,24 @@
 package es.chewiegames.bloggie.viewmodel
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.view.View
-import android.view.inputmethod.EditorInfo
-import android.widget.EditText
 import android.widget.ImageView
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import es.chewiegames.bloggie.livedata.BaseSingleLiveEvent
-import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.util.*
 import es.chewiegames.domain.model.Post
 import es.chewiegames.domain.model.PostContent
+import es.chewiegames.domain.model.StoreNewPostParams
 import es.chewiegames.domain.usecases.newpost.StoreNewPostUseCase
 import kotlin.math.ceil
 import kotlin.math.sqrt
+import com.squareup.picasso.Callback
+import es.chewiegames.data.exceptions.NewPostException
 
 class NewPostViewModel(private val context: Context, private val storeNewPostUseCase: StoreNewPostUseCase) : ViewModel() {
 
@@ -33,9 +31,12 @@ class NewPostViewModel(private val context: Context, private val storeNewPostUse
     val showInstructions: BaseSingleLiveEvent<Boolean> by lazy { BaseSingleLiveEvent<Boolean>() }
     val showUndoPostContent: BaseSingleLiveEvent<PostContent> by lazy { BaseSingleLiveEvent<PostContent>() }
     val postContentImageType: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
-    val addAdapterItem: BaseSingleLiveEvent<Any> by lazy { BaseSingleLiveEvent<Any>() }
-    val updateAdapterPosition: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
-    val removeAdapterItem: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
+    val addAdapterItem: BaseSingleLiveEvent<PostContent> by lazy { BaseSingleLiveEvent<PostContent>() }
+    val updateAdapterPosition: BaseSingleLiveEvent<PostContent> by lazy { BaseSingleLiveEvent<PostContent>() }
+    val removeAdapterItem: BaseSingleLiveEvent<PostContent> by lazy { BaseSingleLiveEvent<PostContent>() }
+    val imageContentLoading: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
+    val imageBackgroundVisibility: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
+    val showError: BaseSingleLiveEvent<String> by lazy { BaseSingleLiveEvent<String>() }
 
     private var tempContent: PostContent? = null
     var isTextContent: Boolean = true
@@ -44,6 +45,9 @@ class NewPostViewModel(private val context: Context, private val storeNewPostUse
 
     init {
         typeContentToAdd = EDITTEXT_VIEW
+        postContent.value = arrayListOf()
+        post.value = Post()
+        showInstructions()
     }
 
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
@@ -71,16 +75,16 @@ class NewPostViewModel(private val context: Context, private val storeNewPostUse
     private fun onAddImageContent(content: PostContent?, imageUri: Uri, bitmap: Bitmap) {
         if (content == null) {
             val tmpContent = PostContent()
-            tmpContent.viewType = es.chewiegames.data.utils.IMAGE_VIEW
+            tmpContent.viewType = IMAGE_VIEW
             tmpContent.position = postContent.value!!.size
             tmpContent.uriImage = imageUri.toString()
             tmpContent.bitmapImage = bitmap
             postContent.value?.add(tmpContent)
-            onChangeViewType(IMAGE_VIEW, tmpContent.position)
+            onChangeViewType(IMAGE_VIEW, tmpContent.position, tmpContent)
         } else {
             content.uriImage = imageUri.toString()
             content.bitmapImage = bitmap
-            onChangeImageContent(content.position)
+            onChangeImageContent(content)
         }
     }
 
@@ -92,15 +96,12 @@ class NewPostViewModel(private val context: Context, private val storeNewPostUse
             content.viewType = EDITTEXT_VIEW
             content.position = postContent.value!!.size
             postContent.value?.add(content)
-            onChangeViewType(EDITTEXT_VIEW, content.position)
+            onChangeViewType(EDITTEXT_VIEW, content.position, content)
         }
     }
 
-    fun publishPost(blogImageView: ImageView) {
-        storeNewPostUseCase.blogImageView = blogImageView
-        storeNewPostUseCase.postContent = postContent.value ?: arrayListOf()
-//        storeNewPostUseCase.executeAsync(viewModelScope, post.value!!, onResult= {::onStoreNewPostSuccess}, onError = ::onTitleEmpty)
-    }
+    fun publishPost(blogImageView: ImageView) = storeNewPostUseCase.executeAsync(viewModelScope, StoreNewPostParams(post.value!!,postContent.value ?: arrayListOf(), blogImageView),
+                    ::onStoreNewPostSuccess, ::onError, ::showLoading)
 
     fun onAddContent() {
         if (isTextContent) {
@@ -128,16 +129,16 @@ class NewPostViewModel(private val context: Context, private val storeNewPostUse
             content.viewType = TEXT_VIEW
             content.content = textContent
             postContent.value!![postContent.value!!.indexOf(content)] = content
-            onChangeViewType(TEXT_VIEW, content.position)
+            onChangeViewType(TEXT_VIEW, content.position, content)
         } else {
             postContent.value?.remove(postContent.value!![postContent.value!!.indexOf(content)])
-            removeAdapterItem.value = postContent.value!!.indexOf(content)
+            removeAdapterItem.value = content
         }
     }
 
     fun editTextContent(content: PostContent) {
         content.viewType = EDITTEXT_VIEW
-        onChangeViewType(EDITTEXT_VIEW, content.position)
+        onChangeViewType(EDITTEXT_VIEW, content.position, content)
     }
 
     fun itemSwiped(deletedItem: PostContent?, deletedItemIndex: Int) {
@@ -146,31 +147,33 @@ class NewPostViewModel(private val context: Context, private val storeNewPostUse
         } else if (deletedItem.viewType != IMAGE_VIEW) {
             isTypeContent = false
         }
-        showInstructions.call()
     }
 
-    private fun onChangeViewType(viewType: Int, position: Int) {
+    private fun onChangeViewType(viewType: Int, position: Int, content: PostContent) {
         typeContentToAdd = viewType
-        if (viewType == IMAGE_VIEW) {
-            //isTypeContent = false;
-            addAdapterItem.call()
-        } else {
-            updateAdapterPosition.value = position
-        }
-        showInstructions.call()
+        if (viewType == IMAGE_VIEW) addAdapterItem.value = content
+        else updateAdapterPosition.value = content
+        showInstructions()
     }
 
-    private fun onChangeImageContent(position: Int) {
-        updateAdapterPosition.value = position
+    private fun onChangeImageContent(content: PostContent?) {
+        updateAdapterPosition.value = content
+        showInstructions()
     }
+
+    private fun showInstructions() { showInstructions.value = postContent.value?.size == 0 }
 
     /**
      * storeUseCase methods
      */
-    private fun onStoreNewPostSuccess(any: LiveData<Unit>) = navigateToHome.call()
+    private fun onStoreNewPostSuccess(post: Post) = navigateToHome.call()
 
-    private fun onTitleEmpty(t: Throwable) = showTitleDialog.call()
+    private fun onError(t: Throwable) {
+        if(t is NewPostException) showTitleDialog.call()
+        else showError.value = t.message
+    }
 
+    private fun showLoading(){}
     /**
      * Trigger when click on add image to post
      */
@@ -184,5 +187,18 @@ class NewPostViewModel(private val context: Context, private val storeNewPostUse
         isTypeContent = false
         tempContent = null
         postContentImageType.value = BLOG_TITLE_IMAGE
+    }
+
+    val postContentImageCallback = object : Callback{
+        override fun onSuccess() {
+            imageContentLoading.value = View.GONE
+            imageBackgroundVisibility.value = View.VISIBLE
+        }
+
+        override fun onError() {
+            imageContentLoading.value = View.GONE
+            imageBackgroundVisibility.value = View.VISIBLE
+        }
+
     }
 }

@@ -1,17 +1,18 @@
 package es.chewiegames.domain.usecases.feedpost
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.liveData
-import es.chewiegames.data.model.PostData
 import es.chewiegames.data.repository.PostRepository
-import es.chewiegames.data.repositoryImpl.PostDataRepository
 import es.chewiegames.domain.model.Post
-import es.chewiegames.domain.model.mapToPostdata
+import es.chewiegames.domain.model.PostParams
+import es.chewiegames.domain.model.mapToPost
+import es.chewiegames.domain.model.mapToPostData
 import es.chewiegames.domain.usecases.UseCase
-import java.lang.IllegalArgumentException
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
-class UpdateLikedPostUseCase(private val repository : PostRepository) {
+class UpdateLikedPostUseCase(private val repository: PostRepository) : UseCase<Post, PostParams>() {
 
-    var checked : Boolean = false
-
+    override fun runInBackground(params: PostParams): Flow<Post> =
+            repository.updateLikedPosts(
+                    mapToPostData(params.post),
+                    params.checked).map{ mapToPost(it)}
 }

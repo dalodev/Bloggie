@@ -3,6 +3,7 @@ package es.chewiegames.bloggie.ui.login
 import android.content.Intent
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import es.chewiegames.bloggie.R
 import com.google.android.material.snackbar.Snackbar
 import es.chewiegames.bloggie.ui.main.MainActivity
@@ -14,13 +15,12 @@ import es.chewiegames.bloggie.util.RC_SIGN_IN
 import es.chewiegames.bloggie.viewmodel.LoginViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class LoginActivity : BaseActivity() {
+class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
     override fun injectDependencies(component: ApplicationComponent) {
     }
 
     private val viewModel: LoginViewModel by viewModel()
-    lateinit var binding: ActivityLoginBinding
 
     override fun getLayoutId(): Int = R.layout.activity_login
 
@@ -35,10 +35,6 @@ class LoginActivity : BaseActivity() {
         viewModel.goToMainActivity.observe(this, Observer { goToActivity(MainActivity(), this) })
         viewModel.message.observe(this, Observer { Snackbar.make(binding.root, resources.getString(it), Snackbar.LENGTH_SHORT).show() })
         viewModel.error.observe(this, Observer { Snackbar.make(binding.root, it, Snackbar.LENGTH_SHORT).show() })
-    }
-    override fun onResume() {
-        super.onResume()
-        viewModel.checkForUserLogin()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

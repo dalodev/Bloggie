@@ -26,6 +26,10 @@
         <item name="android:windowBackground">@drawable/background_splash</item>
     </style>
 
+    <style name="HomeTheme" parent="AppTheme.NoActionBar">
+        <item name="android:statusBarColor">@color/colorPrimary</item>
+    </style>
+
 
     <style name="PrimaryButton" parent="Theme.AppCompat">
         <item name="colorButtonNormal">@color/colorAccent</item>
@@ -39,4 +43,16 @@
         <item name="android:paddingBottom">8dp</item>
     </style>
 
+    <!-- Font family -->
+    <style name="MyTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/primaryText</item>
+    </style>
+
+    <style name="title" parent="MyTextViewStyle">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="SmallText" parent="MyTextViewStyle">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
+    </style>
 </resources>

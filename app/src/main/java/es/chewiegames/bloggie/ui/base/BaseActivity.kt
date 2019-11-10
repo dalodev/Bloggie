@@ -6,6 +6,8 @@ import android.os.Bundle
 import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -16,17 +18,22 @@ import es.chewiegames.bloggie.BloggieApplication
 import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.di.component.ApplicationComponent
 
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity() {
 
     private var mToolbar: Toolbar? = null
+    lateinit var binding : B
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(getLayoutId())
+        bindView(getLayoutId())
         injectDependencies(BloggieApplication.getComponent()!!)
         setupToolbar()
         initView(savedInstanceState)
         initObservers()
+    }
+
+    protected fun bindView(layoutId :Int) {
+        binding = DataBindingUtil.setContentView(this, layoutId)
     }
 
     override fun onSupportNavigateUp() = findNavController(R.id.my_nav_host_fragment).navigateUp()

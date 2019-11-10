@@ -29,8 +29,8 @@ class PostAdapter(private val viewModel: NewPostViewModel,
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = DataBindingUtil.inflate<ViewDataBinding>(layoutInflater, viewType, parent, false)
         return when (viewType) {
-            TEXT_VIEW, EDITTEXT_VIEW -> PostTextViewHolder(binding, false)
-            IMAGE_VIEW -> PostImageViewHolder(binding, false)
+            R.layout.edittext_content, R.layout.textview_content -> PostTextViewHolder(binding, false)
+            R.layout.imageview_content -> PostImageViewHolder(binding, false)
             else -> PostTextViewHolder(binding, false)
         }
     }
@@ -47,7 +47,7 @@ class PostAdapter(private val viewModel: NewPostViewModel,
     override fun getItemCount() = postContent.size
 
     fun restoreItem(item: PostContent) {
-        val position = postContent.indexOf(item)
+        val position = item.position
         postContent.add(position, item)
         // notify item added by position
         notifyItemInserted(position)
@@ -86,15 +86,15 @@ class PostAdapter(private val viewModel: NewPostViewModel,
         viewModel.itemSwiped(deletedItem, deletedIndex)
     }
 
-    fun updateAdapterView(position: Int) {
-        notifyItemChanged(position)
+    fun updateAdapterView(content: PostContent) {
+        notifyItemChanged(content.position)
     }
 
-    fun removeContent(position: Int) {
-        notifyItemRemoved(position)
+    fun removeContent(content: PostContent) {
+        notifyItemRemoved(content.position)
     }
 
-    fun addItem() {
+    fun addItem(content: PostContent) {
         notifyItemInserted(itemCount - 1)
     }
 }

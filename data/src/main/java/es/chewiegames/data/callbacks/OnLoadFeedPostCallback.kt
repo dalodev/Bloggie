@@ -6,7 +6,7 @@ import java.util.ArrayList
 interface OnLoadFeedPostCallback {
     fun onItemAdded(post: PostData)
 
-    fun onItemRemoved(position: Int)
+    fun onItemRemoved(idRemoved: String)
 
-    fun onItemChange(position: Int, post: PostData)
+    fun onItemChange(post: PostData)
 }

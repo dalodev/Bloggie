@@ -12,11 +12,12 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.util.RC_SIGN_IN
+import es.chewiegames.domain.model.User
 import es.chewiegames.domain.usecases.UseCase.None
 import es.chewiegames.domain.usecases.user.CheckUserLoginUseCase
 import es.chewiegames.domain.usecases.user.RegisterUserUseCase
 
-class LoginViewModel(private val checkUserLoginUseCase: CheckUserLoginUseCase, private val registerUserUseCase : RegisterUserUseCase) : ViewModel() {
+class LoginViewModel(private val checkUserLoginUseCase: CheckUserLoginUseCase, private val registerUserUseCase: RegisterUserUseCase) : ViewModel() {
 
     val goToMainActivity: BaseSingleLiveEvent<Any?> by lazy { BaseSingleLiveEvent<Any?>() }
     val loginButtonVisibility: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
@@ -24,10 +25,13 @@ class LoginViewModel(private val checkUserLoginUseCase: CheckUserLoginUseCase, p
     val message: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
     val error: BaseSingleLiveEvent<String> by lazy { BaseSingleLiveEvent<String>() }
     val startActivityForResult: BaseSingleLiveEvent<Intent> by lazy { BaseSingleLiveEvent<Intent>() }
-    val userLogged: BaseSingleLiveEvent<Boolean> by lazy { BaseSingleLiveEvent<Boolean>() }
+
+    init {
+        loginButtonVisibility.value = View.GONE
+        checkUserLogin()
+    }
 
     fun checkFirebaseAuth() {
-        // Choose authentication providers
         val providers = listOf(
                 AuthUI.IdpConfig.EmailBuilder().build(),
                 AuthUI.IdpConfig.GoogleBuilder().build())
@@ -41,26 +45,23 @@ class LoginViewModel(private val checkUserLoginUseCase: CheckUserLoginUseCase, p
         startActivityForResult.value = authIntent
     }
 
-    fun checkForUserLogin() {
-        showProgressDialog()
-        checkUserLoginUseCase.executeAsync(viewModelScope, None(), onResult = {
-            userLogged(it)
-        }, onError = {userNotLogged()})
+    private fun checkUserLogin() {
+        checkUserLoginUseCase.executeAsync(viewModelScope, None(), ::userLogged, ::onError, ::showProgressDialog)
     }
 
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if(requestCode == RC_SIGN_IN){
+        if (requestCode == RC_SIGN_IN) {
             val response: IdpResponse? = IdpResponse.fromResultIntent(data)
-            if(resultCode == Activity.RESULT_OK){
-                val user : FirebaseUser = FirebaseAuth.getInstance().currentUser!!
-//                registerUserUseCase.executeAsync(viewModelScope, user, onResult = {onRegisterUserSucces()}, onError = ::onError)
-            }else{
-                if(response == null){
+            if (resultCode == Activity.RESULT_OK) {
+                val user: FirebaseUser = FirebaseAuth.getInstance().currentUser!!
+                registerUserUseCase.executeAsync(viewModelScope, user, ::userRegistered, ::onError, ::showProgressDialog)
+            } else {
+                if (response == null) {
                     message.value = R.string.sign_in_canceled
                     return
                 }
 
-                when(response.error!!.errorCode){
+                when (response.error!!.errorCode) {
                     ErrorCodes.NO_NETWORK -> {
                         message.value = R.string.no_internet_connection
                     }
@@ -70,13 +71,13 @@ class LoginViewModel(private val checkUserLoginUseCase: CheckUserLoginUseCase, p
                 }
                 loginButtonVisibility.value = View.VISIBLE
             }
-        }else{
+        } else {
             loginButtonVisibility.value = View.VISIBLE
         }
     }
 
     private fun userLogged(logged: Boolean) {
-        if(logged) goToMainActivity.call()
+        if (logged) goToMainActivity.call()
         else userNotLogged()
         hideProgressDialog()
     }
@@ -87,11 +88,11 @@ class LoginViewModel(private val checkUserLoginUseCase: CheckUserLoginUseCase, p
     }
 
     private fun onError(t: Throwable) {
-        hideProgressDialog()
+        userNotLogged()
         error.value = t.message
     }
 
-    private fun onRegisterUserSucces() {
+    private fun userRegistered(user: User) {
         goToMainActivity.call()
     }
 

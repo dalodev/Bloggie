@@ -32,7 +32,7 @@ fun feedPostTitleImage(view: ImageView, titleImage: String?, progressBarImage: P
     } else {
         progressBarImage.visibility = View.GONE
         logoNoImage.visibility = View.VISIBLE
-        view.setImageResource(R.drawable.background_splash)
+        //view.setImageResource(R.drawable.background_splash)
     }
 
 }

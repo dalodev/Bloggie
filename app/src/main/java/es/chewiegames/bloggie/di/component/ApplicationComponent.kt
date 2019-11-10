@@ -13,6 +13,4 @@ import javax.inject.Singleton
         )))
 interface ApplicationComponent {
     fun plus(newPostModule: NewPostModule) : NewPostSubComponent
-    fun plus(detailPostModule: DetailPostModule) : DetailPostSubComponent
-    fun plus(commentsModule: CommentsModule) : CommentsSubComponent
 }

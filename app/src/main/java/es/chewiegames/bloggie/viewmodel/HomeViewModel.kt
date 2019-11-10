@@ -8,12 +8,18 @@ import es.chewiegames.bloggie.livedata.BaseSingleLiveEvent
 import es.chewiegames.domain.model.Post
 import es.chewiegames.bloggie.util.EXTRA_POST
 import es.chewiegames.domain.callbacks.OnLoadFeedPostListener
-import es.chewiegames.domain.usecases.feedpost.FeedPostUseCase
+import es.chewiegames.domain.model.PostParams
+import es.chewiegames.domain.usecases.UseCase.None
+import es.chewiegames.domain.usecases.feedpost.GetFeedPostUseCase
+import es.chewiegames.domain.usecases.feedpost.GetLikedPostsByUserUseCase
+import es.chewiegames.domain.usecases.feedpost.SubscribeFeedPostsUseCase
 import es.chewiegames.domain.usecases.feedpost.UpdateLikedPostUseCase
 import java.util.ArrayList
 
-class HomeViewModel(private val feedPostUseCase : FeedPostUseCase,
-                    private val updateLikedPostUseCase : UpdateLikedPostUseCase)  : ViewModel(), OnLoadFeedPostListener {
+class HomeViewModel(private val getFeedPostUseCase: GetFeedPostUseCase,
+                    private val getLikedPostsByUserUseCase: GetLikedPostsByUserUseCase,
+                    private val updateLikedPostUseCase: UpdateLikedPostUseCase,
+                    subscribeFeedPostsUseCase: SubscribeFeedPostsUseCase) : ViewModel(), OnLoadFeedPostListener {
 
     val posts: BaseSingleLiveEvent<ArrayList<Post>> by lazy { BaseSingleLiveEvent<ArrayList<Post>>() }
     val emptyViewVisibility: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
@@ -30,15 +36,16 @@ class HomeViewModel(private val feedPostUseCase : FeedPostUseCase,
     var onBind = false
     var options = Bundle()
 
-    fun loadFeedPosts() {
-        showProgressDialog()
-//        feedPostUseCase.executeAsync(viewModelScope,this, onResult = {hideProgressDialog()}, onError = ::onError)
+    init {
+        posts.value = arrayListOf()
+        likedPosts.value = arrayListOf()
+        loadFeedPosts()
+        loadLikedPostsByUser()
+        subscribeFeedPostsUseCase.subscribe(viewModelScope, this, onResult = {}, onError = {})
     }
 
-    private fun onLikedPost(post: Post, checked: Boolean) {
-        updateLikedPostUseCase.checked = checked
-//        updateLikedPostUseCase.executeAsync(viewModelScope, post, onResult = {}, onError = {})
-    }
+    private fun loadFeedPosts() = getFeedPostUseCase.executeAsync(viewModelScope, None(), ::onLoadFeedPostSuccess, ::onError, ::showProgressDialog)
+    private fun loadLikedPostsByUser() = getLikedPostsByUserUseCase.executeAsync(viewModelScope, None(), ::onLoadedLikedPostsByUser, ::onError, onStart = {})
 
     /**
      * trigger when user touch on item of the list
@@ -46,15 +53,12 @@ class HomeViewModel(private val feedPostUseCase : FeedPostUseCase,
     fun onPostClicked(post: Post, vararg viewsToShare: View?) {
         this.viewsToShare.value = varargAsList(viewsToShare) as ArrayList<View>
         postToDetail.value = post
-
     }
 
     /**
      * trigger when user touch on like button in post
      */
-    fun onLikePost(post: Post, checked: Boolean) {
-        onLikedPost(post, checked)
-    }
+    fun onLikePost(post: Post, checked: Boolean) = updateLikedPostUseCase.executeAsync(viewModelScope, PostParams(post, checked), ::likedPostUpdated, ::onError, ::showProgressDialog)
 
     /**
      * trigger when user touch on comment buttom
@@ -65,13 +69,20 @@ class HomeViewModel(private val feedPostUseCase : FeedPostUseCase,
         goToComments.value = bundle
     }
 
+    private fun likedPostUpdated(post: Post) {
+        val postLiked = likedPosts.value!!.find { it.id!! == post.id }
+        if(postLiked==null) likedPosts.value!!.add(post)
+        else likedPosts.value!!.remove(postLiked)
+        val postInFeed = posts.value!!.find { it.id!! == post.id }
+        val position = posts.value!!.indexOf(postInFeed)
+        posts.value!![position] = post
+    }
+
     private fun onError(t: Throwable) {
         handleError.value = t.message
     }
 
-    private fun showProgressDialog() {
-        loadingVisibility.value = View.VISIBLE
-    }
+    private fun showProgressDialog() {}
 
     private fun hideProgressDialog() {
         loadingVisibility.value = View.GONE
@@ -86,33 +97,43 @@ class HomeViewModel(private val feedPostUseCase : FeedPostUseCase,
         return false
     }
 
+    private fun onLoadFeedPostSuccess(posts: ArrayList<Post>) {
+        this.posts.value = posts
+        emptyViewVisibility.value = if (posts.size == 0) View.VISIBLE else View.GONE
+        hideProgressDialog()
+    }
+
+    private fun onLoadedLikedPostsByUser(posts: ArrayList<Post>) {
+        this.likedPosts.value = posts
+    }
+
     /**
      * OnLoadFeedPostListener methods
      */
-    override fun onLoadFeedPostSuccess(posts: ArrayList<Post>) {
-        this.posts.value = posts
-        emptyViewVisibility.call()
-        hideProgressDialog()
-    }
-
     override fun onItemAdded(post: Post) {
-        this.posts.value?.add(post)
+        this.posts.value?.add(0, post)
         addItemAdapter.call()
-        emptyViewVisibility.call()
+        emptyViewVisibility.value = if (posts.value!!.size == 0) View.VISIBLE else View.GONE
         hideProgressDialog()
     }
 
-    override fun onItemRemoved(position: Int) {
-        posts.value?.removeAt(position)
-        removeItemAdapterPosition.value = position
-        emptyViewVisibility.call()
-        hideProgressDialog()
+    override fun onItemRemoved(idRemoved: String) {
+        val postToRemove = posts.value!!.find { it.id!! == idRemoved }
+        if (postToRemove != null) {
+            val position = posts.value!!.indexOf(postToRemove)
+            posts.value?.remove(postToRemove)
+            removeItemAdapterPosition.value = position
+            emptyViewVisibility.value = if (posts.value!!.size == 0) View.VISIBLE else View.GONE
+            hideProgressDialog()
+        }
     }
 
-    override fun onItemChange(position: Int, post: Post) {
+    override fun onItemChange(post: Post) {
+        val containPost = this.posts.value!!.find { post.id!! == it.id!! }
+        val position = this.posts.value!!.indexOf(containPost)
         this.posts.value!![position] = post
         updateItemAdapterPosition.value = position
-        emptyViewVisibility.call()
+        emptyViewVisibility.value = if (posts.value!!.size == 0) View.VISIBLE else View.GONE
         hideProgressDialog()
     }
 }

@@ -11,7 +11,7 @@ import kotlin.coroutines.CoroutineContext
 val appModule = module {
 
     viewModel { LoginViewModel(checkUserLoginUseCase = get(), registerUserUseCase = get()) }
-    viewModel { HomeViewModel(feedPostUseCase = get(), updateLikedPostUseCase = get()) }
+    viewModel { HomeViewModel(getFeedPostUseCase = get(), getLikedPostsByUserUseCase = get(), updateLikedPostUseCase = get(), subscribeFeedPostsUseCase = get()) }
     viewModel { NewPostViewModel(context = get(), storeNewPostUseCase = get()) }
 
     // Coroutines

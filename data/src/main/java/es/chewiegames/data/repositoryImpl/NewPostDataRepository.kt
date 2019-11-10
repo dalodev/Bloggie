@@ -13,11 +13,16 @@ import es.chewiegames.data.model.PostData
 import es.chewiegames.data.model.UserData
 import es.chewiegames.data.repository.NewPostRepository
 import es.chewiegames.data.utils.IMAGE_VIEW
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.util.*
+import kotlin.collections.ArrayList
 
-
+@ExperimentalCoroutinesApi
 class NewPostDataRepository(val mDatabasePosts: DatabaseReference,
                             val mDatabasePostByUser: DatabaseReference,
                             val mStorageReference: StorageReference,
@@ -26,14 +31,15 @@ class NewPostDataRepository(val mDatabasePosts: DatabaseReference,
     private lateinit var mPost: PostData
     private var postContent = arrayListOf<PostContentData>()
 
-    override fun storeNewPost(mPost: PostData, postContent: ArrayList<PostContentData>, blogImageView: ImageView) {
+    override fun storeNewPost(post: PostData, postContentData: ArrayList<PostContentData>, blogImageView: ImageView): Flow<PostData> = callbackFlow {
         try {
-            this.mPost = mPost
-            this.postContent = postContent
+            mPost = post
+            postContent = postContentData
             if (mPost.title != null && mPost.title!!.isNotEmpty()) {
                 val idP = mDatabasePosts.push().key
                 mPost.id = idP!!
 //                getDataFromTitleImage(blogImageView, idP)
+                storeImage(getBitmapFromView(blogImageView), idP)  //launch in coroutine???????
                 mPost.createdDate = Calendar.getInstance().time
                 mPost.userData = mUserData
                 mPost.littlePoints = 0
@@ -42,31 +48,36 @@ class NewPostDataRepository(val mDatabasePosts: DatabaseReference,
                 mDatabasePostByUser.child(idP).setValue(mPost) //Store post by user
                 mPost.id = idP
                 mDatabasePosts.child(idP).setValue(mPost)//store in general posts
-                storeImage(getBitmapFromView(blogImageView), idP)  //launch in coroutine???????
+                offer(mPost)
             } else {
-                throw NewPostException("Tittle Empty")
+                close(NewPostException("Title Empty"))
             }
         } catch (e: Exception) {
-            throw NewPostException(e.message ?: "Default Exception")
+            if (e is NewPostException) close(NewPostException("Title Empty"))
+            else close(e)
         }
+        awaitClose()
     }
 
     private fun getBitmapFromView(imageView: ImageView): ByteArray? {
         val drawable = imageView.drawable
-        val bitmapDrawable = drawable as BitmapDrawable
-        val bitmap = bitmapDrawable.bitmap
-        var imageInByte : ByteArray? = null
-        if (bitmap != null) {
-            val stream = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
-            imageInByte = stream.toByteArray()
-            val bis = ByteArrayInputStream(imageInByte)
+        var imageInByte: ByteArray? = null
+        if (drawable != null) {
+            val bitmapDrawable = drawable as BitmapDrawable
+            val bitmap = bitmapDrawable.bitmap
+            if (bitmap != null) {
+                val stream = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+                imageInByte = stream.toByteArray()
+                val bis = ByteArrayInputStream(imageInByte)
+            }
         }
+
         return imageInByte
     }
 
     private fun storeImage(imageInByte: ByteArray?, idPost: String) {
-        if(imageInByte!=null){
+        if (imageInByte != null) {
             val postImagesRefByUser = mStorageReference.child("images").child(idPost).child(UUID.randomUUID().toString())
             val uploadTaskByUser = postImagesRefByUser.putBytes(imageInByte)
             uploadTaskByUser.addOnFailureListener { }.addOnSuccessListener { taskSnapshot ->
@@ -89,45 +100,9 @@ class NewPostDataRepository(val mDatabasePosts: DatabaseReference,
                     }
                 }
             }
-        }else{
-            throw Exception()
-        }
-    }
-
-    private fun getDataFromTitleImage(imageView: ImageView, idPost: String) {
-        imageView.isDrawingCacheEnabled = true
-        imageView.buildDrawingCache()
-        val baos = ByteArrayOutputStream()
-        val bitmap = imageView.drawingCache
-        if (bitmap != null) {
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-            imageView.destroyDrawingCache()
-            imageView.isDrawingCacheEnabled = false // clear drawing cache
-            val data = baos.toByteArray()
-
-            val postImagesRefByUser = mStorageReference.child("images").child(idPost).child(UUID.randomUUID().toString())
-            val uploadTaskByUser = postImagesRefByUser.putBytes(data)
-            uploadTaskByUser.addOnFailureListener { }.addOnSuccessListener { taskSnapshot ->
-                taskSnapshot.storage.downloadUrl.addOnSuccessListener {
-                    val downloadUrl = it.toString()
-                    if (downloadUrl.isNotEmpty()) {
-                        mPost.titleImage = downloadUrl.toString()
-                        mDatabasePostByUser.child(idPost).setValue(mPost) //Store post by user
-                    }
-                }
-            }
-            val postImagesRefPost = mStorageReference.child("images/" + idPost + "/" + UUID.randomUUID() + ".jpg")
-            val uploadTaskPost = postImagesRefPost.putBytes(data)
-            uploadTaskPost.addOnFailureListener { }.addOnSuccessListener { taskSnapshot ->
-                taskSnapshot.storage.downloadUrl.addOnSuccessListener {
-                    val downloadUrl = it.toString()
-                    if (downloadUrl.isNotEmpty()) {
-                        mPost.titleImage = downloadUrl.toString()
-                        mDatabasePosts.child(idPost).setValue(mPost)//store in general posts
-                    }
-                }
-            }
-        }
+        } /*else {
+            throw NewPostException("Image Empty")
+        }*/
     }
 
     private fun getContentData(idPost: String): ArrayList<PostContentData> {

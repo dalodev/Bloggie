@@ -41,19 +41,15 @@ class HomeFragment : BaseBindingFragment() {
         viewModel.posts.observe(this, Observer {
             adapter.posts = it
             adapter.notifyDataSetChanged()
-            showEmptyView()
         })
         viewModel.updateItemAdapterPosition.observe(this, Observer {
             adapter.notifyItemChanged(it)
-            showEmptyView()
         })
         viewModel.addItemAdapter.observe(this, Observer {
             adapter.notifyItemRangeChanged(0, adapter.itemCount)
-            showEmptyView()
         })
         viewModel.removeItemAdapterPosition.observe(this, Observer {
             adapter.notifyItemRemoved(it)
-            showEmptyView()
         })
         viewModel.goToComments.observe(this, Observer { findNavController().navigate(R.id.action_home_to_comments, it) })
         viewModel.viewsToShare.observe(this, Observer {
@@ -76,11 +72,6 @@ class HomeFragment : BaseBindingFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         updateAdapter()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewModel.loadFeedPosts()
     }
 
     private fun updateAdapter() {

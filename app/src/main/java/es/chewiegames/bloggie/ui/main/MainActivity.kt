@@ -8,11 +8,12 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import es.chewiegames.bloggie.R
+import es.chewiegames.bloggie.databinding.ActivityMainBinding
 import es.chewiegames.bloggie.di.component.ApplicationComponent
 import es.chewiegames.bloggie.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+class MainActivity : BaseActivity<ActivityMainBinding>(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     /**
      * Get the layout view of the activity
@@ -27,9 +28,8 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         super.initView(savedInstanceState)
         val host = my_nav_host_fragment as NavHostFragment? ?: return
         val navController = host.navController
-        setupActionBarWithNavController(navController)
-        navigation.setupWithNavController(navController)
-        navigation.setOnNavigationItemSelectedListener(this)
+        binding.navigation.setupWithNavController(navController)
+        binding.navigation.setOnNavigationItemSelectedListener(this)
     }
 
     /**

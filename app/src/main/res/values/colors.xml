@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="primaryText">#FFFFFF</color>
+    <color name="primaryText">#000</color>
     <color name="colorTextIcons">#FFFFFF</color>
 
     <color name="alpha_gray">#CC757575</color>

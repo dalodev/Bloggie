@@ -8,20 +8,16 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.di.component.ApplicationComponent
 import es.chewiegames.bloggie.ui.base.BaseActivity
-import kotlinx.android.synthetic.main.activity_new_post.*
 import androidx.recyclerview.widget.DefaultItemAnimator
-import kotlinx.android.synthetic.main.content_new_post.*
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import es.chewiegames.bloggie.util.*
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,15 +27,14 @@ import es.chewiegames.bloggie.viewmodel.NewPostViewModel
 import es.chewiegames.domain.model.PostContent
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class NewPostActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+class NewPostActivity : BaseActivity<ActivityNewPostBinding>(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     private val viewModel : NewPostViewModel by viewModel()
     private val adapter: PostAdapter by lazy { PostAdapter(viewModel) }
-    lateinit var binding : ActivityNewPostBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, getLayoutId())
+        bindView(getLayoutId())
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         setupToolbar()
@@ -57,20 +52,18 @@ class NewPostActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSel
      * This method is triggered in onCreate event
      */
     override fun initView(savedInstanceState: Bundle?) {
-        super.initView(savedInstanceState)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowTitleEnabled(true)
-        navigation.setOnNavigationItemSelectedListener(this)
+        binding.navigation.setOnNavigationItemSelectedListener(this)
         setAdapter()
     }
 
     override fun initObservers() {
         viewModel.navigateToHome.observe(this, Observer { finish() })
-        viewModel.showInstructions.observe(this, Observer { showInstructions() })
         viewModel.showUndoPostContent.observe(this, Observer { showUndoSnackbar(it) })
         viewModel.postContentImageType.observe(this, Observer { onChoosePhotoPicker(it) })
         viewModel.showTitleDialog.observe(this, Observer { changePostTitle() })
-        viewModel.addAdapterItem.observe(this, Observer { adapter.addItem() })
+        viewModel.addAdapterItem.observe(this, Observer { adapter.addItem(it) })
         viewModel.updateAdapterPosition.observe(this, Observer { adapter.updateAdapterView(it) })
         viewModel.removeAdapterItem.observe(this, Observer { adapter.removeContent(it) })
     }
@@ -110,7 +103,7 @@ class NewPostActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSel
                 return true
             }
             R.id.publishNavigation -> {
-                viewModel.publishPost(blogImageView)
+                viewModel.publishPost(binding.blogImageView)
                 return true
             }
         }
@@ -128,12 +121,10 @@ class NewPostActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSel
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    private fun showInstructions() { viewModel.showInstructions.value = adapter.itemCount == 0 }
-
     private fun setAdapter() {
-        contentList.layoutManager = LinearLayoutManager(this)
-        contentList.itemAnimator = DefaultItemAnimator()
-        contentList.adapter = adapter
+        binding.contentNewPostLayout.contentList.layoutManager = LinearLayoutManager(this)
+        binding.contentNewPostLayout.contentList.itemAnimator = DefaultItemAnimator()
+        binding.contentNewPostLayout.contentList.adapter = adapter
         val callback = SimpleItemTouchHelperCallback.Builder(ItemTouchHelper.UP or ItemTouchHelper.DOWN, ItemTouchHelper.START or ItemTouchHelper.END)
                 .setAdapter(adapter)
                 .bgColorSwipeLeft(ContextCompat.getColor(this, R.color.delete_red))
@@ -143,7 +134,7 @@ class NewPostActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSel
                 .setSwipeEnabled(true)
                 .build()
         val touchHelper = ItemTouchHelper(callback)
-        touchHelper.attachToRecyclerView(contentList)
+        touchHelper.attachToRecyclerView(binding.contentNewPostLayout.contentList)
     }
 
     /**
@@ -155,10 +146,11 @@ class NewPostActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSel
 
     private fun changePostTitle() {
         val dialogBuilder = AlertDialog.Builder(this)
-        val viewContent: View = layoutInflater.inflate(R.layout.title_edit_text_dialog, binding.root as ViewGroup)
+        val viewContent: View = layoutInflater.inflate(R.layout.title_edit_text_dialog, null)
         dialogBuilder.setView(viewContent)
         val editText: EditText = viewContent.findViewById(R.id.post_title_edittext)
         dialogBuilder.setPositiveButton(getString(R.string.ok)) { dialog, _ ->
+            binding.collapsingToolBar.title = editText.text.toString()
             viewModel.post.value?.title = editText.text.toString()
             dialog.dismiss()
         }
@@ -167,6 +159,7 @@ class NewPostActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSel
         dialog.show()
         editText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
+                binding.collapsingToolBar.title = editText.text.toString()
                 viewModel.post.value?.title = editText.text.toString()
                 dialog.dismiss()
             }
@@ -176,15 +169,14 @@ class NewPostActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSel
 
     private fun showUndoSnackbar(deletedItem: PostContent) {
         // showing snack bar with Undo option
-        val snackbar = Snackbar.make(coordinatorLayout, resources.getString(R.string.removed_from_content), Snackbar.LENGTH_LONG)
+        val snackbar = Snackbar.make(binding.root, resources.getString(R.string.removed_from_content), Snackbar.LENGTH_LONG)
         val snackBarView = snackbar.view
         val params = snackBarView.layoutParams as CoordinatorLayout.LayoutParams
-        params.setMargins(0, 0, 0, navigation.height)
+        params.setMargins(0, 0, 0, binding.navigation.height)
         snackbar.view.layoutParams = params
         snackbar.setAction(resources.getString(R.string.undo)) {
             // undo is selected, restore the deleted item
             adapter.restoreItem(deletedItem)
-            showInstructions()
         }
         snackbar.setActionTextColor(Color.YELLOW)
         snackbar.show()

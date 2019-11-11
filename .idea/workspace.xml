@@ -26,16 +26,14 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.6.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.6.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/interactor/newPost/NewPostInteractor.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/interactor/newPost/NewPostInteractor.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/data.iml" beforeDir="false" afterPath="$PROJECT_DIR$/data/data.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/src/main/java/es/chewiegames/data/model/PostData.kt" beforeDir="false" afterPath="$PROJECT_DIR$/data/src/main/java/es/chewiegames/data/model/PostData.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/src/main/java/es/chewiegames/data/repositoryImpl/NewPostDataRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/data/src/main/java/es/chewiegames/data/repositoryImpl/NewPostDataRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/domain.iml" beforeDir="false" afterPath="$PROJECT_DIR$/domain/domain.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/src/main/java/es/chewiegames/domain/model/Post.kt" beforeDir="false" afterPath="$PROJECT_DIR$/domain/src/main/java/es/chewiegames/domain/model/Post.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/di/component/ApplicationComponent.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/di/component/ApplicationComponent.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/di/component/NewPostSubComponent.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/di/module/NewPostModule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/interactor/newPost/INewPostInteractor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/interactor/newPost/NewPostInteractor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/presenter/newPost/INewPostPresenter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/chewiegames/bloggie/presenter/newPost/NewPostPresenter.kt" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,7 +41,6 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="2eb08302" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />

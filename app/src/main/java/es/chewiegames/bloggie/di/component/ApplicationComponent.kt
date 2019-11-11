@@ -12,5 +12,4 @@ import javax.inject.Singleton
         FirebaseDatabaseModule::class
         )))
 interface ApplicationComponent {
-    fun plus(newPostModule: NewPostModule) : NewPostSubComponent
 }

@@ -1,9 +1,7 @@
 package es.chewiegames.domain.usecases
 
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.*
 import java.lang.Exception
 
 abstract class UseCase<out T, in Params> {
@@ -14,17 +12,12 @@ abstract class UseCase<out T, in Params> {
                      onResult: (T) -> Unit,
                      onError: (Throwable) -> Unit,
                      onStart: () -> Unit) {
-        scope.launch {
-            try {
-                runInBackground(params)
-                        .onStart { onStart() }
-                        .collect {
-                            job = scope.launch(Dispatchers.Main) {
-                                onResult(it)
-                            }
-                        }
-            } catch (e: Exception) { onError(e) }
-        }
+        job = runInBackground(params)
+                .onStart { onStart() }
+                .onEach { onResult(it) }
+                .catch { onError(it) }
+                .launchIn(scope)
+
     }
 
     protected abstract fun runInBackground(params: Params): Flow<T>

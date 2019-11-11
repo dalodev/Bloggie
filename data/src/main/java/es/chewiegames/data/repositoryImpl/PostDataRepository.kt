@@ -1,5 +1,6 @@
 package es.chewiegames.data.repositoryImpl
 
+import android.util.Log
 import com.google.firebase.database.*
 import es.chewiegames.data.callbacks.OnLoadFeedPostCallback
 import es.chewiegames.data.model.PostData
@@ -10,13 +11,13 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 
+private const val TAG = "PostDataRepository"
 @ExperimentalCoroutinesApi
 class PostDataRepository(val mDatabasePostByUser: DatabaseReference,
                          val mDatabaseAllPost: DatabaseReference,
                          val mDatabaseLikedPostByUser: DatabaseReference,
                          val mUserData: UserData) : PostRepository {
 
-    private var feedPosts = arrayListOf<PostData>()
 
     override fun getFeedPosts(): Flow<ArrayList<PostData>> = callbackFlow {
         val eventListener = object : ValueEventListener {
@@ -30,8 +31,8 @@ class PostDataRepository(val mDatabasePostByUser: DatabaseReference,
                     val post = postSnapshot.getValue(PostData::class.java)
                     if (post != null) posts.add(post)
                 }
-                feedPosts= posts
                 offer(posts)
+                Log.i(TAG, "Offer: $posts")
             }
         }
         mDatabaseAllPost.addListenerForSingleValueEvent(eventListener)
@@ -80,8 +81,8 @@ class PostDataRepository(val mDatabasePostByUser: DatabaseReference,
                     val feedPostUser = post.userData
                     if (feedPostUser != null) {
                         if (feedPostUser.id.equals(mUserData.id)) {
-                            feedPosts.add(0, post)
                             callback.onItemAdded(post)
+                            //TODO define what to do when add a post to feed
                         } else {
                             //TODO check follow people and check posts
                         }
@@ -107,7 +108,7 @@ class PostDataRepository(val mDatabasePostByUser: DatabaseReference,
         })
     }
 
-    fun updatePost(post: PostData) {
+    private fun updatePost(post: PostData) {
         mDatabaseAllPost.child(post.id!!).setValue(post)
         mDatabasePostByUser.child(post.id!!).setValue(post)
     }

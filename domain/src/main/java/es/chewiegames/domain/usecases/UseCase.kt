@@ -2,7 +2,6 @@ package es.chewiegames.domain.usecases
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import java.lang.Exception
 
 abstract class UseCase<out T, in Params> {
 

@@ -71,7 +71,7 @@ class HomeViewModel(private val getFeedPostUseCase: GetFeedPostUseCase,
 
     private fun likedPostUpdated(post: Post) {
         val postLiked = likedPosts.value!!.find { it.id!! == post.id }
-        if(postLiked==null) likedPosts.value!!.add(post)
+        if (postLiked == null) likedPosts.value!!.add(post)
         else likedPosts.value!!.remove(postLiked)
         val postInFeed = posts.value!!.find { it.id!! == post.id }
         val position = posts.value!!.indexOf(postInFeed)
@@ -98,7 +98,7 @@ class HomeViewModel(private val getFeedPostUseCase: GetFeedPostUseCase,
     }
 
     private fun onLoadFeedPostSuccess(posts: ArrayList<Post>) {
-        this.posts.value = posts
+        this.posts.value?.addAll(posts)
         emptyViewVisibility.value = if (posts.size == 0) View.VISIBLE else View.GONE
         hideProgressDialog()
     }
@@ -111,10 +111,13 @@ class HomeViewModel(private val getFeedPostUseCase: GetFeedPostUseCase,
      * OnLoadFeedPostListener methods
      */
     override fun onItemAdded(post: Post) {
-        this.posts.value?.add(0, post)
-        addItemAdapter.call()
-        emptyViewVisibility.value = if (posts.value!!.size == 0) View.VISIBLE else View.GONE
-        hideProgressDialog()
+        val containPost = posts.value?.any { it.id == post.id }
+        takeIf { !containPost!! }?.let {
+            posts.value?.add(0, post)
+            addItemAdapter.call()
+            emptyViewVisibility.value = if (posts.value!!.size == 0) View.VISIBLE else View.GONE
+            hideProgressDialog()
+        }
     }
 
     override fun onItemRemoved(idRemoved: String) {

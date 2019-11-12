@@ -88,6 +88,8 @@ class HomeViewModel(private val getFeedPostUseCase: GetFeedPostUseCase,
         loadingVisibility.value = View.GONE
     }
 
+    private fun showEmptyView() = View.VISIBLE.takeIf { posts.value!!.size==0 } ?: View.GONE
+
     fun isLikedPost(feedPost: Post): Boolean {
         for (likedPost in likedPosts.value!!) {
             if (likedPost.id == feedPost.id) {
@@ -115,7 +117,7 @@ class HomeViewModel(private val getFeedPostUseCase: GetFeedPostUseCase,
         takeIf { !containPost!! }?.let {
             posts.value?.add(0, post)
             addItemAdapter.call()
-            emptyViewVisibility.value = if (posts.value!!.size == 0) View.VISIBLE else View.GONE
+            emptyViewVisibility.value = showEmptyView()
             hideProgressDialog()
         }
     }
@@ -126,7 +128,7 @@ class HomeViewModel(private val getFeedPostUseCase: GetFeedPostUseCase,
             val position = posts.value!!.indexOf(postToRemove)
             posts.value?.remove(postToRemove)
             removeItemAdapterPosition.value = position
-            emptyViewVisibility.value = if (posts.value!!.size == 0) View.VISIBLE else View.GONE
+            emptyViewVisibility.value = showEmptyView()
             hideProgressDialog()
         }
     }
@@ -136,7 +138,7 @@ class HomeViewModel(private val getFeedPostUseCase: GetFeedPostUseCase,
         val position = this.posts.value!!.indexOf(containPost)
         this.posts.value!![position] = post
         updateItemAdapterPosition.value = position
-        emptyViewVisibility.value = if (posts.value!!.size == 0) View.VISIBLE else View.GONE
+        emptyViewVisibility.value = showEmptyView()
         hideProgressDialog()
     }
 }

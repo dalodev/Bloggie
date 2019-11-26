@@ -27,6 +27,7 @@ class UserDataRepository(var mUserData: UserData, var mDatabaseUsers: DatabaseRe
         mUserData.avatar = user.photoUrl.toString()
         mDatabaseUsers.child(user.uid).setValue(mUserData)
         offer(mUserData)
+        channel.close()
         awaitClose()
     }
 
@@ -64,6 +65,6 @@ class UserDataRepository(var mUserData: UserData, var mDatabaseUsers: DatabaseRe
         } else {
             offer(false)
         }
-        awaitClose()
+        awaitClose { mDatabaseUsers.child(FirebaseAuth.getInstance().currentUser!!.uid).removeEventListener(callback) }
     }
 }

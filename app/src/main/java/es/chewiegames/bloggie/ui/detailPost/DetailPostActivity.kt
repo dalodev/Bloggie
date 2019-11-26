@@ -20,7 +20,6 @@ class DetailPostActivity : BaseActivity<ActivityDetailPostBinding>(), DetailPost
     @Inject
     lateinit var mDetailPostPresenter : IDetailPostPresenter
 
-
     @Inject
     lateinit var layoutManager: LinearLayoutManager
 

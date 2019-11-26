@@ -51,7 +51,7 @@ class HomeFragment : BaseBindingFragment() {
         viewModel.removeItemAdapterPosition.observe(this, Observer {
             adapter.notifyItemRemoved(it)
         })
-        viewModel.goToComments.observe(this, Observer { findNavController().navigate(R.id.action_home_to_comments, it) })
+        viewModel.navigateToComments.observe(this, Observer { findNavController().navigate(R.id.action_home_to_comments, it) })
         viewModel.viewsToShare.observe(this, Observer {
             val p2 = Pair.create(it[1], ViewCompat.getTransitionName(it[1]))
             val options = if(it.size > 1){
@@ -62,7 +62,7 @@ class HomeFragment : BaseBindingFragment() {
             }
             viewModel.options = options.toBundle()!!
         })
-        viewModel.postToDetail.observe(this, Observer {
+        viewModel.navigateToDetail.observe(this, Observer {
             val intent = Intent(activity, DetailPostActivity::class.java)
             intent.putExtra(EXTRA_POST, it)
             goToActivity(intent, viewModel.options)
@@ -78,12 +78,6 @@ class HomeFragment : BaseBindingFragment() {
         feedRecyclerview.layoutManager = LinearLayoutManager(context)
         feedRecyclerview.itemAnimator = HomeItemAnimator()
         feedRecyclerview.adapter = adapter
-        showEmptyView()
-    }
-
-    private fun showEmptyView() {
-        viewModel.emptyViewVisibility.value = if(adapter.itemCount == 0) View.VISIBLE else View.GONE
-        viewModel.loadingVisibility.value = View.GONE
     }
 
     override fun destroyView() {

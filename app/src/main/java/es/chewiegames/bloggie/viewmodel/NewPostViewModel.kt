@@ -101,7 +101,7 @@ class NewPostViewModel(private val context: Context, private val storeNewPostUse
     }
 
     fun publishPost(blogImageView: ImageView) = storeNewPostUseCase.executeAsync(viewModelScope, StoreNewPostParams(post.value!!,postContent.value ?: arrayListOf(), blogImageView),
-                    ::onStoreNewPostSuccess, ::onError, ::showLoading)
+                    ::onStoreNewPostSuccess, ::onError, ::showLoading, ::hideLoading)
 
     fun onAddContent() {
         if (isTextContent) {
@@ -174,6 +174,7 @@ class NewPostViewModel(private val context: Context, private val storeNewPostUse
     }
 
     private fun showLoading(){}
+    private fun hideLoading(){}
     /**
      * Trigger when click on add image to post
      */

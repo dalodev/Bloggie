@@ -2,7 +2,8 @@ package es.chewiegames.bloggie.viewmodel
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import es.chewiegames.bloggie.livedata.BaseSingleLiveEvent
 import es.chewiegames.domain.model.Post
@@ -19,46 +20,46 @@ import java.util.ArrayList
 class HomeViewModel(private val getFeedPostUseCase: GetFeedPostUseCase,
                     private val getLikedPostsByUserUseCase: GetLikedPostsByUserUseCase,
                     private val updateLikedPostUseCase: UpdateLikedPostUseCase,
-                    subscribeFeedPostsUseCase: SubscribeFeedPostsUseCase) : ViewModel(), OnLoadFeedPostListener {
+                    subscribeFeedPostsUseCase: SubscribeFeedPostsUseCase) : BaseViewModel(), OnLoadFeedPostListener {
 
     val posts: BaseSingleLiveEvent<ArrayList<Post>> by lazy { BaseSingleLiveEvent<ArrayList<Post>>() }
-    val emptyViewVisibility: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
-    val loadingVisibility: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
     val addItemAdapter: BaseSingleLiveEvent<Any> by lazy { BaseSingleLiveEvent<Any>() }
     val removeItemAdapterPosition: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
     val updateItemAdapterPosition: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
-    private val handleError: BaseSingleLiveEvent<String> by lazy { BaseSingleLiveEvent<String>() }
     val viewsToShare: BaseSingleLiveEvent<ArrayList<View>> by lazy { BaseSingleLiveEvent<ArrayList<View>>() }
-    val postToDetail: BaseSingleLiveEvent<Post> by lazy { BaseSingleLiveEvent<Post>() }
-    val goToComments: BaseSingleLiveEvent<Bundle> by lazy { BaseSingleLiveEvent<Bundle>() }
-    private val likedPosts: BaseSingleLiveEvent<ArrayList<Post>> by lazy { BaseSingleLiveEvent<ArrayList<Post>>() }
+    val navigateToDetail: BaseSingleLiveEvent<Post> by lazy { BaseSingleLiveEvent<Post>() }
+    val navigateToComments: BaseSingleLiveEvent<Bundle> by lazy { BaseSingleLiveEvent<Bundle>() }
 
+    // This LiveData depends on another so we can use a transformation.
+    val emptyViewVisibility: LiveData<Int> = Transformations.map(posts){ if(it.isEmpty()) View.VISIBLE else View.GONE}
+
+    private var likedPosts : ArrayList<Post> = arrayListOf()
     var onBind = false
     var options = Bundle()
 
     init {
         posts.value = arrayListOf()
-        likedPosts.value = arrayListOf()
         loadFeedPosts()
         loadLikedPostsByUser()
         subscribeFeedPostsUseCase.subscribe(viewModelScope, this, onResult = {}, onError = {})
     }
 
-    private fun loadFeedPosts() = getFeedPostUseCase.executeAsync(viewModelScope, None(), ::onLoadFeedPostSuccess, ::onError, ::showProgressDialog)
-    private fun loadLikedPostsByUser() = getLikedPostsByUserUseCase.executeAsync(viewModelScope, None(), ::onLoadedLikedPostsByUser, ::onError, onStart = {})
+    private fun loadFeedPosts() = getFeedPostUseCase.executeAsync(viewModelScope, None(), ::onLoadFeedPostSuccess, ::onError, ::showProgressDialog, ::hideProgressDialog)
+
+    private fun loadLikedPostsByUser() = getLikedPostsByUserUseCase.executeAsync(viewModelScope, None(), ::onLoadedLikedPostsByUser, ::onError, ::showProgressDialog, ::hideProgressDialog)
 
     /**
      * trigger when user touch on item of the list
      */
     fun onPostClicked(post: Post, vararg viewsToShare: View?) {
         this.viewsToShare.value = varargAsList(viewsToShare) as ArrayList<View>
-        postToDetail.value = post
+        navigateToDetail.value = post
     }
 
     /**
      * trigger when user touch on like button in post
      */
-    fun onLikePost(post: Post, checked: Boolean) = updateLikedPostUseCase.executeAsync(viewModelScope, PostParams(post, checked), ::likedPostUpdated, ::onError, ::showProgressDialog)
+    fun onLikePost(post: Post, checked: Boolean) = updateLikedPostUseCase.executeAsync(viewModelScope, PostParams(post, checked), ::likedPostUpdated, ::onError, ::showProgressDialog, ::hideProgressDialog)
 
     /**
      * trigger when user touch on comment buttom
@@ -66,32 +67,24 @@ class HomeViewModel(private val getFeedPostUseCase: GetFeedPostUseCase,
     fun onAddCommentClicked(post: Post) {
         val bundle = Bundle()
         bundle.putSerializable(EXTRA_POST, post)
-        goToComments.value = bundle
+        navigateToComments.value = bundle
     }
 
     private fun likedPostUpdated(post: Post) {
-        val postLiked = likedPosts.value!!.find { it.id!! == post.id }
-        if (postLiked == null) likedPosts.value!!.add(post)
-        else likedPosts.value!!.remove(postLiked)
+        val postLiked = likedPosts.find { it.id!! == post.id }
+        if (postLiked == null) likedPosts.add(post)
+        else likedPosts.remove(postLiked)
         val postInFeed = posts.value!!.find { it.id!! == post.id }
         val position = posts.value!!.indexOf(postInFeed)
         posts.value!![position] = post
     }
 
     private fun onError(t: Throwable) {
-        handleError.value = t.message
+        error.value = t.message
     }
-
-    private fun showProgressDialog() {}
-
-    private fun hideProgressDialog() {
-        loadingVisibility.value = View.GONE
-    }
-
-    private fun showEmptyView() = View.VISIBLE.takeIf { posts.value!!.size==0 } ?: View.GONE
 
     fun isLikedPost(feedPost: Post): Boolean {
-        for (likedPost in likedPosts.value!!) {
+        for (likedPost in likedPosts) {
             if (likedPost.id == feedPost.id) {
                 return true
             }
@@ -101,12 +94,11 @@ class HomeViewModel(private val getFeedPostUseCase: GetFeedPostUseCase,
 
     private fun onLoadFeedPostSuccess(posts: ArrayList<Post>) {
         this.posts.value?.addAll(posts)
-        emptyViewVisibility.value = if (posts.size == 0) View.VISIBLE else View.GONE
         hideProgressDialog()
     }
 
     private fun onLoadedLikedPostsByUser(posts: ArrayList<Post>) {
-        this.likedPosts.value = posts
+        this.likedPosts = posts
     }
 
     /**
@@ -117,8 +109,6 @@ class HomeViewModel(private val getFeedPostUseCase: GetFeedPostUseCase,
         takeIf { !containPost!! }?.let {
             posts.value?.add(0, post)
             addItemAdapter.call()
-            emptyViewVisibility.value = showEmptyView()
-            hideProgressDialog()
         }
     }
 
@@ -128,8 +118,6 @@ class HomeViewModel(private val getFeedPostUseCase: GetFeedPostUseCase,
             val position = posts.value!!.indexOf(postToRemove)
             posts.value?.remove(postToRemove)
             removeItemAdapterPosition.value = position
-            emptyViewVisibility.value = showEmptyView()
-            hideProgressDialog()
         }
     }
 
@@ -138,8 +126,6 @@ class HomeViewModel(private val getFeedPostUseCase: GetFeedPostUseCase,
         val position = this.posts.value!!.indexOf(containPost)
         this.posts.value!![position] = post
         updateItemAdapterPosition.value = position
-        emptyViewVisibility.value = showEmptyView()
-        hideProgressDialog()
     }
 }
 

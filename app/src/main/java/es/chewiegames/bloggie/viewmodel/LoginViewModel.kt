@@ -17,17 +17,15 @@ import es.chewiegames.domain.usecases.UseCase.None
 import es.chewiegames.domain.usecases.user.CheckUserLoginUseCase
 import es.chewiegames.domain.usecases.user.RegisterUserUseCase
 
-class LoginViewModel(private val checkUserLoginUseCase: CheckUserLoginUseCase, private val registerUserUseCase: RegisterUserUseCase) : ViewModel() {
+class LoginViewModel(private val checkUserLoginUseCase: CheckUserLoginUseCase,
+                     private val registerUserUseCase: RegisterUserUseCase) : BaseViewModel() {
 
     val goToMainActivity: BaseSingleLiveEvent<Any?> by lazy { BaseSingleLiveEvent<Any?>() }
-    val loginButtonVisibility: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
-    val loadingVisibility: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
-    val message: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
-    val error: BaseSingleLiveEvent<String> by lazy { BaseSingleLiveEvent<String>() }
+    val loginButton: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
     val startActivityForResult: BaseSingleLiveEvent<Intent> by lazy { BaseSingleLiveEvent<Intent>() }
 
     init {
-        loginButtonVisibility.value = View.GONE
+        loginButton.value = View.GONE
         checkUserLogin()
     }
 
@@ -45,16 +43,14 @@ class LoginViewModel(private val checkUserLoginUseCase: CheckUserLoginUseCase, p
         startActivityForResult.value = authIntent
     }
 
-    private fun checkUserLogin() {
-        checkUserLoginUseCase.executeAsync(viewModelScope, None(), ::userLogged, ::onError, ::showProgressDialog)
-    }
+    private fun checkUserLogin() = checkUserLoginUseCase.executeAsync(viewModelScope, None(), ::userLogged, ::onError, ::showProgressDialog, ::hideProgressDialog)
 
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == RC_SIGN_IN) {
             val response: IdpResponse? = IdpResponse.fromResultIntent(data)
             if (resultCode == Activity.RESULT_OK) {
                 val user: FirebaseUser = FirebaseAuth.getInstance().currentUser!!
-                registerUserUseCase.executeAsync(viewModelScope, user, ::userRegistered, ::onError, ::showProgressDialog)
+                registerUserUseCase.executeAsync(viewModelScope, user, ::userRegistered, ::onError, ::showProgressDialog, ::hideProgressDialog)
             } else {
                 if (response == null) {
                     message.value = R.string.sign_in_canceled
@@ -69,10 +65,10 @@ class LoginViewModel(private val checkUserLoginUseCase: CheckUserLoginUseCase, p
                         message.value = R.string.unknown_error
                     }
                 }
-                loginButtonVisibility.value = View.VISIBLE
+                loginButton.value = View.VISIBLE
             }
         } else {
-            loginButtonVisibility.value = View.VISIBLE
+            loginButton.value = View.VISIBLE
         }
     }
 
@@ -83,8 +79,7 @@ class LoginViewModel(private val checkUserLoginUseCase: CheckUserLoginUseCase, p
     }
 
     private fun userNotLogged() {
-        loginButtonVisibility.value = View.VISIBLE
-        hideProgressDialog()
+        loginButton.value = View.VISIBLE
     }
 
     private fun onError(t: Throwable) {
@@ -92,15 +87,5 @@ class LoginViewModel(private val checkUserLoginUseCase: CheckUserLoginUseCase, p
         error.value = t.message
     }
 
-    private fun userRegistered(user: User) {
-        goToMainActivity.call()
-    }
-
-    private fun showProgressDialog() {
-        loadingVisibility.value = View.VISIBLE
-    }
-
-    private fun hideProgressDialog() {
-        loadingVisibility.value = View.GONE
-    }
+    private fun userRegistered(user: User) = goToMainActivity.call()
 }

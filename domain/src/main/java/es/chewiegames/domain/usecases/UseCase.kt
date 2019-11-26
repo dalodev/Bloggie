@@ -10,13 +10,14 @@ abstract class UseCase<out T, in Params> {
                      params: Params,
                      onResult: (T) -> Unit,
                      onError: (Throwable) -> Unit,
-                     onStart: () -> Unit) {
+                     onStart: () -> Unit,
+                     onCompletion: () -> Unit) {
         job = runInBackground(params)
                 .onStart { onStart() }
                 .onEach { onResult(it) }
                 .catch { onError(it) }
+                .onCompletion { onCompletion() }
                 .launchIn(scope)
-
     }
 
     protected abstract fun runInBackground(params: Params): Flow<T>

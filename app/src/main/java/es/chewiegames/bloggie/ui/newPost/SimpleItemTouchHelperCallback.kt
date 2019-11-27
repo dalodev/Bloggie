@@ -8,7 +8,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import es.chewiegames.bloggie.R
-import es.chewiegames.bloggie.util.Utils
+import es.chewiegames.bloggie.util.getBitmap
 
 class SimpleItemTouchHelperCallback constructor(dragDirs: Int, swipeDirs: Int) : ItemTouchHelper.SimpleCallback(dragDirs, swipeDirs) {
 
@@ -66,12 +66,12 @@ class SimpleItemTouchHelperCallback constructor(dragDirs: Int, swipeDirs: Int) :
                 val background = RectF(left, top, right + dX, bottom)
                 val iconDest = RectF(left + cardViewWidth, top + cardViewWidth, left + 2 * cardViewWidth, bottom - cardViewWidth)
                 c.drawRect(background, paintLeft!!)
-                c.drawBitmap(Utils.getBitmap(drawableLeft!!), null, iconDest, paintLeft)
+                c.drawBitmap(getBitmap(drawableLeft!!), null, iconDest, paintLeft)
             } else if (dX < 0) {
                 val background = RectF(right + dX, top, right, bottom)
                 val iconDest = RectF(right - 2 * cardViewWidth, top + cardViewWidth, right - cardViewWidth, bottom - cardViewWidth)
                 c.drawRect(background, paintRight!!)
-                c.drawBitmap(Utils.getBitmap(drawableRight!!), null, iconDest, paintRight)
+                c.drawBitmap(getBitmap(drawableRight!!), null, iconDest, paintRight)
             }
         }
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)

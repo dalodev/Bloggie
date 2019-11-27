@@ -19,7 +19,7 @@ import es.chewiegames.bloggie.util.ImagePicker
 import es.chewiegames.bloggie.util.MAX_HEIGHT
 import es.chewiegames.bloggie.util.MAX_WIDTH
 import es.chewiegames.bloggie.util.TEXT_VIEW
-import es.chewiegames.bloggie.util.Utils
+import es.chewiegames.bloggie.util.hideKeyBoard
 import es.chewiegames.data.exceptions.NewPostException
 import es.chewiegames.domain.model.Post
 import es.chewiegames.domain.model.PostContent
@@ -132,7 +132,7 @@ class NewPostViewModel(private val context: Context, private val storeNewPostUse
     fun doSetTextContent(view: View, content: PostContent, textContent: String) {
         isTypeContent = false
         typeContentToAdd = TEXT_VIEW
-        Utils.hideKeyBoard(context, view)
+        hideKeyBoard(context, view)
         if (textContent.trim().isNotEmpty()) {
             content.viewType = TEXT_VIEW
             content.content = textContent

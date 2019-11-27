@@ -10,11 +10,11 @@ abstract class BaseViewModel : ViewModel() {
     val message: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
     val loading: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
 
-    fun showProgressDialog() {
+    protected fun showProgressDialog() {
         loading.value = View.VISIBLE
     }
 
-    fun hideProgressDialog() {
+    protected fun hideProgressDialog() {
         loading.value = View.GONE
     }
 }

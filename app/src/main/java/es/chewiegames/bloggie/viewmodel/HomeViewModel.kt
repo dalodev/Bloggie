@@ -7,6 +7,7 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import es.chewiegames.bloggie.livedata.BaseSingleLiveEvent
 import es.chewiegames.bloggie.util.EXTRA_POST
+import es.chewiegames.bloggie.util.varargAsList
 import es.chewiegames.domain.callbacks.OnLoadFeedPostListener
 import es.chewiegames.domain.model.Post
 import es.chewiegames.domain.model.PostParams
@@ -129,11 +130,4 @@ class HomeViewModel(
         this.posts.value!![position] = post
         updateItemAdapterPosition.value = position
     }
-}
-
-fun <T> varargAsList(vararg ts: T): ArrayList<T>? {
-    val result = ArrayList<T>()
-    for (t in ts) // ts is an Array
-        result.add(t)
-    return result
 }

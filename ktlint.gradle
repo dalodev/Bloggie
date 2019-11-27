@@ -27,6 +27,7 @@ task ktlintFormat(type: JavaExec, group: "formatting") {
 }
 
 //Source from
+//https://ktlint.github.io/
 //https://medium.com/@AndreSand/add-ktlint-to-android-app-36821aec9b9a
 
 //1. The below task runs Kotlin lint check and outputs Kotlin file errors.

@@ -3,23 +3,23 @@ package es.chewiegames.bloggie.ui.home
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.fragment.findNavController
-import es.chewiegames.bloggie.R
-import es.chewiegames.bloggie.util.HomeItemAnimator
-import kotlinx.android.synthetic.main.fragment_home.*
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.databinding.FragmentHomeBinding
 import es.chewiegames.bloggie.ui.base.BaseBindingFragment
 import es.chewiegames.bloggie.ui.detailPost.DetailPostActivity
 import es.chewiegames.bloggie.util.EXTRA_POST
+import es.chewiegames.bloggie.util.HomeItemAnimator
 import es.chewiegames.bloggie.viewmodel.HomeViewModel
+import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseBindingFragment() {
@@ -54,10 +54,10 @@ class HomeFragment : BaseBindingFragment() {
         viewModel.navigateToComments.observe(this, Observer { findNavController().navigate(R.id.action_home_to_comments, it) })
         viewModel.viewsToShare.observe(this, Observer {
             val p2 = Pair.create(it[1], ViewCompat.getTransitionName(it[1]))
-            val options = if(it.size > 1){
+            val options = if (it.size > 1) {
                 val p1 = Pair.create(it[0], ViewCompat.getTransitionName(it[0]))
                 ActivityOptionsCompat.makeSceneTransitionAnimation(activity!!, p1, p2)
-            }else{
+            } else {
                 ActivityOptionsCompat.makeSceneTransitionAnimation(activity!!, p2)
             }
             viewModel.options = options.toBundle()!!

@@ -4,10 +4,10 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
 import android.graphics.drawable.Drawable
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.ItemTouchHelper
-import es.chewiegames.bloggie.R
 import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
+import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.util.Utils
 
 class SimpleItemTouchHelperCallback constructor(dragDirs: Int, swipeDirs: Int) : ItemTouchHelper.SimpleCallback(dragDirs, swipeDirs) {
@@ -50,9 +50,9 @@ class SimpleItemTouchHelperCallback constructor(dragDirs: Int, swipeDirs: Int) :
         if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
 
             val itemView = viewHolder.itemView
-            val cardView : CardView = itemView.findViewById(R.id.foregroundView)
+            val cardView: CardView = itemView.findViewById(R.id.foregroundView)
 
-            //background points
+            // background points
             val height = itemView.bottom.toFloat() - itemView.top.toFloat()
             val width = height / 3
             val cardViewHeight = cardView.bottom.toFloat() - cardView.top.toFloat()

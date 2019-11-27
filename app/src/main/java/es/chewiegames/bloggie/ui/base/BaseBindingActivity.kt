@@ -51,7 +51,6 @@ abstract class BaseBindingActivity : AppCompatActivity() {
         }
     }
 
-
     override fun onDestroy() {
         super.onDestroy()
         destroyView()

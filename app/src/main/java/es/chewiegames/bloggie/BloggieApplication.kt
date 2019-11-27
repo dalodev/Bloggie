@@ -33,7 +33,7 @@ open class BloggieApplication : Application() {
     private fun initializeDependecyInjector() {
         applicationComponent = DaggerApplicationComponent
                 .builder()
-                //.applicationModule(ApplicationModule(this))
+                // .applicationModule(ApplicationModule(this))
                 .build()
     }
 }

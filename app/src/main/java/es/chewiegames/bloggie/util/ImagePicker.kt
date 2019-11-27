@@ -1,24 +1,22 @@
 package es.chewiegames.bloggie.util
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.provider.MediaStore
-import android.media.ExifInterface
-import android.graphics.BitmapFactory
-import android.content.res.AssetFileDescriptor
 import android.content.Intent
+import android.content.res.AssetFileDescriptor
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Matrix
+import android.media.ExifInterface
 import android.net.Uri
+import android.provider.MediaStore
 import android.util.Log
 import java.io.File
 import java.io.FileNotFoundException
 
-
 class ImagePicker {
 
-
     companion object {
-        private val DEFAULT_MIN_WIDTH_QUALITY = 400        // min pixels
+        private val DEFAULT_MIN_WIDTH_QUALITY = 400 // min pixels
         private val TAG = "ImagePicker"
         private val TEMP_IMAGE_NAME = "tempImage"
 
@@ -124,7 +122,6 @@ class ImagePicker {
             return cursor.getInt(orientationColumnIndex)
         }
 
-
         private fun rotate(bm: Bitmap?, rotation: Int): Bitmap? {
             if (rotation != 0) {
                 val matrix = Matrix()
@@ -134,13 +131,10 @@ class ImagePicker {
             return bm
         }
 
-
         private fun getTempFile(context: Context): File {
             val imageFile = File(context.externalCacheDir, TEMP_IMAGE_NAME)
             imageFile.parentFile.mkdirs()
             return imageFile
         }
     }
-
-
 }

@@ -2,19 +2,19 @@ package es.chewiegames.bloggie.ui.comments
 
 import android.animation.LayoutTransition
 import android.content.Context
-import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import es.chewiegames.bloggie.R
-import es.chewiegames.data.model.Comment
 import es.chewiegames.bloggie.util.RoundedTransformation
+import es.chewiegames.data.model.Comment
 import javax.inject.Inject
 
-class CommentsAdapter @Inject constructor(): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CommentsAdapter @Inject constructor() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     interface CommentsAdapterListener {
         fun replyComment(parentComment: Comment)
@@ -22,16 +22,15 @@ class CommentsAdapter @Inject constructor(): RecyclerView.Adapter<RecyclerView.V
     }
 
     @Inject
-    lateinit var context : Context
+    lateinit var context: Context
 
     @Inject
     lateinit var mListener: CommentsAdapterListener
 
-
     var comments: ArrayList<Comment> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-         val view = LayoutInflater.from(context).inflate(R.layout.comment_item, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.comment_item, parent, false)
         return CommentViewHolder(view)
     }
 
@@ -44,11 +43,11 @@ class CommentsAdapter @Inject constructor(): RecyclerView.Adapter<RecyclerView.V
         (holder as CommentViewHolder).comment.text = comment.comment
         holder.root!!.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
 
-        if(comment.userData!!.avatar != null) Picasso.with(context).load(comment.userData!!.avatar).transform(RoundedTransformation(50, 0)).into(holder.userImage)
+        if (comment.userData!!.avatar != null) Picasso.with(context).load(comment.userData!!.avatar).transform(RoundedTransformation(50, 0)).into(holder.userImage)
 
-        if(comment.replies.isEmpty()){
+        if (comment.replies.isEmpty()) {
             holder.replysRecyclerView!!.visibility = View.GONE
-        }else{
+        } else {
             holder.replysRecyclerView!!.visibility = View.VISIBLE
             holder.replysRecyclerView!!.layoutManager = LinearLayoutManager(context)
             holder.replysRecyclerView!!.itemAnimator = DefaultItemAnimator()

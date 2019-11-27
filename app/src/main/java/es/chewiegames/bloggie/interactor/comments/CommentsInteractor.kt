@@ -1,14 +1,14 @@
 package es.chewiegames.bloggie.interactor.comments
 
 import com.google.firebase.database.DatabaseReference
-import es.chewiegames.data.model.Comment
-import es.chewiegames.domain.model.Post
-import es.chewiegames.data.model.UserData
 import es.chewiegames.bloggie.util.COMMENT_VIEW
+import es.chewiegames.data.model.Comment
+import es.chewiegames.data.model.UserData
+import es.chewiegames.domain.model.Post
 import javax.inject.Inject
 import javax.inject.Named
 
-class CommentsInteractor @Inject constructor(): ICommentsInteractor{
+class CommentsInteractor @Inject constructor() : ICommentsInteractor {
 
     @field:[Inject Named("all posts")]
     lateinit var mDatabaseAllPosts: DatabaseReference

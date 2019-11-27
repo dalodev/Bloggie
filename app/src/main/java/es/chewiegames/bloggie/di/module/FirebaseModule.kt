@@ -1,19 +1,19 @@
 package es.chewiegames.bloggie.di.module
 
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
-import com.google.firebase.storage.StorageReference
-import com.google.firebase.database.FirebaseDatabase
 
 @Module
 class FirebaseModule {
 
     @Provides
     @Singleton
-    fun provideFirebaseStorage(): FirebaseStorage{
+    fun provideFirebaseStorage(): FirebaseStorage {
         return FirebaseStorage.getInstance()
     }
 
@@ -25,14 +25,14 @@ class FirebaseModule {
 
     @Provides
     @Singleton
-    fun provideFirebaseAuth() : FirebaseAuth{
+    fun provideFirebaseAuth(): FirebaseAuth {
         return FirebaseAuth.getInstance()
     }
 
     @Provides
     @Singleton
     fun provideFirebaseDatabase(): FirebaseDatabase {
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true)//enable offline conection
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true) // enable offline conection
         return FirebaseDatabase.getInstance()
     }
 }

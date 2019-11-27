@@ -22,7 +22,7 @@ class HomeItemAnimator : SimpleItemAnimator() {
 
     var mAdditionsList: ArrayList<ArrayList<RecyclerView.ViewHolder>> = ArrayList()
     var mMovesList: ArrayList<ArrayList<MoveInfo>> = ArrayList()
-    var mChangesList:ArrayList<ArrayList<ChangeInfo>> = ArrayList()
+    var mChangesList: ArrayList<ArrayList<ChangeInfo>> = ArrayList()
 
     var mAddAnimations: ArrayList<RecyclerView.ViewHolder> = ArrayList()
     var mMoveAnimations: ArrayList<RecyclerView.ViewHolder> = ArrayList()
@@ -37,8 +37,14 @@ class HomeItemAnimator : SimpleItemAnimator() {
         var toX: Int = 0
         var toY: Int = 0
 
-        internal constructor(oldHolder: RecyclerView.ViewHolder, newHolder: RecyclerView.ViewHolder,
-                             fromX: Int, fromY: Int, toX: Int, toY: Int) : this(oldHolder, newHolder) {
+        internal constructor(
+            oldHolder: RecyclerView.ViewHolder,
+            newHolder: RecyclerView.ViewHolder,
+            fromX: Int,
+            fromY: Int,
+            toX: Int,
+            toY: Int
+        ) : this(oldHolder, newHolder) {
             this.fromX = fromX
             this.fromY = fromY
             this.toX = toX
@@ -46,14 +52,14 @@ class HomeItemAnimator : SimpleItemAnimator() {
         }
 
         override fun toString(): String {
-            return ("ChangeInfo{"
-                    + "oldHolder=" + oldHolder
-                    + ", newHolder=" + newHolder
-                    + ", fromX=" + fromX
-                    + ", fromY=" + fromY
-                    + ", toX=" + toX
-                    + ", toY=" + toY
-                    + '}'.toString())
+            return ("ChangeInfo{" +
+                    "oldHolder=" + oldHolder +
+                    ", newHolder=" + newHolder +
+                    ", fromX=" + fromX +
+                    ", fromY=" + fromY +
+                    ", toX=" + toX +
+                    ", toY=" + toY +
+                    '}'.toString())
         }
     }
 
@@ -194,8 +200,13 @@ class HomeItemAnimator : SimpleItemAnimator() {
                 }).start()
     }
 
-    override fun animateMove(holder: RecyclerView.ViewHolder, fromX: Int, fromY: Int,
-                             toX: Int, toY: Int): Boolean {
+    override fun animateMove(
+        holder: RecyclerView.ViewHolder,
+        fromX: Int,
+        fromY: Int,
+        toX: Int,
+        toY: Int
+    ): Boolean {
         var fromX = fromX
         var fromY = fromY
         val view = holder.itemView
@@ -256,8 +267,14 @@ class HomeItemAnimator : SimpleItemAnimator() {
         }).start()
     }
 
-    override fun animateChange(oldHolder: RecyclerView.ViewHolder, newHolder: RecyclerView.ViewHolder?,
-                               fromX: Int, fromY: Int, toX: Int, toY: Int): Boolean {
+    override fun animateChange(
+        oldHolder: RecyclerView.ViewHolder,
+        newHolder: RecyclerView.ViewHolder?,
+        fromX: Int,
+        fromY: Int,
+        toX: Int,
+        toY: Int
+    ): Boolean {
         if (oldHolder === newHolder) {
             // Don't know how to run change animations when the same view holder is re-used.
             // run a move animation to handle position changes.
@@ -460,17 +477,17 @@ class HomeItemAnimator : SimpleItemAnimator() {
     }
 
     override fun isRunning(): Boolean {
-        return (!mPendingAdditions.isEmpty()
-                || !mPendingChanges.isEmpty()
-                || !mPendingMoves.isEmpty()
-                || !mPendingRemovals.isEmpty()
-                || !mMoveAnimations.isEmpty()
-                || !mRemoveAnimations.isEmpty()
-                || !mAddAnimations.isEmpty()
-                || !mChangeAnimations.isEmpty()
-                || !mMovesList.isEmpty()
-                || !mAdditionsList.isEmpty()
-                || !mChangesList.isEmpty())
+        return (!mPendingAdditions.isEmpty() ||
+                !mPendingChanges.isEmpty() ||
+                !mPendingMoves.isEmpty() ||
+                !mPendingRemovals.isEmpty() ||
+                !mMoveAnimations.isEmpty() ||
+                !mRemoveAnimations.isEmpty() ||
+                !mAddAnimations.isEmpty() ||
+                !mChangeAnimations.isEmpty() ||
+                !mMovesList.isEmpty() ||
+                !mAdditionsList.isEmpty() ||
+                !mChangesList.isEmpty())
     }
 
     /**

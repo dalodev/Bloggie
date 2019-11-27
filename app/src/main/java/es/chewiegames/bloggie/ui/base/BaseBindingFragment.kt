@@ -1,6 +1,5 @@
 package es.chewiegames.bloggie.ui.base
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -58,7 +57,6 @@ abstract class BaseBindingFragment : Fragment() {
      */
     protected abstract fun destroyView()
 
-
     /**
      * Fragment navigation.
      */
@@ -80,7 +78,7 @@ abstract class BaseBindingFragment : Fragment() {
     /**
      * Activity navigation.
      */
-    fun goToActivity(intent: Intent, bundle : Bundle) {
+    fun goToActivity(intent: Intent, bundle: Bundle) {
         startActivity(intent, bundle)
     }
     /**

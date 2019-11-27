@@ -5,10 +5,10 @@ import android.os.Bundle
 import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.interactor.comments.CommentsInteractor
 import es.chewiegames.bloggie.interactor.comments.ICommentsInteractor
-import es.chewiegames.data.model.Comment
-import es.chewiegames.domain.model.Post
 import es.chewiegames.bloggie.ui.comments.CommentsView
 import es.chewiegames.bloggie.util.EXTRA_POST
+import es.chewiegames.data.model.Comment
+import es.chewiegames.domain.model.Post
 import javax.inject.Inject
 
 class CommentsPresenter @Inject constructor() : ICommentsPresenter, ICommentsInteractor.CommentsListener {
@@ -19,7 +19,7 @@ class CommentsPresenter @Inject constructor() : ICommentsPresenter, ICommentsInt
 
     private var isReplyTo = false
 
-    private var parentComment : Comment? = null
+    private var parentComment: Comment? = null
 
     @Inject
     lateinit var mCommentsInteractor: CommentsInteractor
@@ -38,9 +38,9 @@ class CommentsPresenter @Inject constructor() : ICommentsPresenter, ICommentsInt
     }
 
     override fun sendComment(text: String?) {
-        if(!isReplyTo){
+        if (!isReplyTo) {
             mCommentsInteractor.storeCommentInDatabase(text, post!!, this)
-        }else{
+        } else {
             view.showReplyTo(false, "")
             parentComment = null
             isReplyTo = false
@@ -67,16 +67,16 @@ class CommentsPresenter @Inject constructor() : ICommentsPresenter, ICommentsInt
     override fun replyTo(parentComment: Comment) {
         this.parentComment = parentComment
         isReplyTo = true
-        val replyToText = ""+resources.getText(R.string.replyTo) + " @" + parentComment.userData!!.userName
+        val replyToText = "" + resources.getText(R.string.replyTo) + " @" + parentComment.userData!!.userName
         view.showReplyTo(true, replyToText)
     }
 
     override fun handleBack() {
-        if(isReplyTo){
+        if (isReplyTo) {
             parentComment = null
             isReplyTo = false
             view.showReplyTo(false, "")
-        }else{
+        } else {
             view.goBack()
         }
     }

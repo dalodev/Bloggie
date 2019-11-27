@@ -1,19 +1,18 @@
 package es.chewiegames.bloggie.interactor.detailPost
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
+import android.graphics.Point
+import android.graphics.Rect
 import android.view.View
+import android.view.animation.DecelerateInterpolator
 import android.widget.ImageView
+import com.google.firebase.database.DatabaseReference
 import es.chewiegames.domain.model.Post
 import javax.inject.Inject
-import android.animation.Animator
-import android.graphics.Rect
-import com.google.firebase.database.DatabaseReference
 import javax.inject.Named
-import android.animation.AnimatorListenerAdapter
-import android.view.animation.DecelerateInterpolator
-import android.animation.ObjectAnimator
-import android.animation.AnimatorSet
-import android.graphics.Point
-
 
 class DetailPostInteractor @Inject constructor() : IDetailPostInteractor {
 
@@ -33,7 +32,6 @@ class DetailPostInteractor @Inject constructor() : IDetailPostInteractor {
 
     override fun setCurrentAnimatorDuration(mShortAnimationDuration: Int) {
         this.mShortAnimationDuration = mShortAnimationDuration.toLong()
-
     }
 
     override fun zoomImageFromThumb(thumbView: View, expandedImage: ImageView, content: String, listener: IDetailPostInteractor.InteractorListener) {

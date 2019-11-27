@@ -3,10 +3,10 @@ package es.chewiegames.bloggie.koin
 import es.chewiegames.bloggie.viewmodel.HomeViewModel
 import es.chewiegames.bloggie.viewmodel.LoginViewModel
 import es.chewiegames.bloggie.viewmodel.NewPostViewModel
+import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.Dispatchers
 import org.koin.androidx.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
-import kotlin.coroutines.CoroutineContext
 
 val appModule = module {
 

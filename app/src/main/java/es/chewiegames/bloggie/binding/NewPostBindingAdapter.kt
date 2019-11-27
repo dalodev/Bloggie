@@ -1,10 +1,8 @@
 package es.chewiegames.bloggie.binding
 
 import android.net.Uri
-import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.ProgressBar
 import androidx.databinding.BindingAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.squareup.picasso.Callback
@@ -62,7 +60,7 @@ fun displayImage(imageView: ImageView, content: PostContent, postContentImageCal
                     .into(imageView, postContentImageCallback)
         }
         else -> {
-            //TODO display error image
+            // TODO display error image
         }
     }
 }

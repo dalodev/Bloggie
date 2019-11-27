@@ -1,7 +1,7 @@
 package es.chewiegames.bloggie.ui.newPost
 
-import androidx.recyclerview.widget.RecyclerView
 import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.RecyclerView
 import es.chewiegames.bloggie.BR
 import es.chewiegames.bloggie.viewmodel.NewPostViewModel
 import es.chewiegames.domain.model.PostContent

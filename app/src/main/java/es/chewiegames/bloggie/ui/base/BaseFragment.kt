@@ -1,13 +1,13 @@
 package es.chewiegames.bloggie.ui.base
 
-import androidx.fragment.app.Fragment
 import android.content.Context
 import android.os.Bundle
-import androidx.annotation.Nullable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import es.chewiegames.bloggie.BloggieApplication
@@ -50,7 +50,7 @@ abstract class BaseFragment : Fragment() {
     /**
      * init viewmodel observers
      */
-    open fun initObservers(){}
+    open fun initObservers() {}
     abstract fun injectDependencies(component: ApplicationComponent, context: Context)
     /**
      * @return The layout id that's gonna be the fragment view.
@@ -67,7 +67,6 @@ abstract class BaseFragment : Fragment() {
      */
 //    protected abstract fun destroyView()
 
-
     /**
      * Fragment navigation.
      */
@@ -75,12 +74,12 @@ abstract class BaseFragment : Fragment() {
         beginTransaction().func().commit()
     }
 
-    fun AppCompatActivity.addFragment(fragment: Fragment, frameId: Int){
+    fun AppCompatActivity.addFragment(fragment: Fragment, frameId: Int) {
         supportFragmentManager.inTransaction { add(frameId, fragment) }
     }
 
     open fun AppCompatActivity.replaceFragment(fragment: Fragment, frameId: Int) {
-        supportFragmentManager.inTransaction{
+        supportFragmentManager.inTransaction {
             replace(frameId, fragment, fragment.javaClass.simpleName)
             addToBackStack(fragment.javaClass.simpleName)
         }

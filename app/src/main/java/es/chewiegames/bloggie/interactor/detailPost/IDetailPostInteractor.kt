@@ -5,7 +5,7 @@ import android.widget.ImageView
 import es.chewiegames.bloggie.interactor.BaseInteractor
 import es.chewiegames.domain.model.Post
 
-interface IDetailPostInteractor : BaseInteractor{
+interface IDetailPostInteractor : BaseInteractor {
 
     interface InteractorListener {
         fun displayExpandedImage(content: String)

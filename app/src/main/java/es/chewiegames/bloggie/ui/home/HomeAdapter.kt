@@ -1,18 +1,17 @@
 package es.chewiegames.bloggie.ui.home
 
 import android.content.Context
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import es.chewiegames.bloggie.R
-import es.chewiegames.domain.model.Post
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import es.chewiegames.data.model.UserData
+import androidx.recyclerview.widget.RecyclerView
+import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.viewmodel.HomeViewModel
+import es.chewiegames.domain.model.Post
 import es.chewiegames.domain.model.User
 
-class HomeAdapter(val context: Context, private val viewModel : HomeViewModel) : RecyclerView.Adapter<HomeViewHolder>() {
+class HomeAdapter(val context: Context, private val viewModel: HomeViewModel) : RecyclerView.Adapter<HomeViewHolder>() {
 
     var posts: ArrayList<Post> = viewModel.posts.value ?: arrayListOf()
     private var likedPosts: ArrayList<Post> = arrayListOf()

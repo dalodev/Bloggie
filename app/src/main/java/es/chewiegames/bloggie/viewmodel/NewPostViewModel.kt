@@ -9,16 +9,24 @@ import android.view.View
 import android.widget.ImageView
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.squareup.picasso.Callback
 import es.chewiegames.bloggie.livedata.BaseSingleLiveEvent
-import es.chewiegames.bloggie.util.*
+import es.chewiegames.bloggie.util.BLOG_CONTENT_IMAGE
+import es.chewiegames.bloggie.util.BLOG_TITLE_IMAGE
+import es.chewiegames.bloggie.util.EDITTEXT_VIEW
+import es.chewiegames.bloggie.util.IMAGE_VIEW
+import es.chewiegames.bloggie.util.ImagePicker
+import es.chewiegames.bloggie.util.MAX_HEIGHT
+import es.chewiegames.bloggie.util.MAX_WIDTH
+import es.chewiegames.bloggie.util.TEXT_VIEW
+import es.chewiegames.bloggie.util.Utils
+import es.chewiegames.data.exceptions.NewPostException
 import es.chewiegames.domain.model.Post
 import es.chewiegames.domain.model.PostContent
 import es.chewiegames.domain.model.StoreNewPostParams
 import es.chewiegames.domain.usecases.newpost.StoreNewPostUseCase
 import kotlin.math.ceil
 import kotlin.math.sqrt
-import com.squareup.picasso.Callback
-import es.chewiegames.data.exceptions.NewPostException
 
 class NewPostViewModel(private val context: Context, private val storeNewPostUseCase: StoreNewPostUseCase) : ViewModel() {
 
@@ -65,7 +73,7 @@ class NewPostViewModel(private val context: Context, private val storeNewPostUse
                         BLOG_CONTENT_IMAGE -> onAddImageContent(tempContent, photoUri, bitmap!!)
                     }
                 } catch (e: Exception) {
-                    //TODO: show error cannot found file or cannot read file
+                    // TODO: show error cannot found file or cannot read file
                     e.printStackTrace()
                 }
             }
@@ -100,7 +108,7 @@ class NewPostViewModel(private val context: Context, private val storeNewPostUse
         }
     }
 
-    fun publishPost(blogImageView: ImageView) = storeNewPostUseCase.executeAsync(viewModelScope, StoreNewPostParams(post.value!!,postContent.value ?: arrayListOf(), blogImageView),
+    fun publishPost(blogImageView: ImageView) = storeNewPostUseCase.executeAsync(viewModelScope, StoreNewPostParams(post.value!!, postContent.value ?: arrayListOf(), blogImageView),
                     ::onStoreNewPostSuccess, ::onError, ::showLoading, ::hideLoading)
 
     fun onAddContent() {
@@ -169,12 +177,12 @@ class NewPostViewModel(private val context: Context, private val storeNewPostUse
     private fun onStoreNewPostSuccess(post: Post) = navigateToHome.call()
 
     private fun onError(t: Throwable) {
-        if(t is NewPostException) showTitleDialog.call()
+        if (t is NewPostException) showTitleDialog.call()
         else showError.value = t.message
     }
 
-    private fun showLoading(){}
-    private fun hideLoading(){}
+    private fun showLoading() {}
+    private fun hideLoading() {}
     /**
      * Trigger when click on add image to post
      */
@@ -190,7 +198,7 @@ class NewPostViewModel(private val context: Context, private val storeNewPostUse
         postContentImageType.value = BLOG_TITLE_IMAGE
     }
 
-    val postContentImageCallback = object : Callback{
+    val postContentImageCallback = object : Callback {
         override fun onSuccess() {
             imageContentLoading.value = View.GONE
             imageBackgroundVisibility.value = View.VISIBLE
@@ -200,6 +208,5 @@ class NewPostViewModel(private val context: Context, private val storeNewPostUse
             imageContentLoading.value = View.GONE
             imageBackgroundVisibility.value = View.VISIBLE
         }
-
     }
 }

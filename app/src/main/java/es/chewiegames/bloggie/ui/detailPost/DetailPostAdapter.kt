@@ -1,22 +1,20 @@
 package es.chewiegames.bloggie.ui.detailPost
 
 import android.content.Context
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import com.squareup.picasso.Callback
-import com.squareup.picasso.Picasso
+import androidx.recyclerview.widget.RecyclerView
 import es.chewiegames.bloggie.R
-import es.chewiegames.data.model.PostContentData
 import es.chewiegames.bloggie.ui.newPost.PostImageViewHolder
 import es.chewiegames.bloggie.ui.newPost.PostTextViewHolder
+import es.chewiegames.bloggie.util.EDITTEXT_VIEW
+import es.chewiegames.bloggie.util.IMAGE_VIEW
+import es.chewiegames.bloggie.util.TEXT_VIEW
+import es.chewiegames.data.model.PostContentData
 import javax.inject.Inject
-import es.chewiegames.bloggie.util.*
-
 
 class DetailPostAdapter @Inject constructor() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -54,22 +52,21 @@ class DetailPostAdapter @Inject constructor() : RecyclerView.Adapter<RecyclerVie
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val content = postContent[position]
 
-       /* when (content.viewType) {
-            TEXT_VIEW -> {
-                (holder as PostTextViewHolder).foregroundView!!.visibility = View.VISIBLE
-                holder.textContent!!.visibility = View.VISIBLE
-                holder.editTextLayout!!.visibility = View.GONE
-                holder.okButton!!.visibility = View.GONE
-                holder.textContent!!.text = content.content
-            }
-            IMAGE_VIEW -> {
-                if (content.content != null) {
-                    displayImage(holder as PostImageViewHolder, holder.mProgressBar, content.content!!)
-                    holder.foregroundView.setOnClickListener { mListener.onClickImage(holder.image!!, postContent[holder.getAdapterPosition()]) }
-                }
-            }
-        }*/
-
+        /* when (content.viewType) {
+             TEXT_VIEW -> {
+                 (holder as PostTextViewHolder).foregroundView!!.visibility = View.VISIBLE
+                 holder.textContent!!.visibility = View.VISIBLE
+                 holder.editTextLayout!!.visibility = View.GONE
+                 holder.okButton!!.visibility = View.GONE
+                 holder.textContent!!.text = content.content
+             }
+             IMAGE_VIEW -> {
+                 if (content.content != null) {
+                     displayImage(holder as PostImageViewHolder, holder.mProgressBar, content.content!!)
+                     holder.foregroundView.setOnClickListener { mListener.onClickImage(holder.image!!, postContent[holder.getAdapterPosition()]) }
+                 }
+             }
+         }*/
     }
 
     /**

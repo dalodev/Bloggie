@@ -3,7 +3,7 @@ package es.chewiegames.bloggie.interactor.comments
 import es.chewiegames.data.model.Comment
 import es.chewiegames.domain.model.Post
 
-interface ICommentsInteractor  {
+interface ICommentsInteractor {
 
     interface CommentsListener {
         fun onCommentAdded(comment: Comment)

@@ -4,7 +4,7 @@ import dagger.Module
 import es.chewiegames.bloggie.BloggieApplication
 
 @Module
-class ApplicationModule constructor(mApplication: BloggieApplication?){
+class ApplicationModule constructor(mApplication: BloggieApplication?) {
 
     private var mApplication: BloggieApplication? = mApplication
 }

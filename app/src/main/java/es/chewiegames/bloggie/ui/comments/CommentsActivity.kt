@@ -2,20 +2,20 @@ package es.chewiegames.bloggie.ui.comments
 
 import android.animation.LayoutTransition
 import android.os.Bundle
-import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.MenuItem
 import android.view.View
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.squareup.picasso.Picasso
 import es.chewiegames.bloggie.R
+import es.chewiegames.bloggie.databinding.ActivityCommentsBinding
 import es.chewiegames.bloggie.di.component.ApplicationComponent
-import es.chewiegames.data.model.Comment
-import es.chewiegames.domain.model.Post
 import es.chewiegames.bloggie.presenter.comments.ICommentsPresenter
 import es.chewiegames.bloggie.ui.base.BaseActivity
-import javax.inject.Inject
 import es.chewiegames.bloggie.util.RoundedTransformation
-import com.squareup.picasso.Picasso
-import es.chewiegames.bloggie.databinding.ActivityCommentsBinding
+import es.chewiegames.data.model.Comment
+import es.chewiegames.domain.model.Post
+import javax.inject.Inject
 
 class CommentsActivity : BaseActivity<ActivityCommentsBinding>(), CommentsView, CommentsAdapter.CommentsAdapterListener {
 
@@ -23,10 +23,10 @@ class CommentsActivity : BaseActivity<ActivityCommentsBinding>(), CommentsView, 
     lateinit var mCommentsPresenter: ICommentsPresenter
 
     @Inject
-    lateinit var commentsAdapter : CommentsAdapter
+    lateinit var commentsAdapter: CommentsAdapter
 
     @Inject
-    lateinit var layoutManager : LinearLayoutManager
+    lateinit var layoutManager: LinearLayoutManager
 
     override fun getLayoutId(): Int {
         return R.layout.activity_comments
@@ -47,8 +47,8 @@ class CommentsActivity : BaseActivity<ActivityCommentsBinding>(), CommentsView, 
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item!!.itemId){
-            android.R.id.home ->{
+        when (item!!.itemId) {
+            android.R.id.home -> {
                 mCommentsPresenter.handleBack()
             }
         }
@@ -64,7 +64,7 @@ class CommentsActivity : BaseActivity<ActivityCommentsBinding>(), CommentsView, 
     }
 
     override fun fillValues(post: Post) {
-        if(!post.user!!.avatar.equals("null")) Picasso.with(this).load(post.user!!.avatar).transform(RoundedTransformation(50, 0)).into(binding.userImage)
+        if (!post.user!!.avatar.equals("null")) Picasso.with(this).load(post.user!!.avatar).transform(RoundedTransformation(50, 0)).into(binding.userImage)
     }
 
     override fun setAdapter(comments: ArrayList<Comment>) {
@@ -78,8 +78,8 @@ class CommentsActivity : BaseActivity<ActivityCommentsBinding>(), CommentsView, 
         commentsAdapter.repliesAdded(parentComment)
     }
 
-    fun onSendCommentClicked(view: View){
-        if(binding.userCommentTextInput.text.toString().isNotEmpty()){
+    fun onSendCommentClicked(view: View) {
+        if (binding.userCommentTextInput.text.toString().isNotEmpty()) {
             mCommentsPresenter.sendComment(binding.userCommentTextInput.text.toString())
             binding.userCommentTextInput.setText("")
         }
@@ -98,15 +98,14 @@ class CommentsActivity : BaseActivity<ActivityCommentsBinding>(), CommentsView, 
     }
 
     override fun showReplies(parentComment: Comment) {
-
     }
 
     override fun showReplyTo(show: Boolean, replyToText: String) {
-        if(show){
+        if (show) {
             binding.commentsRoot.layoutTransition.enableTransitionType(LayoutTransition.APPEARING)
             binding.replyInfo.text = replyToText
             binding.replyInfo.visibility = View.VISIBLE
-        }else{
+        } else {
             binding.commentsRoot.layoutTransition.enableTransitionType(LayoutTransition.DISAPPEARING)
             binding.replyInfo.visibility = View.GONE
         }

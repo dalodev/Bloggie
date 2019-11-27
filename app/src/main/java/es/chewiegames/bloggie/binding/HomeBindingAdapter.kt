@@ -7,11 +7,10 @@ import android.widget.ProgressBar
 import androidx.databinding.BindingAdapter
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
-import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.util.RoundedTransformation
 import es.chewiegames.bloggie.viewmodel.HomeViewModel
 
-@BindingAdapter(value=["feedPostTitleImage", "progressBarImage", "logoNoImage"], requireAll = true)
+@BindingAdapter(value = ["feedPostTitleImage", "progressBarImage", "logoNoImage"], requireAll = true)
 fun feedPostTitleImage(view: ImageView, titleImage: String?, progressBarImage: ProgressBar, logoNoImage: ImageView) {
     if (titleImage != null) {
         Picasso.with(view.context)
@@ -32,9 +31,8 @@ fun feedPostTitleImage(view: ImageView, titleImage: String?, progressBarImage: P
     } else {
         progressBarImage.visibility = View.GONE
         logoNoImage.visibility = View.VISIBLE
-        //view.setImageResource(R.drawable.background_splash)
+        // view.setImageResource(R.drawable.background_splash)
     }
-
 }
 
 @BindingAdapter("profileImage")
@@ -45,10 +43,10 @@ fun profileImage(view: ImageView, avatar: String) {
             .into(view)
 }
 
-@BindingAdapter(value =["onLittlePointChecked", "position"], requireAll = false)
-fun littlePointChecked(view: CheckBox, viewModel: HomeViewModel, position: Int){
-    view.setOnCheckedChangeListener { _,  checked->
-        if(!viewModel.onBind){
+@BindingAdapter(value = ["onLittlePointChecked", "position"], requireAll = false)
+fun littlePointChecked(view: CheckBox, viewModel: HomeViewModel, position: Int) {
+    view.setOnCheckedChangeListener { _, checked ->
+        if (!viewModel.onBind) {
             viewModel.onLikePost(viewModel.posts.value!![position], checked)
         }
     }

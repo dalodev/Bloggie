@@ -1,27 +1,31 @@
 package es.chewiegames.bloggie.ui.newPost
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import es.chewiegames.bloggie.R
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import es.chewiegames.bloggie.util.*
+import androidx.recyclerview.widget.RecyclerView
+import es.chewiegames.bloggie.R
+import es.chewiegames.bloggie.util.EDITTEXT_VIEW
+import es.chewiegames.bloggie.util.IMAGE_VIEW
+import es.chewiegames.bloggie.util.TEXT_VIEW
 import es.chewiegames.bloggie.viewmodel.NewPostViewModel
 import es.chewiegames.domain.model.PostContent
-import java.util.*
+import java.util.Collections
 import kotlin.collections.ArrayList
 
-class PostAdapter(private val viewModel: NewPostViewModel,
-                  private var postContent: ArrayList<PostContent> = viewModel.postContent.value ?: arrayListOf())
-    : RecyclerView.Adapter<RecyclerView.ViewHolder>(), ItemTouchHelperAdapter {
+class PostAdapter(
+    private val viewModel: NewPostViewModel,
+    private var postContent: ArrayList<PostContent> = viewModel.postContent.value ?: arrayListOf()
+) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>(), ItemTouchHelperAdapter {
 
     override fun getItemViewType(position: Int): Int {
         return when (postContent[position].viewType) {
             TEXT_VIEW -> R.layout.textview_content
             EDITTEXT_VIEW -> R.layout.edittext_content
             IMAGE_VIEW -> R.layout.imageview_content
-            else ->  R.layout.textview_content
+            else -> R.layout.textview_content
         }
     }
 

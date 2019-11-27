@@ -1,11 +1,11 @@
 package es.chewiegames.bloggie.ui.main
 
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.view.MenuItem
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.databinding.ActivityMainBinding
 import es.chewiegames.bloggie.di.component.ApplicationComponent
@@ -44,7 +44,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), BottomNavigationView.O
      * @param item single component of menu
      */
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             R.id.newPostActivity -> {
                 findNavController(R.id.my_nav_host_fragment).navigate(R.id.action_to_new_post)
             }

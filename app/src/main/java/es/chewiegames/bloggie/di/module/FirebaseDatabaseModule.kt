@@ -1,23 +1,23 @@
 package es.chewiegames.bloggie.di.module
 
-import dagger.Module
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import dagger.Provides
-import javax.inject.Named
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import es.chewiegames.domain.model.Post
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import dagger.Module
+import dagger.Provides
 import es.chewiegames.data.model.UserData
+import es.chewiegames.domain.model.Post
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
-class FirebaseDatabaseModule constructor(var posts : ArrayList<Post> = ArrayList(), var likedPostsByUser : ArrayList<Post> = ArrayList()){
+class FirebaseDatabaseModule constructor(var posts: ArrayList<Post> = ArrayList(), var likedPostsByUser: ArrayList<Post> = ArrayList()) {
 
     @Provides
     fun provideUsersReference(firebaseDatabase: FirebaseDatabase): DatabaseReference {
         var databaseReference = firebaseDatabase.getReference("users")
-        databaseReference.keepSynced(true)//keep data synced
+        databaseReference.keepSynced(true) // keep data synced
         return databaseReference
     }
 
@@ -25,7 +25,7 @@ class FirebaseDatabaseModule constructor(var posts : ArrayList<Post> = ArrayList
     @Named("post by user")
     fun providePostByUserReference(firebaseDatabase: FirebaseDatabase, userData: UserData): DatabaseReference {
         var databaseReference = firebaseDatabase.getReference("postsByUser").child(userData.id!!)
-        databaseReference.keepSynced(true)//keep data synced
+        databaseReference.keepSynced(true) // keep data synced
         return databaseReference
     }
 
@@ -33,7 +33,7 @@ class FirebaseDatabaseModule constructor(var posts : ArrayList<Post> = ArrayList
     @Named("all posts")
     fun provideAllPosts(firebaseDatabase: FirebaseDatabase): DatabaseReference {
         var databaseReference = firebaseDatabase.getReference("posts")
-        databaseReference.keepSynced(true)//keep data synced
+        databaseReference.keepSynced(true) // keep data synced
         return databaseReference
     }
 
@@ -50,7 +50,6 @@ class FirebaseDatabaseModule constructor(var posts : ArrayList<Post> = ArrayList
     fun provideFirebaseUser(): FirebaseUser? {
         return FirebaseAuth.getInstance().currentUser
     }
-
 
     @Provides
     @Singleton

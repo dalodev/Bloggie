@@ -1,7 +1,10 @@
 package es.chewiegames.bloggie.di.component
 
 import dagger.Component
-import es.chewiegames.bloggie.di.module.*
+import es.chewiegames.bloggie.di.module.AppContextModule
+import es.chewiegames.bloggie.di.module.ApplicationModule
+import es.chewiegames.bloggie.di.module.FirebaseDatabaseModule
+import es.chewiegames.bloggie.di.module.FirebaseModule
 import javax.inject.Singleton
 
 @Singleton
@@ -11,5 +14,4 @@ import javax.inject.Singleton
         FirebaseModule::class,
         FirebaseDatabaseModule::class
         )))
-interface ApplicationComponent {
-}
+interface ApplicationComponent

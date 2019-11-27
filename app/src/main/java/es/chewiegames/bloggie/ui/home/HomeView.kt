@@ -3,8 +3,6 @@ package es.chewiegames.bloggie.ui.home
 import es.chewiegames.bloggie.ui.ui.BaseView
 import es.chewiegames.domain.model.Post
 
-
-
 interface HomeView : BaseView {
     fun updateFeedPosts(posts: ArrayList<Post>)
     fun updateItem(position: Int)

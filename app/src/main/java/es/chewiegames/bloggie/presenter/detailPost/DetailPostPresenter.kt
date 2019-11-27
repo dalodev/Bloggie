@@ -6,13 +6,13 @@ import android.view.View
 import android.widget.ImageView
 import es.chewiegames.bloggie.interactor.detailPost.DetailPostInteractor
 import es.chewiegames.bloggie.interactor.detailPost.IDetailPostInteractor
-import es.chewiegames.data.model.PostContentData
 import es.chewiegames.bloggie.ui.detailPost.DetailPostView
 import es.chewiegames.bloggie.util.EXTRA_POST
-import javax.inject.Inject
+import es.chewiegames.data.model.PostContentData
 import es.chewiegames.domain.model.Post
+import javax.inject.Inject
 
-class DetailPostPresenter @Inject constructor(): IDetailPostPresenter, IDetailPostInteractor.InteractorListener {
+class DetailPostPresenter @Inject constructor() : IDetailPostPresenter, IDetailPostInteractor.InteractorListener {
 
     private lateinit var view: DetailPostView
 
@@ -29,12 +29,12 @@ class DetailPostPresenter @Inject constructor(): IDetailPostPresenter, IDetailPo
     }
 
     override fun loadData(extras: Bundle) {
-        val post : Post? = extras.getSerializable(EXTRA_POST) as Post
-        if (post != null){
+        val post: Post? = extras.getSerializable(EXTRA_POST) as Post
+        if (post != null) {
             mPost = post
             view.fillValues(post)
             mDetailPostInteractor.addViewToPost(post)
-            if(post.content.isNotEmpty()){
+            if (post.content.isNotEmpty()) {
                 view.setAdapter(post.content)
             }
         }
@@ -58,18 +58,18 @@ class DetailPostPresenter @Inject constructor(): IDetailPostPresenter, IDetailPo
     }
 
     override fun handleBack() {
-        if(mDetailPostInteractor.isExpandedImage()){
+        if (mDetailPostInteractor.isExpandedImage()) {
             view.closeExpandedImage()
-        }else{
+        } else {
             view.goBack()
         }
     }
 
     override fun getPost(): Post? {
-        return  mPost
+        return mPost
     }
 
-    //interactor listener
+    // interactor listener
     override fun displayExpandedImage(content: String) {
         view.displayExpandedImage(content)
     }

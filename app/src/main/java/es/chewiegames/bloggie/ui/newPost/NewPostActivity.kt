@@ -4,32 +4,32 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
-import es.chewiegames.bloggie.R
-import es.chewiegames.bloggie.di.component.ApplicationComponent
-import es.chewiegames.bloggie.ui.base.BaseActivity
-import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.ItemTouchHelper
-import es.chewiegames.bloggie.util.*
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
+import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.databinding.ActivityNewPostBinding
+import es.chewiegames.bloggie.di.component.ApplicationComponent
+import es.chewiegames.bloggie.ui.base.BaseActivity
+import es.chewiegames.bloggie.util.BLOG_CONTENT_IMAGE
 import es.chewiegames.bloggie.viewmodel.NewPostViewModel
 import es.chewiegames.domain.model.PostContent
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NewPostActivity : BaseActivity<ActivityNewPostBinding>(), BottomNavigationView.OnNavigationItemSelectedListener {
 
-    private val viewModel : NewPostViewModel by viewModel()
+    private val viewModel: NewPostViewModel by viewModel()
     private val adapter: PostAdapter by lazy { PostAdapter(viewModel) }
 
     override fun onCreate(savedInstanceState: Bundle?) {

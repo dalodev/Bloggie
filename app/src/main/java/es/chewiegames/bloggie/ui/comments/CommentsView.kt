@@ -1,8 +1,8 @@
 package es.chewiegames.bloggie.ui.comments
 
+import es.chewiegames.bloggie.ui.ui.BaseView
 import es.chewiegames.data.model.Comment
 import es.chewiegames.domain.model.Post
-import es.chewiegames.bloggie.ui.ui.BaseView
 
 interface CommentsView : BaseView {
     fun fillValues(post: Post)

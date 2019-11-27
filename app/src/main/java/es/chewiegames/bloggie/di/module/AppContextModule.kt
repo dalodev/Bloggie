@@ -22,8 +22,7 @@ class AppContextModule {
 
     @Provides
     @Singleton
-    fun provideSharedPreferences(): SharedPreferences{
+    fun provideSharedPreferences(): SharedPreferences {
         return PreferenceManager.getDefaultSharedPreferences(BloggieApplication.instance)
     }
-
 }

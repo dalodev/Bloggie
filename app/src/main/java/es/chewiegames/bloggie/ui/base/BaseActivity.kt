@@ -21,7 +21,7 @@ import es.chewiegames.bloggie.di.component.ApplicationComponent
 abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity() {
 
     private var mToolbar: Toolbar? = null
-    lateinit var binding : B
+    lateinit var binding: B
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +32,7 @@ abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity() {
         initObservers()
     }
 
-    protected fun bindView(layoutId :Int) {
+    protected fun bindView(layoutId: Int) {
         binding = DataBindingUtil.setContentView(this, layoutId)
     }
 
@@ -69,7 +69,6 @@ abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity() {
             setSupportActionBar(mToolbar)
         }
     }
-
 
     override fun onDestroy() {
         super.onDestroy()

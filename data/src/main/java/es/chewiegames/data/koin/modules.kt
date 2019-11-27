@@ -12,11 +12,11 @@ import org.koin.dsl.module.module
 
 val dataModule = module {
 
-    single<UserRepository> { UserDataRepository(mUserData= get(), mDatabaseUsers = get(userDatabaseReference) ) }
+    single<UserRepository> { UserDataRepository(mUserData = get(), mDatabaseUsers = get(userDatabaseReference)) }
     single<PostRepository> {
         PostDataRepository(
                 mDatabasePostByUser = get(postsByUserDatabaseReference),
-                mDatabaseAllPost =get(allPostsDatabaseReference),
+                mDatabaseAllPost = get(allPostsDatabaseReference),
                 mDatabaseLikedPostByUser = get(likedPostsByUserDatabaseReference),
                 mUserData = get()
         )
@@ -33,18 +33,18 @@ val dataModule = module {
     single { provideUser() }
     single(feedPosts) { provideFeedPosts() }
     single(likedPostsByUser) { provideLikedPostsByUser() }
-    //Firebase database
+    // Firebase database
     single { provideFirebaseDatabase() }
     factory(userDatabaseReference) { getUserDatabaseReference(firebaseDatabase = get()) }
-    factory(postsByUserDatabaseReference) { providePostByUserReference(firebaseDatabase = get(), userData =  get()) }
+    factory(postsByUserDatabaseReference) { providePostByUserReference(firebaseDatabase = get(), userData = get()) }
     factory(allPostsDatabaseReference) { provideAllPostsReference(firebaseDatabase = get()) }
-    factory(likedPostsByUserDatabaseReference) { provideLikedPostByUserReference(firebaseDatabase = get(),userData =  get()) }
+    factory(likedPostsByUserDatabaseReference) { provideLikedPostByUserReference(firebaseDatabase = get(), userData = get()) }
 
-    //Firebase storage
+    // Firebase storage
     factory { provideFirebaseStorage() }
     factory { provideStorageReference(firebaseStorage = get()) }
 
-    //firebase auth
+    // firebase auth
     factory { provideFirebaseAuth() }
 }
 

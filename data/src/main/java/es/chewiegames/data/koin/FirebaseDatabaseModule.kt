@@ -6,25 +6,25 @@ import es.chewiegames.data.model.UserData
 
 fun provideFirebaseDatabase(): FirebaseDatabase {
     val firebaseDatabase = FirebaseDatabase.getInstance()
-    firebaseDatabase.setPersistenceEnabled(true)//enable offline conection
+    firebaseDatabase.setPersistenceEnabled(true) // enable offline conection
     return firebaseDatabase
 }
 
 fun getUserDatabaseReference(firebaseDatabase: FirebaseDatabase): DatabaseReference {
     val databaseReference = firebaseDatabase.getReference("users")
-    databaseReference.keepSynced(true)//keep data synced
+    databaseReference.keepSynced(true) // keep data synced
     return databaseReference
 }
 
 fun providePostByUserReference(firebaseDatabase: FirebaseDatabase, userData: UserData): DatabaseReference {
     val databaseReference = firebaseDatabase.getReference("postsByUser").child(userData.id!!)
-    databaseReference.keepSynced(true)//keep data synced
+    databaseReference.keepSynced(true) // keep data synced
     return databaseReference
 }
 
 fun provideAllPostsReference(firebaseDatabase: FirebaseDatabase): DatabaseReference {
     val databaseReference = firebaseDatabase.getReference("posts")
-    databaseReference.keepSynced(true)//keep data synced
+    databaseReference.keepSynced(true) // keep data synced
     return databaseReference
 }
 

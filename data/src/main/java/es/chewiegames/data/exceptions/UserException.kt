@@ -1,3 +1,3 @@
 package es.chewiegames.data.exceptions
 
-class UserException(message:String): Exception(message)
+class UserException(message: String) : Exception(message)

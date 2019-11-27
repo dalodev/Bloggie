@@ -8,5 +8,5 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class GetLikedPostsByUserUseCase(private val repository: PostRepository) : UseCase<ArrayList<Post>, UseCase.None>() {
-    override fun runInBackground(params: None): Flow<ArrayList<Post>> = repository.getLikedPostsByUser().map{ mapToPosts(it) }
+    override fun runInBackground(params: None): Flow<ArrayList<Post>> = repository.getLikedPostsByUser().map { mapToPosts(it) }
 }

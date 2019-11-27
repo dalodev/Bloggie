@@ -8,6 +8,6 @@ import es.chewiegames.domain.usecases.UseCase.None
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class GetFeedPostUseCase(private val repository: PostRepository) : UseCase<ArrayList<Post> , None>() {
-    override fun runInBackground(params: None): Flow<ArrayList<Post>> = repository.getFeedPosts().map{mapToPosts(it)}
+class GetFeedPostUseCase(private val repository: PostRepository) : UseCase<ArrayList<Post>, None>() {
+    override fun runInBackground(params: None): Flow<ArrayList<Post>> = repository.getFeedPosts().map { mapToPosts(it) }
 }

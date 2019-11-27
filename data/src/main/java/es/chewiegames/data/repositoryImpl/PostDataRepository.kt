@@ -1,7 +1,11 @@
 package es.chewiegames.data.repositoryImpl
 
 import android.util.Log
-import com.google.firebase.database.*
+import com.google.firebase.database.ChildEventListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
 import es.chewiegames.data.callbacks.OnLoadFeedPostCallback
 import es.chewiegames.data.model.PostData
 import es.chewiegames.data.model.UserData
@@ -13,11 +17,12 @@ import kotlinx.coroutines.flow.callbackFlow
 
 private const val TAG = "PostDataRepository"
 @ExperimentalCoroutinesApi
-class PostDataRepository(val mDatabasePostByUser: DatabaseReference,
-                         val mDatabaseAllPost: DatabaseReference,
-                         val mDatabaseLikedPostByUser: DatabaseReference,
-                         val mUserData: UserData) : PostRepository {
-
+class PostDataRepository(
+    val mDatabasePostByUser: DatabaseReference,
+    val mDatabaseAllPost: DatabaseReference,
+    val mDatabaseLikedPostByUser: DatabaseReference,
+    val mUserData: UserData
+) : PostRepository {
 
     override fun getFeedPosts(): Flow<ArrayList<PostData>> = callbackFlow {
         val eventListener = object : ValueEventListener {
@@ -61,11 +66,11 @@ class PostDataRepository(val mDatabasePostByUser: DatabaseReference,
     override fun updateLikedPosts(postData: PostData, checked: Boolean): Flow<PostData> = callbackFlow {
         postData.userData = mUserData
         if (checked) {
-            postData.littlePoints +=1
+            postData.littlePoints += 1
             mDatabaseLikedPostByUser.child(postData.id!!).setValue(postData)
             updatePost(postData)
         } else {
-            postData.littlePoints -=1
+            postData.littlePoints -= 1
             mDatabaseLikedPostByUser.child(postData.id!!).removeValue()
             updatePost(postData)
         }
@@ -82,9 +87,9 @@ class PostDataRepository(val mDatabasePostByUser: DatabaseReference,
                     if (feedPostUser != null) {
                         if (feedPostUser.id.equals(mUserData.id)) {
                             callback.onItemAdded(post)
-                            //TODO define what to do when add a post to feed
+                            // TODO define what to do when add a post to feed
                         } else {
-                            //TODO check follow people and check posts
+                            // TODO check follow people and check posts
                         }
                     }
                 }

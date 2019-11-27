@@ -6,5 +6,5 @@ import es.chewiegames.data.model.PostData
 import kotlinx.coroutines.flow.Flow
 
 interface NewPostRepository {
-    fun storeNewPost(post: PostData, postContentData : ArrayList<PostContentData>, blogImageView: ImageView) : Flow<PostData>
+    fun storeNewPost(post: PostData, postContentData: ArrayList<PostContentData>, blogImageView: ImageView): Flow<PostData>
 }

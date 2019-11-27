@@ -14,5 +14,5 @@ class UpdateLikedPostUseCase(private val repository: PostRepository) : UseCase<P
     override fun runInBackground(params: PostParams): Flow<Post> =
             repository.updateLikedPosts(
                     mapToPostData(params.post),
-                    params.checked).map{ mapToPost(it)}
+                    params.checked).map { mapToPost(it) }
 }

@@ -7,5 +7,5 @@ import kotlinx.coroutines.flow.Flow
 
 class CheckUserLoginUseCase(private val repository: UserRepository) : UseCase<Boolean, None>() {
 
-    override fun runInBackground(params: None) : Flow<Boolean> = repository.checkUserLogin()
+    override fun runInBackground(params: None): Flow<Boolean> = repository.checkUserLogin()
 }

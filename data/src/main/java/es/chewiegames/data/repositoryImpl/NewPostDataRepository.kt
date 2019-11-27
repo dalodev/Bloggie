@@ -6,7 +6,6 @@ import android.net.Uri
 import android.util.Log
 import android.widget.ImageView
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.storage.StorageException
 import com.google.firebase.storage.StorageReference
 import es.chewiegames.data.exceptions.NewPostException
 import es.chewiegames.data.model.PostContentData
@@ -14,23 +13,25 @@ import es.chewiegames.data.model.PostData
 import es.chewiegames.data.model.UserData
 import es.chewiegames.data.repository.NewPostRepository
 import es.chewiegames.data.utils.IMAGE_VIEW
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
+import java.util.Calendar
+import java.util.UUID
+import kotlin.collections.ArrayList
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
-import java.io.ByteArrayInputStream
-import java.io.ByteArrayOutputStream
-import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.math.log
 
 private const val TAG = "NewPostDataRepository"
 
 @ExperimentalCoroutinesApi
-class NewPostDataRepository(val mDatabasePosts: DatabaseReference,
-                            val mDatabasePostByUser: DatabaseReference,
-                            val mStorageReference: StorageReference,
-                            val mUserData: UserData) : NewPostRepository {
+class NewPostDataRepository(
+    val mDatabasePosts: DatabaseReference,
+    val mDatabasePostByUser: DatabaseReference,
+    val mStorageReference: StorageReference,
+    val mUserData: UserData
+) : NewPostRepository {
     private lateinit var mPost: PostData
     private var postContent = arrayListOf<PostContentData>()
 
@@ -42,15 +43,15 @@ class NewPostDataRepository(val mDatabasePosts: DatabaseReference,
                 val idP = mDatabasePosts.push().key
                 mPost.id = idP!!
 //                getDataFromTitleImage(blogImageView, idP)
-                storeImage(getBitmapFromView(blogImageView), idP)  //launch in coroutine???????
+                storeImage(getBitmapFromView(blogImageView), idP) // launch in coroutine???????
                 mPost.createdDate = Calendar.getInstance().time
                 mPost.userData = mUserData
                 mPost.littlePoints = 0
                 mPost.views = 0
                 mPost.content = getContentData(idP)
-                mDatabasePostByUser.child(idP).setValue(mPost) //Store post by user
+                mDatabasePostByUser.child(idP).setValue(mPost) // Store post by user
                 mPost.id = idP
-                mDatabasePosts.child(idP).setValue(mPost)//store in general posts
+                mDatabasePosts.child(idP).setValue(mPost) // store in general posts
                 offer(mPost)
             } else {
                 close(NewPostException("Title Empty"))
@@ -89,7 +90,7 @@ class NewPostDataRepository(val mDatabasePosts: DatabaseReference,
                     val downloadUrl = it.toString()
                     if (downloadUrl.isNotEmpty()) {
                         mPost.titleImage = downloadUrl.toString()
-                        mDatabasePostByUser.child(idPost).setValue(mPost) //Store post by user
+                        mDatabasePostByUser.child(idPost).setValue(mPost) // Store post by user
                     }
                 }
             }
@@ -100,7 +101,7 @@ class NewPostDataRepository(val mDatabasePosts: DatabaseReference,
                     val downloadUrl = it.toString()
                     if (downloadUrl.isNotEmpty()) {
                         mPost.titleImage = downloadUrl.toString()
-                        mDatabasePosts.child(idPost).setValue(mPost)//store in general posts
+                        mDatabasePosts.child(idPost).setValue(mPost) // store in general posts
                     }
                 }
             }
@@ -132,7 +133,7 @@ class NewPostDataRepository(val mDatabasePosts: DatabaseReference,
                 if (downloadUrl.isNotEmpty()) {
                     content.content = downloadUrl.toString()
                     mPost.content[content.position] = content
-                    mDatabasePostByUser.child(idPost).setValue(mPost) //Store post by user
+                    mDatabasePostByUser.child(idPost).setValue(mPost) // Store post by user
                 }
             }
         }

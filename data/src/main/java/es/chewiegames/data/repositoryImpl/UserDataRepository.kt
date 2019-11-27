@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.callbackFlow
 @ExperimentalCoroutinesApi
 class UserDataRepository(var mUserData: UserData, var mDatabaseUsers: DatabaseReference) : UserRepository {
 
-    override fun storeUserInDatabase(user: FirebaseUser) : Flow<UserData> = callbackFlow {
+    override fun storeUserInDatabase(user: FirebaseUser): Flow<UserData> = callbackFlow {
         mUserData.id = user.uid
         mUserData.userEmail = user.email.toString()
         mUserData.userName = user.displayName.toString()
@@ -57,8 +57,6 @@ class UserDataRepository(var mUserData: UserData, var mDatabaseUsers: DatabaseRe
                     offer(false)
                 }
             }
-
-
         }
         if (FirebaseAuth.getInstance().currentUser != null) {
             mDatabaseUsers.child(FirebaseAuth.getInstance().currentUser!!.uid).addListenerForSingleValueEvent(callback)

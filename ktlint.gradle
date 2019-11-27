@@ -25,3 +25,11 @@ task ktlintFormat(type: JavaExec, group: "formatting") {
     main = "com.pinterest.ktlint.Main"
     args "-F", "src/**/*.kt"
 }
+
+//Source from
+//https://medium.com/@AndreSand/add-ktlint-to-android-app-36821aec9b9a
+
+//1. The below task runs Kotlin lint check and outputs Kotlin file errors.
+// ./gradlew %module%:ktlint
+//2. The below task automatically formats all Kotlin files and fixes some of the lint errors outputted from the above Gradle task.
+// ./gradlew %module%:ktlintFormat

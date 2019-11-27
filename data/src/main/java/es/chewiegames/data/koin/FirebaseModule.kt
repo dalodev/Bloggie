@@ -12,6 +12,6 @@ fun provideStorageReference(firebaseStorage: FirebaseStorage): StorageReference 
     return firebaseStorage.reference
 }
 
-fun provideFirebaseAuth() : FirebaseAuth {
+fun provideFirebaseAuth(): FirebaseAuth {
     return FirebaseAuth.getInstance()
 }

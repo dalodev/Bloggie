@@ -10,6 +10,7 @@ import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.viewmodel.HomeViewModel
 import es.chewiegames.domain.model.Post
 import es.chewiegames.domain.model.User
+import kotlinx.android.synthetic.main.list_item_home.view.*
 
 class HomeAdapter(val context: Context, private val viewModel: HomeViewModel) : RecyclerView.Adapter<HomeViewHolder>() {
 
@@ -31,6 +32,8 @@ class HomeAdapter(val context: Context, private val viewModel: HomeViewModel) : 
         onBind = true
         val feedPost: Post = posts[position]
         val feedPostUserData: User = feedPost.user!!
+        viewModel.littlePointChecked(holder.itemView.littlePoint, holder.adapterPosition)
+        viewModel.onAddCommentClicked(holder.itemView.comments, holder.adapterPosition)
         holder.bind(feedPost, feedPostUserData, viewModel)
     }
 }

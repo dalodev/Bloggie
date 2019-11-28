@@ -2,9 +2,11 @@ package es.chewiegames.bloggie.viewmodel
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
+import com.airbnb.lottie.LottieAnimationView
 import es.chewiegames.bloggie.livedata.BaseSingleLiveEvent
 import es.chewiegames.bloggie.util.EXTRA_POST
 import es.chewiegames.bloggie.util.varargAsList
@@ -19,10 +21,10 @@ import es.chewiegames.domain.usecases.feedpost.UpdateLikedPostUseCase
 import java.util.ArrayList
 
 class HomeViewModel(
-    private val getFeedPostUseCase: GetFeedPostUseCase,
-    private val getLikedPostsByUserUseCase: GetLikedPostsByUserUseCase,
-    private val updateLikedPostUseCase: UpdateLikedPostUseCase,
-    subscribeFeedPostsUseCase: SubscribeFeedPostsUseCase
+        private val getFeedPostUseCase: GetFeedPostUseCase,
+        private val getLikedPostsByUserUseCase: GetLikedPostsByUserUseCase,
+        private val updateLikedPostUseCase: UpdateLikedPostUseCase,
+        subscribeFeedPostsUseCase: SubscribeFeedPostsUseCase
 ) : BaseViewModel(), OnLoadFeedPostListener {
 
     val posts: BaseSingleLiveEvent<ArrayList<Post>> by lazy { BaseSingleLiveEvent<ArrayList<Post>>() }
@@ -34,7 +36,7 @@ class HomeViewModel(
     val navigateToComments: BaseSingleLiveEvent<Bundle> by lazy { BaseSingleLiveEvent<Bundle>() }
 
     // This LiveData depends on another so we can use a transformation.
-    val emptyViewVisibility: LiveData<Int> = Transformations.map(posts) { if (it.isEmpty()) View.VISIBLE else View.GONE }
+    val emptyViewVisibility: LiveData<Int> = Transformations.map(posts) { if (it.isEmpty()) View.GONE else View.VISIBLE }
 
     private var likedPosts: ArrayList<Post> = arrayListOf()
     var onBind = false
@@ -67,10 +69,13 @@ class HomeViewModel(
     /**
      * trigger when user touch on comment buttom
      */
-    fun onAddCommentClicked(post: Post) {
-        val bundle = Bundle()
-        bundle.putSerializable(EXTRA_POST, post)
-        navigateToComments.value = bundle
+    fun onAddCommentClicked(view: LottieAnimationView, position: Int) {
+        view.setOnClickListener {
+            view.playAnimation()
+            val bundle = Bundle()
+            bundle.putSerializable(EXTRA_POST, posts.value!![position])
+            navigateToComments.value = bundle
+        }
     }
 
     private fun likedPostUpdated(post: Post) {
@@ -93,6 +98,18 @@ class HomeViewModel(
             }
         }
         return false
+    }
+
+    fun littlePointChecked(view: LottieAnimationView, position: Int) {
+        val feedPost = posts.value!![position]
+        val checked = isLikedPost(feedPost)
+        view.progress = if(checked) 1f else 0f
+        if (!onBind) {
+            view.setOnClickListener {
+                view.playAnimation()
+                onLikePost(feedPost, !checked)
+            }
+        }
     }
 
     private fun onLoadFeedPostSuccess(posts: ArrayList<Post>) {

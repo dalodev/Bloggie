@@ -42,12 +42,3 @@ fun profileImage(view: ImageView, avatar: String) {
             .transform(RoundedTransformation(50, 0))
             .into(view)
 }
-
-@BindingAdapter(value = ["onLittlePointChecked", "position"], requireAll = false)
-fun littlePointChecked(view: CheckBox, viewModel: HomeViewModel, position: Int) {
-    view.setOnCheckedChangeListener { _, checked ->
-        if (!viewModel.onBind) {
-            viewModel.onLikePost(viewModel.posts.value!![position], checked)
-        }
-    }
-}

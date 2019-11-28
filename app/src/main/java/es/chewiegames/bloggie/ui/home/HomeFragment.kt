@@ -1,11 +1,13 @@
 package es.chewiegames.bloggie.ui.home
 
+import android.animation.Animator
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
+import androidx.core.content.ContextCompat
 import androidx.core.util.Pair
 import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
@@ -20,6 +22,7 @@ import es.chewiegames.bloggie.util.EXTRA_POST
 import es.chewiegames.bloggie.util.HomeItemAnimator
 import es.chewiegames.bloggie.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.list_item_home.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseBindingFragment() {
@@ -42,15 +45,9 @@ class HomeFragment : BaseBindingFragment() {
             adapter.posts = it
             adapter.notifyDataSetChanged()
         })
-        viewModel.updateItemAdapterPosition.observe(this, Observer {
-            adapter.notifyItemChanged(it)
-        })
-        viewModel.addItemAdapter.observe(this, Observer {
-            adapter.notifyItemRangeChanged(0, adapter.itemCount)
-        })
-        viewModel.removeItemAdapterPosition.observe(this, Observer {
-            adapter.notifyItemRemoved(it)
-        })
+        viewModel.updateItemAdapterPosition.observe(this, Observer { adapter.notifyItemChanged(it) })
+        viewModel.addItemAdapter.observe(this, Observer { adapter.notifyItemRangeChanged(0, adapter.itemCount) })
+        viewModel.removeItemAdapterPosition.observe(this, Observer { adapter.notifyItemRemoved(it) })
         viewModel.navigateToComments.observe(this, Observer { findNavController().navigate(R.id.action_home_to_comments, it) })
         viewModel.viewsToShare.observe(this, Observer {
             val p2 = Pair.create(it[1], ViewCompat.getTransitionName(it[1]))

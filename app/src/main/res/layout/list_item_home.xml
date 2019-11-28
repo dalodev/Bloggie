@@ -3,6 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="adapterPosition"
+            type="Integer" />
+
+        <variable
+            name="user"
+            type="es.chewiegames.domain.model.User" />
+
+        <variable
+            name="feedPost"
+            type="es.chewiegames.domain.model.Post" />
+
+        <variable
+            name="homeViewModel"
+            type="es.chewiegames.bloggie.viewmodel.HomeViewModel" />
+    </data>
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
@@ -73,30 +92,33 @@
                 android:text="@{user.userName}"
                 style="@style/title"/>
 
-
-            <CheckBox
+            <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/littlePoint"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:button="@drawable/fill_in_heart"
-                android:checked="@{homeViewModel.isLikedPost(feedPost)}"
                 android:padding="@dimen/card_padding"
-                app:layout_constraintBottom_toBottomOf="@+id/comments"
-                app:layout_constraintEnd_toStartOf="@+id/comments"
-                app:layout_constraintTop_toTopOf="@id/postImage"
-                app:onLittlePointChecked="@{homeViewModel}"
-                app:position="@{adapterPosition}" />
+                app:layout_constraintEnd_toStartOf="@id/comments"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="false"
+                app:lottie_rawRes="@raw/likecheckmark"
+                app:lottie_speed="2"
+                app:lottie_scale="1.5"
+                app:lottie_progress="0" />
 
-            <ImageView
+            <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/comments"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:onClick="@{(v) -> homeViewModel.onAddCommentClicked(homeViewModel.posts[adapterPosition])}"
                 android:padding="@dimen/card_padding"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/postImage"
-                app:srcCompat="@drawable/ic_comment" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_rawRes="@raw/comments"
+                app:lottie_autoPlay="true"
+                app:lottie_speed="2"
+                app:lottie_scale="0.35"
+                app:lottie_progress="1"
+                app:lottie_colorFilter="@color/colorPrimary"/>
 
 
             <ProgressBar
@@ -208,24 +230,5 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
-
-    <data>
-
-        <variable
-            name="adapterPosition"
-            type="Integer" />
-
-        <variable
-            name="user"
-            type="es.chewiegames.domain.model.User" />
-
-        <variable
-            name="feedPost"
-            type="es.chewiegames.domain.model.Post" />
-
-        <variable
-            name="homeViewModel"
-            type="es.chewiegames.bloggie.viewmodel.HomeViewModel" />
-    </data>
 
 </layout>

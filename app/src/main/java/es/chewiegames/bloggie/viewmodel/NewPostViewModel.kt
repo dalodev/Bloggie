@@ -151,6 +151,7 @@ class NewPostViewModel(private val context: Context, private val storeNewPostUse
 
     fun itemSwiped(deletedItem: PostContent?, deletedItemIndex: Int) {
         if (deletedItem!!.viewType != EDITTEXT_VIEW) {
+            deletedItem.position = deletedItemIndex
             showUndoPostContent.value = deletedItem
         } else if (deletedItem.viewType != IMAGE_VIEW) {
             isTypeContent = false

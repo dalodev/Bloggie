@@ -73,7 +73,7 @@ dependencies {
     /**
      * GSON
      */
-    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.google.code.gson:gson:2.8.6'
 
     /**
      * Android navigation
@@ -94,11 +94,11 @@ dependencies {
     /**
      * Dagger
      */
-    implementation 'com.google.dagger:dagger:2.17'
-    kapt "com.google.dagger:dagger-compiler:2.14.1"
-    kapt 'com.google.dagger:dagger-compiler:2.14.1'
-    implementation 'com.google.dagger:dagger-android-support:2.14.1'
-    kapt 'com.google.dagger:dagger-android-processor:2.14.1'
+    implementation 'com.google.dagger:dagger:2.25.2'
+    kapt 'com.google.dagger:dagger-compiler:2.25.2'
+    kapt 'com.google.dagger:dagger-compiler:2.25.2'
+    implementation 'com.google.dagger:dagger-android-support:2.25.2'
+    kapt 'com.google.dagger:dagger-android-processor:2.25.2'
 
     /**
      * DataBinding
@@ -108,7 +108,7 @@ dependencies {
     /**
      * Timber
      */
-    implementation 'com.jakewharton.timber:timber:4.7.0'
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 
     /**
      * Firebase core
@@ -119,7 +119,7 @@ dependencies {
      * Firebase Auth
      */
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
-    implementation 'com.google.firebase:firebase-auth:19.1.0'
+    implementation 'com.google.firebase:firebase-auth:19.2.0'
     implementation 'com.firebaseui:firebase-ui-auth:4.0.0'
 
     /**
@@ -135,18 +135,23 @@ dependencies {
     /**
      * Picasoo
      */
-    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    /**
+     * Lottie
+     */
+    implementation 'com.airbnb.android:lottie:3.2.2'
 
     /**
      * Not in use
      */
     //Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.6.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.6.2'
 
     //okHttp
-    implementation 'com.squareup.okhttp3:okhttp:3.12.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.2.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.2'
 
     /**
      * Test

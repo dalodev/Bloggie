@@ -12,7 +12,6 @@ import android.widget.EditText
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,6 +31,8 @@ class NewPostActivity : BaseActivity<ActivityNewPostBinding>(), BottomNavigation
     private val viewModel: NewPostViewModel by viewModel()
     private val adapter: PostAdapter by lazy { PostAdapter(viewModel) }
 
+    override fun getLayoutId() = R.layout.activity_new_post
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bindView(getLayoutId())
@@ -42,15 +43,6 @@ class NewPostActivity : BaseActivity<ActivityNewPostBinding>(), BottomNavigation
         initObservers()
     }
 
-    /**
-     * Get the layout view of the activity
-     * @return The layout id of the activity
-     */
-    override fun getLayoutId() = R.layout.activity_new_post
-
-    /**
-     * This method is triggered in onCreate event
-     */
     override fun initView(savedInstanceState: Bundle?) {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowTitleEnabled(true)
@@ -68,19 +60,23 @@ class NewPostActivity : BaseActivity<ActivityNewPostBinding>(), BottomNavigation
         viewModel.removeAdapterItem.observe(this, Observer { adapter.removeContent(it) })
     }
 
-    override fun onSupportNavigateUp() = findNavController(R.id.my_nav_host_fragment).navigateUp()
-
     /**
      * Initialize the inject dependences for this activity. This method is triggered in onCreate event
      * @param component
      */
     override fun injectDependencies(component: ApplicationComponent) {}
 
+    /**
+     * this method inflate menu for toolbar
+     */
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.new_post, menu)
         return true
     }
 
+    /**
+     * This methor is trigger when click on menu item
+     */
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item!!.itemId) {
             android.R.id.home -> {
@@ -92,6 +88,9 @@ class NewPostActivity : BaseActivity<ActivityNewPostBinding>(), BottomNavigation
         return true
     }
 
+    /**
+     * This methor is trigger when user click in bottom menú items
+     */
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.textNavigation -> {

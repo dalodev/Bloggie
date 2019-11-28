@@ -14,10 +14,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity<ActivityMainBinding>(), BottomNavigationView.OnNavigationItemSelectedListener {
 
-    /**
-     * Get the layout view of the activity
-     * @return The layout id of the activity
-     */
     override fun getLayoutId(): Int = R.layout.activity_main
 
     /**
@@ -36,8 +32,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), BottomNavigationView.O
      * @param component
      */
     override fun injectDependencies(component: ApplicationComponent) {}
-
-    override fun onSupportNavigateUp() = findNavController(R.id.my_nav_host_fragment).navigateUp()
 
     /**
      * this method trigger when user click on any of items in bottom menu

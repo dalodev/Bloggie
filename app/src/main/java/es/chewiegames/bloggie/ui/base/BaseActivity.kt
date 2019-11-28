@@ -32,10 +32,16 @@ abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity() {
         initObservers()
     }
 
+    /**
+     * Binding the view with layout resource
+     */
     protected fun bindView(layoutId: Int) {
         binding = DataBindingUtil.setContentView(this, layoutId)
     }
 
+    /**
+     * Navigation jetpack navigation support
+     */
     override fun onSupportNavigateUp() = findNavController(R.id.my_nav_host_fragment).navigateUp()
 
     /**

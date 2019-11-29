@@ -1,15 +1,17 @@
 package es.chewiegames.bloggie.viewmodel
 
 import android.os.Bundle
+import android.view.GestureDetector
+import android.view.MotionEvent
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.core.view.GestureDetectorCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import com.airbnb.lottie.LottieAnimationView
 import es.chewiegames.bloggie.livedata.BaseSingleLiveEvent
 import es.chewiegames.bloggie.util.EXTRA_POST
-import es.chewiegames.bloggie.util.varargAsList
 import es.chewiegames.domain.callbacks.OnLoadFeedPostListener
 import es.chewiegames.domain.model.Post
 import es.chewiegames.domain.model.PostParams
@@ -31,7 +33,7 @@ class HomeViewModel(
     val addItemAdapter: BaseSingleLiveEvent<Any> by lazy { BaseSingleLiveEvent<Any>() }
     val removeItemAdapterPosition: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
     val updateItemAdapterPosition: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
-    val viewsToShare: BaseSingleLiveEvent<ArrayList<View>> by lazy { BaseSingleLiveEvent<ArrayList<View>>() }
+    val viewsToShare: BaseSingleLiveEvent<Array<out View?>> by lazy { BaseSingleLiveEvent<Array<out View?>>() }
     val navigateToDetail: BaseSingleLiveEvent<Post> by lazy { BaseSingleLiveEvent<Post>() }
     val navigateToComments: BaseSingleLiveEvent<Bundle> by lazy { BaseSingleLiveEvent<Bundle>() }
 
@@ -57,14 +59,14 @@ class HomeViewModel(
      * trigger when user touch on item of the list
      */
     fun onPostClicked(post: Post, vararg viewsToShare: View?) {
-        this.viewsToShare.value = varargAsList(viewsToShare) as ArrayList<View>
+        this.viewsToShare.value = viewsToShare
         navigateToDetail.value = post
     }
 
     /**
      * trigger when user touch on like button in post
      */
-    fun onLikePost(post: Post, checked: Boolean) = updateLikedPostUseCase.executeAsync(viewModelScope, PostParams(post, checked), ::likedPostUpdated, ::onError, ::showProgressDialog, ::hideProgressDialog)
+    private fun onLikePost(post: Post, checked: Boolean) = updateLikedPostUseCase.executeAsync(viewModelScope, PostParams(post, checked), ::likedPostUpdated, ::onError, ::showProgressDialog, ::hideProgressDialog)
 
     /**
      * trigger when user touch on comment buttom
@@ -91,7 +93,7 @@ class HomeViewModel(
         error.value = t.message
     }
 
-    fun isLikedPost(feedPost: Post): Boolean {
+    private fun isLikedPost(feedPost: Post): Boolean {
         for (likedPost in likedPosts) {
             if (likedPost.id == feedPost.id) {
                 return true
@@ -100,15 +102,20 @@ class HomeViewModel(
         return false
     }
 
+    fun isLittlePointChecked(view: LottieAnimationView, position: Int){
+        val feedPost = posts.value!![position]
+        val checked = isLikedPost(feedPost)
+        view.visibility = if (checked) View.VISIBLE else View.GONE
+        view.playAnimation()
+    }
+
     fun littlePointChecked(view: LottieAnimationView, position: Int) {
         val feedPost = posts.value!![position]
         val checked = isLikedPost(feedPost)
-        view.progress = if(checked) 1f else 0f
-        if (!onBind) {
-            view.setOnClickListener {
-                view.playAnimation()
-                onLikePost(feedPost, !checked)
-            }
+        if (!view.isAnimating) {
+            view.visibility = if (checked) View.VISIBLE else View.GONE
+            view.playAnimation()
+            onLikePost(feedPost, !checked)
         }
     }
 

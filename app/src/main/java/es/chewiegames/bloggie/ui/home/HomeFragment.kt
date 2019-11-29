@@ -50,14 +50,16 @@ class HomeFragment : BaseBindingFragment() {
         viewModel.removeItemAdapterPosition.observe(this, Observer { adapter.notifyItemRemoved(it) })
         viewModel.navigateToComments.observe(this, Observer { findNavController().navigate(R.id.action_home_to_comments, it) })
         viewModel.viewsToShare.observe(this, Observer {
-            val p2 = Pair.create(it[1], ViewCompat.getTransitionName(it[1]))
-            val options = if (it.size > 1) {
-                val p1 = Pair.create(it[0], ViewCompat.getTransitionName(it[0]))
-                ActivityOptionsCompat.makeSceneTransitionAnimation(activity!!, p1, p2)
-            } else {
-                ActivityOptionsCompat.makeSceneTransitionAnimation(activity!!, p2)
+            if(it!=null){
+                val p2 = Pair.create(it[1], ViewCompat.getTransitionName(it[1]!!))
+                val options = if (it.size > 1) {
+                    val p1 = Pair.create(it[0], ViewCompat.getTransitionName(it[0]!!))
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(activity!!, p1, p2)
+                } else {
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(activity!!, p2)
+                }
+                viewModel.options = options.toBundle()!!
             }
-            viewModel.options = options.toBundle()!!
         })
         viewModel.navigateToDetail.observe(this, Observer {
             val intent = Intent(activity, DetailPostActivity::class.java)

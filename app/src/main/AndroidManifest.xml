@@ -22,7 +22,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.main.MainActivity"
-            android:theme="@style/HomeTheme"/>
+            android:theme="@style/HomeTheme"
+            android:screenOrientation="userPortrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ui.newPost.NewPostActivity"
             android:configChanges="orientation|screenSize"

@@ -1,8 +1,11 @@
 package es.chewiegames.bloggie.ui.home
 
 import android.content.Context
+import android.view.GestureDetector
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.ViewGroup
+import androidx.core.view.GestureDetectorCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
@@ -32,7 +35,6 @@ class HomeAdapter(val context: Context, private val viewModel: HomeViewModel) : 
         onBind = true
         val feedPost: Post = posts[position]
         val feedPostUserData: User = feedPost.user!!
-        viewModel.littlePointChecked(holder.itemView.littlePoint, holder.adapterPosition)
         viewModel.onAddCommentClicked(holder.itemView.comments, holder.adapterPosition)
         holder.bind(feedPost, feedPostUserData, viewModel)
     }

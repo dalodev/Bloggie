@@ -39,10 +39,3 @@ fun hideKeyBoard(context: Context, view: View) {
     imm.hideSoftInputFromWindow(view.windowToken,
             InputMethodManager.RESULT_UNCHANGED_SHOWN)
 }
-
-fun <T> varargAsList(vararg ts: T): ArrayList<T>? {
-    val result = ArrayList<T>()
-    for (t in ts) // ts is an Array
-        result.add(t)
-    return result
-}

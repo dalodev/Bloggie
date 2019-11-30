@@ -7,7 +7,6 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.view.View
 import android.widget.ImageView
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.squareup.picasso.Callback
 import es.chewiegames.bloggie.livedata.BaseSingleLiveEvent
@@ -28,7 +27,7 @@ import es.chewiegames.domain.usecases.newpost.StoreNewPostUseCase
 import kotlin.math.ceil
 import kotlin.math.sqrt
 
-class NewPostViewModel(private val context: Context, private val storeNewPostUseCase: StoreNewPostUseCase) : ViewModel() {
+class NewPostViewModel(private val context: Context, private val storeNewPostUseCase: StoreNewPostUseCase) : BaseViewModel() {
 
     val postContent: BaseSingleLiveEvent<ArrayList<PostContent>> by lazy { BaseSingleLiveEvent<ArrayList<PostContent>>() }
     val post: BaseSingleLiveEvent<Post> by lazy { BaseSingleLiveEvent<Post>() }
@@ -37,22 +36,20 @@ class NewPostViewModel(private val context: Context, private val storeNewPostUse
     val navigateToHome: BaseSingleLiveEvent<Any> by lazy { BaseSingleLiveEvent<Any>() }
     val showTitleDialog: BaseSingleLiveEvent<Boolean> by lazy { BaseSingleLiveEvent<Boolean>() }
     val showInstructions: BaseSingleLiveEvent<Boolean> by lazy { BaseSingleLiveEvent<Boolean>() }
-    val showUndoPostContent: BaseSingleLiveEvent<PostContent> by lazy { BaseSingleLiveEvent<PostContent>() }
+    val showUndoContent: BaseSingleLiveEvent<PostContent> by lazy { BaseSingleLiveEvent<PostContent>() }
     val postContentImageType: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
     val addAdapterItem: BaseSingleLiveEvent<PostContent> by lazy { BaseSingleLiveEvent<PostContent>() }
     val updateAdapterPosition: BaseSingleLiveEvent<PostContent> by lazy { BaseSingleLiveEvent<PostContent>() }
     val removeAdapterItem: BaseSingleLiveEvent<PostContent> by lazy { BaseSingleLiveEvent<PostContent>() }
     val imageContentLoading: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
     val imageBackgroundVisibility: BaseSingleLiveEvent<Int> by lazy { BaseSingleLiveEvent<Int>() }
-    val showError: BaseSingleLiveEvent<String> by lazy { BaseSingleLiveEvent<String>() }
 
     private var tempContent: PostContent? = null
     var isTextContent: Boolean = true
     private var isTypeContent: Boolean = false
-    private var typeContentToAdd: Int? = null
+    private var typeContentToAdd: Int = EDITTEXT_VIEW
 
     init {
-        typeContentToAdd = EDITTEXT_VIEW
         postContent.value = arrayListOf()
         post.value = Post()
         showInstructions()
@@ -109,14 +106,12 @@ class NewPostViewModel(private val context: Context, private val storeNewPostUse
     }
 
     fun publishPost(blogImageView: ImageView) = storeNewPostUseCase.executeAsync(viewModelScope, StoreNewPostParams(post.value!!, postContent.value ?: arrayListOf(), blogImageView),
-                    ::onStoreNewPostSuccess, ::onError, ::showLoading, ::hideLoading)
+                    ::onStoreNewPostSuccess, ::onError, ::showProgressDialog, ::hideProgressDialog)
 
     fun onAddContent() {
-        if (isTextContent) {
-            if (!isTypeContent) {
-                isTextContent = true
-                handleAddContent()
-            }
+        if (isTextContent && !isTypeContent) {
+            isTextContent = true
+            handleAddContent()
         } else {
             handleAddContent()
         }
@@ -152,7 +147,7 @@ class NewPostViewModel(private val context: Context, private val storeNewPostUse
     fun itemSwiped(deletedItem: PostContent?, deletedItemIndex: Int) {
         if (deletedItem!!.viewType != EDITTEXT_VIEW) {
             deletedItem.position = deletedItemIndex
-            showUndoPostContent.value = deletedItem
+            showUndoContent.value = deletedItem
         } else if (deletedItem.viewType != IMAGE_VIEW) {
             isTypeContent = false
         }
@@ -174,16 +169,15 @@ class NewPostViewModel(private val context: Context, private val storeNewPostUse
 
     /**
      * storeUseCase methods
+     * @param post post stored in database
      */
     private fun onStoreNewPostSuccess(post: Post) = navigateToHome.call()
 
     private fun onError(t: Throwable) {
         if (t is NewPostException) showTitleDialog.call()
-        else showError.value = t.message
+        else error.value = t.message
     }
 
-    private fun showLoading() {}
-    private fun hideLoading() {}
     /**
      * Trigger when click on add image to post
      */

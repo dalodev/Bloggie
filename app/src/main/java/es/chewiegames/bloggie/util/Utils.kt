@@ -7,7 +7,6 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import java.util.ArrayList
 
 /**
  * converts drawable to bitmap

@@ -11,7 +11,6 @@ import org.koin.android.ext.android.startKoin
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 
-
 open class BloggieApplication : Application() {
 
     companion object {

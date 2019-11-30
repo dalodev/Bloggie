@@ -37,6 +37,8 @@ abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity() {
      */
     protected fun bindView(layoutId: Int) {
         binding = DataBindingUtil.setContentView(this, layoutId)
+        binding.lifecycleOwner = this
+
     }
 
     /**

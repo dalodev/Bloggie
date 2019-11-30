@@ -64,7 +64,7 @@ class HomeViewHolder constructor(val binding: ViewDataBinding) : RecyclerView.Vi
                         return true
                     }
 
-                    override fun onDoubleTapEvent(e: MotionEvent?) : Boolean{
+                    override fun onDoubleTapEvent(e: MotionEvent?): Boolean {
                         Timber.i("onDoubleTapEvent")
                         return true
                     }
@@ -74,7 +74,6 @@ class HomeViewHolder constructor(val binding: ViewDataBinding) : RecyclerView.Vi
                         homeViewModel.onPostClicked(feedPost, if (feedPost.titleImage != null) itemView.postImage else null, itemView.postTitle)
                         return true
                     }
-
                 })
         homeViewModel.isLittlePointChecked(itemView.littlePoint, adapterPosition)
         itemView.confettiAnimation.setOnTouchListener { v, event -> mDetector.onTouchEvent(event) }

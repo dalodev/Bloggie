@@ -11,25 +11,21 @@ import es.chewiegames.bloggie.databinding.ActivityDetailPostBinding
 import es.chewiegames.bloggie.di.component.ApplicationComponent
 import es.chewiegames.bloggie.presenter.detailPost.IDetailPostPresenter
 import es.chewiegames.bloggie.ui.base.BaseActivity
+import es.chewiegames.bloggie.viewmodel.DetailPostViewModel
 import es.chewiegames.data.model.PostContentData
 import es.chewiegames.domain.model.Post
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import javax.inject.Inject
 
-class DetailPostActivity : BaseActivity<ActivityDetailPostBinding>(), DetailPostView, DetailPostAdapter.DetailPostAdapterListener {
+class DetailPostActivity : BaseActivity<ActivityDetailPostBinding>(), DetailPostAdapter.DetailPostAdapterListener {
 
-    @Inject
-    lateinit var mDetailPostPresenter: IDetailPostPresenter
+    private val viewModel: DetailPostViewModel by viewModel()
 
-    @Inject
-    lateinit var layoutManager: LinearLayoutManager
-
-    override fun getLayoutId(): Int {
-        return R.layout.activity_detail_post
-    }
+    override fun getLayoutId() = R.layout.activity_detail_post
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
-        mDetailPostPresenter.setCurrentAnimatorDuration()
+        viewModel.setCurrentAnimatorDuration()
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowTitleEnabled(true)
     }

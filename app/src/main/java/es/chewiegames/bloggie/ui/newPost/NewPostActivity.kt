@@ -33,16 +33,6 @@ class NewPostActivity : BaseActivity<ActivityNewPostBinding>(), BottomNavigation
 
     override fun getLayoutId() = R.layout.activity_new_post
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        bindView(getLayoutId())
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
-        setupToolbar()
-        initView(savedInstanceState)
-        initObservers()
-    }
-
     override fun initView(savedInstanceState: Bundle?) {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowTitleEnabled(true)
@@ -52,7 +42,7 @@ class NewPostActivity : BaseActivity<ActivityNewPostBinding>(), BottomNavigation
 
     override fun initObservers() {
         viewModel.navigateToHome.observe(this, Observer { finish() })
-        viewModel.showUndoPostContent.observe(this, Observer { showUndoSnackbar(it) })
+        viewModel.showUndoContent.observe(this, Observer { showUndoSnackbar(it) })
         viewModel.postContentImageType.observe(this, Observer { onChoosePhotoPicker(it) })
         viewModel.showTitleDialog.observe(this, Observer { changePostTitle() })
         viewModel.addAdapterItem.observe(this, Observer { adapter.addItem(it) })

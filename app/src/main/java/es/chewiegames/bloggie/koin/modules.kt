@@ -1,5 +1,6 @@
 package es.chewiegames.bloggie.koin
 
+import es.chewiegames.bloggie.viewmodel.DetailPostViewModel
 import es.chewiegames.bloggie.viewmodel.HomeViewModel
 import es.chewiegames.bloggie.viewmodel.LoginViewModel
 import es.chewiegames.bloggie.viewmodel.NewPostViewModel
@@ -13,6 +14,7 @@ val appModule = module {
     viewModel { LoginViewModel(checkUserLoginUseCase = get(), registerUserUseCase = get()) }
     viewModel { HomeViewModel(getFeedPostUseCase = get(), getLikedPostsByUserUseCase = get(), updateLikedPostUseCase = get(), subscribeFeedPostsUseCase = get()) }
     viewModel { NewPostViewModel(context = get(), storeNewPostUseCase = get()) }
+    viewModel { DetailPostViewModel(context = get()) }
 
     // Coroutines
     factory<CoroutineContext> { Dispatchers.Main }

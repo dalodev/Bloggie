@@ -1,11 +1,7 @@
 package es.chewiegames.bloggie.viewmodel
 
 import android.os.Bundle
-import android.view.GestureDetector
-import android.view.MotionEvent
 import android.view.View
-import androidx.core.content.ContextCompat
-import androidx.core.view.GestureDetectorCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
@@ -23,10 +19,10 @@ import es.chewiegames.domain.usecases.feedpost.UpdateLikedPostUseCase
 import java.util.ArrayList
 
 class HomeViewModel(
-        private val getFeedPostUseCase: GetFeedPostUseCase,
-        private val getLikedPostsByUserUseCase: GetLikedPostsByUserUseCase,
-        private val updateLikedPostUseCase: UpdateLikedPostUseCase,
-        subscribeFeedPostsUseCase: SubscribeFeedPostsUseCase
+    private val getFeedPostUseCase: GetFeedPostUseCase,
+    private val getLikedPostsByUserUseCase: GetLikedPostsByUserUseCase,
+    private val updateLikedPostUseCase: UpdateLikedPostUseCase,
+    subscribeFeedPostsUseCase: SubscribeFeedPostsUseCase
 ) : BaseViewModel(), OnLoadFeedPostListener {
 
     val posts: BaseSingleLiveEvent<ArrayList<Post>> by lazy { BaseSingleLiveEvent<ArrayList<Post>>() }
@@ -66,7 +62,7 @@ class HomeViewModel(
     /**
      * trigger when user touch on like button in post
      */
-    private fun onLikePost(post: Post, checked: Boolean) = updateLikedPostUseCase.executeAsync(viewModelScope, PostParams(post, checked), ::likedPostUpdated, ::onError, ::showProgressDialog, ::hideProgressDialog)
+    private fun onLikePost(post: Post, checked: Boolean) = updateLikedPostUseCase.executeAsync(viewModelScope, PostParams(post, checked), ::likedPostUpdated, ::onError, {}, {})
 
     /**
      * trigger when user touch on comment buttom
@@ -102,7 +98,7 @@ class HomeViewModel(
         return false
     }
 
-    fun isLittlePointChecked(view: LottieAnimationView, position: Int){
+    fun isLittlePointChecked(view: LottieAnimationView, position: Int) {
         val feedPost = posts.value!![position]
         val checked = isLikedPost(feedPost)
         view.visibility = if (checked) View.VISIBLE else View.GONE

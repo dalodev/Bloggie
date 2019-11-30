@@ -1,14 +1,12 @@
 package es.chewiegames.bloggie.binding
 
 import android.view.View
-import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.databinding.BindingAdapter
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import es.chewiegames.bloggie.util.RoundedTransformation
-import es.chewiegames.bloggie.viewmodel.HomeViewModel
 
 @BindingAdapter(value = ["feedPostTitleImage", "progressBarImage", "logoNoImage"], requireAll = true)
 fun feedPostTitleImage(view: ImageView, titleImage: String?, progressBarImage: ProgressBar, logoNoImage: ImageView) {

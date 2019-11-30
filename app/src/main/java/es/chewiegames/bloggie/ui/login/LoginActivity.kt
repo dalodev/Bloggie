@@ -24,7 +24,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
     override fun initView(savedInstanceState: Bundle?) {
         binding = DataBindingUtil.setContentView(this, getLayoutId())
-        binding.lifecycleOwner = this
         binding.loginViewModel = viewModel
     }
 

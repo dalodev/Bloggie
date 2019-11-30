@@ -1,11 +1,8 @@
 package es.chewiegames.bloggie.ui.home
 
 import android.content.Context
-import android.view.GestureDetector
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.ViewGroup
-import androidx.core.view.GestureDetectorCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView

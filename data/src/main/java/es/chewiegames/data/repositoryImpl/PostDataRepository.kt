@@ -34,14 +34,13 @@ class PostDataRepository(
                 val posts = arrayListOf<PostData>()
                 for (postSnapshot in dataSnapshot.children) {
                     val post = postSnapshot.getValue(PostData::class.java)
-                    if (post != null) posts.add(post)
+                    if (post != null) posts.add(0, post)
                 }
                 offer(posts)
-                Log.i(TAG, "Offer: $posts")
             }
         }
-        mDatabaseAllPost.addListenerForSingleValueEvent(eventListener)
-        awaitClose { mDatabaseAllPost.removeEventListener(eventListener) }
+        mDatabasePostByUser.child(mUserData.id!!).addListenerForSingleValueEvent(eventListener)
+        awaitClose { mDatabasePostByUser.removeEventListener(eventListener) }
     }
 
     override fun getLikedPostsByUser(): Flow<ArrayList<PostData>> = callbackFlow {
@@ -79,7 +78,7 @@ class PostDataRepository(
     }
 
     override fun subscribeFeedPosts(callback: OnLoadFeedPostCallback) {
-        mDatabaseAllPost.addChildEventListener(object : ChildEventListener {
+        mDatabasePostByUser.addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(dataSnapshot: DataSnapshot, p1: String?) {
                 val post: PostData? = dataSnapshot.getValue(PostData::class.java)
                 if (post != null) {
@@ -113,21 +112,8 @@ class PostDataRepository(
         })
     }
 
-    override fun updatePostViews(post: PostData) {
-        updatePost(post)
-    }
-
-    private fun updatePost(post: PostData) {
+    override fun updatePost(post: PostData) {
         mDatabaseAllPost.child(post.id!!).setValue(post)
         mDatabasePostByUser.child(post.id!!).setValue(post)
-    }
-
-    internal fun postsContainPost(posts: ArrayList<PostData>, post: PostData): Boolean {
-        for (p in posts) {
-            if (p.id == post.id) {
-                return true
-            }
-        }
-        return false
     }
 }

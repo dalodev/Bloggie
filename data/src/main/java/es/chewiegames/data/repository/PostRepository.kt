@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 interface PostRepository {
     // CRUD
     fun getFeedPosts(): Flow<ArrayList<PostData>>
-    fun updatePostViews(post: PostData)
+    fun updatePost(post: PostData)
     fun getLikedPostsByUser(): Flow<ArrayList<PostData>>
     fun updateLikedPosts(postData: PostData, checked: Boolean): Flow<PostData>
     // Subscribe

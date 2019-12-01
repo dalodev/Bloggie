@@ -10,6 +10,6 @@ import kotlinx.coroutines.flow.flow
 class UpdatePostUseCase constructor(private val repository: PostRepository) : UseCase<Unit, Post>()  {
 
     override fun runInBackground(params: Post) : Flow<Unit> = flow {
-        repository.updatePostViews(mapToPostData(params))
+        repository.updatePost(mapToPostData(params))
     }
 }

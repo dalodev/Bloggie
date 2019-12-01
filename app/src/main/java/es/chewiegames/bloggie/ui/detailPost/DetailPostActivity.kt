@@ -19,7 +19,7 @@ import es.chewiegames.domain.model.Post
 import es.chewiegames.domain.model.PostContent
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class DetailPostActivity : BaseActivity<ActivityDetailPostBinding>(), DetailPostAdapter.DetailPostAdapterListener {
+class DetailPostActivity : BaseActivity<ActivityDetailPostBinding>() {
 
     private val viewModel: DetailPostViewModel by viewModel()
     private val adapter: DetailPostAdapter by lazy { DetailPostAdapter(viewModel) }
@@ -49,7 +49,7 @@ class DetailPostActivity : BaseActivity<ActivityDetailPostBinding>(), DetailPost
     }
 
     private fun setAdapter(content: ArrayList<PostContent>) {
-        adapter.setPostContent(content)
+        adapter.postContent = content
         binding.contentPostList.layoutManager = LinearLayoutManager(this)
         binding.contentPostList.itemAnimator = DefaultItemAnimator()
         binding.contentPostList.adapter = adapter
@@ -92,7 +92,7 @@ class DetailPostActivity : BaseActivity<ActivityDetailPostBinding>(), DetailPost
 
     fun closeExpandedImage(v: ImageView) = viewModel.closeExpandedImage(v)
 
-    override fun onClickImage(thumbView: View, postContent: PostContentData) {
+    fun onClickImage(thumbView: View, postContent: PostContentData) {
         binding.expandedImageProgressbar.visibility = View.VISIBLE
         viewModel.zoomDetailPostImage(thumbView, binding.expandedImage, postContent)
     }

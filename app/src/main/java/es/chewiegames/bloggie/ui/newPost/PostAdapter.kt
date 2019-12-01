@@ -17,8 +17,7 @@ import kotlin.collections.ArrayList
 class PostAdapter(
     private val viewModel: NewPostViewModel,
     private var postContent: ArrayList<PostContent> = viewModel.postContent.value ?: arrayListOf()
-) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>(), ItemTouchHelperAdapter {
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), ItemTouchHelperAdapter {
 
     override fun getItemViewType(position: Int): Int {
         return when (postContent[position].viewType) {

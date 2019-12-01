@@ -39,7 +39,7 @@ class PostDataRepository(
                 offer(posts)
             }
         }
-        mDatabasePostByUser.child(mUserData.id!!).addListenerForSingleValueEvent(eventListener)
+        mDatabasePostByUser.addListenerForSingleValueEvent(eventListener)
         awaitClose { mDatabasePostByUser.removeEventListener(eventListener) }
     }
 

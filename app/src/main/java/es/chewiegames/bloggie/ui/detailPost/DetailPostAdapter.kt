@@ -13,12 +13,14 @@ import es.chewiegames.bloggie.ui.newPost.PostTextViewHolder
 import es.chewiegames.bloggie.util.EDITTEXT_VIEW
 import es.chewiegames.bloggie.util.IMAGE_VIEW
 import es.chewiegames.bloggie.util.TEXT_VIEW
+import es.chewiegames.bloggie.viewmodel.DetailPostViewModel
 import es.chewiegames.data.model.PostContentData
+import es.chewiegames.domain.model.PostContent
 import javax.inject.Inject
 
-class DetailPostAdapter @Inject constructor() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class DetailPostAdapter @Inject constructor(private val viewModel: DetailPostViewModel) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private lateinit var postContent: ArrayList<PostContentData>
+    private lateinit var postContent: ArrayList<PostContent>
 
     @Inject
     lateinit var context: Context
@@ -101,7 +103,7 @@ class DetailPostAdapter @Inject constructor() : RecyclerView.Adapter<RecyclerVie
 
     }*/
 
-    fun setPostContent(content: ArrayList<PostContentData>) {
+    fun setPostContent(content: ArrayList<PostContent>) {
         this.postContent = content
     }
 

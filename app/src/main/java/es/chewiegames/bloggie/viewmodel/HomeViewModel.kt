@@ -34,7 +34,7 @@ class HomeViewModel(
     val navigateToComments: BaseSingleLiveEvent<Bundle> by lazy { BaseSingleLiveEvent<Bundle>() }
 
     // This LiveData depends on another so we can use a transformation.
-    val emptyViewVisibility: LiveData<Int> = Transformations.map(posts) { if (it.isEmpty()) View.GONE else View.VISIBLE }
+    val emptyViewVisibility: LiveData<Int> = Transformations.map(posts) { if (it.isEmpty()) View.VISIBLE else View.GONE }
 
     private var likedPosts: ArrayList<Post> = arrayListOf()
     var onBind = false
@@ -116,7 +116,7 @@ class HomeViewModel(
     }
 
     private fun onLoadFeedPostSuccess(posts: ArrayList<Post>) {
-        this.posts.value?.addAll(posts)
+        this.posts.value = posts
         hideProgressDialog()
     }
 

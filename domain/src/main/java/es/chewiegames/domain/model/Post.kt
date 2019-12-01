@@ -12,7 +12,7 @@ data class Post(
     var id: String? = null,
     var title: String? = null,
     var titleImage: String? = null,
-    var content: ArrayList<PostContentData> = ArrayList(),
+    var content: ArrayList<PostContent> = ArrayList(),
     var comments: ArrayList<Comment> = ArrayList(),
     var littlePoints: Int = -1,
     var views: Int = -1,
@@ -25,8 +25,8 @@ data class PostParams(
     var checked: Boolean
 )
 
-fun mapToPost(post: PostData) = Post(post.id, post.title, post.titleImage, post.content, post.comments, post.littlePoints, post.views, post.createdDate, mapToUser(post.userData!!))
-fun mapToPostData(post: Post) = PostData(post.id, post.title, post.titleImage, post.content, post.comments, post.littlePoints, post.views, post.createdDate, null)
+fun mapToPost(post: PostData) = Post(post.id, post.title, post.titleImage, mapPostContentList(post.content), post.comments, post.littlePoints, post.views, post.createdDate, mapToUser(post.userData!!))
+fun mapToPostData(post: Post) = PostData(post.id, post.title, post.titleImage, mapPostContentDataList(post.content), post.comments, post.littlePoints, post.views, post.createdDate, post.user?.let {  mapToUserData(post.user!!) })
 fun mapToPosts(postData: ArrayList<PostData>): ArrayList<Post> {
     val posts = arrayListOf<Post>()
     postData.forEach {

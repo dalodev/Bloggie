@@ -32,6 +32,7 @@ class NewPostDataRepository(
     val mStorageReference: StorageReference,
     val mUserData: UserData
 ) : NewPostRepository {
+
     private lateinit var mPost: PostData
     private var postContent = arrayListOf<PostContentData>()
 

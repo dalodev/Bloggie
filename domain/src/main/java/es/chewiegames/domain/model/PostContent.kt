@@ -12,11 +12,19 @@ data class PostContent(
     var bitmapImage: Bitmap? = null
 ) : Serializable
 
-fun mapPostContentList(postContentList: List<PostContent>): ArrayList<PostContentData> {
+fun mapPostContentDataList(postContentList: List<PostContent>): ArrayList<PostContentData> {
     val postContentDataList = arrayListOf<PostContentData>()
     for (postContent in postContentList) {
         postContentDataList.add(mapToPostContentData(postContent))
     }
     return postContentDataList
 }
+fun mapPostContentList(postContentList: List<PostContentData>): ArrayList<PostContent> {
+    val postContentDataList = arrayListOf<PostContent>()
+    for (postContent in postContentList) {
+        postContentDataList.add(mapToPostContent(postContent))
+    }
+    return postContentDataList
+}
 fun mapToPostContentData(postContent: PostContent) = PostContentData(postContent.position, postContent.content, postContent.viewType, postContent.uriImage, postContent.bitmapImage)
+fun mapToPostContent(postContent: PostContentData) = PostContent(postContent.position, postContent.content, postContent.viewType, postContent.uriImage, postContent.bitmapImage)

@@ -5,6 +5,7 @@ import es.chewiegames.domain.usecases.feedpost.GetLikedPostsByUserUseCase
 import es.chewiegames.domain.usecases.feedpost.SubscribeFeedPostsUseCase
 import es.chewiegames.domain.usecases.feedpost.UpdateLikedPostUseCase
 import es.chewiegames.domain.usecases.newpost.StoreNewPostUseCase
+import es.chewiegames.domain.usecases.post.UpdatePostUseCase
 import es.chewiegames.domain.usecases.user.CheckUserLoginUseCase
 import es.chewiegames.domain.usecases.user.RegisterUserUseCase
 import org.koin.dsl.module.module
@@ -21,4 +22,5 @@ val domainModule = module {
     single { UpdateLikedPostUseCase(repository = get()) }
     single { StoreNewPostUseCase(repository = get()) }
     single { SubscribeFeedPostsUseCase(repository = get()) }
+    single { UpdatePostUseCase(repository = get()) }
 }

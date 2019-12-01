@@ -14,7 +14,7 @@ val appModule = module {
     viewModel { LoginViewModel(checkUserLoginUseCase = get(), registerUserUseCase = get()) }
     viewModel { HomeViewModel(getFeedPostUseCase = get(), getLikedPostsByUserUseCase = get(), updateLikedPostUseCase = get(), subscribeFeedPostsUseCase = get()) }
     viewModel { NewPostViewModel(context = get(), storeNewPostUseCase = get()) }
-    viewModel { DetailPostViewModel(context = get()) }
+    viewModel { DetailPostViewModel(context = get(), updatePostUseCase = get()) }
 
     // Coroutines
     factory<CoroutineContext> { Dispatchers.Main }

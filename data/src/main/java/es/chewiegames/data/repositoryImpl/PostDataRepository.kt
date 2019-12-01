@@ -113,6 +113,10 @@ class PostDataRepository(
         })
     }
 
+    override fun updatePostViews(post: PostData) {
+        updatePost(post)
+    }
+
     private fun updatePost(post: PostData) {
         mDatabaseAllPost.child(post.id!!).setValue(post)
         mDatabasePostByUser.child(post.id!!).setValue(post)

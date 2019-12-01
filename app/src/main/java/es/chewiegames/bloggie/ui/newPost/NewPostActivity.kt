@@ -36,6 +36,7 @@ class NewPostActivity : BaseActivity<ActivityNewPostBinding>(), BottomNavigation
     override fun initView(savedInstanceState: Bundle?) {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowTitleEnabled(true)
+        binding.viewModel = viewModel
         binding.navigation.setOnNavigationItemSelectedListener(this)
         setAdapter()
     }

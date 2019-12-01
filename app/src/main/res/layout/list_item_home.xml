@@ -46,7 +46,7 @@
                 android:layout_height="@dimen/post_cover_height"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/post_image_description"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:transitionName="@{feedPost.id}"
                 android:visibility="visible"
                 app:feedPostTitleImage="@{feedPost.titleImage}"

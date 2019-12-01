@@ -3,56 +3,59 @@ package es.chewiegames.bloggie.ui.detailPost
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.databinding.ActivityDetailPostBinding
 import es.chewiegames.bloggie.di.component.ApplicationComponent
-import es.chewiegames.bloggie.presenter.detailPost.IDetailPostPresenter
 import es.chewiegames.bloggie.ui.base.BaseActivity
 import es.chewiegames.bloggie.viewmodel.DetailPostViewModel
 import es.chewiegames.data.model.PostContentData
 import es.chewiegames.domain.model.Post
+import es.chewiegames.domain.model.PostContent
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import javax.inject.Inject
 
-class DetailPostActivity : BaseActivity<ActivityDetailPostBinding>(), DetailPostView, DetailPostAdapter.DetailPostAdapterListener {
+class DetailPostActivity : BaseActivity<ActivityDetailPostBinding>(), DetailPostAdapter.DetailPostAdapterListener {
 
     private val viewModel: DetailPostViewModel by viewModel()
+    private val adapter: DetailPostAdapter by lazy { DetailPostAdapter(viewModel) }
 
-    @Inject
-    lateinit var mDetailPostPresenter: IDetailPostPresenter
-
-    @Inject
-    lateinit var layoutManager: LinearLayoutManager
-
-    override fun getLayoutId(): Int {
-        return R.layout.activity_detail_post
-    }
+    override fun getLayoutId() = R.layout.activity_detail_post
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
-        mDetailPostPresenter.setCurrentAnimatorDuration()
+        viewModel.setCurrentAnimatorDuration()
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowTitleEnabled(true)
     }
 
     override fun onStart() {
         super.onStart()
-        mDetailPostPresenter.loadData(intent.extras!!)
+        viewModel.loadData(intent.extras!!)
     }
 
     override fun injectDependencies(component: ApplicationComponent) {}
 
-    override fun setAdapter(content: ArrayList<PostContentData>) {
-        /*adapter.setPostContent(content)
-        contentPostList.layoutManager = layoutManager
-        contentPostList.itemAnimator = DefaultItemAnimator()
-        contentPostList.adapter = adapter*/
+    override fun initObservers() {
+        viewModel.post.observe(this, Observer { fillValues(it) })
+        viewModel.postContent.observe(this, Observer { setAdapter(it) })
+        viewModel.closeExpandedImage.observe(this, Observer { closeExpandedImage(binding.expandedImage) })
+        viewModel.goBack.observe(this, Observer { goBack() })
+        viewModel.displayExpandedImage.observe(this, Observer { displayExpandedImage(it) })
     }
 
-    override fun fillValues(post: Post) {
+    private fun setAdapter(content: ArrayList<PostContent>) {
+        adapter.setPostContent(content)
+        binding.contentPostList.layoutManager = LinearLayoutManager(this)
+        binding.contentPostList.itemAnimator = DefaultItemAnimator()
+        binding.contentPostList.adapter = adapter
+    }
+
+    private fun fillValues(post: Post) {
         if (post.titleImage != null) {
             binding.imgToolbar.transitionName = post.id
         }
@@ -61,9 +64,7 @@ class DetailPostActivity : BaseActivity<ActivityDetailPostBinding>(), DetailPost
         binding.collapsingToolBar.title = post.title
     }
 
-    override fun onBackPressed() {
-        mDetailPostPresenter.handleBack()
-    }
+    override fun onBackPressed() = viewModel.handleBack()
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item!!.itemId) {
@@ -76,37 +77,23 @@ class DetailPostActivity : BaseActivity<ActivityDetailPostBinding>(), DetailPost
     }
 
     fun expandTitleImage(v: View) {
-        if (mDetailPostPresenter.getPost()!!.titleImage != null) {
-            mDetailPostPresenter.zoomDetailPostImage(binding.imgToolbar, binding.expandedImage, mDetailPostPresenter.getPost()!!)
+        if (viewModel.post.value?.titleImage != null) {
+            viewModel.zoomDetailPostImage(v, binding.expandedImage, viewModel.post.value!!)
         }
     }
 
-    override fun displayExpandedImage(content: String) {
+    private fun displayExpandedImage(content: String) {
         Picasso.with(this).load(content).into(binding.expandedImage, object : Callback {
             override fun onSuccess() { binding.expandedImageProgressbar.visibility = View.GONE }
             override fun onError() {} })
     }
 
-    override fun goBack() {
-        super.onBackPressed()
-    }
+    private fun goBack() = super.onBackPressed()
 
-    override fun closeExpandedImage() {
-        closeExpandedImage(binding.expandedImage)
-    }
-
-    fun closeExpandedImage(v: View) {
-        mDetailPostPresenter.closeExpandedImage(binding.expandedImage)
-    }
+    fun closeExpandedImage(v: ImageView) = viewModel.closeExpandedImage(v)
 
     override fun onClickImage(thumbView: View, postContent: PostContentData) {
         binding.expandedImageProgressbar.visibility = View.VISIBLE
-        mDetailPostPresenter.zoomDetailPostImage(thumbView, binding.expandedImage, postContent)
-    }
-
-    override fun showMessage(message: String) {
-    }
-
-    override fun showLoading(show: Boolean) {
+        viewModel.zoomDetailPostImage(thumbView, binding.expandedImage, postContent)
     }
 }

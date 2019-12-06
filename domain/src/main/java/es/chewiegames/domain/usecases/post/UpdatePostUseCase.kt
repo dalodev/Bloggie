@@ -7,9 +7,9 @@ import es.chewiegames.domain.usecases.UseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class UpdatePostUseCase constructor(private val repository: PostRepository) : UseCase<Unit, Post>()  {
+class UpdatePostUseCase constructor(private val repository: PostRepository) : UseCase<Unit, Post>() {
 
-    override fun runInBackground(params: Post) : Flow<Unit> = flow {
+    override fun runInBackground(params: Post): Flow<Unit> = flow {
         repository.updatePost(mapToPostData(params))
     }
 }

@@ -1,6 +1,5 @@
 package es.chewiegames.data.repositoryImpl
 
-import android.util.Log
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError

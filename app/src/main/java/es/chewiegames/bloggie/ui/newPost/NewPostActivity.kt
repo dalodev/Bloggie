@@ -19,7 +19,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.databinding.ActivityNewPostBinding
-import es.chewiegames.bloggie.di.component.ApplicationComponent
 import es.chewiegames.bloggie.ui.base.BaseActivity
 import es.chewiegames.bloggie.util.BLOG_CONTENT_IMAGE
 import es.chewiegames.bloggie.viewmodel.NewPostViewModel
@@ -50,12 +49,6 @@ class NewPostActivity : BaseActivity<ActivityNewPostBinding>(), BottomNavigation
         viewModel.updateAdapterPosition.observe(this, Observer { adapter.updateAdapterView(it) })
         viewModel.removeAdapterItem.observe(this, Observer { adapter.removeContent(it) })
     }
-
-    /**
-     * Initialize the inject dependences for this activity. This method is triggered in onCreate event
-     * @param component
-     */
-    override fun injectDependencies(component: ApplicationComponent) {}
 
     /**
      * this method inflate menu for toolbar

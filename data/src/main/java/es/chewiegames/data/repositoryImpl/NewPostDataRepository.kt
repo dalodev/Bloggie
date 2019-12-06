@@ -13,7 +13,6 @@ import es.chewiegames.data.model.PostData
 import es.chewiegames.data.model.UserData
 import es.chewiegames.data.repository.NewPostRepository
 import es.chewiegames.data.utils.IMAGE_VIEW
-import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.util.Calendar
 import java.util.UUID

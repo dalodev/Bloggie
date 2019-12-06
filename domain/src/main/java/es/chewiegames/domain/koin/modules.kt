@@ -1,5 +1,7 @@
 package es.chewiegames.domain.koin
 
+import es.chewiegames.domain.usecases.comments.StoreCommentUseCase
+import es.chewiegames.domain.usecases.comments.StoreReplyUseCase
 import es.chewiegames.domain.usecases.feedpost.GetFeedPostUseCase
 import es.chewiegames.domain.usecases.feedpost.GetLikedPostsByUserUseCase
 import es.chewiegames.domain.usecases.feedpost.SubscribeFeedPostsUseCase
@@ -23,4 +25,6 @@ val domainModule = module {
     single { StoreNewPostUseCase(repository = get()) }
     single { SubscribeFeedPostsUseCase(repository = get()) }
     single { UpdatePostUseCase(repository = get()) }
+    single { StoreCommentUseCase(repository = get()) }
+    single { StoreReplyUseCase(repository = get()) }
 }

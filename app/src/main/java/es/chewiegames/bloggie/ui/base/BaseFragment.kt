@@ -10,8 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import es.chewiegames.bloggie.BloggieApplication
-import es.chewiegames.bloggie.di.component.ApplicationComponent
 
 abstract class BaseFragment : Fragment() {
 
@@ -36,7 +34,6 @@ abstract class BaseFragment : Fragment() {
      */
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        injectDependencies(BloggieApplication.getComponent()!!, context)
         if (context is OnLoaderCallback) {
             loaderCallback = context
         }
@@ -51,7 +48,6 @@ abstract class BaseFragment : Fragment() {
      * init viewmodel observers
      */
     open fun initObservers() {}
-    abstract fun injectDependencies(component: ApplicationComponent, context: Context)
     /**
      * @return The layout id that's gonna be the fragment view.
      */

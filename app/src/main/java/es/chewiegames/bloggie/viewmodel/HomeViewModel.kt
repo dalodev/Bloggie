@@ -19,10 +19,10 @@ import es.chewiegames.domain.usecases.feedpost.UpdateLikedPostUseCase
 import java.util.ArrayList
 
 class HomeViewModel(
-        private val getFeedPostUseCase: GetFeedPostUseCase,
-        private val getLikedPostsByUserUseCase: GetLikedPostsByUserUseCase,
-        private val updateLikedPostUseCase: UpdateLikedPostUseCase,
-        subscribeFeedPostsUseCase: SubscribeFeedPostsUseCase
+    private val getFeedPostUseCase: GetFeedPostUseCase,
+    private val getLikedPostsByUserUseCase: GetLikedPostsByUserUseCase,
+    private val updateLikedPostUseCase: UpdateLikedPostUseCase,
+    subscribeFeedPostsUseCase: SubscribeFeedPostsUseCase
 ) : BaseViewModel(), OnLoadFeedPostListener {
 
     val posts: BaseSingleLiveEvent<ArrayList<Post>> by lazy { BaseSingleLiveEvent<ArrayList<Post>>() }

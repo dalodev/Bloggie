@@ -1,19 +1,25 @@
 package es.chewiegames.bloggie.ui.comments
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import es.chewiegames.bloggie.R
-import es.chewiegames.data.model.Comment
+import es.chewiegames.bloggie.viewmodel.CommentsViewModel
+import es.chewiegames.domain.model.Comment
 
-class RepliesCommentsAdapter constructor(var context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RepliesCommentsAdapter(
+    private val viewModel: CommentsViewModel,
+    val comments: ArrayList<Comment> = viewModel.comments.value ?: arrayListOf()
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var comments: ArrayList<Comment> = ArrayList()
+    override fun getItemViewType(position: Int): Int = R.layout.reply_comment_item
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.reply_comment_item, parent, false)
-        return CommentViewHolder(view)
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = DataBindingUtil.inflate<ViewDataBinding>(layoutInflater, viewType, parent, false)
+        return CommentViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
@@ -22,6 +28,6 @@ class RepliesCommentsAdapter constructor(var context: Context) : RecyclerView.Ad
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val comment = comments[position]
-        (holder as CommentViewHolder).comment.text = comment.comment
+        (holder as CommentViewHolder).bind(comment, viewModel)
     }
 }

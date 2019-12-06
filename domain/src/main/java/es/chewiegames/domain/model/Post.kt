@@ -1,8 +1,6 @@
 package es.chewiegames.domain.model
 
 import android.widget.ImageView
-import es.chewiegames.data.model.Comment
-import es.chewiegames.data.model.PostContentData
 import es.chewiegames.data.model.PostData
 import java.io.Serializable
 import java.util.Date
@@ -25,8 +23,8 @@ data class PostParams(
     var checked: Boolean
 )
 
-fun mapToPost(post: PostData) = Post(post.id, post.title, post.titleImage, mapPostContentList(post.content), post.comments, post.littlePoints, post.views, post.createdDate, mapToUser(post.userData!!))
-fun mapToPostData(post: Post) = PostData(post.id, post.title, post.titleImage, mapPostContentDataList(post.content), post.comments, post.littlePoints, post.views, post.createdDate, post.user?.let {  mapToUserData(post.user!!) })
+fun mapToPost(post: PostData) = Post(post.id, post.title, post.titleImage, mapPostContentList(post.content), mapToComments(post.comments), post.littlePoints, post.views, post.createdDate, mapToUser(post.userData!!))
+fun mapToPostData(post: Post) = PostData(post.id, post.title, post.titleImage, mapPostContentDataList(post.content), mapToCommentsData(post.comments), post.littlePoints, post.views, post.createdDate, post.user?.let { mapToUserData(post.user!!) })
 fun mapToPosts(postData: ArrayList<PostData>): ArrayList<Post> {
     val posts = arrayListOf<Post>()
     postData.forEach {

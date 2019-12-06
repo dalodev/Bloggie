@@ -9,7 +9,7 @@ data class PostData(
     var title: String? = null,
     var titleImage: String? = null,
     var content: ArrayList<PostContentData> = ArrayList(),
-    var comments: ArrayList<Comment> = ArrayList(),
+    var comments: ArrayList<CommentData> = ArrayList(),
     var littlePoints: Int = -1,
     var views: Int = -1,
     var createdDate: Date? = null,

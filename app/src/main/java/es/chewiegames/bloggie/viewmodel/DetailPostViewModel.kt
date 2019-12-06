@@ -10,7 +10,6 @@ import android.graphics.Rect
 import android.os.Bundle
 import android.view.View
 import android.view.animation.DecelerateInterpolator
-import android.widget.ImageView
 import androidx.lifecycle.viewModelScope
 import es.chewiegames.bloggie.livedata.BaseSingleLiveEvent
 import es.chewiegames.bloggie.util.EXTRA_POST
@@ -22,10 +21,10 @@ import es.chewiegames.domain.usecases.post.UpdatePostUseCase
 class DetailPostViewModel(private val context: Context, private val updatePostUseCase: UpdatePostUseCase) : BaseViewModel() {
 
     val post: BaseSingleLiveEvent<Post> by lazy { BaseSingleLiveEvent<Post>() }
-    val postContent : BaseSingleLiveEvent<ArrayList<PostContent>> by lazy { BaseSingleLiveEvent<ArrayList<PostContent>>() }
-    val closeExpandedImage : BaseSingleLiveEvent<Any> by lazy { BaseSingleLiveEvent<Any>() }
-    val goBack : BaseSingleLiveEvent<Any> by lazy { BaseSingleLiveEvent<Any>() }
-    val displayExpandedImage : BaseSingleLiveEvent<String> by lazy { BaseSingleLiveEvent<String>() }
+    val postContent: BaseSingleLiveEvent<ArrayList<PostContent>> by lazy { BaseSingleLiveEvent<ArrayList<PostContent>>() }
+    val closeExpandedImage: BaseSingleLiveEvent<Any> by lazy { BaseSingleLiveEvent<Any>() }
+    val goBack: BaseSingleLiveEvent<Any> by lazy { BaseSingleLiveEvent<Any>() }
+    val displayExpandedImage: BaseSingleLiveEvent<String> by lazy { BaseSingleLiveEvent<String>() }
 
     private var isExpandedImage = false
     private var mShortAnimationDuration: Long = 0L
@@ -38,9 +37,9 @@ class DetailPostViewModel(private val context: Context, private val updatePostUs
     fun loadData(extras: Bundle) {
         val extraPost: Post? = extras.getSerializable(EXTRA_POST) as Post
         if (extraPost != null) {
-            extraPost.views = extraPost.views +1
+            extraPost.views = extraPost.views + 1
             post.value = extraPost
-            updatePostUseCase.executeAsync(viewModelScope, extraPost, {}, {},{},{})
+            updatePostUseCase.executeAsync(viewModelScope, extraPost, {}, {}, {}, {})
             if (extraPost.content.isNotEmpty()) {
                 postContent.value = extraPost.content
             }

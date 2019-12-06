@@ -3,7 +3,6 @@ package es.chewiegames.bloggie.ui.detailPost
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,11 +10,8 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.databinding.ActivityDetailPostBinding
-import es.chewiegames.bloggie.di.component.ApplicationComponent
 import es.chewiegames.bloggie.ui.base.BaseActivity
 import es.chewiegames.bloggie.viewmodel.DetailPostViewModel
-import es.chewiegames.data.model.PostContentData
-import es.chewiegames.domain.model.Post
 import es.chewiegames.domain.model.PostContent
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -38,8 +34,6 @@ class DetailPostActivity : BaseActivity<ActivityDetailPostBinding>() {
         super.onStart()
         viewModel.loadData(intent.extras!!)
     }
-
-    override fun injectDependencies(component: ApplicationComponent) {}
 
     override fun initObservers() {
         viewModel.postContent.observe(this, Observer { setAdapter(it) })

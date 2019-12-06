@@ -6,16 +6,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import es.chewiegames.bloggie.R
-import es.chewiegames.bloggie.util.EDITTEXT_VIEW
 import es.chewiegames.bloggie.util.IMAGE_VIEW
 import es.chewiegames.bloggie.util.TEXT_VIEW
 import es.chewiegames.bloggie.viewmodel.DetailPostViewModel
 import es.chewiegames.domain.model.PostContent
 
 class DetailPostAdapter(
-        val viewModel: DetailPostViewModel,
-        var postContent: ArrayList<PostContent> = viewModel.postContent.value ?: arrayListOf())
-    : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    val viewModel: DetailPostViewModel,
+    var postContent: ArrayList<PostContent> = viewModel.postContent.value ?: arrayListOf()
+) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemViewType(position: Int): Int {
         return when (postContent[position].viewType) {
@@ -43,7 +43,6 @@ class DetailPostAdapter(
             TEXT_VIEW -> (holder as DetailPostTextViewHolder).bind(content, viewModel, holder.adapterPosition)
             IMAGE_VIEW -> (holder as DetailPostImageViewHolder).bind(content, viewModel)
             else -> (holder as DetailPostTextViewHolder).bind(content, viewModel, holder.adapterPosition)
-
         }
     }
 }

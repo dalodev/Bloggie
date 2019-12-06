@@ -2,9 +2,9 @@ package es.chewiegames.data.model
 
 import java.io.Serializable
 
-data class Comment(
+data class CommentData(
     var comment: String? = null,
-    var replies: ArrayList<Comment> = ArrayList(),
+    var replies: ArrayList<CommentData> = ArrayList(),
     var likes: Int = 0,
     var userData: UserData? = null,
     var viewType: Int? = -1

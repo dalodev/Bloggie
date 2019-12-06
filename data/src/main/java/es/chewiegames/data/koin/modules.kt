@@ -2,9 +2,11 @@ package es.chewiegames.data.koin
 
 import android.content.Context
 import android.content.res.Resources
+import es.chewiegames.data.repository.CommentsRepository
 import es.chewiegames.data.repository.NewPostRepository
 import es.chewiegames.data.repository.PostRepository
 import es.chewiegames.data.repository.UserRepository
+import es.chewiegames.data.repositoryImpl.CommentsDataRepository
 import es.chewiegames.data.repositoryImpl.NewPostDataRepository
 import es.chewiegames.data.repositoryImpl.PostDataRepository
 import es.chewiegames.data.repositoryImpl.UserDataRepository
@@ -26,6 +28,13 @@ val dataModule = module {
                 mDatabasePosts = get(allPostsDatabaseReference),
                 mDatabasePostByUser = get(postsByUserDatabaseReference),
                 mStorageReference = get(),
+                mUserData = get()
+        )
+    }
+    single<CommentsRepository> {
+        CommentsDataRepository(
+                mDatabasePostByUser = get(postsByUserDatabaseReference),
+                mDatabaseAllPost = get(allPostsDatabaseReference),
                 mUserData = get()
         )
     }

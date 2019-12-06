@@ -8,7 +8,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.databinding.ActivityMainBinding
-import es.chewiegames.bloggie.di.component.ApplicationComponent
 import es.chewiegames.bloggie.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -26,12 +25,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), BottomNavigationView.O
         binding.navigation.setupWithNavController(navController)
         binding.navigation.setOnNavigationItemSelectedListener(this)
     }
-
-    /**
-     * Initialize the inject dependences for this activity. This method is triggered in onCreate event
-     * @param component
-     */
-    override fun injectDependencies(component: ApplicationComponent) {}
 
     /**
      * this method trigger when user click on any of items in bottom menu

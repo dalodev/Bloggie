@@ -14,9 +14,7 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import es.chewiegames.bloggie.BloggieApplication
 import es.chewiegames.bloggie.R
-import es.chewiegames.bloggie.di.component.ApplicationComponent
 
 abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity() {
 
@@ -26,7 +24,6 @@ abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bindView(getLayoutId())
-        injectDependencies(BloggieApplication.getComponent()!!)
         setupToolbar()
         initView(savedInstanceState)
         initObservers()
@@ -38,7 +35,6 @@ abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity() {
     protected fun bindView(layoutId: Int) {
         binding = DataBindingUtil.setContentView(this, layoutId)
         binding.lifecycleOwner = this
-
     }
 
     /**
@@ -56,7 +52,6 @@ abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity() {
      */
     protected abstract fun getLayoutId(): Int
 
-    protected abstract fun injectDependencies(component: ApplicationComponent)
     /**
      * call destroy view lifecycle
      */

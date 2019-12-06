@@ -1,37 +1,27 @@
 package es.chewiegames.bloggie.ui.comments
 
-import android.animation.LayoutTransition
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
 import es.chewiegames.bloggie.R
-import es.chewiegames.bloggie.util.RoundedTransformation
-import es.chewiegames.data.model.Comment
+import es.chewiegames.bloggie.viewmodel.CommentsViewModel
+import es.chewiegames.data.model.CommentData
+import es.chewiegames.domain.model.Comment
 import javax.inject.Inject
 
-class CommentsAdapter @Inject constructor() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CommentsAdapter @Inject constructor(
+    private val viewModel: CommentsViewModel,
+    val comments: ArrayList<Comment> = viewModel.comments.value ?: arrayListOf()
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    interface CommentsAdapterListener {
-        fun replyComment(parentComment: Comment)
-        fun showReplies(parentComment: Comment)
-    }
-
-    @Inject
-    lateinit var context: Context
-
-    @Inject
-    lateinit var mListener: CommentsAdapterListener
-
-    var comments: ArrayList<Comment> = ArrayList()
+    override fun getItemViewType(position: Int): Int = R.layout.comment_item
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.comment_item, parent, false)
-        return CommentViewHolder(view)
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = DataBindingUtil.inflate<ViewDataBinding>(layoutInflater, viewType, parent, false)
+        return CommentViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
@@ -40,28 +30,10 @@ class CommentsAdapter @Inject constructor() : RecyclerView.Adapter<RecyclerView.
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val comment = comments[position]
-        (holder as CommentViewHolder).comment.text = comment.comment
-        holder.root!!.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
-
-        if (comment.userData!!.avatar != null) Picasso.with(context).load(comment.userData!!.avatar).transform(RoundedTransformation(50, 0)).into(holder.userImage)
-
-        if (comment.replies.isEmpty()) {
-            holder.replysRecyclerView!!.visibility = View.GONE
-        } else {
-            holder.replysRecyclerView!!.visibility = View.VISIBLE
-            holder.replysRecyclerView!!.layoutManager = LinearLayoutManager(context)
-            holder.replysRecyclerView!!.itemAnimator = DefaultItemAnimator()
-            var repliesCommentsAdapter = RepliesCommentsAdapter(context)
-            repliesCommentsAdapter.comments = comment.replies
-            holder.replysRecyclerView!!.adapter = repliesCommentsAdapter
-        }
-
-        holder.reply!!.setOnClickListener {
-            mListener.replyComment(comments[holder.adapterPosition])
-        }
+        (holder as CommentViewHolder).bind(comment, viewModel)
     }
 
-    fun repliesAdded(parentComment: Comment) {
+    fun repliesAdded(parentComment: CommentData) {
         notifyDataSetChanged()
     }
 }

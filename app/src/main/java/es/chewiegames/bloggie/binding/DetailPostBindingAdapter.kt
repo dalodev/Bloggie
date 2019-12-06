@@ -1,9 +1,7 @@
 package es.chewiegames.bloggie.binding
 
-import android.net.Uri
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import es.chewiegames.bloggie.util.BitmapTransform
 import es.chewiegames.bloggie.util.MAX_HEIGHT

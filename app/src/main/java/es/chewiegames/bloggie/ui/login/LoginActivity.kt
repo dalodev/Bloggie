@@ -7,7 +7,6 @@ import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.databinding.ActivityLoginBinding
-import es.chewiegames.bloggie.di.component.ApplicationComponent
 import es.chewiegames.bloggie.ui.base.BaseActivity
 import es.chewiegames.bloggie.ui.main.MainActivity
 import es.chewiegames.bloggie.util.RC_SIGN_IN
@@ -15,8 +14,6 @@ import es.chewiegames.bloggie.viewmodel.LoginViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>() {
-
-    override fun injectDependencies(component: ApplicationComponent) {}
 
     private val viewModel: LoginViewModel by viewModel()
 

@@ -4,7 +4,6 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import es.chewiegames.bloggie.BR
 import es.chewiegames.bloggie.viewmodel.DetailPostViewModel
-import es.chewiegames.bloggie.viewmodel.NewPostViewModel
 import es.chewiegames.domain.model.PostContent
 
 class DetailPostTextViewHolder constructor(private val binding: ViewDataBinding, isDetailPost: Boolean) : RecyclerView.ViewHolder(binding.root) {

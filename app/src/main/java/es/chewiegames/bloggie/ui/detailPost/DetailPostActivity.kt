@@ -22,7 +22,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class DetailPostActivity : BaseActivity<ActivityDetailPostBinding>() {
 
     private val viewModel: DetailPostViewModel by viewModel()
-    private lateinit var adapter: DetailPostAdapter
+    private val adapter: DetailPostAdapter by lazy { DetailPostAdapter(viewModel) }
 
     override fun getLayoutId() = R.layout.activity_detail_post
 
@@ -42,7 +42,6 @@ class DetailPostActivity : BaseActivity<ActivityDetailPostBinding>() {
     override fun injectDependencies(component: ApplicationComponent) {}
 
     override fun initObservers() {
-        viewModel.post.observe(this, Observer { fillValues(it) })
         viewModel.postContent.observe(this, Observer { setAdapter(it) })
         viewModel.closeExpandedImage.observe(this, Observer { closeExpandedImage(binding.expandedImage) })
         viewModel.goBack.observe(this, Observer { goBack() })
@@ -50,19 +49,10 @@ class DetailPostActivity : BaseActivity<ActivityDetailPostBinding>() {
     }
 
     private fun setAdapter(content: ArrayList<PostContent>) {
-        adapter = DetailPostAdapter(viewModel)
         adapter.postContent = content
         binding.contentPostList.layoutManager = LinearLayoutManager(this)
         binding.contentPostList.itemAnimator = DefaultItemAnimator()
         binding.contentPostList.adapter = adapter
-    }
-
-    private fun fillValues(post: Post) {
-        if (post.titleImage != null) {
-            binding.imgToolbar.transitionName = post.id
-        }
-        binding.collapsingToolBar.transitionName = post.title
-        binding.collapsingToolBar.title = post.title
     }
 
     override fun onBackPressed() = viewModel.handleBack()
@@ -92,9 +82,4 @@ class DetailPostActivity : BaseActivity<ActivityDetailPostBinding>() {
     private fun goBack() = super.onBackPressed()
 
     private fun closeExpandedImage(v: ImageView) = viewModel.closeExpandedImage(v)
-
-    fun onClickImage(thumbView: View, postContent: PostContentData) {
-        binding.expandedImageProgressbar.visibility = View.VISIBLE
-        viewModel.zoomDetailPostImage(thumbView, binding.expandedImage, postContent)
-    }
 }

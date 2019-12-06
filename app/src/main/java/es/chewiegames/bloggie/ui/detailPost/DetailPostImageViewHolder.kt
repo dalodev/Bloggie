@@ -9,7 +9,7 @@ import es.chewiegames.domain.model.PostContent
 class DetailPostImageViewHolder constructor(private val binding: ViewDataBinding, isDetailPost: Boolean) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(content: PostContent, viewModel: DetailPostViewModel) {
-        binding.setVariable(BR.content, content)
+        binding.setVariable(BR.postContent, content)
         binding.setVariable(BR.viewModel, viewModel)
         binding.executePendingBindings()
     }

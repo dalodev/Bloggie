@@ -52,7 +52,7 @@ class DetailPostViewModel(private val context: Context, private val updatePostUs
         this.mShortAnimationDuration = mShortAnimationDuration.toLong()
     }
 
-    fun zoomImageFromThumb(thumbView: View, expandedImage: ImageView, content: String) {
+    fun zoomImageFromThumb(thumbView: View, expandedImage: View, content: String) {
         this.thumbView = thumbView
         // If there's an animation in progress, cancel it
         // immediately and proceed with this one.
@@ -167,11 +167,11 @@ class DetailPostViewModel(private val context: Context, private val updatePostUs
         mCurrentAnimator = set
     }
 
-    fun zoomDetailPostImage(thumbView: View, expandedImage: ImageView, post: Post) {
+    fun zoomDetailPostImage(thumbView: View, expandedImage: View, post: Post) {
         zoomImageFromThumb(thumbView, expandedImage, post.titleImage!!)
     }
 
-    fun zoomDetailPostImage(thumbView: View, expandedImage: ImageView, post: PostContentData?) {
+    fun zoomDetailPostImage(thumbView: View, expandedImage: View, post: PostContentData?) {
         zoomImageFromThumb(thumbView, expandedImage, post!!.content!!)
     }
 

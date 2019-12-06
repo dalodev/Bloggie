@@ -49,7 +49,7 @@ class HomeFragment : BaseBindingFragment() {
         viewModel.viewsToShare.observe(this, Observer {
             if (it != null) {
                 val p2 = Pair.create(it[1], ViewCompat.getTransitionName(it[1]!!))
-                val options = if (it.size > 1) {
+                val options = if (it[0] != null) {
                     val p1 = Pair.create(it[0], ViewCompat.getTransitionName(it[0]!!))
                     ActivityOptionsCompat.makeSceneTransitionAnimation(activity!!, p1, p2)
                 } else {

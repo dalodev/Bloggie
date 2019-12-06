@@ -21,29 +21,14 @@ fun displayTitleImage(imageView: ImageView, titleImage: String?) {
 fun displayDetailImage(imageView: ImageView, content: PostContent?) {
     content?.let {
         val size = ceil(sqrt((MAX_WIDTH * MAX_HEIGHT).toDouble())).toInt()
-        val imgUri: Uri? = Uri.parse(content.uriImage)
-        val umgUrl: String? = content.content
-        when {
-            umgUrl != null -> {
-                Picasso.with(imageView.context)
-                        .load(umgUrl)
-                        .transform(BitmapTransform(MAX_WIDTH, MAX_HEIGHT))
-                        .resize(size, size)
-                        .centerInside()
-                        .into(imageView)
-            }
-            imgUri != null -> {
-                Picasso.with(imageView.context)
-                        .load(imgUri)
-                        .transform(BitmapTransform(MAX_WIDTH, MAX_HEIGHT))
-                        .resize(size, size)
-                        .centerInside()
-                        .into(imageView)
-            }
-            else -> {
-                // TODO display error image
-            }
+        val imgUrl: String? = content.content
+        imgUrl?.let {
+            Picasso.with(imageView.context)
+                    .load(it)
+                    .transform(BitmapTransform(MAX_WIDTH, MAX_HEIGHT))
+                    .resize(size, size)
+                    .centerInside()
+                    .into(imageView)
         }
     }
-
 }

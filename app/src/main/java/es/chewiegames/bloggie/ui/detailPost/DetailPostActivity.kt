@@ -81,5 +81,5 @@ class DetailPostActivity : BaseActivity<ActivityDetailPostBinding>() {
 
     private fun goBack() = super.onBackPressed()
 
-    private fun closeExpandedImage(v: ImageView) = viewModel.closeExpandedImage(v)
+    private fun closeExpandedImage(view: View) = viewModel.closeExpandedImage(view)
 }

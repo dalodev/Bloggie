@@ -75,10 +75,8 @@ class NewPostDataRepository(
                 val stream = ByteArrayOutputStream()
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
                 imageInByte = stream.toByteArray()
-                val bis = ByteArrayInputStream(imageInByte)
             }
         }
-
         return imageInByte
     }
 
@@ -90,7 +88,7 @@ class NewPostDataRepository(
                 taskSnapshot.storage.downloadUrl.addOnSuccessListener {
                     val downloadUrl = it.toString()
                     if (downloadUrl.isNotEmpty()) {
-                        mPost.titleImage = downloadUrl.toString()
+                        mPost.titleImage = downloadUrl
                         mDatabasePostByUser.child(idPost).setValue(mPost) // Store post by user
                     }
                 }
@@ -101,14 +99,12 @@ class NewPostDataRepository(
                 taskSnapshot.storage.downloadUrl.addOnSuccessListener {
                     val downloadUrl = it.toString()
                     if (downloadUrl.isNotEmpty()) {
-                        mPost.titleImage = downloadUrl.toString()
+                        mPost.titleImage = downloadUrl
                         mDatabasePosts.child(idPost).setValue(mPost) // store in general posts
                     }
                 }
             }
-        } /*else {
-            throw NewPostException("Image Empty")
-        }*/
+        }
     }
 
     private fun getContentData(idPost: String): ArrayList<PostContentData> {

@@ -1,47 +1,51 @@
 package es.chewiegames.bloggie.ui.base
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 
-abstract class BaseFragment : Fragment() {
+abstract class BaseFragment<B : ViewDataBinding> : Fragment() {
 
-    protected var loaderCallback: OnLoaderCallback? = null
+    lateinit var binding: B
 
     @Nullable
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var view: View = inflater.inflate(getLayoutId(), container, false)
-        bindViews(inflater, container, getLayoutId())
+        bindView(inflater, container, getLayoutId())
         initObservers()
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initView()
     }
 
-    open fun bindViews(inflater: LayoutInflater, container: ViewGroup?, layoutId: Int) {}
-
+    /**
+     * Binding the view with layout resource
+     */
+    private fun bindView(inflater: LayoutInflater, container: ViewGroup?, layoutId: Int) {
+        binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+    }
     /**
      * Start lifecycle  methods
      */
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is OnLoaderCallback) {
-            loaderCallback = context
-        }
     }
 
     override fun onDetach() {
         super.onDetach()
-        loaderCallback = null
     }
 
     /**
@@ -82,15 +86,9 @@ abstract class BaseFragment : Fragment() {
     }
 
     /**
-     * Start callbacks
+     * Activity navigation.
      */
-    interface OnLoaderCallback {
-        fun onLoading()
-        fun onFinishLoading()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-//        destroyView()
+    fun goToActivity(intent: Intent, bundle: Bundle) {
+        startActivity(intent, bundle)
     }
 }

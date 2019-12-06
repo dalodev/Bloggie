@@ -2,39 +2,30 @@ package es.chewiegames.bloggie.ui.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import androidx.core.view.ViewCompat
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import es.chewiegames.bloggie.R
 import es.chewiegames.bloggie.databinding.FragmentHomeBinding
-import es.chewiegames.bloggie.ui.base.BaseBindingFragment
+import es.chewiegames.bloggie.ui.base.BaseFragment
 import es.chewiegames.bloggie.ui.detailPost.DetailPostActivity
 import es.chewiegames.bloggie.util.EXTRA_POST
 import es.chewiegames.bloggie.util.HomeItemAnimator
 import es.chewiegames.bloggie.viewmodel.HomeViewModel
-import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class HomeFragment : BaseBindingFragment() {
+class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private val viewModel: HomeViewModel by viewModel()
-    lateinit var binding: FragmentHomeBinding
     private val adapter: HomeAdapter by lazy { HomeAdapter(context!!, viewModel) }
 
     override fun getLayoutId(): Int = R.layout.fragment_home
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
-        binding.lifecycleOwner = this
+    override fun initView() {
         binding.homeViewModel = viewModel
-        return binding.root
     }
 
     override fun initObservers() {
@@ -71,11 +62,8 @@ class HomeFragment : BaseBindingFragment() {
     }
 
     private fun updateAdapter() {
-        feedRecyclerview.layoutManager = LinearLayoutManager(context)
-        feedRecyclerview.itemAnimator = HomeItemAnimator()
-        feedRecyclerview.adapter = adapter
-    }
-
-    override fun destroyView() {
+        binding.feedRecyclerview.layoutManager = LinearLayoutManager(context)
+        binding.feedRecyclerview.itemAnimator = HomeItemAnimator()
+        binding.feedRecyclerview.adapter = adapter
     }
 }

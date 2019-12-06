@@ -12,8 +12,8 @@ import es.chewiegames.domain.usecases.comments.StoreCommentUseCase
 import es.chewiegames.domain.usecases.comments.StoreReplyUseCase
 
 class CommentsViewModel(
-        private val storeCommentUseCase: StoreCommentUseCase,
-        private val storeReplyUseCase: StoreReplyUseCase
+    private val storeCommentUseCase: StoreCommentUseCase,
+    private val storeReplyUseCase: StoreReplyUseCase
 ) : BaseViewModel() {
 
     val post: BaseSingleLiveEvent<Post> by lazy { BaseSingleLiveEvent<Post>() }

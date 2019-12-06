@@ -22,15 +22,16 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class DetailPostActivity : BaseActivity<ActivityDetailPostBinding>() {
 
     private val viewModel: DetailPostViewModel by viewModel()
-    private val adapter: DetailPostAdapter by lazy { DetailPostAdapter(viewModel) }
+    private lateinit var adapter: DetailPostAdapter
 
     override fun getLayoutId() = R.layout.activity_detail_post
 
     override fun initView(savedInstanceState: Bundle?) {
-        super.initView(savedInstanceState)
         viewModel.setCurrentAnimatorDuration()
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowTitleEnabled(true)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
     }
 
     override fun onStart() {
@@ -49,6 +50,7 @@ class DetailPostActivity : BaseActivity<ActivityDetailPostBinding>() {
     }
 
     private fun setAdapter(content: ArrayList<PostContent>) {
+        adapter = DetailPostAdapter(viewModel)
         adapter.postContent = content
         binding.contentPostList.layoutManager = LinearLayoutManager(this)
         binding.contentPostList.itemAnimator = DefaultItemAnimator()
@@ -60,7 +62,6 @@ class DetailPostActivity : BaseActivity<ActivityDetailPostBinding>() {
             binding.imgToolbar.transitionName = post.id
         }
         binding.collapsingToolBar.transitionName = post.title
-        Picasso.with(this).load(post.titleImage).into(binding.imgToolbar)
         binding.collapsingToolBar.title = post.title
     }
 
@@ -70,10 +71,10 @@ class DetailPostActivity : BaseActivity<ActivityDetailPostBinding>() {
         when (item!!.itemId) {
             android.R.id.home -> {
                 supportFinishAfterTransition()
-                super.onBackPressed()
+                goBack()
             }
         }
-        return super.onOptionsItemSelected(item)
+        return true
     }
 
     fun expandTitleImage(v: View) {
@@ -90,7 +91,7 @@ class DetailPostActivity : BaseActivity<ActivityDetailPostBinding>() {
 
     private fun goBack() = super.onBackPressed()
 
-    fun closeExpandedImage(v: ImageView) = viewModel.closeExpandedImage(v)
+    private fun closeExpandedImage(v: ImageView) = viewModel.closeExpandedImage(v)
 
     fun onClickImage(thumbView: View, postContent: PostContentData) {
         binding.expandedImageProgressbar.visibility = View.VISIBLE

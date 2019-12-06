@@ -3,6 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="es.chewiegames.bloggie.viewmodel.DetailPostViewModel" />
+
+        <variable
+            name="postContent"
+            type="es.chewiegames.domain.model.PostContent" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -39,23 +49,9 @@
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
                 android:src="@drawable/background_splash"
-               />
+                app:displayDetailImage="@{postContent}" />
+
         </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <data>
-
-        <import type="android.view.View" />
-
-        <import type="android.net.Uri" />
-
-        <variable
-            name="content"
-            type="es.chewiegames.domain.model.PostContent" />
-
-        <variable
-            name="viewModel"
-            type="es.chewiegames.bloggie.viewmodel.DetailPostViewModel" />
-    </data>
 </layout>

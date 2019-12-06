@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+
+    <data>
+        <variable
+            name="viewModel"
+            type="es.chewiegames.bloggie.viewmodel.DetailPostViewModel" />
+
+    </data>
     <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -33,7 +40,8 @@
                     android:scaleType="centerCrop"
                     android:fitsSystemWindows="true"
                     app:layout_collapseMode="parallax"
-                    android:onClick="expandTitleImage"/>
+                    android:onClick="expandTitleImage"
+                    app:displayTitleImage="@{viewModel.post.titleImage}" />
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
@@ -74,7 +82,7 @@
             android:background="@color/alpha_black"
             android:fitsSystemWindows="true"
             android:contentDescription="@string/description_zoom_touch_close"
-            android:onClick="closeExpandedImage"
+            android:onClick="@{(v) -> viewModel.closeExpandedImage(v)}"
             />
 
         <RelativeLayout

@@ -65,17 +65,17 @@ class PostAdapter(
     }
 
     override fun onItemMove(fromPosition: Int, toPosition: Int): Boolean {
-        postContent[fromPosition].position = toPosition
-        postContent[toPosition].position = fromPosition
+        viewModel.postContent.value!![fromPosition].position = toPosition
+        viewModel.postContent.value!![toPosition].position = fromPosition
         if (fromPosition < toPosition) {
             for (i in fromPosition until toPosition) {
                 Collections.swap(postContent, i, i + 1)
-                postContent[i].position = i + 1
+                viewModel.postContent.value!![i].position = i + 1
             }
         } else {
             for (i in fromPosition downTo toPosition + 1) {
                 Collections.swap(postContent, i, i - 1)
-                postContent[i].position = i - 1
+                viewModel.postContent.value!![i].position = i - 1
             }
         }
         notifyItemMoved(fromPosition, toPosition)

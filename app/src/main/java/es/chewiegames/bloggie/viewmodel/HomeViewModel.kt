@@ -19,10 +19,10 @@ import es.chewiegames.domain.usecases.feedpost.UpdateLikedPostUseCase
 import java.util.ArrayList
 
 class HomeViewModel(
-    private val getFeedPostUseCase: GetFeedPostUseCase,
-    private val getLikedPostsByUserUseCase: GetLikedPostsByUserUseCase,
-    private val updateLikedPostUseCase: UpdateLikedPostUseCase,
-    subscribeFeedPostsUseCase: SubscribeFeedPostsUseCase
+        private val getFeedPostUseCase: GetFeedPostUseCase,
+        private val getLikedPostsByUserUseCase: GetLikedPostsByUserUseCase,
+        private val updateLikedPostUseCase: UpdateLikedPostUseCase,
+        subscribeFeedPostsUseCase: SubscribeFeedPostsUseCase
 ) : BaseViewModel(), OnLoadFeedPostListener {
 
     val posts: BaseSingleLiveEvent<ArrayList<Post>> by lazy { BaseSingleLiveEvent<ArrayList<Post>>() }
@@ -101,8 +101,9 @@ class HomeViewModel(
     fun isLittlePointChecked(view: LottieAnimationView, position: Int) {
         val feedPost = posts.value!![position]
         val checked = isLikedPost(feedPost)
-        view.visibility = if (checked) View.VISIBLE else View.GONE
-        view.playAnimation()
+        view.let {
+            if (checked) it.playAnimation()
+        }
     }
 
     fun littlePointChecked(view: LottieAnimationView, position: Int) {

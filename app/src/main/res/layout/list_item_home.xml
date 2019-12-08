@@ -11,15 +11,15 @@
 
         <variable
             name="user"
-            type="es.chewiegames.domain.model.User" />
+            type="es.littledavity.domain.model.User" />
 
         <variable
             name="feedPost"
-            type="es.chewiegames.domain.model.Post" />
+            type="es.littledavity.domain.model.Post" />
 
         <variable
             name="homeViewModel"
-            type="es.chewiegames.bloggie.viewmodel.HomeViewModel" />
+            type="es.littledavity.bloggie.viewmodel.HomeViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView

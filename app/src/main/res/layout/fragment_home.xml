@@ -5,7 +5,7 @@
     <data>
         <variable
             name="homeViewModel"
-            type="es.chewiegames.bloggie.viewmodel.HomeViewModel" />
+            type="es.littledavity.bloggie.viewmodel.HomeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

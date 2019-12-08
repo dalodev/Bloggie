@@ -6,11 +6,11 @@
     <data>
         <variable
             name="viewModel"
-            type="es.chewiegames.bloggie.viewmodel.DetailPostViewModel" />
+            type="es.littledavity.bloggie.viewmodel.DetailPostViewModel" />
 
         <variable
             name="postContent"
-            type="es.chewiegames.domain.model.PostContent" />
+            type="es.littledavity.domain.model.PostContent" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

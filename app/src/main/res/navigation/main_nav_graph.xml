@@ -6,28 +6,28 @@
 
     <activity
         android:id="@+id/loginActivity"
-        android:name="es.chewiegames.bloggie.ui.login.LoginActivity"
+        android:name="es.littledavity.bloggie.ui.login.LoginActivity"
         android:label="Login"
         tools:layout="@layout/activity_login" />
 
     <activity
         android:id="@+id/newPostActivity"
-        android:name="es.chewiegames.bloggie.ui.newPost.NewPostActivity"
+        android:name="es.littledavity.bloggie.ui.newPost.NewPostActivity"
         android:label="@string/app_name"
         tools:layout="@layout/activity_new_post" />
     <activity
         android:id="@+id/detailPostActivity"
-        android:name="es.chewiegames.bloggie.ui.detailPost.DetailPostActivity"
+        android:name="es.littledavity.bloggie.ui.detailPost.DetailPostActivity"
         android:label="@string/title_activity_create_post"
         tools:layout="@layout/activity_detail_post" />
     <activity
         android:id="@+id/commentsActivity"
-        android:name="es.chewiegames.bloggie.ui.comments.CommentsActivity"
+        android:name="es.littledavity.bloggie.ui.comments.CommentsActivity"
         android:label="@string/comments"
         tools:layout="@layout/activity_comments" />
     <fragment
         android:id="@+id/homeFragment"
-        android:name="es.chewiegames.bloggie.ui.home.HomeFragment"
+        android:name="es.littledavity.bloggie.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home">
         <action

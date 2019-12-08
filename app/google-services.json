@@ -1,39 +1,37 @@
 {
   "project_info": {
-    "project_number": "688346150060",
-    "firebase_url": "https://bloggie-id.firebaseio.com",
-    "project_id": "bloggie-id",
-    "storage_bucket": "bloggie-id.appspot.com"
+    "project_number": "712042066866",
+    "firebase_url": "https://bloggie-me.firebaseio.com",
+    "project_id": "bloggie-me",
+    "storage_bucket": "bloggie-me.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:688346150060:android:a72aa8cdd5d149c5",
+        "mobilesdk_app_id": "1:712042066866:android:fe2a43f7646d3612386aab",
         "android_client_info": {
-          "package_name": "es.chewiegames.bloggie"
+          "package_name": "es.littledavity.bloggie"
         }
       },
       "oauth_client": [
         {
-          "client_id": "688346150060-53utajfj174f98l53a2g7bv6eri0v45d.apps.googleusercontent.com",
+          "client_id": "712042066866-19d8va9tgovlm6nl39e1n39r9bvr2tsu.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDDP7ve1JxgZ9fztTFsUhv2MGYCqgyhOuk"
+          "current_key": "AIzaSyBbWgH4Nc8i_7aRNYVNU8zwozutJ7L-SSM"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
+          "other_platform_oauth_client": [
+            {
+              "client_id": "712042066866-19d8va9tgovlm6nl39e1n39r9bvr2tsu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

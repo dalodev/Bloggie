@@ -7,7 +7,7 @@
         <import type="android.view.View" />
         <variable
             name="viewModel"
-            type="es.chewiegames.bloggie.viewmodel.NewPostViewModel" />
+            type="es.littledavity.bloggie.viewmodel.NewPostViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container"

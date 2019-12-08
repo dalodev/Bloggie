@@ -6,7 +6,7 @@
         <import type="android.view.View"/>
         <variable
             name="viewModel"
-            type="es.chewiegames.bloggie.viewmodel.NewPostViewModel" />
+            type="es.littledavity.bloggie.viewmodel.NewPostViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

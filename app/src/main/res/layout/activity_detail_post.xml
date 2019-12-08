@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="es.chewiegames.bloggie.viewmodel.DetailPostViewModel" />
+            type="es.littledavity.bloggie.viewmodel.DetailPostViewModel" />
 
     </data>
     <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -75,7 +75,7 @@
             android:visibility="gone"
             app:layout_anchorGravity="bottom|right|end" />
 
-        <es.chewiegames.bloggie.util.TouchImageView
+        <es.littledavity.bloggie.util.TouchImageView
             android:id="@+id/expandedImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -7,7 +7,7 @@
     <data>
         <variable
             name="loginViewModel"
-            type="es.chewiegames.bloggie.viewmodel.LoginViewModel" />
+            type="es.littledavity.bloggie.viewmodel.LoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

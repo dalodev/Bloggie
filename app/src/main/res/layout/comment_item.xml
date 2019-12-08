@@ -5,11 +5,11 @@
     <data>
         <variable
             name="viewModel"
-            type="es.chewiegames.bloggie.viewmodel.CommentsViewModel" />
+            type="es.littledavity.bloggie.viewmodel.CommentsViewModel" />
 
         <variable
             name="comment"
-            type="es.chewiegames.domain.model.Comment" />
+            type="es.littledavity.domain.model.Comment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

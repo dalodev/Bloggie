@@ -9,11 +9,11 @@
             type="Integer" />
         <variable
             name="content"
-            type="es.chewiegames.domain.model.PostContent" />
+            type="es.littledavity.domain.model.PostContent" />
 
         <variable
             name="viewModel"
-            type="es.chewiegames.bloggie.viewmodel.NewPostViewModel" />
+            type="es.littledavity.bloggie.viewmodel.NewPostViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

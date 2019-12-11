@@ -17,6 +17,7 @@ object BuildDependenciesVersions {
     const val TIMBER = "4.7.1"
     const val COIL = "0.8.0"
     const val CRASHLYTICS = "2.10.1"
+    const val FIREBASE_ANALYTICS = "17.2.1'"
     const val PLAY_CORE = "1.6.4"
     const val LEAKCANARY = "2.0-beta-2"
     const val DATABINDING = "3.5.3"
@@ -30,6 +31,7 @@ object BuildDependenciesVersions {
     const val PICASSO = "2.5.2"
     const val LOTTIE = "3.2.2"
     const val KOIN = "1.0.2"
+    const val ANNOTATIONS = "1.1.0"
 
     // Tests
     const val TEST = "1.2.0"

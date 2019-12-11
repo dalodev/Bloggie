@@ -1,7 +1,8 @@
 include(
     BuildModules.APP,
     BuildModules.DOMAIN,
-    BuildModules.DATA
+    BuildModules.DATA,
+    BuildModules.Libraries.TEST_UTILS
 )
 
-rootProject.buildFileName = "build.gradle.kts.kts.kts"
+rootProject.buildFileName = "build.gradle.kts"

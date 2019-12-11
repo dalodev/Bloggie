@@ -11,6 +11,7 @@ import extensions.addTestsDependencies
 import extensions.implementation
 import extensions.testImplementation
 import extensions.kapt
+//import gradle.kotlin.dsl.accessors._8fbe50ab46e72ba67087bf0fa5fe6568.testImplementation
 
 plugins {
     id("com.android.dynamic-feature")
@@ -81,6 +82,8 @@ android {
 
 dependencies {
     implementation(project(BuildModules.APP))
+    implementation(project(BuildModules.DATA))
+    implementation(project(BuildModules.DOMAIN))
 
     implementation(Dependencies.KOTLIN)
     implementation(Dependencies.APPCOMPAT)
@@ -97,6 +100,7 @@ dependencies {
     implementation(Dependencies.TIMBER)
 
     kapt(AnnotationProcessorsDependencies.DATABINDING)
+    testImplementation(project(BuildModules.Libraries.TEST_UTILS))
 
     addTestsDependencies()
 }

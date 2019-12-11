@@ -9,9 +9,8 @@ import es.littledavity.bloggie.R
 import es.littledavity.bloggie.viewmodel.CommentsViewModel
 import es.littledavity.data.model.CommentData
 import es.littledavity.domain.model.Comment
-import javax.inject.Inject
 
-class CommentsAdapter @Inject constructor(
+class CommentsAdapter  constructor(
     private val viewModel: CommentsViewModel,
     val comments: ArrayList<Comment> = viewModel.comments.value ?: arrayListOf()
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

@@ -26,7 +26,7 @@ object PluginsVersions {
     const val KTLINT = "0.34.2"
     const val SPOTLESS = "3.24.1"
     const val DETEKT = "1.0.1"
-    const val GOOGLE_PLAY_SERVICES = "4.3.2"
+    const val GOOGLE_PLAY_SERVICES = "4.3.3"
 }
 
 dependencies {
@@ -35,7 +35,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:${PluginsVersions.KOTLIN}")
     implementation("org.jetbrains.kotlin:kotlin-allopen:${PluginsVersions.KOTLIN}")
     implementation("androidx.navigation:navigation-safe-args-gradle-plugin:${PluginsVersions.NAVIGATION}")
+    implementation("com.google.gms:google-services:${PluginsVersions.GOOGLE_PLAY_SERVICES}")
     implementation("io.fabric.tools:gradle:${PluginsVersions.FABRIC}")
     implementation("com.pinterest:ktlint:${PluginsVersions.KTLINT}")
-    implementation("com.google.gms:google-services:${PluginsVersions.GOOGLE_PLAY_SERVICES}")
 }

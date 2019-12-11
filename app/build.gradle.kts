@@ -9,11 +9,10 @@ plugins {
     id(BuildPlugins.ANDROID_APPLICATION)
     id(BuildPlugins.KOTLIN_ANDROID)
     id(BuildPlugins.KOTLIN_ANDROID_EXTENSIONS)
+    id(BuildPlugins.GOOGLE_SERVICES)
     id(BuildPlugins.KOTLIN_KAPT)
     id(BuildPlugins.KOTLIN_ALLOPEN)
     id(BuildPlugins.NAVIGATION_SAFE_ARGS)
-    id(BuildPlugins.FABRIC)
-    id(BuildPlugins.GOOGLE_SERVICES)
 }
 
 android {
@@ -48,7 +47,7 @@ android {
 
             isMinifyEnabled = BuildTypeRelease.isMinifyEnabled
             isTestCoverageEnabled = BuildTypeRelease.isTestCoverageEnabled
-            buildConfigBooleanField("ENABLE_CRASHLYTICS", BuildTypeRelease.isCrashlyticsEnabled)
+//            buildConfigBooleanField("ENABLE_CRASHLYTICS", BuildTypeRelease.isCrashlyticsEnabled)
         }
 
         getByName(BuildType.DEBUG) {
@@ -57,7 +56,7 @@ android {
             isMinifyEnabled = BuildTypeDebug.isMinifyEnabled
             isTestCoverageEnabled = BuildTypeDebug.isTestCoverageEnabled
 
-            buildConfigBooleanField( "ENABLE_CRASHLYTICS", BuildTypeDebug.isCrashlyticsEnabled)
+//            buildConfigBooleanField( "ENABLE_CRASHLYTICS", BuildTypeDebug.isCrashlyticsEnabled)
         }
     }
 
@@ -112,21 +111,27 @@ android {
 }
 
 dependencies {
-    implementation(project(BuildModules.DATA))
     implementation(project(BuildModules.DOMAIN))
+    implementation(project(BuildModules.DATA))
 
     implementation(Dependencies.KOTLIN)
     implementation(Dependencies.APPCOMPAT)
     implementation(Dependencies.MATERIAL)
     implementation(Dependencies.CONSTRAIN_LAYOUT)
     implementation(Dependencies.NAVIGATION_FRAGMENT)
+    implementation(Dependencies.NAVIGATION_UI)
     implementation(Dependencies.TIMBER)
     implementation(Dependencies.CRASHLYTICS)
+    implementation(Dependencies.FIREBASE_ANALIYTICS)
     implementation(Dependencies.PLAY_CORE)
     implementation(Dependencies.KOIN_VIEWMODEL)
     implementation(Dependencies.LOTTIE)
     implementation(Dependencies.PICASSO)
     implementation(Dependencies.RECYCLE_VIEW)
+    implementation(Dependencies.ANNOTATIONS)
+    implementation(Dependencies.FIREBASE_AUTH_PLAY_SERVICES)
+    implementation(Dependencies.FIREBASE_AUTH_UI)
+    implementation(Dependencies.FIREBASE_AUTH)
 
     debugImplementation(DebugDependencies.LEAKCANARY)
 

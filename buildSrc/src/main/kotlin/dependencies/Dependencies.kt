@@ -25,6 +25,7 @@ object Dependencies {
     const val TIMBER = "com.jakewharton.timber:timber:${BuildDependenciesVersions.TIMBER}"
     const val COIL = "io.coil-kt:coil:${BuildDependenciesVersions.COIL}"
     const val CRASHLYTICS = "com.crashlytics.sdk.android:crashlytics:${BuildDependenciesVersions.CRASHLYTICS}"
+    const val FIREBASE_ANALIYTICS = "com.google.firebase:firebase-analytics:${BuildDependenciesVersions.FIREBASE_ANALYTICS}"
     const val PLAY_CORE = "com.google.android.play:core:${BuildDependenciesVersions.PLAY_CORE}"
     const val FIREBASE_CORE = "com.google.firebase:firebase-core:${BuildDependenciesVersions.FIREBASE_CORE}"
     const val FIREBASE_AUTH_PLAY_SERVICES = "com.google.android.gms:play-services-auth:${BuildDependenciesVersions.FIREBASE_AUTH_PLAY_SERVICES}"
@@ -36,4 +37,5 @@ object Dependencies {
     const val LOTTIE = "com.airbnb.android:lottie:${BuildDependenciesVersions.LOTTIE}"
     const val KOIN = "org.koin:koin-android:${BuildDependenciesVersions.KOIN}"
     const val KOIN_VIEWMODEL = "org.koin:koin-androidx-viewmodel:${BuildDependenciesVersions.KOIN}"
+    const val ANNOTATIONS = "androidx.annotation:annotation:${BuildDependenciesVersions.ANNOTATIONS}"
 }

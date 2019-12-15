@@ -20,7 +20,7 @@ jobs:
       - run:
           name: Run Lint
           command: ./gradlew lintDevDebug
-     - run:
+      - run:
           name: Run Unit Tests
           command: ./gradlew testDevDebugUnitTest
       - save_cache:

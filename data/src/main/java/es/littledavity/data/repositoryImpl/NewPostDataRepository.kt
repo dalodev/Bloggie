@@ -35,7 +35,11 @@ class NewPostDataRepository(
     private lateinit var mPost: PostData
     private var postContent = arrayListOf<PostContentData>()
 
-    override fun storeNewPost(post: PostData, postContentData: ArrayList<PostContentData>, blogImageView: ImageView): Flow<PostData> = callbackFlow {
+    override fun storeNewPost(
+        post: PostData,
+        postContentData: ArrayList<PostContentData>,
+        blogImageView: ImageView
+    ): Flow<PostData> = callbackFlow {
         try {
             mPost = post
             postContent = postContentData

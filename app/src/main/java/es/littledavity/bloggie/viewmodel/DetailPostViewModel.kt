@@ -18,7 +18,10 @@ import es.littledavity.domain.model.Post
 import es.littledavity.domain.model.PostContent
 import es.littledavity.domain.usecases.post.UpdatePostUseCase
 
-class DetailPostViewModel(private val context: Context, private val updatePostUseCase: UpdatePostUseCase) : BaseViewModel() {
+class DetailPostViewModel(
+    private val context: Context,
+    private val updatePostUseCase: UpdatePostUseCase
+) : BaseViewModel() {
 
     val post: BaseSingleLiveEvent<Post> by lazy { BaseSingleLiveEvent<Post>() }
     val postContent: BaseSingleLiveEvent<ArrayList<PostContent>> by lazy { BaseSingleLiveEvent<ArrayList<PostContent>>() }

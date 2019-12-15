@@ -29,9 +29,18 @@ class HomeItemAnimator : SimpleItemAnimator() {
     var mRemoveAnimations: ArrayList<RecyclerView.ViewHolder> = ArrayList()
     var mChangeAnimations: ArrayList<RecyclerView.ViewHolder> = ArrayList()
 
-    class MoveInfo internal constructor(var holder: RecyclerView.ViewHolder, var fromX: Int, var fromY: Int, var toX: Int, var toY: Int)
+    class MoveInfo internal constructor(
+        var holder: RecyclerView.ViewHolder,
+        var fromX: Int,
+        var fromY: Int,
+        var toX: Int,
+        var toY: Int
+    )
 
-    class ChangeInfo private constructor(var oldHolder: RecyclerView.ViewHolder?, var newHolder: RecyclerView.ViewHolder?) {
+    class ChangeInfo private constructor(
+        var oldHolder: RecyclerView.ViewHolder?,
+        var newHolder: RecyclerView.ViewHolder?
+    ) {
         var fromX: Int = 0
         var fromY: Int = 0
         var toX: Int = 0
@@ -370,7 +379,10 @@ class HomeItemAnimator : SimpleItemAnimator() {
         }
     }
 
-    private fun endChangeAnimationIfNecessary(changeInfo: ChangeInfo, item: RecyclerView.ViewHolder?): Boolean {
+    private fun endChangeAnimationIfNecessary(
+        changeInfo: ChangeInfo,
+        item: RecyclerView.ViewHolder?
+    ): Boolean {
         var oldItem = false
         if (changeInfo.newHolder === item) {
             changeInfo.newHolder = null
@@ -608,7 +620,10 @@ class HomeItemAnimator : SimpleItemAnimator() {
      *
      *
      */
-    override fun canReuseUpdatedViewHolder(viewHolder: RecyclerView.ViewHolder, payloads: MutableList<Any>): Boolean {
+    override fun canReuseUpdatedViewHolder(
+        viewHolder: RecyclerView.ViewHolder,
+        payloads: MutableList<Any>
+    ): Boolean {
         return !payloads.isEmpty() || super.canReuseUpdatedViewHolder(viewHolder, payloads)
     }
 }

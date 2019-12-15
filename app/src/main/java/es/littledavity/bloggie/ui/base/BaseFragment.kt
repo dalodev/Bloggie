@@ -19,7 +19,11 @@ abstract class BaseFragment<B : ViewDataBinding> : Fragment() {
     lateinit var binding: B
 
     @Nullable
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         bindView(inflater, container, getLayoutId())
         initObservers()
         return binding.root

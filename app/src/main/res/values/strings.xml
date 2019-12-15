@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Bloggie</string>
+    <string name="app_name">BloggieDev</string>
 
     <!--AUTH FIREBASE-->
     <!--Google API server client ID-->

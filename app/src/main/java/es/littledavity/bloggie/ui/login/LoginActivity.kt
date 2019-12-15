@@ -2,7 +2,6 @@ package es.littledavity.bloggie.ui.login
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 import es.littledavity.bloggie.R
@@ -20,7 +19,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     override fun getLayoutId(): Int = R.layout.activity_login
 
     override fun initView(savedInstanceState: Bundle?) {
-        binding = DataBindingUtil.setContentView(this, getLayoutId())
         binding.loginViewModel = viewModel
     }
 

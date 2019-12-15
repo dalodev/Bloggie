@@ -9,10 +9,10 @@ plugins {
     id(BuildPlugins.ANDROID_APPLICATION)
     id(BuildPlugins.KOTLIN_ANDROID)
     id(BuildPlugins.KOTLIN_ANDROID_EXTENSIONS)
-    id(BuildPlugins.GOOGLE_SERVICES)
     id(BuildPlugins.KOTLIN_KAPT)
     id(BuildPlugins.KOTLIN_ALLOPEN)
     id(BuildPlugins.NAVIGATION_SAFE_ARGS)
+    id(BuildPlugins.GOOGLE_SERVICES)
 }
 
 android {
@@ -47,17 +47,16 @@ android {
 
             isMinifyEnabled = BuildTypeRelease.isMinifyEnabled
             isTestCoverageEnabled = BuildTypeRelease.isTestCoverageEnabled
-//            buildConfigBooleanField("ENABLE_CRASHLYTICS", BuildTypeRelease.isCrashlyticsEnabled)
+            buildConfigBooleanField("ENABLE_CRASHLYTICS", BuildTypeRelease.isCrashlyticsEnabled)
         }
 
-        getByName(BuildType.DEBUG) {
+       /* getByName(BuildType.DEBUG) {
             applicationIdSuffix = BuildTypeDebug.applicationIdSuffix
             versionNameSuffix = BuildTypeDebug.versionNameSuffix
             isMinifyEnabled = BuildTypeDebug.isMinifyEnabled
             isTestCoverageEnabled = BuildTypeDebug.isTestCoverageEnabled
-
-//            buildConfigBooleanField( "ENABLE_CRASHLYTICS", BuildTypeDebug.isCrashlyticsEnabled)
-        }
+            buildConfigBooleanField( "ENABLE_CRASHLYTICS", BuildTypeDebug.isCrashlyticsEnabled)
+        }*/
     }
 
     flavorDimensions(BuildProductDimensions.ENVIRONMENT)

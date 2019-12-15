@@ -32,7 +32,11 @@ class CommentsDataRepository(
         awaitClose()
     }
 
-    override fun storeReplyCommentInDatabase(text: String?, post: PostData, parentComment: CommentData): Flow<CommentData> = callbackFlow {
+    override fun storeReplyCommentInDatabase(
+        text: String?,
+        post: PostData,
+        parentComment: CommentData
+    ): Flow<CommentData> = callbackFlow {
         val comment = CommentData()
         comment.comment = text
         comment.likes = 0

@@ -2,7 +2,6 @@ package commons
 
 import BuildAndroidConfig
 import BuildProductDimensions
-import ProductFlavorDevelop
 import ProductFlavorProduction
 import ProductFlavorQA
 import dependencies.Dependencies

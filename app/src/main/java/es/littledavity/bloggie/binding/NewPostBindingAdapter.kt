@@ -66,7 +66,12 @@ fun displayImage(imageView: ImageView, content: PostContent, postContentImageCal
 }
 
 @BindingAdapter("setTextContent", "content", "textToAdd")
-fun addTextContentToPost(view: FloatingActionButton, viewModel: NewPostViewModel, content: PostContent, textToAdd: EditText) {
+fun addTextContentToPost(
+    view: FloatingActionButton,
+    viewModel: NewPostViewModel,
+    content: PostContent,
+    textToAdd: EditText
+) {
     view.setOnClickListener {
         viewModel.doSetTextContent(it, content, textToAdd.text.toString())
     }

@@ -21,7 +21,7 @@ object ProductFlavorDevelop : BuildProductFlavor {
         namedDomainObjectContainer: NamedDomainObjectContainer<ProductFlavor>
     ): ProductFlavor {
         return namedDomainObjectContainer.create(name) {
-            applicationIdSuffix = ".dev"
+//            applicationIdSuffix = ".dev"
             versionNameSuffix = "-dev"
             dimension = BuildProductDimensions.ENVIRONMENT
         }
@@ -44,7 +44,7 @@ object ProductFlavorQA : BuildProductFlavor {
         namedDomainObjectContainer: NamedDomainObjectContainer<ProductFlavor>
     ): ProductFlavor {
         return namedDomainObjectContainer.create(name) {
-            applicationIdSuffix = ".qa"
+//            applicationIdSuffix = ".qa"
             versionNameSuffix = "-qa"
             dimension = BuildProductDimensions.ENVIRONMENT
         }
@@ -54,7 +54,7 @@ object ProductFlavorQA : BuildProductFlavor {
         namedDomainObjectContainer: NamedDomainObjectContainer<ProductFlavor>
     ): ProductFlavor {
         return namedDomainObjectContainer.create(name) {
-            versionNameSuffix = "-qa"
+//            versionNameSuffix = "-qa"
             dimension = BuildProductDimensions.ENVIRONMENT
         }
     }

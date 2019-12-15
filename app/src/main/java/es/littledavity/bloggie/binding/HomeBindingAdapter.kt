@@ -9,7 +9,12 @@ import com.squareup.picasso.Picasso
 import es.littledavity.bloggie.util.RoundedTransformation
 
 @BindingAdapter(value = ["feedPostTitleImage", "progressBarImage", "logoNoImage"], requireAll = true)
-fun feedPostTitleImage(view: ImageView, titleImage: String?, progressBarImage: ProgressBar, logoNoImage: ImageView) {
+fun feedPostTitleImage(
+    view: ImageView,
+    titleImage: String?,
+    progressBarImage: ProgressBar,
+    logoNoImage: ImageView
+) {
     if (titleImage != null) {
         Picasso.with(view.context)
                 .load(titleImage)

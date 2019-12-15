@@ -27,7 +27,10 @@ import es.littledavity.domain.usecases.newpost.StoreNewPostUseCase
 import kotlin.math.ceil
 import kotlin.math.sqrt
 
-class NewPostViewModel(private val context: Context, private val storeNewPostUseCase: StoreNewPostUseCase) : BaseViewModel() {
+class NewPostViewModel(
+    private val context: Context,
+    private val storeNewPostUseCase: StoreNewPostUseCase
+) : BaseViewModel() {
 
     val postContent: BaseSingleLiveEvent<ArrayList<PostContent>> by lazy { BaseSingleLiveEvent<ArrayList<PostContent>>() }
     val post: BaseSingleLiveEvent<Post> by lazy { BaseSingleLiveEvent<Post>() }

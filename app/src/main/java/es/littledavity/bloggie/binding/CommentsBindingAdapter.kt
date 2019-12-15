@@ -20,7 +20,12 @@ fun displayCommentAvatar(imageView: ImageView, avatar: String?) {
 }
 
 @BindingAdapter("repliesAdapter", "comment", "commentViewModel")
-fun setRepliesAdapter(recyclerView: RecyclerView, replies: ArrayList<Comment>, comment: Comment, viewModel: CommentsViewModel) {
+fun setRepliesAdapter(
+    recyclerView: RecyclerView,
+    replies: ArrayList<Comment>,
+    comment: Comment,
+    viewModel: CommentsViewModel
+) {
     if (replies.isEmpty()) {
         recyclerView.visibility = View.GONE
     } else {

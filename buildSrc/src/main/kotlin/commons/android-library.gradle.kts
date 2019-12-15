@@ -2,7 +2,6 @@ package commons
 
 import BuildAndroidConfig
 import BuildProductDimensions
-import ProductFlavorDevelop
 import ProductFlavorProduction
 import ProductFlavorQA
 import dependencies.Dependencies
@@ -80,5 +79,6 @@ dependencies {
     implementation(Dependencies.KOIN)
     implementation(Dependencies.TIMBER)
 
+    testImplementation(project(BuildModules.Libraries.TEST_UTILS))
     addTestsDependencies()
 }

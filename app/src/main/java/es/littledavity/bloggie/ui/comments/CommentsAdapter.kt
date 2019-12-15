@@ -10,7 +10,7 @@ import es.littledavity.bloggie.viewmodel.CommentsViewModel
 import es.littledavity.data.model.CommentData
 import es.littledavity.domain.model.Comment
 
-class CommentsAdapter  constructor(
+class CommentsAdapter constructor(
     private val viewModel: CommentsViewModel,
     val comments: ArrayList<Comment> = viewModel.comments.value ?: arrayListOf()
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

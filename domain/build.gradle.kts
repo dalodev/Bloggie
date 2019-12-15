@@ -11,8 +11,4 @@ dependencies {
     implementation(Dependencies.FIREBASE_AUTH_PLAY_SERVICES)
     implementation(Dependencies.FIREBASE_AUTH_UI)
     implementation(Dependencies.FIREBASE_AUTH)
-    implementation(Dependencies.LIFECYCLE_EXTENSIONS)
-
-    kapt(AnnotationProcessorsDependencies.DATABINDING)
-
 }

@@ -6,8 +6,6 @@ plugins {
 }
 
 dependencies {
-
-    implementation(Dependencies.LIFECYCLE_EXTENSIONS)
     implementation(Dependencies.FIREBASE_AUTH_PLAY_SERVICES)
     implementation(Dependencies.FIREBASE_AUTH_UI)
     implementation(Dependencies.FIREBASE_AUTH)
@@ -15,6 +13,4 @@ dependencies {
     implementation(Dependencies.FIREBASE_STORAGE)
     implementation(Dependencies.FIREBASE_CORE)
     implementation(Dependencies.CORE_KTX)
-    kapt(AnnotationProcessorsDependencies.DATABINDING)
-
 }

@@ -9,6 +9,7 @@ repositories {
     jcenter()
     mavenCentral()
     maven("https://maven.fabric.io/public")
+    maven("https://ci.android.com/builds/submitted/5837096/androidx_snapshot/latest/repository")
 }
 
 kotlinDslPluginOptions {
@@ -38,4 +39,5 @@ dependencies {
     implementation("com.google.gms:google-services:${PluginsVersions.GOOGLE_PLAY_SERVICES}")
     implementation("io.fabric.tools:gradle:${PluginsVersions.FABRIC}")
     implementation("com.pinterest:ktlint:${PluginsVersions.KTLINT}")
+    implementation("org.jetbrains.dokka:dokka-gradle-plugin:${PluginsVersions.DOKKA}")
 }

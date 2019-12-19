@@ -17,6 +17,14 @@ jobs:
       - run:
           name: Run Ktlint
           command: ./gradlew ktlint
+      - run:
+          name: Run Lint
+          command: ./gradlew lintDevDebug
+      - run:
+          name: Generate Dependency Updates
+          command: ./gradlew dependencyUpdates -Drevision=release
+      - store_artifacts:
+          path: build/dependencyUpdates
       - save_cache:
           paths:
             - ~/.gradle

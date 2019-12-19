@@ -1,8 +1,8 @@
 #!/bin/sh
 echo "Running static analysis..."
-
-JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
-export JAVA_HOME
+#
+#JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+#export JAVA_HOME
 
 OUTPUT="/tmp/analysis-result"
 ./gradlew ktlint --daemon > ${OUTPUT}

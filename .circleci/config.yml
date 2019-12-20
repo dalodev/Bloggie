@@ -20,6 +20,12 @@ jobs:
       - run:
           name: Run Ktlint
           command: ./gradlew ktlint
+      - run:
+          name: Run Unit Tests
+          command: ./gradlew testDevDebugUnitTest
+      - run:
+          name: Generate Code Coverage
+          command: ./gradlew jacocoTestReportDevDebug
 #     - run:
           ##          name: Run Lint
           ##          command: ./gradlew lintDevDebug
@@ -28,6 +34,16 @@ jobs:
           command: ./gradlew dependencyUpdates -Drevision=release
       - store_artifacts:
           path: build/dependencyUpdates
+      - store_artifacts:
+          path: build/dependencyUpdates
+      - codecov/upload:
+          flags: unittest
+      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
+          path: app/build/reports
+          destination: reports
+      - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
+          path: app/build/test-results
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
       - save_cache:
           paths:
             - ~/.gradle
@@ -36,9 +52,3 @@ jobs:
           paths:
             - ~/.gradle
           key: gradle-{{ checksum "build.gradle.kts" }}
-      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
-          path: app/build/reports
-          destination: reports
-      - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
-          path: app/build/test-results
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples

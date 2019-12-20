@@ -8,7 +8,9 @@ repositories {
     google()
     jcenter()
     mavenCentral()
+    maven("https://oss.sonatype.org/content/repositories/snapshots")
     maven("https://maven.fabric.io/public")
+    maven("https://plugins.gradle.org/m2/")
     maven("https://ci.android.com/builds/submitted/5837096/androidx_snapshot/latest/repository")
 }
 
@@ -41,5 +43,6 @@ dependencies {
     implementation("com.pinterest:ktlint:${PluginsVersions.KTLINT}")
     implementation("org.jetbrains.dokka:dokka-gradle-plugin:${PluginsVersions.DOKKA}")
     implementation("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${PluginsVersions.DETEKT}")
+    implementation("com.vanniktech:gradle-android-junit-jacoco-plugin:${PluginsVersions.JACOCO}")
 
 }

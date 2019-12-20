@@ -23,4 +23,5 @@ dependencies {
     implementation(TestDependencies.EXT)
     implementation(TestDependencies.MOCK_WEB_SERVER)
 
+    kapt(AnnotationProcessorsDependencies.AUTO_SERVICE)
 }

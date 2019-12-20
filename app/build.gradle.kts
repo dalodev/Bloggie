@@ -13,6 +13,8 @@ plugins {
     id(BuildPlugins.KOTLIN_ALLOPEN)
     id(BuildPlugins.NAVIGATION_SAFE_ARGS)
     id(BuildPlugins.GOOGLE_SERVICES)
+    id(BuildPlugins.JACOCO)
+
 }
 
 android {
@@ -107,6 +109,10 @@ android {
         }
     }
 
+}
+
+junitJacoco {
+    includeNoLocationClasses = true
 }
 
 dependencies {

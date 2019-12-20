@@ -17,6 +17,7 @@ plugins {
     id("kotlin-android-extensions")
     id("kotlin-kapt")
     id("kotlin-allopen")
+    id("com.vanniktech.android.junit.jacoco")
 }
 
 android {
@@ -70,6 +71,10 @@ android {
         unitTests.isIncludeAndroidResources = true
         unitTests.isReturnDefaultValues = true
     }
+}
+
+junitJacoco {
+    includeNoLocationClasses = true
 }
 
 dependencies {

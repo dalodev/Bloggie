@@ -13,4 +13,6 @@ dependencies {
     implementation(Dependencies.FIREBASE_STORAGE)
     implementation(Dependencies.FIREBASE_CORE)
     implementation(Dependencies.CORE_KTX)
+    kapt(AnnotationProcessorsDependencies.DATABINDING)
+
 }

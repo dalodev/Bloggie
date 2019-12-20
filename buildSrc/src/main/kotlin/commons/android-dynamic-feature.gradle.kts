@@ -19,6 +19,7 @@ plugins {
     id("kotlin-kapt")
     id("kotlin-allopen")
     id("androidx.navigation.safeargs.kotlin")
+    id("com.vanniktech.android.junit.jacoco")
 }
 
 android {
@@ -77,6 +78,10 @@ android {
         unitTests.isIncludeAndroidResources = true
         unitTests.isReturnDefaultValues = true
     }
+}
+
+junitJacoco {
+    includeNoLocationClasses = true
 }
 
 dependencies {

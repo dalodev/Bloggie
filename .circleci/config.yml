@@ -15,6 +15,9 @@ jobs:
           name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
           command: sudo chmod +x ./gradlew
       - run:
+          name: Run Detekt
+          command: ./gradlew detekt
+      - run:
           name: Run Ktlint
           command: ./gradlew ktlint
 #     - run:

@@ -40,4 +40,6 @@ dependencies {
     implementation("io.fabric.tools:gradle:${PluginsVersions.FABRIC}")
     implementation("com.pinterest:ktlint:${PluginsVersions.KTLINT}")
     implementation("org.jetbrains.dokka:dokka-gradle-plugin:${PluginsVersions.DOKKA}")
+    implementation("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${PluginsVersions.DETEKT}")
+
 }

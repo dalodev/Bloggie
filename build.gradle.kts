@@ -9,4 +9,5 @@ allprojects {
     repositories.applyDefault()
 
     plugins.apply(BuildPlugins.KTLINT)
+    plugins.apply(BuildPlugins.DETEKT)
 }

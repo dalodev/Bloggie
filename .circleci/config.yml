@@ -1,5 +1,5 @@
 # https://circleci.com/docs/2.0/language-android
-version: 2.1
+version: 2.1gradlew jacocoTestReport
 jobs:
   build:
     working_directory: ~/bloggie

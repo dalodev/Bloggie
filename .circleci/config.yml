@@ -1,7 +1,5 @@
 # https://circleci.com/docs/2.0/language-android
 version: 2.1
-orbs:
-  codecov: codecov/codecov@1.0.5
 jobs:
   build:
     working_directory: ~/bloggie
@@ -39,8 +37,6 @@ jobs:
           path: build/dependencyUpdates
       - store_artifacts:
           path: build/dependencyUpdates
-      - codecov/upload:
-          flags: unittest
       - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
           path: app/build/reports
           destination: reports

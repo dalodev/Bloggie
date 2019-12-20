@@ -17,7 +17,7 @@ object BuildDependenciesVersions {
     const val TIMBER = "4.7.1"
     const val COIL = "0.8.0"
     const val CRASHLYTICS = "2.10.1"
-    const val FIREBASE_ANALYTICS = "17.2.1'"
+    const val FIREBASE_ANALYTICS = "17.2.1"
     const val PLAY_CORE = "1.6.4"
     const val LEAKCANARY = "2.0"
     const val DATABINDING = "3.5.3"

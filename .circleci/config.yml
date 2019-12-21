@@ -1,5 +1,7 @@
 # https://circleci.com/docs/2.0/language-android
-version: 2.1gradlew jacocoTestReport
+version: 2.1
+orbs:
+  codecov: codecov/codecov@1.0.5
 jobs:
   build:
     working_directory: ~/bloggie
@@ -37,16 +39,14 @@ jobs:
           path: build/dependencyUpdates
       - store_artifacts:
           path: build/dependencyUpdates
+      - codecov/upload:
+          flags: unittest
       - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
           path: app/build/reports
           destination: reports
       - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: app/build/test-results
       # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
-      - save_cache:
-          paths:
-            - ~/.gradle
-          key: jars-{{ checksum "build.gradle.kts" }}-{{ checksum  "app/build.gradle.kts" }}
       - save_cache:
           paths:
             - ~/.gradle

@@ -88,6 +88,7 @@ dependencies {
     implementation(project(BuildModules.APP))
     implementation(project(BuildModules.DATA))
     implementation(project(BuildModules.DOMAIN))
+    implementation(project(BuildModules.Commons.UI))
 
     implementation(Dependencies.KOTLIN)
     implementation(Dependencies.APPCOMPAT)

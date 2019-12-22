@@ -14,7 +14,6 @@ plugins {
     id(BuildPlugins.NAVIGATION_SAFE_ARGS)
     id(BuildPlugins.GOOGLE_SERVICES)
     id(BuildPlugins.JACOCO)
-
 }
 
 android {

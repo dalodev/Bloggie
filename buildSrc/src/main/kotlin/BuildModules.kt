@@ -9,4 +9,9 @@ object BuildModules {
     object Libraries {
         const val TEST_UTILS = ":libraries:test_utils"
     }
+
+    object Commons {
+        const val UI = ":commons:ui"
+        const val VIEWS = ":commons:views"
+    }
 }

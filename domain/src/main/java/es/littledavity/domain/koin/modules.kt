@@ -1,3 +1,6 @@
+/*
+ * Copyright 2019 littledavity
+ */
 package es.littledavity.domain.koin
 
 import es.littledavity.domain.usecases.comments.StoreCommentUseCase

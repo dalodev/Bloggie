@@ -1,3 +1,6 @@
+/*
+ * Copyright 2019 littledavity
+ */
 package es.littledavity.bloggie.ui.comments
 
 import android.view.LayoutInflater

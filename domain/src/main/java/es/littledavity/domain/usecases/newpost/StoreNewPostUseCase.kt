@@ -1,3 +1,6 @@
+/*
+ * Copyright 2019 littledavity
+ */
 package es.littledavity.domain.usecases.newpost
 
 import es.littledavity.data.repository.NewPostRepository

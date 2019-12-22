@@ -1,3 +1,6 @@
+/*
+ * Copyright 2019 littledavity
+ */
 package es.littledavity.data.repository
 
 import com.google.firebase.auth.FirebaseUser

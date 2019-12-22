@@ -1,3 +1,6 @@
+/*
+ * Copyright 2019 littledavity
+ */
 import dependencies.AnnotationProcessorsDependencies
 import dependencies.Dependencies
 

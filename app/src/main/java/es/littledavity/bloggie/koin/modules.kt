@@ -1,3 +1,6 @@
+/*
+ * Copyright 2019 littledavity
+ */
 package es.littledavity.bloggie.koin
 
 import es.littledavity.bloggie.viewmodel.CommentsViewModel

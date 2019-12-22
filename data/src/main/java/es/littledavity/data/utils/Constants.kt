@@ -1,3 +1,6 @@
+/*
+ * Copyright 2019 littledavity
+ */
 package es.littledavity.data.utils
 
 val RC_SIGN_IN = 123

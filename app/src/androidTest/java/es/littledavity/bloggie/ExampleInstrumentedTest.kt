@@ -1,3 +1,6 @@
+/*
+ * Copyright 2019 littledavity
+ */
 package es.littledavity.bloggie
 
 import androidx.test.ext.junit.runners.AndroidJUnit4

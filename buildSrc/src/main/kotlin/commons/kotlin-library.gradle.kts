@@ -1,3 +1,6 @@
+/*
+ * Copyright 2019 littledavity
+ */
 package commons
 
 import dependencies.Dependencies

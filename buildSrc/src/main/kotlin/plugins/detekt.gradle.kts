@@ -1,3 +1,6 @@
+/*
+ * Copyright 2019 littledavity
+ */
 package plugins
 
 import io.gitlab.arturbosch.detekt.DetektPlugin

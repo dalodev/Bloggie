@@ -1,3 +1,6 @@
+/*
+ * Copyright 2019 littledavity
+ */
 package es.littledavity.domain.callbacks
 
 import es.littledavity.domain.model.Post

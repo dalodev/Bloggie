@@ -1,5 +1,6 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-
+/*
+ * Copyright 2019 littledavity
+ */
 import extensions.applyDefault
 
 plugins.apply(BuildPlugins.GIT_HOOKS)
@@ -10,4 +11,5 @@ allprojects {
 
     plugins.apply(BuildPlugins.KTLINT)
     plugins.apply(BuildPlugins.DETEKT)
+    plugins.apply(BuildPlugins.SPOTLESS)
 }

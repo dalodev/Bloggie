@@ -1,3 +1,6 @@
+/*
+ * Copyright 2019 littledavity
+ */
 package es.littledavity.domain.usecases.user
 
 import com.google.firebase.auth.FirebaseUser

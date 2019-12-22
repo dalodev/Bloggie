@@ -1,3 +1,6 @@
+/*
+ * Copyright 2019 littledavity
+ */
 package plugins
 
 val ktlint: Configuration by configurations.creating

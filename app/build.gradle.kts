@@ -53,22 +53,20 @@ android {
             buildConfigBooleanField("ENABLE_CRASHLYTICS", BuildTypeRelease.isCrashlyticsEnabled)
         }
 
-       /* getByName(BuildType.DEBUG) {
-            applicationIdSuffix = BuildTypeDebug.applicationIdSuffix
+        getByName(BuildType.DEBUG) {
+//            applicationIdSuffix = BuildTypeDebug.applicationIdSuffix
             versionNameSuffix = BuildTypeDebug.versionNameSuffix
             isMinifyEnabled = BuildTypeDebug.isMinifyEnabled
             isTestCoverageEnabled = BuildTypeDebug.isTestCoverageEnabled
             buildConfigBooleanField( "ENABLE_CRASHLYTICS", BuildTypeDebug.isCrashlyticsEnabled)
-        }*/
+        }
     }
 
-    flavorDimensions(BuildProductDimensions.ENVIRONMENT)
-    productFlavors {
-        ProductFlavorDevelop.appCreate(this)
-        ProductFlavorQA.appCreate(this)
-        ProductFlavorProduction.appCreate(this)
-    }
-
+    dynamicFeatures = mutableSetOf(
+        BuildModules.Features.SPLASH,
+        BuildModules.Features.LOGIN,
+        BuildModules.Features.HOME
+    )
 
     dataBinding {
         isEnabled = true
@@ -109,7 +107,6 @@ android {
             java.srcDir("src/androidTest/kotlin")
         }
     }
-
 }
 
 junitJacoco {
@@ -117,29 +114,23 @@ junitJacoco {
 }
 
 dependencies {
-    implementation(project(BuildModules.DOMAIN))
-    implementation(project(BuildModules.DATA))
+    implementation(project(BuildModules.CORE))
 
     implementation(Dependencies.KOTLIN)
     implementation(Dependencies.APPCOMPAT)
     implementation(Dependencies.MATERIAL)
     implementation(Dependencies.CONSTRAIN_LAYOUT)
     implementation(Dependencies.NAVIGATION_FRAGMENT)
-    implementation(Dependencies.NAVIGATION_UI)
     implementation(Dependencies.TIMBER)
+    implementation(Dependencies.LOGGING)
     implementation(Dependencies.CRASHLYTICS)
-    implementation(Dependencies.FIREBASE_ANALIYTICS)
     implementation(Dependencies.PLAY_CORE)
-    implementation(Dependencies.KOIN_VIEWMODEL)
-    implementation(Dependencies.LOTTIE)
-    implementation(Dependencies.PICASSO)
-    implementation(Dependencies.RECYCLE_VIEW)
-    implementation(Dependencies.ANNOTATIONS)
-    implementation(Dependencies.FIREBASE_AUTH_PLAY_SERVICES)
-    implementation(Dependencies.FIREBASE_AUTH_UI)
-    implementation(Dependencies.FIREBASE_AUTH)
+    implementation(Dependencies.DAGGER)
+    implementation(Dependencies.FIREBASE_ANALYTICS)
 
     debugImplementation(DebugDependencies.LEAKCANARY)
+
+    kapt(AnnotationProcessorsDependencies.DAGGER)
 
     addTestsDependencies()
 }

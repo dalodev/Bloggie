@@ -4,16 +4,12 @@
 package commons
 
 import BuildAndroidConfig
-import BuildProductDimensions
-import ProductFlavorProduction
-import ProductFlavorQA
 import dependencies.Dependencies
 import dependencies.AnnotationProcessorsDependencies
 import extensions.addTestsDependencies
 import extensions.implementation
 import extensions.testImplementation
 import extensions.kapt
-//import gradle.kotlin.dsl.accessors._8fbe50ab46e72ba67087bf0fa5fe6568.testImplementation
 
 plugins {
     id("com.android.dynamic-feature")
@@ -52,13 +48,6 @@ android {
         isExperimental = true
     }
 
-    flavorDimensions(BuildProductDimensions.ENVIRONMENT)
-    productFlavors {
-        ProductFlavorDevelop.libraryCreate(this)
-        ProductFlavorQA.libraryCreate(this)
-        ProductFlavorProduction.libraryCreate(this)
-    }
-
     sourceSets {
         getByName("main") {
             java.srcDir("src/main/kotlin")
@@ -89,15 +78,13 @@ junitJacoco {
 
 dependencies {
     implementation(project(BuildModules.APP))
-    implementation(project(BuildModules.DATA))
-    implementation(project(BuildModules.DOMAIN))
+    implementation(project(BuildModules.CORE))
     implementation(project(BuildModules.Commons.UI))
 
     implementation(Dependencies.KOTLIN)
     implementation(Dependencies.APPCOMPAT)
     implementation(Dependencies.COROUTINES)
     implementation(Dependencies.COROUTINES_ANDROID)
-    implementation(Dependencies.KOIN)
     implementation(Dependencies.NAVIGATION_FRAGMENT)
     implementation(Dependencies.NAVIGATION_UI)
     implementation(Dependencies.LIFECYCLE_EXTENSIONS)
@@ -105,9 +92,13 @@ dependencies {
     implementation(Dependencies.CORE_KTX)
     implementation(Dependencies.FRAGMENT_KTX)
     implementation(Dependencies.CONSTRAIN_LAYOUT)
+    implementation(Dependencies.DAGGER)
     implementation(Dependencies.TIMBER)
+    implementation(Dependencies.LOGGING)
 
+    kapt(AnnotationProcessorsDependencies.DAGGER)
     kapt(AnnotationProcessorsDependencies.DATABINDING)
+    kapt(AnnotationProcessorsDependencies.ROOM)
     testImplementation(project(BuildModules.Libraries.TEST_UTILS))
 
     addTestsDependencies()

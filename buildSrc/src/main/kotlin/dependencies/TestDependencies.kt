@@ -10,6 +10,7 @@ object TestDependencies {
     const val MOCKK = "io.mockk:mockk:${BuildDependenciesVersions.MOCKK}"
     const val ASSERTJ = "org.assertj:assertj-core:${BuildDependenciesVersions.ASSERTJ}"
     const val ROBOELECTRIC = "org.robolectric:robolectric:${BuildDependenciesVersions.ROBOELECTRIC}"
+    const val ROOM = "androidx.room:room-testing:${BuildDependenciesVersions.ROOM}"
     const val EXT = "androidx.test.ext:junit:${BuildDependenciesVersions.EXT}"
     const val CORE = "androidx.test:core:${BuildDependenciesVersions.TEST}"
     const val RUNNER = "androidx.test:runner:${BuildDependenciesVersions.TEST}"

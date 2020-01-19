@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Menu navigation srings-->
+    <string name="title_home">Home</string>
+    <string name="title_search">Search</string>
+    <string name="title_new_post">New post</string>
+    <string name="title_notification">Notifications</string>
+    <string name="title_profile">Profile</string>
+</resources>

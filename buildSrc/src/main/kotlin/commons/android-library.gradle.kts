@@ -4,9 +4,6 @@
 package commons
 
 import BuildAndroidConfig
-import BuildProductDimensions
-import ProductFlavorProduction
-import ProductFlavorQA
 import dependencies.Dependencies
 import dependencies.AnnotationProcessorsDependencies
 import extensions.addTestsDependencies
@@ -48,13 +45,6 @@ android {
         isExperimental = true
     }
 
-    flavorDimensions(BuildProductDimensions.ENVIRONMENT)
-    productFlavors {
-        ProductFlavorDevelop.libraryCreate(this)
-        ProductFlavorQA.libraryCreate(this)
-        ProductFlavorProduction.libraryCreate(this)
-    }
-
     sourceSets {
         getByName("main") {
             java.srcDir("src/main/kotlin")
@@ -84,8 +74,10 @@ dependencies {
     implementation(Dependencies.KOTLIN)
     implementation(Dependencies.COROUTINES)
     implementation(Dependencies.COROUTINES_ANDROID)
-    implementation(Dependencies.KOIN)
+    implementation(Dependencies.DAGGER)
     implementation(Dependencies.TIMBER)
+
+    kapt(AnnotationProcessorsDependencies.DAGGER)
 
     testImplementation(project(BuildModules.Libraries.TEST_UTILS))
     addTestsDependencies()

@@ -3,8 +3,13 @@
  */
 object BuildModules {
     const val APP = ":app"
-    const val DOMAIN = ":domain"
-    const val DATA = ":data"
+    const val CORE = ":core"
+
+    object Features {
+        const val SPLASH = ":features:splash"
+        const val LOGIN = ":features:login"
+        const val HOME = ":features:home"
+    }
 
     object Libraries {
         const val TEST_UTILS = ":libraries:test_utils"
@@ -12,6 +17,5 @@ object BuildModules {
 
     object Commons {
         const val UI = ":commons:ui"
-        const val VIEWS = ":commons:views"
     }
 }

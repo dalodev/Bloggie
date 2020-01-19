@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!--Primary colors-->
     <color name="colorPrimary">#0EB6E6</color>
     <color name="colorPrimaryDark">#5F65E6</color>
     <color name="colorAccent">#30E9E7</color>
 
-    <color name="primaryText">#000</color>
-    <color name="colorTextIcons">#FFFFFF</color>
-
-    <color name="delete_red">#D93B58</color>
-
-    <color name="alpha_black">#CC000000</color>
+    <!--Text colors-->
+    <color name="textBody">#4f4f4f</color>
+    <color name="textHeadline">#1f1f1f</color>
 
 </resources>

@@ -1,13 +1,15 @@
 /*
  * Copyright 2019 littledavity
  */
+include(":features:home")
+include(":features:login")
 include(
     BuildModules.APP,
-    BuildModules.DOMAIN,
-    BuildModules.DATA,
+    BuildModules.CORE,
+    BuildModules.Features.SPLASH,
+    BuildModules.Features.LOGIN,
     BuildModules.Libraries.TEST_UTILS,
-    BuildModules.Commons.UI,
-    BuildModules.Commons.VIEWS
+    BuildModules.Commons.UI
 )
 
 rootProject.buildFileName = "build.gradle.kts"

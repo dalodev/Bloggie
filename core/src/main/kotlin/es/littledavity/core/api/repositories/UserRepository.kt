@@ -33,7 +33,11 @@ class UserRepository @Inject constructor(
     internal val mDatabaseUsers: DatabaseReference
 ) {
 
-    fun getCurrentUser() = mDatabaseUsers.child(FirebaseAuth.getInstance().currentUser!!.uid)
+    fun getCurrentUser() = run {
+        FirebaseAuth.getInstance().currentUser?.let {
+            mDatabaseUsers.child(it.uid)
+        }
+    }
 
     suspend fun storeUser(user: FirebaseUser): Flow<UserResponse> = callbackFlow {
         val newUser = UserResponse(
@@ -79,4 +83,5 @@ class UserRepository @Inject constructor(
             awaitClose()
         }
     }
+}
 }

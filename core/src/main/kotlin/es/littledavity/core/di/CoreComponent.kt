@@ -6,7 +6,6 @@ package es.littledavity.core.di
 import android.content.Context
 import com.google.firebase.database.DatabaseReference
 import dagger.Component
-import es.littledavity.core.api.responses.UserResponse
 import es.littledavity.core.di.modules.ContextModule
 import es.littledavity.core.di.modules.FirebaseDatabaseModule
 import es.littledavity.core.di.modules.UtilsModule

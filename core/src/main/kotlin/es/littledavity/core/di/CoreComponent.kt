@@ -48,11 +48,4 @@ interface CoreComponent {
      */
     @Named("users")
     fun userDatabase(): DatabaseReference
-
-    /**
-     * Provide dependency graph user
-     *
-     * @return UserResponse
-     */
-    fun user(): UserResponse
 }

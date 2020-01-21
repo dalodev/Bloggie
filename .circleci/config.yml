@@ -31,7 +31,7 @@ jobs:
           command: ./gradlew spotlessKotlinCheck
       - run:
           name: Run Unit Tests
-          command: ./gradlew testDevDebugUnitTest
+          command: ./gradlew testDebugUnitTest
       - run:
           name: Generate Code Coverage
           command: ./gradlew jacocoTestReportDevDebug

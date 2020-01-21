@@ -17,10 +17,10 @@ import es.littledavity.core.annotations.OpenForTesting
  */
 @OpenForTesting
 data class UserResponse(
-    var id: String? = "",
-    var email: String? = null,
-    var name: String? = null,
-    var internetStatus: Int = -1,
-    var loginStatus: Int = -1,
-    var avatar: String? = null
+    val id: String,
+    val email: String,
+    val name: String,
+    val internetStatus: Int,
+    val loginStatus: Int,
+    val avatar: String
 )

@@ -34,16 +34,6 @@ class FirebaseDatabaseModule {
     }
 
     /**
-     * Create a provider method for [UserResponse].
-     *
-     * @return Instance of firebase database
-     * @see Provides
-     */
-    @Singleton
-    @Provides
-    fun provideUser(): UserResponse = UserResponse()
-
-    /**
      * Create a provider method for user [DatabaseReference].
      *
      * @return Instance of user database reference
@@ -56,9 +46,9 @@ class FirebaseDatabaseModule {
         firebaseDatabase: FirebaseDatabase,
         user: UserResponse
     ): DatabaseReference {
-        return firebaseDatabase.getReference("users").child(user.id!!).apply {
-            keepSynced(false)
-        }
+        val userDatabase = firebaseDatabase.getReference("users").child(user.id)
+        userDatabase.keepSynced(false)
+        return userDatabase
     }
 
     /**
@@ -67,17 +57,10 @@ class FirebaseDatabaseModule {
      * @return Instance of user database reference
      * @see Provides
      */
-    /**
-     * Create a provider method binding for [CharacterFavoriteRepository].
-     *
-     * @return Instance of character favorite repository.
-     * @see Provides
-     */
     @ExperimentalCoroutinesApi
     @Singleton
     @Provides
     fun provideUserRepository(
-        userDatabase: DatabaseReference,
-        mUser: UserResponse
-    ) = UserRepository(userDatabase, mUser)
+        userDatabase: DatabaseReference
+    ) = UserRepository(userDatabase)
 }

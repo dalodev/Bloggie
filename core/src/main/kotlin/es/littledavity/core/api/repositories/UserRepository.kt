@@ -15,6 +15,7 @@ import es.littledavity.core.api.responses.UserResponse
 import es.littledavity.core.exceptions.UserException
 import es.littledavity.core.utils.LOGIN_IN
 import es.littledavity.core.utils.LOGIN_OUT
+import es.littledavity.core.utils.ONLINE
 import javax.inject.Inject
 import javax.inject.Named
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -29,18 +30,22 @@ import kotlinx.coroutines.flow.callbackFlow
 class UserRepository @Inject constructor(
     @VisibleForTesting(otherwise = PRIVATE)
     @Named("users")
-    internal val mDatabaseUsers: DatabaseReference,
-    internal val mUser: UserResponse
+    internal val mDatabaseUsers: DatabaseReference
 ) {
 
+    fun getCurrentUser() = mDatabaseUsers.child(FirebaseAuth.getInstance().currentUser!!.uid)
+
     suspend fun storeUser(user: FirebaseUser): Flow<UserResponse> = callbackFlow {
-        mUser.id = user.uid
-        mUser.email = user.email.toString()
-        mUser.name = user.displayName.toString()
-        mUser.loginStatus = LOGIN_IN
-        mUser.avatar = user.photoUrl.toString()
-        mDatabaseUsers.child(user.uid).setValue(mUser)
-        offer(mUser)
+        val newUser = UserResponse(
+            user.uid,
+            user.email.toString(),
+            user.displayName.toString(),
+            LOGIN_IN,
+            ONLINE,
+            user.photoUrl.toString()
+        )
+        mDatabaseUsers.child(user.uid).setValue(newUser)
+        offer(newUser)
         channel.close()
         awaitClose()
     }
@@ -57,18 +62,9 @@ class UserRepository @Inject constructor(
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val user: UserResponse? = dataSnapshot.getValue(UserResponse::class.java)
                 if (user != null) {
-                    mUser.id = user.id
-                    mUser.email = user.email
-                    mUser.name = user.name
-                    mUser.loginStatus = user.loginStatus
-                    mUser.avatar = user.avatar
-                    when (mUser.loginStatus) {
-                        LOGIN_IN -> {
-                            offer(true)
-                        }
-                        LOGIN_OUT -> {
-                            offer(false)
-                        }
+                    when (user.loginStatus) {
+                        LOGIN_IN -> offer(true)
+                        LOGIN_OUT -> offer(false)
                     }
                 } else {
                     offer(false)

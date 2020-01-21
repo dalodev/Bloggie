@@ -5,7 +5,7 @@ echo "Running static analysis..."
 #export JAVA_HOME
 
 OUTPUT="/tmp/analysis-result"
-./gradlew ktlint --daemon > ${OUTPUT}
+./gradlew detekt ktlint --daemon > ${OUTPUT}
 EXIT_CODE=$?
 if [ ${EXIT_CODE} -ne 0 ]; then
     cat ${OUTPUT}

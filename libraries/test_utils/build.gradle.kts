@@ -27,4 +27,5 @@ dependencies {
     implementation(TestDependencies.MOCK_WEB_SERVER)
 
     kapt(AnnotationProcessorsDependencies.AUTO_SERVICE)
+    annotationProcessor(AnnotationProcessorsDependencies.AUTO_SERVICE)
 }

@@ -34,7 +34,7 @@ jobs:
           command: ./gradlew testDebugUnitTest
       - run:
           name: Generate Code Coverage
-          command: ./gradlew jacocoTestReportDevDebug
+          command: ./gradlew jacocoTestReportDebug
 
       - run:
           name: Generate Dependency Updates

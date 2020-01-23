@@ -10,6 +10,7 @@ import androidx.paging.DataSource
 import es.littledavity.dynamicfeatures.feed.list.model.Post
 import javax.inject.Inject
 import javax.inject.Provider
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 /**
  * Data source factory which also provides a way to observe the last created data source.
@@ -17,6 +18,7 @@ import javax.inject.Provider
  *
  * @see DataSource.Factory
  */
+@ExperimentalCoroutinesApi
 class FeedPageDataSourceFactory
 @Inject constructor(
     @VisibleForTesting(otherwise = PRIVATE)

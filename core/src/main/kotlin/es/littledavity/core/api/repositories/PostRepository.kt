@@ -8,6 +8,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
+import es.littledavity.core.api.responses.BaseResponse
+import es.littledavity.core.api.responses.DataResponse
 import es.littledavity.core.api.responses.PostResponse
 import javax.inject.Inject
 import javax.inject.Named
@@ -30,7 +32,7 @@ class PostRepository @Inject constructor(
     internal val mDatabaseLikedPostByUser: DatabaseReference
 ) {
 
-    fun getFeedPosts(): Flow<ArrayList<PostResponse>> = callbackFlow {
+    fun getFeedPosts(offset: Int, limit: Int): Flow<BaseResponse<PostResponse>> = callbackFlow {
         val eventListener = object : ValueEventListener {
             override fun onCancelled(dataSnapshot: DatabaseError) {
                 close(dataSnapshot.toException())
@@ -42,7 +44,8 @@ class PostRepository @Inject constructor(
                     val post = postSnapshot.getValue(PostResponse::class.java)
                     if (post != null) posts.add(0, post)
                 }
-                offer(posts)
+
+                offer(buildResponse(posts))
             }
         }
         mDatabasePostByUser.addListenerForSingleValueEvent(eventListener)
@@ -82,8 +85,27 @@ class PostRepository @Inject constructor(
         awaitClose()
     }
 
+    // ============================================================================================
+    //  Private generators methods
+    // ============================================================================================
+
+    /**
+     * Update database post by id
+     *
+     * @param post post to update
+     */
     private fun updatePost(post: PostResponse) {
         mDatabasePosts.child(post.id).setValue(post)
         mDatabasePostByUser.child(post.id).setValue(post)
     }
+
+    private fun buildResponse(posts: ArrayList<PostResponse>) = BaseResponse(
+        data = DataResponse(
+            offset = 0,
+            limit = 20,
+            total = posts.size,
+            count = 20,
+            results = posts
+        )
+    )
 }

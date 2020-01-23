@@ -1,8 +1,4 @@
 <resources>
     <!--Application name-->
     <string name="app_name">BloggieDev</string>
-    <string name="title_splash">Splash</string>
-    <string name="title_login">Login</string>
-    <string name="title_home">Home</string>
-
 </resources>

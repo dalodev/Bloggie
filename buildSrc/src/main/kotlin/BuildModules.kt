@@ -9,6 +9,7 @@ object BuildModules {
         const val SPLASH = ":features:splash"
         const val LOGIN = ":features:login"
         const val HOME = ":features:home"
+        const val FEED = ":features:feed"
     }
 
     object Libraries {

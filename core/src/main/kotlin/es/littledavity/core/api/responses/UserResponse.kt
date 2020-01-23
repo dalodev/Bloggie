@@ -3,6 +3,7 @@
  */
 package es.littledavity.core.api.responses
 
+import com.google.firebase.database.IgnoreExtraProperties
 import es.littledavity.core.annotations.OpenForTesting
 
 /**
@@ -15,12 +16,13 @@ import es.littledavity.core.annotations.OpenForTesting
  * @param loginStatus if user has been logged or not.
  * @param avatar user image.
  */
+@IgnoreExtraProperties
 @OpenForTesting
 data class UserResponse(
-    val id: String,
-    val email: String,
-    val name: String,
-    val internetStatus: Int,
-    val loginStatus: Int,
-    val avatar: String
+    val id: String = "",
+    val email: String = "",
+    val name: String = "",
+    val internetStatus: Int = -1,
+    val loginStatus: Int = -1,
+    val avatar: String = ""
 )

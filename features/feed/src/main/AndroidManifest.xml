@@ -1,10 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
-    package="es.littledavity.dynamicfeatures.login">
+    package="es.littledavity.dynamicfeatures.feed">
 
     <dist:module
         dist:instant="false"
-        dist:title="@string/feature_login">
+        dist:title="@string/feature_feed">
         <dist:delivery>
             <dist:install-time />
         </dist:delivery>

@@ -13,9 +13,9 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import es.littledavity.core.api.responses.UserResponse
 import es.littledavity.core.exceptions.UserException
+import es.littledavity.core.mapper.UserResponseMapper
 import es.littledavity.core.utils.LOGIN_IN
 import es.littledavity.core.utils.LOGIN_OUT
-import es.littledavity.core.utils.ONLINE
 import javax.inject.Inject
 import javax.inject.Named
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -30,26 +30,13 @@ import kotlinx.coroutines.flow.callbackFlow
 class UserRepository @Inject constructor(
     @VisibleForTesting(otherwise = PRIVATE)
     @Named("users")
-    internal val mDatabaseUsers: DatabaseReference
+    internal val mDatabaseUsers: DatabaseReference,
+    private val userResponseMapper: UserResponseMapper
 ) {
 
-    fun getCurrentUser() = run {
-        FirebaseAuth.getInstance().currentUser?.let {
-            mDatabaseUsers.child(it.uid)
-        }
-    }
-
     suspend fun storeUser(user: FirebaseUser): Flow<UserResponse> = callbackFlow {
-        val newUser = UserResponse(
-            user.uid,
-            user.email.toString(),
-            user.displayName.toString(),
-            LOGIN_IN,
-            ONLINE,
-            user.photoUrl.toString()
-        )
-        mDatabaseUsers.child(user.uid).setValue(newUser)
-        offer(newUser)
+        mDatabaseUsers.child(user.uid).setValue(userResponseMapper.map(user))
+        offer(userResponseMapper.map(user))
         channel.close()
         awaitClose()
     }
@@ -64,7 +51,7 @@ class UserRepository @Inject constructor(
             }
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val user: UserResponse? = dataSnapshot.getValue(UserResponse::class.java)
+                val user = dataSnapshot.getValue(UserResponse::class.java)
                 if (user != null) {
                     when (user.loginStatus) {
                         LOGIN_IN -> offer(true)

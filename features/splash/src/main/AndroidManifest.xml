@@ -4,7 +4,7 @@
 
     <dist:module
         dist:instant="false"
-        dist:title="@string/title_splash">
+        dist:title="@string/feature_splash">
         <dist:delivery>
             <dist:install-time />
         </dist:delivery>

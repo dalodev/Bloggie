@@ -109,6 +109,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
         })
     }
 
+    /**
+     * Clear all listeners and observers of [HomeFragment]
+     */
     override fun onClear() {
     }
 }

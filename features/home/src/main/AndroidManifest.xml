@@ -4,7 +4,7 @@
 
     <dist:module
         dist:instant="false"
-        dist:title="@string/title_home">
+        dist:title="@string/feature_home">
         <dist:delivery>
             <dist:install-time />
         </dist:delivery>

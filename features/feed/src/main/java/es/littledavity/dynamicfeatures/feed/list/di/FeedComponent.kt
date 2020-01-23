@@ -1,29 +1,26 @@
-/*
- * Copyright 2020 littledavity
- */
-package es.littledavity.dynamicfeatures.login.di
+package es.littledavity.dynamicfeatures.feed.list.di
 
 import dagger.Component
 import es.littledavity.core.di.CoreComponent
 import es.littledavity.core.di.scopes.FeatureScope
-import es.littledavity.dynamicfeatures.login.LoginFragment
+import es.littledavity.dynamicfeatures.feed.list.FeedFragment
 
 /**
  * Class for which a fully-formed, dependency-injected implementation is to
- * be generated from [LoginModule].
+ * be generated from [FeedModule].
  *
  * @see Component
  */
 @FeatureScope
 @Component(
-    modules = [LoginModule::class],
+    modules = [FeedModule::class],
     dependencies = [CoreComponent::class])
-interface LoginComponent {
+interface FeedComponent {
 
     /**
      * Inject dependencies on component.
      *
-     * @param loginFragment login component.
+     * @param feedFragment posts list component.
      */
-    fun inject(loginFragment: LoginFragment)
+    fun inject(feedFragment: FeedFragment)
 }

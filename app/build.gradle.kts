@@ -65,7 +65,8 @@ android {
     dynamicFeatures = mutableSetOf(
         BuildModules.Features.SPLASH,
         BuildModules.Features.LOGIN,
-        BuildModules.Features.HOME
+        BuildModules.Features.HOME,
+        BuildModules.Features.FEED
     )
 
     dataBinding {

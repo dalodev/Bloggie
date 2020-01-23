@@ -1,3 +1,6 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.dynamicfeatures.feed.list.paging
 
 import androidx.annotation.VisibleForTesting

@@ -1,3 +1,6 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.dynamicfeatures.feed.list.model
 
 import es.littledavity.core.api.responses.PostResponse

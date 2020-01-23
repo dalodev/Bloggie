@@ -1,3 +1,6 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.core.mapper
 
 import com.google.firebase.auth.FirebaseUser

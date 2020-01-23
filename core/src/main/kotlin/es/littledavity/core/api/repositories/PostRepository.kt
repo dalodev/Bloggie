@@ -1,3 +1,6 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.core.api.repositories
 
 import androidx.annotation.VisibleForTesting

@@ -3,6 +3,7 @@
  */
 object BuildModules {
     const val APP = ":app"
+    const val DOMAIN = ":domain"
     const val CORE = ":core"
 
     object Features {
@@ -10,6 +11,7 @@ object BuildModules {
         const val LOGIN = ":features:login"
         const val HOME = ":features:home"
         const val FEED = ":features:feed"
+        const val NEW_POST = ":features:newpost"
     }
 
     object Libraries {

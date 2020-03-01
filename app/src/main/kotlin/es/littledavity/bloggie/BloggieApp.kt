@@ -11,7 +11,6 @@ import es.littledavity.core.di.DaggerCoreComponent
 import es.littledavity.core.di.modules.ContextModule
 import es.littledavity.core.utils.ThemeUtils
 import javax.inject.Inject
-import kotlin.random.Random
 import timber.log.Timber
 
 class BloggieApp : SplitCompatApplication() {
@@ -85,7 +84,7 @@ class BloggieApp : SplitCompatApplication() {
      */
     private fun initRandomNightMode() {
         if (BuildConfig.DEBUG) {
-            themeUtils.setNightMode(Random.nextBoolean())
+//            themeUtils.setNightMode(Random.nextBoolean())
         }
     }
 }

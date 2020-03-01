@@ -3,12 +3,13 @@
  */
 package es.littledavity.core.mapper
 
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import es.littledavity.core.api.responses.UserResponse
 import es.littledavity.core.utils.LOGIN_IN
 import es.littledavity.core.utils.ONLINE
 
-class UserResponseMapper : Mapper<FirebaseUser, UserResponse> {
+class UserResponseMapper : Mapper<FirebaseUser?, UserResponse> {
 
     /**
      * Transform firebase response to [UserResponse].
@@ -18,12 +19,14 @@ class UserResponseMapper : Mapper<FirebaseUser, UserResponse> {
      * @throws NoSuchElementException If the response results are empty.
      */
     @Throws(NoSuchElementException::class)
-    override suspend fun map(from: FirebaseUser) = UserResponse(
-        id = from.uid,
-        email = from.email.toString(),
-        name = from.displayName.toString(),
+    override suspend fun map(from: FirebaseUser?) = UserResponse(
+        id = from?.uid ?: "",
+        email = from?.email.toString(),
+        name = from?.displayName.toString(),
         internetStatus = ONLINE,
         loginStatus = LOGIN_IN,
-        avatar = from.photoUrl.toString()
+        avatar = from?.photoUrl.toString()
     )
+
+    override suspend fun reverseMap(from: UserResponse) = FirebaseAuth.getInstance().currentUser
 }

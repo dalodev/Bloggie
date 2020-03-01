@@ -10,6 +10,7 @@ import extensions.addTestsDependencies
 import extensions.implementation
 import extensions.testImplementation
 import extensions.kapt
+import gradle.kotlin.dsl.accessors._eb3fa7792a1da1c6feddbc49bdf98dc7.implementation
 
 plugins {
     id("com.android.library")
@@ -18,6 +19,7 @@ plugins {
     id("kotlin-kapt")
     id("kotlin-allopen")
     id("com.vanniktech.android.junit.jacoco")
+    id("com.vanniktech.dependency.graph.generator")
 }
 
 android {

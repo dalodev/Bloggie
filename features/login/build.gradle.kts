@@ -1,3 +1,6 @@
+/*
+ * Copyright 2020 littledavity
+ */
 import dependencies.Dependencies
 import extensions.implementation
 

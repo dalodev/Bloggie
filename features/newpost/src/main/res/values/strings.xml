@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="instructions_create_post">Tap buttons below to add content</string>
+    <string name="title_text">Text</string>
+    <string name="title_image">Image</string>
+    <string name="title_publish">Publish</string>
+    <string name="edit_title">Edit title</string>
+    <string name="ok">OK</string>
+    <string name="type_title">Type a title for your post</string>
+    <string name="removed_from_content">Removed from content!</string>
+    <string name="undo">UNDO</string>
+    <string name="new_post_content_error_text">Error on fetch more characters</string>
+</resources>

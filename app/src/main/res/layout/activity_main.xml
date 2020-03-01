@@ -19,4 +19,3 @@
         app:navGraph="@navigation/navigation_app_graph" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-

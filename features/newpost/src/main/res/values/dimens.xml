@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="post_list_item_error_padding">10dp</dimen>
+    <dimen name="post_list_item_loading_padding">10dp</dimen>
+    <dimen name="post_list_item_loading_size">30dp</dimen>
+</resources>

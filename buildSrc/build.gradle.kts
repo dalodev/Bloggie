@@ -33,6 +33,7 @@ object PluginsVersions {
     const val SPOTLESS = "3.24.1"
     const val DETEKT = "1.0.1"
     const val GOOGLE_PLAY_SERVICES = "4.3.3"
+    const val GRAPH_GENERATOR = "0.6.0-SNAPSHOT"
 }
 
 dependencies {
@@ -48,4 +49,5 @@ dependencies {
     implementation("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${PluginsVersions.DETEKT}")
     implementation("com.vanniktech:gradle-android-junit-jacoco-plugin:${PluginsVersions.JACOCO}")
     implementation("com.diffplug.spotless:spotless-plugin-gradle:${PluginsVersions.SPOTLESS}")
+    implementation("com.vanniktech:gradle-dependency-graph-generator-plugin:${PluginsVersions.GRAPH_GENERATOR}")
 }

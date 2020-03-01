@@ -22,13 +22,13 @@ import kotlin.collections.ArrayList
  */
 @OpenForTesting
 data class PostResponse(
-    val id: String,
-    val title: String,
-    val titleImage: String,
-    val content: ArrayList<PostContentResponse>,
-    val comments: ArrayList<CommentResponse>,
-    val littlePoints: Int,
-    val views: Int,
-    val createdDate: Date,
-    val user: UserResponse
+    val id: String = "",
+    val title: String = "",
+    var titleImage: String = "",
+    var content: ArrayList<PostContentResponse> = arrayListOf(),
+    val comments: ArrayList<CommentResponse> = arrayListOf(),
+    val littlePoints: Int = -1,
+    val views: Int = -1,
+    val createdDate: Date? = Date(),
+    val user: UserResponse = UserResponse()
 )

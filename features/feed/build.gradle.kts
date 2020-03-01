@@ -1,3 +1,6 @@
+/*
+ * Copyright 2020 littledavity
+ */
 import dependencies.Dependencies
 import extensions.implementation
 
@@ -15,5 +18,4 @@ dependencies {
     implementation(Dependencies.FIREBASE_AUTH)
     implementation(Dependencies.FIREBASE_DATABASE)
     implementation(Dependencies.LOTTIE)
-
 }

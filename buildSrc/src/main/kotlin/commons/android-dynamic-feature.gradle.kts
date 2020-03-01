@@ -19,6 +19,7 @@ plugins {
     id("kotlin-allopen")
     id("androidx.navigation.safeargs.kotlin")
     id("com.vanniktech.android.junit.jacoco")
+    id("com.vanniktech.dependency.graph.generator")
 }
 
 android {
@@ -78,6 +79,7 @@ junitJacoco {
 
 dependencies {
     implementation(project(BuildModules.APP))
+    implementation(project(BuildModules.DOMAIN))
     implementation(project(BuildModules.CORE))
     implementation(project(BuildModules.Commons.UI))
 
@@ -95,6 +97,7 @@ dependencies {
     implementation(Dependencies.DAGGER)
     implementation(Dependencies.TIMBER)
     implementation(Dependencies.LOGGING)
+    implementation(Dependencies.EXIT_INTERFACE)
 
     kapt(AnnotationProcessorsDependencies.DAGGER)
     kapt(AnnotationProcessorsDependencies.DATABINDING)

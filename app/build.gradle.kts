@@ -16,6 +16,7 @@ plugins {
     id(BuildPlugins.NAVIGATION_SAFE_ARGS)
     id(BuildPlugins.GOOGLE_SERVICES)
     id(BuildPlugins.JACOCO)
+    id(BuildPlugins.GRAPH_GENERATOR)
 }
 
 android {
@@ -66,7 +67,8 @@ android {
         BuildModules.Features.SPLASH,
         BuildModules.Features.LOGIN,
         BuildModules.Features.HOME,
-        BuildModules.Features.FEED
+        BuildModules.Features.FEED,
+        BuildModules.Features.NEW_POST
     )
 
     dataBinding {

@@ -18,8 +18,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import es.littledavity.core.api.repositories.UserRepository
 import es.littledavity.core.utils.RC_SIGN_IN
-import es.littledavity.dynamicfeatures.splash.model.User
-import es.littledavity.dynamicfeatures.splash.model.UserMapper
+import es.littledavity.domain.model.User
+import es.littledavity.domain.model.UserMapper
 import javax.inject.Inject
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.catch

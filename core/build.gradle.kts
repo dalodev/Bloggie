@@ -1,3 +1,6 @@
+/*
+ * Copyright 2020 littledavity
+ */
 import dependencies.Dependencies
 import dependencies.AnnotationProcessorsDependencies
 import extensions.implementation
@@ -34,6 +37,7 @@ dependencies {
     implementation(Dependencies.FIREBASE_AUTH_UI)
     implementation(Dependencies.FIREBASE_AUTH)
     implementation(Dependencies.FIREBASE_DATABASE)
+    implementation(Dependencies.FIREBASE_STORAGE)
 
     kapt(AnnotationProcessorsDependencies.DATABINDING)
     kapt(AnnotationProcessorsDependencies.ROOM)

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feed_list_add_retry_button">Retry</string>
+    <string name="feed_list_add_error_text">Error on fetch more characters</string>
+    <string name="post_image_description">post image</string>
+    <string name="littlepoints">Likes</string>
+    <string name="comments">Comments</string>
+    <string name="views">Views</string>
+    <string name="empty_text">No feeds post information avalible</string>
+</resources>

@@ -36,6 +36,7 @@ object BuildDependenciesVersions {
     const val PICASSO = "2.5.2"
     const val LOTTIE = "3.3.1"
     const val ANNOTATIONS = "1.1.0"
+    const val EXIT_INTERFACE = "1.0.0"
 
     // Tests
     const val TEST = "1.2.0"

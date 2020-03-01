@@ -17,9 +17,9 @@ import es.littledavity.core.annotations.OpenForTesting
  */
 @OpenForTesting
 data class PostContentResponse(
-    val position: Int,
-    val content: String,
-    val viewType: Int,
-    val uriImage: String,
-    val bitmapImage: Bitmap
+    val position: Int = -1,
+    var content: String? = "",
+    val viewType: Int = -1,
+    val uriImage: String? = "",
+    var bitmapImage: Bitmap? = null
 )

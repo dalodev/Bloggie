@@ -43,4 +43,5 @@ object Dependencies {
     const val FIREBASE_ANALIYTICS = "com.google.firebase:firebase-analytics:${BuildDependenciesVersions.FIREBASE_ANALYTICS}"
     const val FIREBASE_CORE = "com.google.firebase:firebase-core:${BuildDependenciesVersions.FIREBASE_CORE}"
     const val LOTTIE = "com.airbnb.android:lottie:${BuildDependenciesVersions.LOTTIE}"
+    const val EXIT_INTERFACE = "androidx.exifinterface:exifinterface:${BuildDependenciesVersions.EXIT_INTERFACE}"
 }

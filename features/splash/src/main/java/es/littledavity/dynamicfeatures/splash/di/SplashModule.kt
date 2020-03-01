@@ -12,7 +12,6 @@ import es.littledavity.core.api.repositories.UserRepository
 import es.littledavity.core.di.scopes.FeatureScope
 import es.littledavity.dynamicfeatures.splash.SplashFragment
 import es.littledavity.dynamicfeatures.splash.SplashViewModel
-import es.littledavity.dynamicfeatures.splash.model.UserMapper
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 /**
@@ -40,14 +39,4 @@ class SplashModule(
     ) = fragment.viewModel {
         SplashViewModel(userRepository = userRepository)
     }
-
-    /**
-     * Create a provider method binding for [UserMapper].
-     *
-     * @return instance of mapper.
-     * @see Provides
-     */
-    @FeatureScope
-    @Provides
-    fun providesUserMapper() = UserMapper()
 }

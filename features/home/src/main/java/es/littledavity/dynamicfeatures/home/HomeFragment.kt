@@ -30,8 +30,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
 
     private val navGraphIds = listOf(
         R.navigation.navigation_feed_graph,
-        R.navigation.navigation_new_post_graph
-    )
+        R.navigation.navigation_new_post_graph)
 
     /**
      * Called to have the fragment instantiate its user interface view.
@@ -45,7 +44,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
         super.onViewCreated(view, savedInstanceState)
         setupToolbar()
         if (savedInstanceState == null) {
-//            setupBottomNavigationBar()
+            setupBottomNavigationBar()
         }
     }
 
@@ -58,7 +57,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
      */
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
-//        setupBottomNavigationBar()
+        setupBottomNavigationBar()
     }
 
     /**
@@ -88,7 +87,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
      * Configure app custom support action bar.
      */
     private fun setupToolbar() {
-        setHasOptionsMenu(true)
         requireCompatActivity().setSupportActionBar(viewBinding.toolbar)
     }
 

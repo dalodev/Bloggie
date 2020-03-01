@@ -10,9 +10,9 @@ import dagger.Provides
 import es.littledavity.commons.ui.extensions.viewModel
 import es.littledavity.core.api.repositories.UserRepository
 import es.littledavity.core.di.scopes.FeatureScope
+import es.littledavity.domain.model.UserMapper
 import es.littledavity.dynamicfeatures.login.LoginFragment
 import es.littledavity.dynamicfeatures.login.LoginViewModel
-import es.littledavity.dynamicfeatures.splash.model.UserMapper
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 /**

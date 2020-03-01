@@ -5,11 +5,13 @@ package es.littledavity.core.di
 
 import android.content.Context
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.storage.StorageReference
 import dagger.Component
 import es.littledavity.core.di.modules.ContextModule
 import es.littledavity.core.di.modules.FirebaseDatabaseModule
 import es.littledavity.core.di.modules.FirebaseDatabasePostModule
 import es.littledavity.core.di.modules.FirebaseDatabaseUserModule
+import es.littledavity.core.di.modules.FirebaseStorageModule
 import es.littledavity.core.di.modules.UtilsModule
 import es.littledavity.core.mapper.UserResponseMapper
 import es.littledavity.core.utils.ThemeUtils
@@ -27,7 +29,8 @@ import javax.inject.Singleton
     UtilsModule::class,
     FirebaseDatabaseModule::class,
     FirebaseDatabaseUserModule::class,
-    FirebaseDatabasePostModule::class
+    FirebaseDatabasePostModule::class,
+    FirebaseStorageModule::class
 ])
 interface CoreComponent {
 
@@ -83,4 +86,11 @@ interface CoreComponent {
      */
     @Named("likedPostsByUser")
     fun likedPostsByUserDatabase(): DatabaseReference
+
+    /**
+     * Provide dependency graph posts storage reference
+     *
+     * @return FirebaseReference
+     */
+    fun storageReference(): StorageReference
 }

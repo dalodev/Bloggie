@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/textNavigation"
+        android:icon="@drawable/ic_text_format"
+        android:title="@string/title_text" />
+
+    <item
+        android:id="@+id/imageNavigation"
+        android:icon="@drawable/ic_image"
+        android:title="@string/title_image" />
+
+    <item
+        android:id="@+id/publishNavigation"
+        android:icon="@drawable/ic_done"
+        android:title="@string/title_publish" />
+
+</menu>

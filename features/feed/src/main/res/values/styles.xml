@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Font family -->
+    <style name="MyTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/textBody</item>
+    </style>
+
+    <style name="title" parent="MyTextViewStyle">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AppTheme.SurfaceStyle">
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+</resources>
